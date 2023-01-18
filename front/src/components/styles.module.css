@@ -1,0 +1,27 @@
+.box{
+    border: solid 2px blue;
+    height: 50vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.centered {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.botones{
+    margin-top: 20px;
+}
+
+.recover{
+    font-size: 10px;
+    cursor: pointer;
+    color: rgb(52, 56, 59);
+}
