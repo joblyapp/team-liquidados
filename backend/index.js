@@ -1,17 +1,18 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 
 const app = express();
 
 // Connect to MongoDB
-// mongoose.connect("mongodb://localhost/your_db_name", { useNewUrlParser: true });
-// const db = mongoose.connection;
+mongoose.connect(process.env.DB_CONNECTOR, { useNewUrlParser: true });
+const db = mongoose.connection;
 
 // Error handling for MongoDB connection
-// db.on("error", console.error.bind(console, "connection error:"));
-// db.once("open", function () {
-//   console.log("Connected to MongoDB");
-// });
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function () {
+  console.log("Connected to MongoDB");
+});
 
 // Middleware
 app.use(express.json());
