@@ -21,7 +21,7 @@ async function getProduct(req, res, next) {
 //All Routes
 //Getting all
 
-router.get("/products", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const products = await Product.find(); // get all products from the database
     res.json(products);
@@ -31,7 +31,7 @@ router.get("/products", async (req, res) => {
 });
 
 //Getting one
-router.get("/products/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id); // find the product by its id
     if (product == null) {
@@ -44,7 +44,7 @@ router.get("/products/:id", async (req, res) => {
 });
 
 //Creating one
-router.post("/products", async (req, res) => {
+router.post("/", async (req, res) => {
   const newProduct = new Product(req.body); // create a new product instance
   try {
     await newProduct.save(); // save the product to the database
@@ -55,7 +55,7 @@ router.post("/products", async (req, res) => {
 });
 
 //Updating one
-router.patch("/products/:id", getProduct, async (req, res) => {
+router.patch("/:id", getProduct, async (req, res) => {
   if (req.body.name != null) {
     res.product.name = req.body.name;
   }
@@ -71,7 +71,7 @@ router.patch("/products/:id", getProduct, async (req, res) => {
 });
 
 //Deliting one
-router.delete("/products/:id", getProduct, async (req, res) => {
+router.delete("/:id", getProduct, async (req, res) => {
   try {
     await res.product.remove(); // delete the product from the database
     res.json({ message: "Deleted Product" });
