@@ -16,6 +16,11 @@ export default function LogIn({ logged, setLogged }) {
         pass: "123456"
     };
 
+    const user2 = {
+        mail: "lucas@g.com",
+        pass: "1234"
+    }
+
 
     useEffect(()=>{
         check();
@@ -29,7 +34,7 @@ export default function LogIn({ logged, setLogged }) {
             return (<Register setRegister={setRegister}/>)
         }
         else{
-            return (<Enter user={user} setLogged={setLogged} setRecovery={setRecovery} setRegister={setRegister}/>)
+            return (<Enter user={user} user2={user2} setLogged={setLogged} setRecovery={setRecovery} setRegister={setRegister}/>)
         }
     }
 

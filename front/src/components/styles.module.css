@@ -1,3 +1,7 @@
+h3{
+    margin: 0;
+}
+
 .box{
     border: solid 2px blue;
     height: 50vh;
@@ -24,4 +28,50 @@
     font-size: 10px;
     cursor: pointer;
     color: rgb(52, 56, 59);
+}
+
+.lateralButtons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* PRODUCTOS */
+
+.productsCard{
+    height: 70vh;
+    overflow-y: auto;
+}
+
+.listaProductos{
+    width: 70vw;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);    
+    border: solid 2px black;
+}
+
+
+/* Are you sure? */
+
+.alert{
+    text-align: center;
+    width: 40vw;
+    height: 20vh;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+}
+
+
+/* BARRA USUARIO */
+
+.sessionStyle{
+    background-color: red;
+    color: white;
+}
+
+.logOut{
+    cursor: pointer;
+    height: auto;
+    background-color: rgb(2, 2, 2);
+    
 }
