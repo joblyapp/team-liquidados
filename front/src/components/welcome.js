@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlices";
 import Session from "./session/session";
+import axios from "axios";
 
 
 export default function Welcome() {
@@ -16,6 +17,8 @@ export default function Welcome() {
     function handleClick(to) {
         nav(to);
     }
+
+
 
     return (
         <>

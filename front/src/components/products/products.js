@@ -59,11 +59,8 @@ export default function Products({ fromVentas }) {
                             <button onClick={() => handleBack("/")}>Volver</button>
                             <button onClick={() => setEsNuevo(true)}>Nuevo Producto</button>
                         </div>
-
                     </div>
-            }
-
-        
+            }        
         </>
 
     )
