@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const morgan = require("morgan");
+//const morgan = require("morgan");
 
 const app = express();
 
@@ -20,7 +20,7 @@ const productsRoutes = require("./routes/products.js");
 
 // Middleware
 app.use(express.json());
-app.use(morgan("tiny"));
+//app.use(morgan("tiny"));
 
 // Routes
 app.use("/products", productsRoutes);
