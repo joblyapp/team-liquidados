@@ -1,4 +1,4 @@
-export default function Sales(){
+export default function SalesPage (){
     return(
         <div>VENTAS</div>
     )
