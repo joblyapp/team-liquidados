@@ -54,7 +54,11 @@ export default function Products() {
                             <button onClick={() => setEsNuevo(true)}>Nuevo Producto</button>
                         </div>
                     </div>
+<<<<<<< HEAD
             }
+=======
+            }        
+>>>>>>> productsCrud
         </>
 
     )

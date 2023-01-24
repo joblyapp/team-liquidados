@@ -1,5 +1,15 @@
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import styles from "../components/styles.module.css";
+=======
+import { useState } from "react";
+import LogIn from "./login/logIn";
+import styles from "./styles.module.css";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlices";
+import Session from "./session/session";
+import axios from "axios";
+>>>>>>> productsCrud
 
 
 export default function Welcome ({user}) {
@@ -9,6 +19,8 @@ export default function Welcome ({user}) {
     function handleClick(to) {
         nav(to);
     }
+
+
 
     return (
         <>   
