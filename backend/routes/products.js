@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+//Models
 const Product = require("../models/Product"); // import the product model
 
 //check if the product exist and return an error message if it does not exist or there is an error.
@@ -73,7 +74,7 @@ router.patch("/:id", getProduct, async (req, res) => {
 //Deactivate a product
 router.patch("deactivate/:id", async (req, res) => {
   try {
-    const updatedField = await Model.findByIdAndUpdate(
+    const updatedField = await Product.findByIdAndUpdate(
       req.params.id,
       { $set: { active: req.body.active } },
       { new: true }
