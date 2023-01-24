@@ -1,17 +1,19 @@
 import { HashRouter, Route, Routes } from "react-router-dom";
-import Welcome from "./components/welcome";
-import Sales from "./components/sales";
-import Products from "./components/products/products";
-import Stats from "./components/stats";
+import ProductsPage from "./pages/productsPage";
+import WelcomePage from "./pages/welcomePage";
+import StatsPage from "./pages/statsPage";
+import SalesPage from "./pages/salesPage";
+
+
 
 function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route exact path='/' element={<Welcome />} />
-        <Route exact path='/sales' element={<Sales />} />
-        <Route exact path='/products' element={<Products />} />
-        <Route exact path='/stats' element={<Stats />} />
+        <Route exact path='/' element={<WelcomePage />} />
+        <Route exact path='/sales' element={<SalesPage />} />
+        <Route exact path='/products' element={<ProductsPage />} />
+        <Route exact path='/stats' element={<StatsPage />} />
       </Routes>
     </HashRouter>
   );

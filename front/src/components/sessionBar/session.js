@@ -1,7 +1,6 @@
 import styles from "../styles.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, selectUser } from "../../features/userSlices";
-import { useNavigate } from "react-router-dom";
+import { logout, selectUser } from "../../features/userSlices"; 
 import { useState } from "react";
 
 export default function Session() {

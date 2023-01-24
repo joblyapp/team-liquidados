@@ -1,26 +1,24 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles.module.css";
 import EditProduct from "./editProduct";
 import ListaProductos from "./listaProductos";
-import { selectUser } from "../../features/userSlices";
-import LogIn from "../login/logIn";
-import Session from "../session/session";
-
-/* Para poder reutilizar el componente PRODUCTOS necesito distinguir si se ingresó desde PRODUCTOS o desde VENTAS */
 
 
-export default function Products({ fromVentas }) {
+
+export default function Products() {
+
+    // Input
     const [busqueda, setBusqueda] = useState("");
 
+    // Enable Edit Mode both NEW PRODUCT or EDIT PRODUCT
     const [editMode, setEditMode] = useState(false);
+    const [esNuevo, setEsNuevo] = useState(false);
+   
+    // Object that contains PRODUCT info
     const [productInfo, setProductInfo] = useState({});
 
-    const [esNuevo, setEsNuevo] = useState(false);
-
-    const user = useSelector(selectUser);
-
+    // Just to navigate
     const navigate = useNavigate();
 
 
@@ -34,36 +32,29 @@ export default function Products({ fromVentas }) {
     }
 
 
-
-
     return (
-        <> 
-          <Session />
+        <>
 
-         {!user.loggedIn ? <LogIn /> :
-        
 
-            editMode ? <EditProduct esNuevo={esNuevo} setMode={setEditMode} id={productInfo.id} name={productInfo.name} price={productInfo.price} />
+            {editMode
 
-                :
+                ? <EditProduct esNuevo={esNuevo} setMode={setEditMode} id={productInfo.id} category={productInfo.category} name={productInfo.name} price={productInfo.price} />
 
-                esNuevo ? <EditProduct esNuevo={esNuevo} setMode={setEsNuevo} id={""} name={""} price={""} />
-                    :
-                    <div className={styles.centered}>
+                : esNuevo
+
+                    ? <EditProduct esNuevo={esNuevo} setMode={setEsNuevo} category={""} name={""} price={""} />
+                    : <div className={styles.centered}>
                         <h3>PRODUCTOS</h3>
                         <input onChange={handleInputChange}></input>
 
-                        <ListaProductos value={busqueda} setProductInfo={setProductInfo} setEditMode={setEditMode} />
+                        <ListaProductos value={busqueda} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} />
 
                         <div>
                             <button onClick={() => handleBack("/")}>Volver</button>
                             <button onClick={() => setEsNuevo(true)}>Nuevo Producto</button>
                         </div>
-
                     </div>
             }
-
-        
         </>
 
     )

@@ -75,3 +75,23 @@ h3{
     background-color: rgb(2, 2, 2);
     
 }
+
+/* WELCOME */
+
+.welcomeTouch{
+    width: 80vw;
+    height: 80vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6,1fr);
+    
+}
+
+.selectTouch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: solid 3px black;
+    margin: 0;
+}
