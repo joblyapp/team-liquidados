@@ -2,6 +2,7 @@ const express = require("express")
 const {
   generateCredentials,
   updatePassword,
+  verifyAdmin,
 } = require("../controllers/admin.controller")
 const usersRouter = express.Router()
 
@@ -19,7 +20,9 @@ usersRouter.get("/demo", (req, res) => {
 usersRouter.post("/generate", generateCredentials)
 
 // change password
-
 usersRouter.put("/update", updatePassword)
+
+// is admin created?
+usersRouter.get("/verify", verifyAdmin)
 
 module.exports = usersRouter
