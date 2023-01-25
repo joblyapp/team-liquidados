@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cors = require('cors');
 
+
 const app = express();
 
 // Connect to MongoDB
@@ -23,6 +24,7 @@ const productsRoutes = require("./routes/products.js");
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(cors());
+
 
 // Routes
 app.use("/products", productsRoutes);
