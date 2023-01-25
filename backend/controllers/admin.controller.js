@@ -22,8 +22,21 @@ const generateCredentials = async (req, res) => {
   }
 }
 
+const verifyAdmin = async (req, res) => {
+  try {
+    let isAdminCreated = await Admin.findOne({ name: "admin" })
+    if (isAdminCreated) {
+      res.status(200).send(true)
+    } else {
+      res.status(200).send(false)
+    }
+  } catch (error) {
+    res.send(error.message)
+  }
+}
+
 const updatePassword = async (req, res) => {
   res.send("hola mundo")
 }
 
-module.exports = { generateCredentials, updatePassword }
+module.exports = { generateCredentials, updatePassword, verifyAdmin }

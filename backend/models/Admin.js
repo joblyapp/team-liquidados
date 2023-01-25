@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt")
 const AdminSchema = new Schema({
   name: {
     type: String,
-    default: "admin"
+    default: "admin",
   },
 
   email: {
@@ -44,6 +44,10 @@ AdminSchema.methods.createHash = async plainTextPassword => {
 
 AdminSchema.methods.hello = async () => {
   console.log("holaaa")
+}
+
+AdminSchema.methods.verifyAdmin = async () => {
+  return true
 }
 
 module.exports.Admin = model("Admin", AdminSchema, "admin")
