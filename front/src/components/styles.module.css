@@ -36,6 +36,13 @@ h3{
     justify-content: center;
 }
 
+.register{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+
 /* PRODUCTOS */
 
 .productsCard{
@@ -94,4 +101,10 @@ h3{
     box-sizing: border-box;
     border: solid 3px black;
     margin: 0;
+}
+
+.message {
+    width: 80vw;
+    text-align: center;
+
 }
