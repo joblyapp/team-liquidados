@@ -1,6 +1,6 @@
-const { Schema, model } = require("mongoose")
+const { Schema, model } = require("mongoose");
 
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 
 // Admin schema
 const AdminSchema = new Schema({
@@ -18,19 +18,19 @@ const AdminSchema = new Schema({
     type: String,
     required: true,
   },
-})
+});
 
 // Generate Password Hash
 
-AdminSchema.methods.createHash = async plainTextPassword => {
+AdminSchema.methods.createHash = async (plainTextPassword) => {
   try {
-    const saltRounds = 10
-    const salt = await bcrypt.genSalt(saltRounds)
-    return await bcrypt.hash(plainTextPassword, salt)
+    const saltRounds = 10;
+    const salt = await bcrypt.genSalt(saltRounds);
+    return await bcrypt.hash(plainTextPassword, salt);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
-}
+};
 
 // Validate password
 
@@ -42,12 +42,25 @@ AdminSchema.methods.createHash = async plainTextPassword => {
 //   } catch (error) {}
 // }
 
+AdminSchema.methods.comparePassword = function (password) {
+  return bcrypt.compare(password, this.password);
+};
+
+AdminSchema.methods.login = function (password) {
+  return this.comparePassword(password).then((isMatch) => {
+    if (!isMatch) {
+      throw new Error("Invalid email or password");
+    }
+    return this;
+  });
+};
+
 AdminSchema.methods.hello = async () => {
-  console.log("holaaa")
-}
+  console.log("holaaa");
+};
 
 AdminSchema.methods.verifyAdmin = async () => {
-  return true
-}
+  return true;
+};
 
-module.exports.Admin = model("Admin", AdminSchema, "admin")
+module.exports.Admin = model("Admin", AdminSchema, "admin");
