@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "../styles.module.css";
 import axios from "axios";
 
-export default function EditProduct({ esNuevo, setMode, id, category, name, price }) {
+export default function EditProduct({ esNuevo, setMode, id, category, name, price, categoriasDisponibles }) {
 
     // Product data State. Only active when submitting form
     const [product, setProduct] = useState(null);
@@ -50,7 +50,16 @@ export default function EditProduct({ esNuevo, setMode, id, category, name, pric
         <div className={styles.centered}>
             {esNuevo ? <h2>Crear Producto</h2> : <h2>Editar Producto</h2>}
             <form className={styles.box} onSubmit={handleEditSubmit}>
-                Categoría: <input id="category" defaultValue={category} type="number" required></input>
+                Categoría: <select id="category" defaultValue={category} type="number" required>
+                    
+                    {categoriasDisponibles.map((item, key)=> {
+                        return( 
+                        <option key={key} value={item.id}>{`${item.id}: ${item.description}`}</option>
+                        )
+                       
+
+                    })}
+                </select>
                 Nombre: <input id="name" defaultValue={name} type="text" required></input>
                 Precio: <input id="price" defaultValue={price} type="number" required></input>
                 <div>

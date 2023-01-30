@@ -4,9 +4,9 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+// A lista productos se le suma otro valor que es "isSelling". Si este valor es TRUE va a cambiar los botones de la derecha
 
-
-export default function ListaProductos({ value, setProductInfo, setEditMode }) {
+export default function ListaProductos({ value, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, setAdding }) {
 
     // Loading wheel
     const [loading, setLoading] = useState(true);
@@ -26,7 +26,6 @@ export default function ListaProductos({ value, setProductInfo, setEditMode }) {
             .then((response) => {
                 setDatos(response.data)
                 setLoading(false);
-                console.log(response.data)
             })
             .catch((error) => {
                 console.log(error);
@@ -88,6 +87,30 @@ export default function ListaProductos({ value, setProductInfo, setEditMode }) {
 
     }
 
+    function handleAdd(name, price, id) {
+        const sale = [...saleStatus];
+        const newProduct = {
+            id: id,
+            name: name,
+            price: price,
+            amount: 1,
+            total() { return this.price * this.amount; }
+        }
+
+        const elementIndex = sale.indexOf(sale.find(element => element.id === id));
+
+        if (elementIndex === -1) {
+            sale.push(newProduct);
+            setSaleStatus(sale);
+            setAdding(false);
+        }
+        else {
+            sale[elementIndex].amount++;
+            setSaleStatus(sale);
+            setAdding(false);
+        }
+
+    }
 
 
     return (
@@ -104,18 +127,25 @@ export default function ListaProductos({ value, setProductInfo, setEditMode }) {
                             <p>{item.name}</p>
                             <p>{item.price}</p>
                             <div className={styles.lateralButtons}>
-                                <button onClick={() => handleEdit(item._id, item.category, item.name, item.price)}>EDIT</button>
-                                <button onClick={() => handleAlert(item._id)}>DELETE</button>
+                                {!isSelling && <button onClick={() => handleEdit(item._id, item.category, item.name, item.price)}>EDIT</button>}
+                                {!isSelling && <button onClick={() => handleAlert(item._id)}>DELETE</button>}
+                                {isSelling && <button onClick={() => handleAdd(item.name, item.price, item._id)}>+</button>}
                             </div>
                         </div>
                     ))
 
                 }
 
+
+            {isSelling && <button onClick={()=>setAdding(false)}> BACK</button>} 
+
             </div>
+
+         
+
             :
 
-            <div className={styles.productsCard}> LOADING</div>
+    <div className={styles.productsCard}> LOADING</div>
 
     )
 }
