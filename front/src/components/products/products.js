@@ -15,7 +15,7 @@ export default function Products() {
     // Enable Edit Mode both NEW PRODUCT or EDIT PRODUCT
     const [editMode, setEditMode] = useState(false);
     const [esNuevo, setEsNuevo] = useState(false);
-   
+
     // Object that contains PRODUCT info
     const [productInfo, setProductInfo] = useState({});
 
@@ -39,16 +39,17 @@ export default function Products() {
 
             {editMode
 
-                ? <EditProduct esNuevo={esNuevo} setMode={setEditMode} id={productInfo.id} category={productInfo.category} name={productInfo.name} price={productInfo.price} categoriasDisponibles={categorias}/>
+                ? <EditProduct esNuevo={esNuevo} setMode={setEditMode} id={productInfo.id} category={productInfo.category} name={productInfo.name} price={productInfo.price} categoriasDisponibles={categorias} />
 
                 : esNuevo
 
                     ? <EditProduct esNuevo={esNuevo} setMode={setEsNuevo} category={""} name={""} price={""} categoriasDisponibles={categorias} />
                     : <div className={styles.centered}>
+
                         <h3>PRODUCTOS</h3>
                         <input onChange={handleInputChange}></input>
 
-                        <ListaProductos value={busqueda} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} />
+                        <ListaProductos value={busqueda} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} isSelling={false} />
 
                         <div>
                             <button onClick={() => handleBack("/")}>Volver</button>

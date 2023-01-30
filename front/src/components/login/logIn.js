@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import styles from "../styles.module.css";
 import Recovery from "./recovery";
-import Register from "./register";
+import Register from "./register/register";
 import Enter from "./enter";
 
 export default function LogIn() {

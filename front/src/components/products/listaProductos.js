@@ -4,9 +4,9 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+// A lista productos se le suma otro valor que es "isSelling". Si este valor es TRUE va a cambiar los botones de la derecha
 
-
-export default function ListaProductos({ value, setProductInfo, setEditMode }) {
+export default function ListaProductos({ value, setProductInfo, setEditMode, isSelling }) {
 
     // Loading wheel
     const [loading, setLoading] = useState(true);
@@ -104,8 +104,9 @@ export default function ListaProductos({ value, setProductInfo, setEditMode }) {
                             <p>{item.name}</p>
                             <p>{item.price}</p>
                             <div className={styles.lateralButtons}>
-                                <button onClick={() => handleEdit(item._id, item.category, item.name, item.price)}>EDIT</button>
-                                <button onClick={() => handleAlert(item._id)}>DELETE</button>
+                                {!isSelling && <button onClick={() => handleEdit(item._id, item.category, item.name, item.price)}>EDIT</button>}
+                                {!isSelling && <button onClick={() => handleAlert(item._id)}>DELETE</button>}
+                                {isSelling && <button onClick={() => console.log("agregar producto ejecutado")}>+</button>}
                             </div>
                         </div>
                     ))

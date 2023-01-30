@@ -1,5 +1,7 @@
+import Sale from "../components/sales/sale";
+
 export default function SalesPage (){
     return(
-        <div>VENTAS</div>
+        <Sale />
     )
 }
