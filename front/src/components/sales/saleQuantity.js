@@ -3,7 +3,12 @@ import styles from "../styles.module.css";
 export default function SaleQuantity( {amount, setSaleStatus, saleStatus, name}) {
   
 function deleteItem(array, index){
-    array.splice(index, index);
+    console.log("Inside deleteItem i have:");
+    console.log("Array: "+ array);
+    console.log("Index: "+ index);
+    console.log("Sale Status: " + saleStatus)
+    const spliceResult = array.splice(index, 1);
+    console.log("splice: " + spliceResult);
 }
 
 function quantityChange(condition){
@@ -12,6 +17,8 @@ function quantityChange(condition){
     const product = saleStatus.find(x => x.name === name);
     
     const index = sale.indexOf(product);
+    console.log(index);
+    console.log(sale);
 
     if(condition === "up"){
         sale[index].amount = sale[index].amount + 1;
@@ -21,9 +28,10 @@ function quantityChange(condition){
     }
 
     if(sale[index].amount === 0){
-        deleteItem(sale,index)
+        deleteItem(sale,index);
     }
      
+    console.log("Sale: " + sale);
     setSaleStatus(sale);
     
 }    
