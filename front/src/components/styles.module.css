@@ -51,6 +51,7 @@ h3{
 }
 
 .listaProductos{
+    text-align: center;
     width: 70vw;
     display: grid;
     grid-template-columns: repeat(4, 1fr);    
@@ -106,5 +107,13 @@ h3{
 .message {
     width: 80vw;
     text-align: center;
+}
 
+
+/* Sale quantity buttons*/
+
+.saleButtons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }

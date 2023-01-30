@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "../styles.module.css";
+import SaleQuantity from "./saleQuantity";
 
-export default function SaleDetails({ saleProducts }) {
+export default function SaleDetails({ saleStatus, setSaleStatus, setAdding }) {
 
     const [totalToPay, setTotalToPay] = useState(0);
 
@@ -9,7 +10,7 @@ export default function SaleDetails({ saleProducts }) {
     function calculateTotal(products) {
         var sum = 0;
         products.map((item) => {
-            sum = sum + item.total;
+            sum = sum + item.total();
         })
 
         setTotalToPay(sum);
@@ -17,38 +18,44 @@ export default function SaleDetails({ saleProducts }) {
 
     useEffect(() => {
 
-        if (saleProducts) {
-            calculateTotal(saleProducts);
+        if (saleStatus) {
+            calculateTotal(saleStatus);
         }
-     
 
-    })
+    }, [saleStatus])
+
+
 
     return (
 
-        <div className={styles.productsCard}>
+        <>
+            <div className={styles.productsCard}>
 
-            {saleProducts.map((item, key) => (
+                {saleStatus.map((item, key) => (
+
+                    <div key={key} className={styles.listaProductos}>
+
+                        <p>{item.name}</p>
+                        <p>{item.price}</p>
+                        <SaleQuantity amount={item.amount} name={item.name} setSaleStatus={setSaleStatus} saleStatus={saleStatus} />
+                        <p>{item.total()}</p>
+
+                    </div>
+
+                )
+                )}
+
+            </div>
+            <div className={styles.listaProductos}>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p style={{ fontWeight: "bold" }}>{totalToPay}</p>
+            </div>
 
 
-                <div key={key} className={styles.listaProductos}>
-
-                    <p>{item.name}</p>
-                    <p>{item.price}</p>
-                    <p>{item.amount}</p>
-                    <p>{item.total}</p>
-
-                </div>
-
-            )
-            )}
-
-            <div>{totalToPay}</div>
-
-
-        </div>
-
-
+            <button onClick={() => setAdding(true)}>ADD NEW PRODUCT</button>
+        </>
     )
 
 }

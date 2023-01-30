@@ -6,7 +6,7 @@ import axios from "axios";
 
 // A lista productos se le suma otro valor que es "isSelling". Si este valor es TRUE va a cambiar los botones de la derecha
 
-export default function ListaProductos({ value, setProductInfo, setEditMode, isSelling }) {
+export default function ListaProductos({ value, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, setAdding }) {
 
     // Loading wheel
     const [loading, setLoading] = useState(true);
@@ -26,7 +26,6 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
             .then((response) => {
                 setDatos(response.data)
                 setLoading(false);
-                console.log(response.data)
             })
             .catch((error) => {
                 console.log(error);
@@ -88,6 +87,30 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
 
     }
 
+    function handleAdd(name, price, id) {
+        const sale = [...saleStatus];
+        const newProduct = {
+            id: id,
+            name: name,
+            price: price,
+            amount: 1,
+            total() { return this.price * this.amount; }
+        }
+
+        const elementIndex = sale.indexOf(sale.find(element => element.id === id));
+
+        if (elementIndex === -1) {
+            sale.push(newProduct);
+            setSaleStatus(sale);
+            setAdding(false);
+        }
+        else {
+            sale[elementIndex].amount++;
+            setSaleStatus(sale);
+            setAdding(false);
+        }
+
+    }
 
 
     return (
@@ -106,17 +129,23 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
                             <div className={styles.lateralButtons}>
                                 {!isSelling && <button onClick={() => handleEdit(item._id, item.category, item.name, item.price)}>EDIT</button>}
                                 {!isSelling && <button onClick={() => handleAlert(item._id)}>DELETE</button>}
-                                {isSelling && <button onClick={() => console.log("agregar producto ejecutado")}>+</button>}
+                                {isSelling && <button onClick={() => handleAdd(item.name, item.price, item._id)}>+</button>}
                             </div>
                         </div>
                     ))
 
                 }
 
+
+            {isSelling && <button onClick={()=>setAdding(false)}> BACK</button>} 
+
             </div>
+
+         
+
             :
 
-            <div className={styles.productsCard}> LOADING</div>
+    <div className={styles.productsCard}> LOADING</div>
 
     )
 }
