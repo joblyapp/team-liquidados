@@ -1,8 +1,9 @@
 const express = require("express");
 const {
   generateCredentials,
-  updatePassword,
   verifyAdmin,
+  forgotPassword,
+  resetPassword,
 } = require("../controllers/admin.controller");
 const usersRouter = express.Router();
 
@@ -22,22 +23,25 @@ usersRouter.post("/generate", generateCredentials);
 //LogIn
 usersRouter.post("/login", (req, res) => {
   Admin.findOne({ email: req.body.email })
-    .then((admin) => {
+    .then(admin => {
       if (!admin) {
         throw new Error("Admin not found");
       }
       return Admin.login(req.body.password);
     })
-    .then((admin) => {
+    .then(admin => {
       res.send("Logged in successfully");
     })
-    .catch((err) => {
+    .catch(err => {
       res.status(401).send(err.message);
     });
 });
 
-// change password
-usersRouter.put("/update", updatePassword);
+// forgot password
+usersRouter.post("/forgot-password", forgotPassword);
+
+// reset password
+usersRouter.post("/reset/:token", resetPassword);
 
 // is admin created?
 usersRouter.get("/verify", verifyAdmin);

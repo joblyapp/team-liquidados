@@ -1,42 +1,99 @@
-const Admin = require("../models/Admin").Admin
+const Admin = require("../models/Admin").Admin;
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Create new credentials with email and password
 const generateCredentials = async (req, res) => {
   try {
-    const { email, password } = req.body
+    const { email, password } = req.body;
 
     const newAdminCredentials = new Admin({
       email: email,
-    })
+    });
 
-    let hashedPassword = await newAdminCredentials.createHash(password)
-    newAdminCredentials.password_hash = hashedPassword
+    let hashedPassword = await newAdminCredentials.createHash(password);
+    newAdminCredentials.password_hash = hashedPassword;
 
-    await newAdminCredentials.save()
+    await newAdminCredentials.save();
 
     return res.status(201).json({
       message: "Admin credentials created",
-    })
+    });
   } catch (error) {
-    res.send(error.message)
+    res.send(error.message);
   }
-}
+};
 
 const verifyAdmin = async (req, res) => {
   try {
-    let isAdminCreated = await Admin.findOne({ name: "admin" })
+    let isAdminCreated = await Admin.findOne({ name: "admin" });
     if (isAdminCreated) {
-      res.status(200).send(true)
+      res.status(200).send(true);
     } else {
-      res.status(200).send(false)
+      res.status(200).send(false);
     }
   } catch (error) {
-    res.send(error.message)
+    res.send(error.message);
   }
-}
+};
 
-const updatePassword = async (req, res) => {
-  res.send("hola mundo")
-}
+const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    let isEmailCreated = await Admin.findOne({ email: email });
+    if (!isEmailCreated) {
+      res.json({
+        message: "User not registered",
+      });
+      return;
+    }
 
-module.exports = { generateCredentials, updatePassword, verifyAdmin }
+    const secret = JWT_SECRET;
+    const payload = {
+      name: "admin",
+      email: email,
+    };
+
+    const token = jwt.sign(payload, secret, { expiresIn: "15m" });
+    const link = `http://localhost:8080/api/v1/admin/reset/${token}`;
+    res.send(link);
+  } catch (error) {
+    res.send(error.message);
+  }
+};
+
+const resetPassword = async (req, res) => {
+  const { token } = req.params;
+  const { password } = req.body;
+  const secret = JWT_SECRET;
+
+  try {
+    const payload = jwt.verify(token, secret);
+    const adminUser = await Admin.findOne({ name: payload.name });
+    const { name, email } = adminUser;
+
+    if (name === payload.name && email === payload.email) {
+      let hash = await bcrypt.hash(password, 10);
+      await Admin.updateOne(
+        {
+          name: name,
+        },
+        { $set: { password_hash: hash } },
+        { new: true }
+      );
+    }
+
+    res.json({ message: "password update successfully" });
+  } catch (error) {
+    res.send(error.message);
+  }
+};
+
+module.exports = {
+  generateCredentials,
+  verifyAdmin,
+  forgotPassword,
+  resetPassword,
+};
