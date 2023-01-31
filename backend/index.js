@@ -22,7 +22,7 @@ const productsRoutes = require("./routes/products.js");
 
 // Middleware
 app.use(express.json());
-app.use(morgan("tiny"));
+// app.use(morgan("tiny"));
 app.use(cors());
 
 
