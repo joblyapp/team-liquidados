@@ -39,10 +39,11 @@ export default function OldSales({ setMode }) {
                     <div key={key} className={styles.listaProductos}>
 
                         <p>{item.total}</p>
+                        <p>{item.products.length}</p>
 
                         {item.products.map((product, key) => (
 
-                            <p key={key}> {product.productId.DateOfEntry} </p>
+                            <p key={key}> {product.length} </p>
 
 
                                 )
