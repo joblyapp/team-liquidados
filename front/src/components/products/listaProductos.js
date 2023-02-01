@@ -90,11 +90,11 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
     function handleAdd(name, price, id) {
         const sale = [...saleStatus];
         const newProduct = {
-            id: id,
+            productId: id,
             name: name,
             price: price,
-            amount: 1,
-            total() { return this.price * this.amount; }
+            quantity: 1,
+            total() { return this.price * this.quantity; }
         }
 
         const elementIndex = sale.indexOf(sale.find(element => element.id === id));
@@ -105,7 +105,7 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
             setAdding(false);
         }
         else {
-            sale[elementIndex].amount++;
+            sale[elementIndex].quantity++;
             setSaleStatus(sale);
             setAdding(false);
         }

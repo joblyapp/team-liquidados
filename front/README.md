@@ -11,4 +11,12 @@
 * DELETE product button DONE
 
 
+// TO ME
+
+handle LOGIN with backend schemma.
+I can register a new User but the system gives me an 401 error when i want to logIn (unauthorized)
+
+handle recovery -> The information is sent and the response is processed
+
+
 

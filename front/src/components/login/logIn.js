@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Recovery from "./recovery";
+import Recovery from "./recovery/recovery";
 import Register from "./register/register";
 import Enter from "./enter";
 

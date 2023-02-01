@@ -1,11 +1,12 @@
 import { useState } from "react";
-import ListaProductos from "../products/listaProductos";
-import styles from "../styles.module.css";
+import ListaProductos from "../../products/listaProductos";
+import styles from "../../styles.module.css";
+import SaleBack from "../saleBack";
 import SaleBar from "./saleBar";
 import SaleDetails from "./saleDetails";
 
 
-export default function Sale() {
+export default function Sale({ setMode }) {
 
     const [adding, setAdding] = useState(false);
 
@@ -26,6 +27,7 @@ export default function Sale() {
                     <h3>NUEVA VENTA</h3>
                     <SaleBar />
                     <SaleDetails saleStatus={saleStatus} setSaleStatus={setSaleStatus} setAdding={setAdding} />
+                    <SaleBack setMode={setMode} />
                 </>
 
             }
