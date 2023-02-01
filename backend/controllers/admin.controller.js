@@ -1,6 +1,8 @@
 const Admin = require("../models/Admin").Admin;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -58,7 +60,18 @@ const forgotPassword = async (req, res) => {
 
     const token = jwt.sign(payload, secret, { expiresIn: "15m" });
     const link = `http://localhost:8080/api/v1/admin/reset/${token}`;
-    res.send(link);
+
+    //email sent using sendgrid
+    const msg = {
+      to: email,
+      from: "example@example.com",
+      subject: "Password Reset",
+      text: "Follow the link to reset your password: " + link,
+    };
+
+    await sgMail.send(msg);
+    res.send({ message: "Email sent successfully" });
+    //----------------------
   } catch (error) {
     res.send(error.message);
   }
