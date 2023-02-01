@@ -22,7 +22,6 @@ const SalesSchema = new Schema({
   date: {
     type: Date,
     default: Date.now,
-    select: true,
     immutable: true,
   },
 });
