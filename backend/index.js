@@ -19,15 +19,17 @@ db.once("open", function () {
 
 const productsRoutes = require("./routes/productsRoutes.js");
 const salesRoutes = require("./routes/SalesRoutes.js");
+const adminsRoutes = require("./routes/adminsRoutes.js");
 
 // Middleware
 app.use(express.json());
-// app.use(morgan("tiny"));
+app.use(morgan("tiny"));
 app.use(cors());
 
 // Routes
 app.use("/products", productsRoutes);
 app.use("/sales", salesRoutes);
+app.use("/admin", adminsRoutes);
 
 app.use("/api/v1", require("./routes/index"));
 
