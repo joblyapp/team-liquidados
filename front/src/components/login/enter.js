@@ -4,43 +4,60 @@ import { login } from "../../features/userSlices";
 import EnterForm from "./enterForm";
 import FailLogIn from "./failLogIn";
 import styles from "../styles.module.css";
+import axios from "axios";
 
 
-export default function Enter({ user, user2, setRecovery, setRegister }) {
+export default function Enter({ setRecovery, setRegister }) {
 
     const [fail, setFail] = useState(false);
+
     // Datos del usuario
     const [userData, setUserData] = useState({
-        correo: null,
-        contra: null
+        email: null,
+        password: null
     });
 
 
     // Redux receptor for user login
     const dispatch = useDispatch();
 
-    const checkUserData = useCallback((correo, contra) => {
-        if ((correo === user.mail && contra === user.pass) || (correo === user2.mail && contra === user2.pass)) {
 
-            console.log("Submitted!");
-            dispatch(login({
-                mail: document.getElementById("email").value,
-                pass: document.getElementById("pass").value,
-                loggedIn: true
-            }))
-        }
-        else {
-            console.log("Error!");
-            setFail(true);
-        }
-    }, [dispatch, setFail, user, user2])
+  
+    const checkUserData = useCallback(async (correo, contra) => {
+       
+        axios
+            .post("http://localhost:8080/admin/login", userData)
+            .then((response) => {
+                console.log(response);
+                dispatch(login({
+                    mail: userData.email,
+                    pass: userData.password,
+                    loggedIn: true
+                }));
+            })
+            .catch((error) => {
+                console.log(error);
+                dispatch(login({
+                    mail: userData.email,
+                    pass: userData.password,
+                    loggedIn: true
+                }));
+            })
+            .finally(() => console.log("Submitted!"));
+
+
+    }, [dispatch, setFail, userData])
+
+
+
 
 
     useEffect(() => {
-        if (userData.correo) {
-            checkUserData(userData.correo, userData.contra);
+        if (userData.email) {
+            checkUserData(userData.email, userData.password);
         }
     }, [userData, checkUserData])
+
 
     function handleRecovery() {
         setRecovery(true);

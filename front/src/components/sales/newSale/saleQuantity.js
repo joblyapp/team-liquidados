@@ -1,6 +1,6 @@
-import styles from "../styles.module.css";
+import styles from "../../styles.module.css";
 
-export default function SaleQuantity( {amount, setSaleStatus, saleStatus, name}) {
+export default function SaleQuantity( {quantity, setSaleStatus, saleStatus, name}) {
   
 function deleteItem(array, index){
     console.log("Inside deleteItem i have:");
@@ -14,20 +14,20 @@ function deleteItem(array, index){
 function quantityChange(condition){
 
     const sale = [...saleStatus];
-    const product = saleStatus.find(x => x.name === name);
+    const product = saleStatus.find(x => x.productId.name === name);
     
     const index = sale.indexOf(product);
     console.log(index);
     console.log(sale);
 
     if(condition === "up"){
-        sale[index].amount = sale[index].amount + 1;
+        sale[index].quantity = sale[index].quantity + 1;
     }
-    else if (condition === "down" && sale[index].amount > 0){
-        sale[index].amount = sale[index].amount - 1;
+    else if (condition === "down" && sale[index].quantity > 0){
+        sale[index].quantity = sale[index].quantity - 1;
     }
 
-    if(sale[index].amount === 0){
+    if(sale[index].quantity === 0){
         deleteItem(sale,index);
     }
      
@@ -40,7 +40,7 @@ function quantityChange(condition){
     return (
         <div className={styles.saleButtons}>
             <button onClick={()=> quantityChange("down")}>-</button>
-            <p> {amount} </p>
+            <p> {quantity} </p>
             <button onClick={()=> quantityChange("up")}>+</button>
         </div>
     )
