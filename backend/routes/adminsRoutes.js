@@ -7,6 +7,20 @@ const Admin = require("../models/Admin");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
+//Route for creating a new admin
+router.post("/", async (req, res) => {
+  try {
+    console.log(req.body);
+    const admin = new Admin(req.body);
+    const salt = await bcrypt.genSalt(10);
+    admin.password_hash = await bcrypt.hash(req.body.password, salt);
+    await admin.save();
+    res.status(201).send(admin);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 // Route for admin login
 router.post("/login", async (req, res) => {
   try {
