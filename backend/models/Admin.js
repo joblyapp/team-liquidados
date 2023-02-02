@@ -1,9 +1,10 @@
-const { Schema, model } = require("mongoose");
+// const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
 
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 
 // Admin schema
-const AdminSchema = new Schema({
+const adminSchema = new mongoose.Schema({
   name: {
     type: String,
     default: "admin",
@@ -20,47 +21,49 @@ const AdminSchema = new Schema({
   },
 });
 
+module.exports = mongoose.model("Admin", adminSchema);
+
 // Generate Password Hash
 
-AdminSchema.methods.createHash = async (plainTextPassword) => {
-  try {
-    const saltRounds = 10;
-    const salt = await bcrypt.genSalt(saltRounds);
-    return await bcrypt.hash(plainTextPassword, salt);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-// Validate password
-
-// AdminSchema.methods.createHash = async (adminPassword, password_hash) => {
-//   const result = await bcrypt.compare(adminPassword, password_hash)
-//   return result
-
+// AdminSchema.methods.createHash = async (plainTextPassword) => {
 //   try {
-//   } catch (error) {}
-// }
+//     const saltRounds = 10;
+//     const salt = await bcrypt.genSalt(saltRounds);
+//     return await bcrypt.hash(plainTextPassword, salt);
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
 
-AdminSchema.methods.comparePassword = function (password) {
-  return bcrypt.compare(password, this.password);
-};
+// // Validate password
 
-AdminSchema.methods.login = function (password) {
-  return this.comparePassword(password).then((isMatch) => {
-    if (!isMatch) {
-      throw new Error("Invalid email or password");
-    }
-    return this;
-  });
-};
+// // AdminSchema.methods.createHash = async (adminPassword, password_hash) => {
+// //   const result = await bcrypt.compare(adminPassword, password_hash)
+// //   return result
 
-AdminSchema.methods.hello = async () => {
-  console.log("holaaa");
-};
+// //   try {
+// //   } catch (error) {}
+// // }
 
-AdminSchema.methods.verifyAdmin = async () => {
-  return true;
-};
+// AdminSchema.methods.comparePassword = function (password) {
+//   return bcrypt.compare(password, this.password);
+// };
 
-module.exports.Admin = model("Admin", AdminSchema, "admin");
+// AdminSchema.methods.login = function (password) {
+//   return this.comparePassword(password).then((isMatch) => {
+//     if (!isMatch) {
+//       throw new Error("Invalid email or password");
+//     }
+//     return this;
+//   });
+// };
+
+// AdminSchema.methods.hello = async () => {
+//   console.log("holaaa");
+// };
+
+// AdminSchema.methods.verifyAdmin = async () => {
+//   return true;
+// };
+
+// module.exports.Admin = model("Admin", AdminSchema, "admin");
