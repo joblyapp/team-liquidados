@@ -22,40 +22,34 @@ export default function Enter({ user, user2, setRecovery, setRegister }) {
     const dispatch = useDispatch();
 
 
-    // THIS FUNCTION IS DOING THE SAME WITH SUCCES AND WITH ERRORS. IT IS ON PURPOSE
-
+  
     const checkUserData = useCallback(async (correo, contra) => {
-        
+
         axios
-        .post("http://localhost:8080/api/v1/admin/login", userData)
-        .then((response) => {
-            console.log(response);
-            dispatch(login({
-                mail: document.getElementById("email").value,
-                pass: document.getElementById("pass").value,
-                loggedIn: true
-            }));
-        })
-        .catch((error) => {
-            console.log(error);
-            dispatch(login({
-                mail: document.getElementById("email").value,
-                pass: document.getElementById("pass").value,
-                loggedIn: true
-            }));
-        })
-        .finally(()=>console.log("Submitted!"));
-        
-    
-    }, [dispatch, setFail, user, user2])
+            .post("http://localhost:8080/admin/login", userData)
+            .then((response) => {
+                console.log(response);
+                dispatch(login({
+                    mail: userData.email,
+                    pass: userData.password,
+                    loggedIn: true
+                }));
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+            .finally(() => console.log("Submitted!"));
+
+
+    }, [dispatch, setFail])
 
 
 
 
 
     useEffect(() => {
-        if (userData.correo) {
-            checkUserData(userData.correo, userData.contra);
+        if (userData.email) {
+            checkUserData(userData.email, userData.password);
         }
     }, [userData, checkUserData])
 

@@ -6,9 +6,10 @@ export default function EnterForm({ setUserData, color }) {
     function handleSubmit(e) {
         e.preventDefault();
         setUserData({
-            correo: document.getElementById("email").value,
-            contra: document.getElementById("pass").value
+            email: document.getElementById("email").value,
+            password: document.getElementById("pass").value
         })
+        console.log("SETTING USER DATA")
     }
 
 
