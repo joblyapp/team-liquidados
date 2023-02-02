@@ -97,7 +97,7 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
             total() { return this.price * this.quantity; }
         }
 
-        const elementIndex = sale.indexOf(sale.find(element => element.id === id));
+        const elementIndex = sale.indexOf(sale.find(element => element.productId === id));
 
         if (elementIndex === -1) {
             sale.push(newProduct);

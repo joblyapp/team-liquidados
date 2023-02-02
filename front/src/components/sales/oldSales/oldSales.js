@@ -3,11 +3,18 @@ import axios from "axios";
 import SaleBack from "../saleBack";
 import styles from "../../styles.module.css";
 import Loading from "../../loading";
+import SaleBar from "../newSale/saleBar";
+import ListOldSales from "./ListOldSales";
+import Sale from "../newSale/sale";
 
 export default function OldSales({ setMode }) {
 
     const [oldSales, setOldSales] = useState("");
     const [loading, setLoading] = useState(true);
+    // Create an state for editing mode
+    const [isEditing, setIsEditing] = useState(false);
+    const [editingStatus, setEditingStatus] = useState(null);
+
 
 
     useEffect(() => {
@@ -29,42 +36,27 @@ export default function OldSales({ setMode }) {
 
     return (
 
-        !loading ?
+        <div className={styles.centered}>
 
-            <div className={styles.productCard}>
+            {!loading ?
 
+                !isEditing ?
 
-                {oldSales.map((item, key) => (
+                    <div className={styles.productCard}>
 
-                    <div key={key} className={styles.listaProductos}>
+                        <SaleBar one="Fecha" two="Cantidad de Productos" three="Productos" four="TOTAL" />
 
-                        <p>{item.total}</p>
-                        <p>{item.products.length}</p>
-
-                        {item.products.map((product, key) => (
-
-                            <p key={key}> {product.length} </p>
-
-
-                                )
-
-
-
-                        )}
-
-                            </div>
-
-                        )
-                        )}
+                        <ListOldSales oldSales={oldSales} setIsEditing={setIsEditing} setEditingStatus={setEditingStatus} />
 
                         <SaleBack setMode={setMode} />
 
-
                     </div>
+                    :
+                    <Sale isEditing={isEditing} isEditingStatus={editingStatus} setIsEditing={setIsEditing}    />
+                :
 
-            :
+                <Loading />}
 
-                <Loading />
-
-                )
+        </div>
+    )
 }
