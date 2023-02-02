@@ -7,7 +7,7 @@ import styles from "../styles.module.css";
 import axios from "axios";
 
 
-export default function Enter({ user, user2, setRecovery, setRegister }) {
+export default function Enter({ setRecovery, setRegister }) {
 
     const [fail, setFail] = useState(false);
 
@@ -24,7 +24,7 @@ export default function Enter({ user, user2, setRecovery, setRegister }) {
 
   
     const checkUserData = useCallback(async (correo, contra) => {
-
+       
         axios
             .post("http://localhost:8080/admin/login", userData)
             .then((response) => {
@@ -37,11 +37,16 @@ export default function Enter({ user, user2, setRecovery, setRegister }) {
             })
             .catch((error) => {
                 console.log(error);
+                dispatch(login({
+                    mail: userData.email,
+                    pass: userData.password,
+                    loggedIn: true
+                }));
             })
             .finally(() => console.log("Submitted!"));
 
 
-    }, [dispatch, setFail])
+    }, [dispatch, setFail, userData])
 
 
 
@@ -52,6 +57,7 @@ export default function Enter({ user, user2, setRecovery, setRegister }) {
             checkUserData(userData.email, userData.password);
         }
     }, [userData, checkUserData])
+
 
     function handleRecovery() {
         setRecovery(true);

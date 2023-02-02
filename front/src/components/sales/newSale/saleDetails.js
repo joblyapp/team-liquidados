@@ -3,7 +3,7 @@ import styles from "../../styles.module.css";
 import SaleQuantity from "./saleQuantity";
 import axios from "axios";
 
-export default function SaleDetails({ saleStatus, setSaleStatus, setAdding }) {
+export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEditing, setMode, isEditingId }) {
 
     const [totalToPay, setTotalToPay] = useState(0);
 
@@ -20,8 +20,9 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding }) {
     useEffect(() => {
 
         if (saleStatus) {
-            calculateTotal(saleStatus);
             console.log(saleStatus);
+            calculateTotal(saleStatus);
+
         }
 
     }, [saleStatus])
@@ -30,20 +31,42 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding }) {
     // This function send to de backEnd a JSON structured like this {products: [] total: {}}
     function handleSale() {
 
-        axios
-            .post("http://localhost:8080/Sales/", {
-                products: saleStatus.map(({productId, quantity}) => ({productId, quantity})),
-                total: totalToPay
-            })
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-            .finally(() => {
-                console.log("proceso atravesado")
-            });
+        if (isEditing) {
+            axios
+                .patch(`http://localhost:8080/Sales/${isEditingId}`, {
+                    products: saleStatus.map(({ productId, quantity }) => ({ productId, quantity })),
+                    total: totalToPay
+                })
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+                .finally(() => {
+                    setMode("");
+                });
+
+
+        }
+        else {
+
+            axios
+                .post("http://localhost:8080/Sales/", {
+                    products: saleStatus.map(({ productId, quantity }) => ({ productId, quantity })),
+                    total: totalToPay
+                })
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+                .finally(() => {
+                    setMode("");
+                });
+
+        }
 
 
 
@@ -60,9 +83,9 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding }) {
 
                     <div key={key} className={styles.listaProductos}>
 
-                        <p>{item.name}</p>
-                        <p>{item.price}</p>
-                        <SaleQuantity quantity={item.quantity} name={item.name} setSaleStatus={setSaleStatus} saleStatus={saleStatus} />
+                        <p>{item.productId.name}</p>
+                        <p>{item.productId.price}</p>
+                        <SaleQuantity quantity={item.quantity} name={item.productId.name} setSaleStatus={setSaleStatus} saleStatus={saleStatus} />
                         <p>{item.total()}</p>
 
                     </div>

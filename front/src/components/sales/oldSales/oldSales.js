@@ -6,14 +6,15 @@ import Loading from "../../loading";
 import SaleBar from "../newSale/saleBar";
 import ListOldSales from "./ListOldSales";
 import Sale from "../newSale/sale";
+import { isElement } from "react-dom/test-utils";
 
-export default function OldSales({ setMode }) {
+export default function OldSales({ setMode, mode }) {
 
     const [oldSales, setOldSales] = useState("");
     const [loading, setLoading] = useState(true);
     // Create an state for editing mode
     const [isEditing, setIsEditing] = useState(false);
-    const [editingStatus, setEditingStatus] = useState(null);
+    const [editingId, setEditingId] = useState(null);
 
 
 
@@ -46,13 +47,13 @@ export default function OldSales({ setMode }) {
 
                         <SaleBar one="Fecha" two="Cantidad de Productos" three="Productos" four="TOTAL" />
 
-                        <ListOldSales oldSales={oldSales} setIsEditing={setIsEditing} setEditingStatus={setEditingStatus} />
+                        <ListOldSales oldSales={oldSales} setIsEditing={setIsEditing} setEditingId={setEditingId} />
 
-                        <SaleBack setMode={setMode} />
+                        <SaleBack setMode={setMode} isEditing={isEditing} setIsEditing={setIsEditing}/>
 
                     </div>
                     :
-                    <Sale isEditing={isEditing} isEditingStatus={editingStatus} setIsEditing={setIsEditing}    />
+                    <Sale setMode={setMode} isEditing={isEditing} isEditingId={editingId} setIsEditing={setIsEditing}    />
                 :
 
                 <Loading />}

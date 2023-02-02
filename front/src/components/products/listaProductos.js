@@ -88,16 +88,20 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
     }
 
     function handleAdd(name, price, id) {
+
         const sale = [...saleStatus];
         const newProduct = {
-            productId: id,
-            name: name,
-            price: price,
+            productId: {
+                _id: id,
+                name: name,
+                price: price,
+                
+            },
             quantity: 1,
-            total() { return this.price * this.quantity; }
+            total() { return this.productId.price * this.quantity}
         }
 
-        const elementIndex = sale.indexOf(sale.find(element => element.productId === id));
+        const elementIndex = sale.indexOf(sale.find(element => element.productId._id === id));
 
         if (elementIndex === -1) {
             sale.push(newProduct);

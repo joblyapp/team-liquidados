@@ -14,7 +14,7 @@ function deleteItem(array, index){
 function quantityChange(condition){
 
     const sale = [...saleStatus];
-    const product = saleStatus.find(x => x.name === name);
+    const product = saleStatus.find(x => x.productId.name === name);
     
     const index = sale.indexOf(product);
     console.log(index);

@@ -4,13 +4,13 @@ import styles from "../../styles.module.css";
 
 
 
-export default function ListOldSales({ oldSales, setIsEditing, setEditingStatus }) {
+export default function ListOldSales({ oldSales, setIsEditing, setEditingId }) {
 
 
     // When clicking on Sale Div we have to LOAD a SALE visual with sale's PRODUCTS loaded 
-    function handleClick(productos) {
+    function handleClick(saleId) {
 
-        setEditingStatus(productos);
+        setEditingId(saleId);
         setIsEditing(true);
 
     }
@@ -21,31 +21,36 @@ export default function ListOldSales({ oldSales, setIsEditing, setEditingStatus 
         <>
             {oldSales.map((item, key) => (
 
-                <div key={key} className={styles.listaProductos} onClick={() => handleClick(item.products)}>
 
-                    <p>{item.date.substring(0, 10)}</p>
+                <div key={key} style={{display: "flex"}}>
 
-                    <p>{item.products.length}</p>
+                    <div  className={styles.listaProductos} >
 
-                    <select>
-                        {item.products.map((product, key) => (
+                        <p>{item.date.substring(0, 10)}</p>
 
+                        <p>{item.products.length}</p>
 
-                            <option key={key}> {product.productId.name} </option>
-
-                        )
-                        )}
-
-                    </select>
-
-                    <p>{item.total}</p>
+                        <select>
+                            {item.products.map((product, key) => (
 
 
+                                <option key={key}> {product.productId.name} </option>
 
+                            )
+                            )}
+
+                        </select>
+
+                        <p>{item.total}</p>
+
+                    </div>
+
+                    <button onClick={() => handleClick(item._id)}>Edit</button>
 
                 </div>
 
             )
+
             )}
         </>
 

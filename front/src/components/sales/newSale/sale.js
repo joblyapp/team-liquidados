@@ -5,10 +5,11 @@ import SaleBack from "../saleBack";
 import SaleBar from "./saleBar";
 import SaleDetails from "./saleDetails";
 import Loading from "../../loading";
+import axios from "axios";
 
 
 
-export default function Sale({ setMode, isEditing, isEditingStatus, setIsEditing }) {
+export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) {
 
     const [adding, setAdding] = useState(false);
     const [load, setLoad] = useState(false);
@@ -21,33 +22,41 @@ export default function Sale({ setMode, isEditing, isEditingStatus, setIsEditing
     // If we are editing a Sale, load the current sale information
     useEffect(() => {
 
-        if (isEditing) {
+        if (isEditing) {          
 
-            console.log(isEditingStatus);
-            const sale = [...saleStatus];
-            var newProduct;
+         
+            var sale;
 
-            isEditingStatus.map((item) => {
+            axios
+                .get(`http://localhost:8080/Sales/${isEditingId}`)
+                .then((response) => {
+                    console.log(response.data.products);
+                    sale = response.data.products;
+                    console.log(sale);
+                    sale.map((item) => {
+                        item.total = ()=> {return item.productId.price * item.quantity};
+                    })
+                    console.log(sale);
+                    setSaleStatus(sale);
+                    console.log("Sale: " + sale[0].productId.total)
+                    console.log(typeof saleStatus);
+                    
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+                .finally(() => {
+                    console.log("saleStatus: "+saleStatus)
+                    setLoad(false)
+                   
+                });
 
-                newProduct = {
-                    productId: item.productId._id,
-                    name: item.productId.name,
-                    price: item.productId.price,
-                    quantity: item.quantity,
-                    total() { return this.price * this.quantity; }
-                }
-
-                sale.push(newProduct)
-
-            }
-
-            )
-
-            setSaleStatus(sale)
-          
+                
         }
 
     },[])
+
+
 
     return (
         !load ?
@@ -55,18 +64,21 @@ export default function Sale({ setMode, isEditing, isEditingStatus, setIsEditing
             <div className={styles.centered}>
 
                 {adding ?
+
                     <ListaProductos setSaleStatus={setSaleStatus} saleStatus={saleStatus} isSelling={true} setAdding={setAdding} />
                     :
                     <>
-                        <h3>NUEVA VENTA</h3>
+                        {!isEditing ? <h3>NUEVA VENTA</h3> :  <h3>EDITAR VENTA</h3>}
+
                         <SaleBar one="Nombre" two="Precio" three="Cantidad" four="TOTAL" />
-                        <SaleDetails saleStatus={saleStatus} setSaleStatus={setSaleStatus} setAdding={setAdding} isEditing={isEditing} />
-                        <SaleBack setMode={setMode} />
+                        <SaleDetails saleStatus={saleStatus} setSaleStatus={setSaleStatus} setAdding={setAdding} isEditing={isEditing} setMode={setMode} isEditingId={isEditingId} />
+                        <SaleBack setMode={setMode} isEditing={isEditing} setIsEditing={setIsEditing} />
                     </>
 
                 }
 
             </div>
+
             :
 
             <Loading />

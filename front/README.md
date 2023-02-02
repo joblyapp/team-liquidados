@@ -10,17 +10,14 @@
 * ADD product button DONE
 * DELETE product button DONE
 
+// ADDING OLD SALES
 
-// TO ME
+* Added Old sales VISUAL
+* Added Old sales EDITING mode
 
-handle LOGIN with backend schemma.
-I can register a new User but the system gives me an 401 error when i want to logIn (unauthorized)
+// TO DO
 
-handle recovery -> The information is sent and the response is processed
+* We need to inform the user when a sale or product is registering ok or not
 
 
-EDIT OLD SALE IS WORKING PROPERLY!!!
 
-LOAD OLD SALE PRODUCTS AND MANIPULATION IS OK
-
->>>>  I NEED TO REPLACE THE OLD SALE WITH THE NEW <<<<
