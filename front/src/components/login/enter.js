@@ -26,7 +26,7 @@ export default function Enter({ setRecovery, setRegister }) {
     const checkUserData = useCallback(async (correo, contra) => {
        
         axios
-            .post("http://localhost:8080/admin/login", userData)
+            .post(`${process.env.REACT_APP_URL}/admin/login`, userData)
             .then((response) => {
                 console.log(response);
                 dispatch(login({
@@ -37,11 +37,6 @@ export default function Enter({ setRecovery, setRegister }) {
             })
             .catch((error) => {
                 console.log(error);
-                dispatch(login({
-                    mail: userData.email,
-                    pass: userData.password,
-                    loggedIn: true
-                }));
             })
             .finally(() => console.log("Submitted!"));
 

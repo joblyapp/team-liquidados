@@ -13,7 +13,7 @@ h3{
 }
 
 .centered {
-    height: 100vh;
+    height: 92vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -75,6 +75,7 @@ h3{
 .sessionStyle{
     background-color: red;
     color: white;
+    width: 12vw;
 }
 
 .logOut{
@@ -117,3 +118,34 @@ h3{
     justify-content: space-evenly;
     align-items: center;
 }
+
+.sessionBar {
+    display: flex;
+    height: 8vh;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border: solid 1px #ed6f70;
+}
+
+.navImg img{
+    height: 80px;
+}
+
+.navMenu {
+    display: flex;
+    justify-content: space-between;
+    gap: 10vw;
+}
+
+.navigateMenuButton {
+    cursor: pointer;
+    padding: 5px;
+    border: solid 4px rgb(245, 242, 242);
+    color: #ed6f70;
+}
+
+.navigateMenuButton:hover {
+    cursor: pointer;
+    color: #b40000;
+} 

@@ -12,14 +12,14 @@ export default function EditProduct({ esNuevo, setMode, id, category, name, pric
         console.log("inside useEffect")
         if (esNuevo && product) {
             axios
-                .post("http://localhost:8080/products", product)
+                .post(`${process.env.REACT_APP_URL}/products`, product)
                 .then((response) => { })
                 .catch(error => console.log(error))
                 .finally(() => setMode(false))
         }
         else if (product && !esNuevo) {
             axios
-                .patch(`http://localhost:8080/products/${id}`, product)
+                .patch(`${process.env.REACT_APP_URL}/products/${id}`, product)
                 .then((response) => { console.log(response) })
                 .catch(error => console.log(error))
                 .finally(() => setMode(false))
@@ -31,13 +31,15 @@ export default function EditProduct({ esNuevo, setMode, id, category, name, pric
     function handleEditSubmit(e) {
         e.preventDefault();
         setProduct({
-            category: document.getElementById("category").value,
+            category: parseInt(document.getElementById("category").value),
             name: document.getElementById("name").value,
             price: document.getElementById("price").value,
             description: "testing"
         })
+    }
 
-
+    function handleChange(e){     
+       console.log(e.target.value);
     }
 
     // Cancel function
@@ -50,18 +52,19 @@ export default function EditProduct({ esNuevo, setMode, id, category, name, pric
         <div className={styles.centered}>
             {esNuevo ? <h2>Crear Producto</h2> : <h2>Editar Producto</h2>}
             <form className={styles.box} onSubmit={handleEditSubmit}>
-                Categoría: <select id="category" defaultValue={category} type="number" required>
-                    
-                    {categoriasDisponibles.map((item, key)=> {
-                        return( 
-                        <option key={key} value={item.id}>{`${item.id}: ${item.description}`}</option>
+
+                Categoría: <select id="category" defaultValue={category} onChange={handleChange} type="number" required>
+
+                    {categoriasDisponibles.map((item, key) => {
+
+                        return (
+                            <option  key={key} value={item.id}>{`${item.id}: ${item.description}`}</option>
                         )
-                       
 
                     })}
                 </select>
-                Nombre: <input id="name" defaultValue={name} type="text" required></input>
-                Precio: <input id="price" defaultValue={price} type="number" required></input>
+                Nombre: <input id="name" defaultValue={name} type="text" maxLength="20" pattern="([^\s][A-z0-9À-ž\s]+)" required></input>
+                Precio: <input id="price" defaultValue={price} type="number" maxLength="10" required></input>
                 <div>
                     <button onClick={handleCancelar}>Cancelar</button>
                     <input type="submit" value="Confirmar"></input>
