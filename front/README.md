@@ -23,3 +23,8 @@
 CREATED AN .ENV FILE
 
 
+
+## NOW
+
+# Created the STATS VISUAL
+

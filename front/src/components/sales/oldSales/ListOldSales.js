@@ -4,7 +4,7 @@ import styles from "../../styles.module.css";
 
 
 
-export default function ListOldSales({ oldSales, setIsEditing, setEditingId }) {
+export default function ListOldSales({ oldSales, setIsEditing, setEditingId, isStats }) {
 
 
     // When clicking on Sale Div we have to LOAD a SALE visual with sale's PRODUCTS loaded 
@@ -46,7 +46,7 @@ export default function ListOldSales({ oldSales, setIsEditing, setEditingId }) {
 
                     </div>
 
-                    <button onClick={() => handleClick(item._id)}>Edit</button>
+                    {!isStats && <button onClick={() => handleClick(item._id)}>Edit</button>}
 
                 </div>
 

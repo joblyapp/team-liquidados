@@ -6,7 +6,7 @@ import Loading from "../../loading";
 import SaleBar from "../newSale/saleBar";
 import ListOldSales from "./ListOldSales";
 import Sale from "../newSale/sale";
-import { isElement } from "react-dom/test-utils";
+
 
 export default function OldSales({ setMode, mode }) {
 

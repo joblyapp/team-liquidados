@@ -128,6 +128,11 @@ h3{
     border: solid 1px #ed6f70;
 }
 
+.navImg {
+    display: flex;
+    align-items: center;
+}
+
 .navImg img{
     height: 80px;
 }

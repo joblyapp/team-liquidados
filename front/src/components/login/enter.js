@@ -41,7 +41,7 @@ export default function Enter({ setRecovery, setRegister }) {
             .finally(() => console.log("Submitted!"));
 
 
-    }, [dispatch, setFail, userData])
+    }, [dispatch, userData])
 
 
 
