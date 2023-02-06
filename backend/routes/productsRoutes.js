@@ -60,9 +60,16 @@ router.patch("/:id", getProduct, async (req, res) => {
   if (req.body.name != null) {
     res.product.name = req.body.name;
   }
+  if (req.body.category != null) {
+    res.product.category = req.body.price;
+  }
+  if (req.body.description != null) {
+    res.product.description = req.body.price;
+  }
   if (req.body.price != null) {
     res.product.price = req.body.price;
   }
+
   try {
     const updatedProduct = await res.product.save(); // save the updated product
     res.json(updatedProduct);
