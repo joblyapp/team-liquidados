@@ -1,7 +1,7 @@
-[{"id":"001", "description": "Frutas"},
-{"id":"002", "description": "Verduras"},
-{"id":"003", "description": "Pelucas"},
-{"id":"004", "description": "Accesorios para pelucas"},
-{"id":"005", "description": "Vasos"},
-{"id":"006", "description": "Chocolates"}
+[{"id":1, "description": "Frutas"},
+{"id":2, "description": "Verduras"},
+{"id":3, "description": "Pelucas"},
+{"id":4, "description": "Accesorios para pelucas"},
+{"id":5, "description": "Vasos"},
+{"id":6, "description": "Chocolates"}
 ]

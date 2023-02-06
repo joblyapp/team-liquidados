@@ -20,4 +20,6 @@
 * We need to inform the user when a sale or product is registering ok or not
 
 
+CREATED AN .ENV FILE
+
 

@@ -22,7 +22,7 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
     useEffect(() => {
         console.log("rendering again")
         axios
-            .get("http://localhost:8080/products")
+            .get(`${process.env.REACT_APP_URL}/products`)
             .then((response) => {
                 setDatos(response.data)
                 setLoading(false);
@@ -37,7 +37,7 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
     function handleDelete(id) {
 
         axios
-            .delete(`http://localhost:8080/products/${id}`)
+            .delete(`${process.env.REACT_APP_URL}/products/${id}`)
             .then((response) => {
                 console.log(response)
             })

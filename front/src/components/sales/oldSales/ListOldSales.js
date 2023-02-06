@@ -22,19 +22,20 @@ export default function ListOldSales({ oldSales, setIsEditing, setEditingId }) {
             {oldSales.map((item, key) => (
 
 
-                <div key={key} style={{display: "flex"}}>
+                <div key={key} style={{ display: "flex" }}>
 
-                    <div  className={styles.listaProductos} >
+                    <div className={styles.listaProductos} >
 
                         <p>{item.date.substring(0, 10)}</p>
 
                         <p>{item.products.length}</p>
 
                         <select>
+
                             {item.products.map((product, key) => (
 
 
-                                <option key={key}> {product.productId.name} </option>
+                                <option key={key}> {product.productId.name}</option>
 
                             )
                             )}
