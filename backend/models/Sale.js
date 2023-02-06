@@ -26,4 +26,21 @@ const SalesSchema = new Schema({
   },
 });
 
+//A method to get sales for a period of time
+SalesSchema.statics.getSalesBetweenDates = function (
+  startDate,
+  endDate,
+  callback
+) {
+  return this.find(
+    {
+      date: {
+        $gte: startDate,
+        $lte: endDate,
+      },
+    },
+    callback
+  );
+};
+
 module.exports = mongoose.model("Sales", SalesSchema);

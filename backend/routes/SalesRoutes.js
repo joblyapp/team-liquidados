@@ -15,6 +15,20 @@ router.post("/", async (req, res) => {
   }
 });
 
+//statistics
+router.get("/statistics", function (req, res) {
+  const startDate = new Date(req.body.startDate);
+  const endDate = new Date(req.body.endDate);
+
+  Sales.getSalesBetweenDates(startDate, endDate, function (err, sales) {
+    console.log("it gets here at least");
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.send(sales);
+  });
+});
+
 // Get all sales
 router.get("/", async (req, res) => {
   try {
