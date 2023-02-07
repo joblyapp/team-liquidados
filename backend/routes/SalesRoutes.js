@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 });
 
 //statistics
-router.get("/statistics", function (req, res) {
+router.post("/statistics", function (req, res) {
   const startDate = new Date(req.body.startDate);
   const endDate = new Date(req.body.endDate);
 
