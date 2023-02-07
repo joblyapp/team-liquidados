@@ -31,8 +31,6 @@ app.use("/products", productsRoutes);
 app.use("/sales", salesRoutes);
 app.use("/admin", adminsRoutes);
 
-app.use("/api/v1", require("./routes/index"));
-
 // Start server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
