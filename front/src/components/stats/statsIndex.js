@@ -9,28 +9,36 @@ export default function StatsIndex() {
 
     const [oldSales, setOldSales] = useState();
     const [loading, setLoading] = useState(true);
+    const [calendar, setCalendar] = useState(null);
+
 
     useEffect(() => {
+        if (calendar) {
 
-        axios
-            .get("http://localhost:8080/Sales/")
-            .then((response) => {
-                console.log(response);
-                setOldSales(response.data)
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            })
-    }, [])
+            axios
+                .post(`${process.env.REACT_APP_URL}/Sales/statistics`, calendar)
+                .then((response) => {
+                    console.log(response);
+                    setOldSales(response.data)
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+                .finally(() => {
+                    setLoading(false);
+                })
+
+        }
+
+
+    }, [calendar])
 
 
     return (
         <div className={styles.centered}>
 
-            <StatsInputs />
+            <StatsInputs setCalendar={setCalendar} />
+
             {!loading
 
                 ?

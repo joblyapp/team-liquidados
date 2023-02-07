@@ -1,11 +1,24 @@
-import { useState } from "react"
+import axios from "axios";
+import { useEffect, useState } from "react"
 
-export default function StatsInputs() {
+export default function StatsInputs({ setCalendar }) {
+
 
     const [selected, setSelected] = useState("custom");
+    
 
-    function handleSelection(e){
+   
+    function handleSelection(e) {
         setSelected(e.target.value);
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        setCalendar({
+            "startDate": document.getElementById("dateFrom").value,
+            "endDate": document.getElementById("dateTo").value
+        })
+
     }
 
     return (
@@ -21,8 +34,11 @@ export default function StatsInputs() {
                 </select>
             </div>
             <div>
-                <input type="date"></input>
-                <input type="date"></input>
+                <form onSubmit={handleSubmit}>
+                    <input id="dateFrom" type="date"></input>
+                    <input id="dateTo" type="date"></input>
+                    <input type="submit" value="Buscar"></input>
+                </form>
             </div>
         </>
 
