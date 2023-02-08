@@ -35,7 +35,14 @@ export default function Recovery({ setRecovery }) {
         if (recoveryMail) {
 
             axios
-                .post("http://localhost:8080/api/v1/admin/forgot-password", recoveryMail)
+                .post("http://localhost:8080/admin/forgot", recoveryMail,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                )
                 .then((response) => {
                     console.log(response);
                     checkMail(response.data.message)

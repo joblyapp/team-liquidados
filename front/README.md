@@ -28,3 +28,8 @@ CREATED AN .ENV FILE
 
 * Create the STATS VISUAL. DONE
 * Success message when sucribing a New Sale
+
+
+## Last PR
+* Stats VISUAL already done. You can choose from the option list and the app will set automatically the calendar
+* Need to change the URLS to the env variable.
