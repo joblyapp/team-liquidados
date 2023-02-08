@@ -61,10 +61,10 @@ router.patch("/:id", getProduct, async (req, res) => {
     res.product.name = req.body.name;
   }
   if (req.body.category != null) {
-    res.product.category = req.body.price;
+    res.product.category = req.body.category;
   }
   if (req.body.description != null) {
-    res.product.description = req.body.price;
+    res.product.description = req.body.description;
   }
   if (req.body.price != null) {
     res.product.price = req.body.price;

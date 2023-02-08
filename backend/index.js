@@ -3,6 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cors = require("cors");
+//authentication function
+const authenticateJWT = require("./auth");
 
 const app = express();
 
@@ -27,8 +29,8 @@ app.use(morgan("tiny"));
 app.use(cors());
 
 // Routes
-app.use("/products", productsRoutes);
-app.use("/sales", salesRoutes);
+app.use("/products", authenticateJWT, productsRoutes);
+app.use("/sales", authenticateJWT, salesRoutes);
 app.use("/admin", adminsRoutes);
 
 // Start server
