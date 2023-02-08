@@ -33,7 +33,7 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEd
 
         if (isEditing) {
             axios
-                .patch(`http://localhost:8080/Sales/${isEditingId}`, {
+                .patch(`${process.env.REACT_APP_URL}/Sales/${isEditingId}`, {
                     products: saleStatus.map(({ productId, quantity }) => ({ productId, quantity })),
                     total: totalToPay
                 }, {
@@ -55,7 +55,7 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEd
         else {
 
             axios
-                .post("http://localhost:8080/Sales/", {
+                .post(`${process.env.REACT_APP_URL}/Sales/`, {
                     products: saleStatus.map(({ productId, quantity }) => ({ productId, quantity })),
                     total: totalToPay
                 }, {

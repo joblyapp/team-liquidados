@@ -17,7 +17,7 @@ export default function ListOldSales({ oldSales, setIsEditing, setEditingId, isS
 
     return (
 
-        <>
+        <div className={styles.productsCard}>
             {oldSales.map((item, key) => (
 
 
@@ -52,7 +52,7 @@ export default function ListOldSales({ oldSales, setIsEditing, setEditingId, isS
             )
 
             )}
-        </>
+        </div>
 
 
     )

@@ -1,21 +1,63 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import { format } from 'fecha';
 
 export default function StatsInputs({ setCalendar }) {
 
 
     const [selected, setSelected] = useState("custom");
-    
-/*
-    useEffect(()=>{
-        switch (selected){
-            case: 
+    const [custom, setCustom] = useState(false);
+
+    const today = format(new Date(), 'isoDate');
+    var tomorrow = new Date();
+    var week = new Date();
+    var month = new Date(today);
+    var year = new Date(new Date(today).getFullYear(), 0, 1);
+
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    week.setDate(week.getDate() - 7);
+    month.setDate(1);
+
+    tomorrow = format(tomorrow, 'isoDate');
+    week = format(week, 'isoDate');
+    month = format(month, 'isoDate');
+    year = format(year, 'isoDate');
+
+
+    useEffect(() => {
+
+        setCustom(false);
+
+        switch (selected) {
+
+            case "today": setCalendar({
+                "startDate": today,
+                "endDate": tomorrow
+            });
+                break;
+            case "week": setCalendar({
+                "startDate": week,
+                "endDate": tomorrow
+            });
+                break;
+            case "month": setCalendar({
+                "startDate": month,
+                "endDate": tomorrow
+            });
+                break;
+            case "year": setCalendar({
+                "startDate": year,
+                "endDate": tomorrow
+            });
+                break;
+            case "custom": setCustom(true);
+                break;
         }
 
 
 
-    },[selected])
-*/
-   
+    }, [selected])
+
+
     function handleSelection(e) {
         setSelected(e.target.value);
     }
@@ -23,11 +65,8 @@ export default function StatsInputs({ setCalendar }) {
     function handleSubmit(e) {
         e.preventDefault();
 
-        const dateFrom =  document.getElementById("dateFrom").value;
+        const dateFrom = document.getElementById("dateFrom").value;
         const dateTo = document.getElementById("dateTo").value;
-
-        console.log(dateFrom);
-        console.log(dateTo);
 
         setCalendar({
             "startDate": dateFrom,
@@ -44,16 +83,21 @@ export default function StatsInputs({ setCalendar }) {
                     <option value="year">Último año</option>
                     <option value="month">Último mes</option>
                     <option value="week">Última semana</option>
-                    <option value="day">Último día</option>
+                    <option value="today">Hoy</option>
                     <option value="custom">Personalizado</option>
                 </select>
             </div>
             <div>
+
+                {custom ?
                 <form onSubmit={handleSubmit}>
                     <input id="dateFrom" type="date"></input>
                     <input id="dateTo" type="date"></input>
                     <input type="submit" value="Buscar"></input>
                 </form>
+                :
+                ""}
+
             </div>
         </>
 

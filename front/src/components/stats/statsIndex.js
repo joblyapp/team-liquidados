@@ -13,6 +13,7 @@ export default function StatsIndex() {
 
 
     useEffect(() => {
+
         if (calendar) {
            
             axios
@@ -23,11 +24,10 @@ export default function StatsIndex() {
                     }
                   })
                 .then((response) => {
-                    console.log(response);
                     setOldSales(response.data)
                 })
                 .catch((error) => {
-                    console.log(error.response.data);
+                    console.log(error);
                 })
                 .finally(() => {
                     setLoading(false);

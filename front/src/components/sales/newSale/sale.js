@@ -29,7 +29,7 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
             var sale;
 
             axios
-                .get(`http://localhost:8080/Sales/${isEditingId}`, {
+                .get(`${process.env.REACT_APP_URL}/Sales/${isEditingId}`, {
                     headers: {
                       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
                       'Content-Type': 'application/json'
