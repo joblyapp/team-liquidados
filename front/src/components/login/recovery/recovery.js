@@ -35,7 +35,7 @@ export default function Recovery({ setRecovery }) {
         if (recoveryMail) {
 
             axios
-                .post("http://localhost:8080/admin/forgot", recoveryMail,
+                .post(`${process.env.REACT_APP_URL}/admin/forgot`, recoveryMail,
                     {
                         headers: {
                             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
