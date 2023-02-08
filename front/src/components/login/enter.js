@@ -28,7 +28,7 @@ export default function Enter({ setRecovery, setRegister }) {
         axios
             .post(`${process.env.REACT_APP_URL}/admin/login`, userData)
             .then((response) => {
-                console.log(response);
+                sessionStorage.setItem("token", response.data);
                 dispatch(login({
                     mail: userData.email,
                     pass: userData.password,

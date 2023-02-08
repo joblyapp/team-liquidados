@@ -16,7 +16,12 @@ export default function StatsIndex() {
         if (calendar) {
            
             axios
-                .post(`${process.env.REACT_APP_URL}/sales/statistics`, calendar)
+                .post(`${process.env.REACT_APP_URL}/sales/statistics`, calendar, {
+                    headers: {
+                      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                      'Content-Type': 'application/json'
+                    }
+                  })
                 .then((response) => {
                     console.log(response);
                     setOldSales(response.data)

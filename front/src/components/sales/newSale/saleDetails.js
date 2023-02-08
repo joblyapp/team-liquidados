@@ -36,7 +36,12 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEd
                 .patch(`http://localhost:8080/Sales/${isEditingId}`, {
                     products: saleStatus.map(({ productId, quantity }) => ({ productId, quantity })),
                     total: totalToPay
-                })
+                }, {
+                    headers: {
+                      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                      'Content-Type': 'application/json'
+                    }
+                  })
                 .then((response) => {
                     console.log(response);
                 })
@@ -53,7 +58,12 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEd
                 .post("http://localhost:8080/Sales/", {
                     products: saleStatus.map(({ productId, quantity }) => ({ productId, quantity })),
                     total: totalToPay
-                })
+                }, {
+                    headers: {
+                      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                      'Content-Type': 'application/json'
+                    }
+                  })
                 .then((response) => {
                     console.log(response);
                 })

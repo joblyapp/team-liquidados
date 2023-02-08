@@ -21,7 +21,12 @@ export default function OldSales({ setMode, mode }) {
     useEffect(() => {
 
         axios
-            .get("http://localhost:8080/Sales/")
+            .get("http://localhost:8080/Sales/", {
+                headers: {
+                  Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                  'Content-Type': 'application/json'
+                }
+              })
             .then((response) => {
                 console.log(response);
                 setOldSales(response.data)

@@ -1,11 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function StatsInputs({ setCalendar }) {
 
 
     const [selected, setSelected] = useState("custom");
     
+/*
+    useEffect(()=>{
+        switch (selected){
+            case: 
+        }
 
+
+
+    },[selected])
+*/
    
     function handleSelection(e) {
         setSelected(e.target.value);

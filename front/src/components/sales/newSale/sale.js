@@ -29,7 +29,12 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
             var sale;
 
             axios
-                .get(`http://localhost:8080/Sales/${isEditingId}`)
+                .get(`http://localhost:8080/Sales/${isEditingId}`, {
+                    headers: {
+                      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                      'Content-Type': 'application/json'
+                    }
+                  })
                 .then((response) => {
                     console.log(response.data.products);
                     sale = response.data.products;
@@ -39,15 +44,14 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
                     ))
                     console.log(sale);
                     setSaleStatus(sale);
-                    console.log("Sale: " + sale[0].productId.total)
-                    console.log(typeof saleStatus);
+                
 
                 })
                 .catch((error) => {
                     console.log(error);
                 })
                 .finally(() => {
-                    console.log("saleStatus: " + saleStatus)
+                
                     setLoad(false)
 
                 });
