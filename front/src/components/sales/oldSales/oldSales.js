@@ -6,7 +6,7 @@ import Loading from "../../loading";
 import SaleBar from "../newSale/saleBar";
 import ListOldSales from "./ListOldSales";
 import Sale from "../newSale/sale";
-import { isElement } from "react-dom/test-utils";
+
 
 export default function OldSales({ setMode, mode }) {
 
@@ -21,7 +21,12 @@ export default function OldSales({ setMode, mode }) {
     useEffect(() => {
 
         axios
-            .get("http://localhost:8080/Sales/")
+            .get("http://localhost:8080/Sales/", {
+                headers: {
+                  Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                  'Content-Type': 'application/json'
+                }
+              })
             .then((response) => {
                 console.log(response);
                 setOldSales(response.data)

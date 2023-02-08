@@ -3,16 +3,16 @@ import styles from "../../styles.module.css";
 import SaleQuantity from "./saleQuantity";
 import axios from "axios";
 
-export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEditing, setMode, isEditingId }) {
+export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEditing, setMode, isEditingId, setSuccess }) {
 
     const [totalToPay, setTotalToPay] = useState(0);
 
 
     function calculateTotal(products) {
         var sum = 0;
-        products.map((item) => {
-            sum = sum + item.total();
-        })
+        products.map((item) => (
+            sum = sum + item.total()
+        ))
 
         setTotalToPay(sum);
     }
@@ -36,7 +36,12 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEd
                 .patch(`http://localhost:8080/Sales/${isEditingId}`, {
                     products: saleStatus.map(({ productId, quantity }) => ({ productId, quantity })),
                     total: totalToPay
-                })
+                }, {
+                    headers: {
+                      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                      'Content-Type': 'application/json'
+                    }
+                  })
                 .then((response) => {
                     console.log(response);
                 })
@@ -44,10 +49,8 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEd
                     console.log(error);
                 })
                 .finally(() => {
-                    setMode("");
+                    setSuccess(true);
                 });
-
-
         }
         else {
 
@@ -55,7 +58,12 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEd
                 .post("http://localhost:8080/Sales/", {
                     products: saleStatus.map(({ productId, quantity }) => ({ productId, quantity })),
                     total: totalToPay
-                })
+                }, {
+                    headers: {
+                      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                      'Content-Type': 'application/json'
+                    }
+                  })
                 .then((response) => {
                     console.log(response);
                 })
@@ -63,7 +71,7 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEd
                     console.log(error);
                 })
                 .finally(() => {
-                    setMode("");
+                    setSuccess(true);
                 });
 
         }
@@ -101,9 +109,9 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEd
                 <p style={{ fontWeight: "bold" }}>{totalToPay}</p>
             </div>
 
-
             <button onClick={() => setAdding(true)}>ADD NEW PRODUCT</button>
             <button onClick={handleSale}>REGISTER SALE</button>
+
         </>
     )
 

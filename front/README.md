@@ -23,3 +23,8 @@
 CREATED AN .ENV FILE
 
 
+
+## NOW
+
+* Create the STATS VISUAL. DONE
+* Success message when sucribing a New Sale

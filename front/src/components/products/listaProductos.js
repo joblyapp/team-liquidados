@@ -18,11 +18,15 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
     const [forceRender, setForceRender] = useState(false);
 
 
+
     // Hook to load information from DataBase. It render again after deleting a file
     useEffect(() => {
         console.log("rendering again")
         axios
-            .get(`${process.env.REACT_APP_URL}/products`)
+            .get(`${process.env.REACT_APP_URL}/products`,  { headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                'Content-Type': 'application/json'
+              }})
             .then((response) => {
                 setDatos(response.data)
                 setLoading(false);
@@ -37,7 +41,12 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
     function handleDelete(id) {
 
         axios
-            .delete(`${process.env.REACT_APP_URL}/products/${id}`)
+            .delete(`${process.env.REACT_APP_URL}/products/${id}`, {
+                headers: {
+                  Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                  'Content-Type': 'application/json'
+                }
+              })
             .then((response) => {
                 console.log(response)
             })

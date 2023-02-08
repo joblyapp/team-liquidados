@@ -12,14 +12,24 @@ export default function EditProduct({ esNuevo, setMode, id, category, name, pric
         console.log("inside useEffect")
         if (esNuevo && product) {
             axios
-                .post(`${process.env.REACT_APP_URL}/products`, product)
+                .post(`${process.env.REACT_APP_URL}/products`, product, {
+                    headers: {
+                      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                      'Content-Type': 'application/json'
+                    }
+                  })
                 .then((response) => { })
                 .catch(error => console.log(error))
                 .finally(() => setMode(false))
         }
         else if (product && !esNuevo) {
             axios
-                .patch(`${process.env.REACT_APP_URL}/products/${id}`, product)
+                .patch(`${process.env.REACT_APP_URL}/products/${id}`, product, {
+                    headers: {
+                      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                      'Content-Type': 'application/json'
+                    }
+                  })
                 .then((response) => { console.log(response) })
                 .catch(error => console.log(error))
                 .finally(() => setMode(false))

@@ -1,12 +1,24 @@
+import { useSelector } from "react-redux";
+import LogIn from "../components/login/logIn";
 import SaleIndex from "../components/sales/saleIndex";
 import Session from "../components/sessionBar/session"
+import { selectUser } from "../features/userSlices";
 
 export default function SalesPage() {
 
+
+    // Redux selector
+    const user = useSelector(selectUser);
+
     return (
+
         <>
             <Session />
-            <SaleIndex />
+            {!user.loggedIn
+                ? <LogIn />
+                : <SaleIndex />
+            }
         </>
+
     )
 }
