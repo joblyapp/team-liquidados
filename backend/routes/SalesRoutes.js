@@ -21,7 +21,6 @@ router.post("/statistics", function (req, res) {
   const endDate = new Date(req.body.endDate);
 
   Sales.getSalesBetweenDates(startDate, endDate, function (err, sales) {
-    console.log("it gets here at least");
     if (err) {
       return res.status(500).send(err);
     }
