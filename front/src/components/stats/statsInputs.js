@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export default function StatsInputs({ setCalendar }) {
 
@@ -14,9 +13,16 @@ export default function StatsInputs({ setCalendar }) {
 
     function handleSubmit(e) {
         e.preventDefault();
+
+        const dateFrom =  document.getElementById("dateFrom").value;
+        const dateTo = document.getElementById("dateTo").value;
+
+        console.log(dateFrom);
+        console.log(dateTo);
+
         setCalendar({
-            "startDate": document.getElementById("dateFrom").value,
-            "endDate": document.getElementById("dateTo").value
+            "startDate": dateFrom,
+            "endDate": dateTo
         })
 
     }

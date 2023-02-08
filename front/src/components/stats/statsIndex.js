@@ -14,22 +14,20 @@ export default function StatsIndex() {
 
     useEffect(() => {
         if (calendar) {
-
+           
             axios
-                .post(`${process.env.REACT_APP_URL}/Sales/statistics`, calendar)
+                .post(`${process.env.REACT_APP_URL}/sales/statistics`, calendar)
                 .then((response) => {
                     console.log(response);
                     setOldSales(response.data)
                 })
                 .catch((error) => {
-                    console.log(error);
+                    console.log(error.response.data);
                 })
                 .finally(() => {
                     setLoading(false);
                 })
-
         }
-
 
     }, [calendar])
 
