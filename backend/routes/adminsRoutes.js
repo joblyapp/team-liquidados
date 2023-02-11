@@ -1,7 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
-const sendgrid = require("@sendgrid/mail");
 
 const Admin = require("../models/Admin");
 
@@ -34,21 +33,18 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/forgot", async (req, res) => {
-  const { email } = req.body;
-
+//route for forgot password
+router.post("/forgot-password", async (req, res) => {
   try {
-    const admin = await Admin.findOne({ email });
-    if (!admin) {
-      return res
-        .status(400)
-        .json({ error: "No account with that email exists." });
-    }
+    const admin = await Admin.findOne({ email: req.body.email });
+    if (!admin) return res.status(404).json({ message: "Admin not found" });
+    console.log(admin.login);
 
-    await admin.sendPasswordResetEmail(sendgrid);
-    return res.status(200).json({ message: "Password reset email sent." });
+    await admin.sendPasswordResetEmail();
+
+    return res.status(200).json({ message: "Password reset email sent" });
   } catch (error) {
-    return res.status(500).json({ error });
+    return res.status(500).json({ message: error.message });
   }
 });
 
