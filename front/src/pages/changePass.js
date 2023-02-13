@@ -1,48 +1,38 @@
 
-import styles from "../components/styles.module.css";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import ChangePassForm from "../components/login/changePass/changePassForm";
+
+import Success from "../components/success";
 
 
 export default function ChangePass() {
 
-    /* const { recoveryToken } = useParams(); */
+    const { recoveryToken } = useParams();
+    const [success, setSuccess] = useState(false);
+    const {done, setDone} = useState(false);
 
-    function handleSubmitRegister(e) {
+    const navigate = useNavigate();
 
-        e.preventDefault();
+    useEffect(()=>{
 
-        const pass = document.getElementById("pass").value;
-        const passRepeat = document.getElementById("passRepeat").value;
-
-        if (pass === passRepeat) {
-
-            console.log("Se pudo enviar cambio de contraseña");
-
-
+        if(done === ""){
+            navigate("/");
         }
-        else {
-            console.log("No se pudo enviar cambio de contraseña");
-        }
+        
+    },[done])
 
-    }
 
 
     return (
 
-        <div className={styles.centered}>
+       !success ? 
 
-            <form className={styles.box} onSubmit={handleSubmitRegister}>
+       <ChangePassForm recoveryToken={recoveryToken} setSuccess={setSuccess}/>
 
-                <input type="password" id="pass" placeholder="Ingrese su contraseña" required></input>
-                <input type="password" id="passRepeat" placeholder="Ingrese nuevamente su contraseña" required></input>
+       :
 
-                <div className={styles.botones}>
-                    <input type="submit" value="Cambiar contraseña"></input>
-                </div>
-
-            </form>
-
-        </div>
-
+       <Success operacion="Cambio de contraseña" setSuccess={setSuccess} setMode={setDone} />
 
 
 

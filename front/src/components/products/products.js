@@ -33,6 +33,33 @@ export default function Products() {
     }
 
 
+    function handleNewProduct() {
+        
+
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <div className={styles.alert}>
+                        <h1>Elminar Producto</h1>
+                        <p>¿Está seguro de que desea eliminar este producto?</p>
+                        <button onClick={onClose}>No</button>
+                        <button
+                            onClick={() => {
+                                handleDelete(id);
+                                onClose();
+                            }}
+
+                        >
+                            Yes
+                        </button>
+                    </div>
+                );
+            }
+        });
+
+    }
+
+
     return (
         <>
 

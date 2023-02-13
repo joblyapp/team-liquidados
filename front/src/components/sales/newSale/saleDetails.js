@@ -22,7 +22,6 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEd
         if (saleStatus) {
             console.log(saleStatus);
             calculateTotal(saleStatus);
-
         }
 
     }, [saleStatus])
@@ -32,6 +31,8 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEd
     function handleSale() {
 
         if (isEditing) {
+
+
             axios
                 .patch(`${process.env.REACT_APP_URL}/Sales/${isEditingId}`, {
                     products: saleStatus.map(({ productId, quantity }) => ({ productId, quantity })),
@@ -44,21 +45,26 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEd
                   })
                 .then((response) => {
                     console.log(response);
+                    setSuccess(true);
                 })
                 .catch((error) => {
                     console.log(error);
                 })
                 .finally(() => {
-                    setSuccess(true);
+                   
                 });
         }
         else {
 
+            const temporarySales = {
+                products: saleStatus.map(({ productId }) => ( {name: productId.name, price: productId.price, quantity: productId.quantity })),
+                total: totalToPay
+            };
+
+            console.log(temporarySales)
+
             axios
-                .post(`${process.env.REACT_APP_URL}/Sales/`, {
-                    products: saleStatus.map(({ productId, quantity }) => ({ productId, quantity })),
-                    total: totalToPay
-                }, {
+                .post(`${process.env.REACT_APP_URL}/Sales/`, temporarySales , {
                     headers: {
                       Authorization: `Bearer ${sessionStorage.getItem("token")}`,
                       'Content-Type': 'application/json'
@@ -66,12 +72,13 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEd
                   })
                 .then((response) => {
                     console.log(response);
+                    setSuccess(true);
                 })
                 .catch((error) => {
                     console.log(error);
                 })
                 .finally(() => {
-                    setSuccess(true);
+                
                 });
 
         }
@@ -93,7 +100,7 @@ export default function SaleDetails({ saleStatus, setSaleStatus, setAdding, isEd
 
                         <p>{item.productId.name}</p>
                         <p>{item.productId.price}</p>
-                        <SaleQuantity quantity={item.quantity} name={item.productId.name} setSaleStatus={setSaleStatus} saleStatus={saleStatus} />
+                        <SaleQuantity quantity={item.productId.quantity} name={item.productId.name} setSaleStatus={setSaleStatus} saleStatus={saleStatus} />
                         <p>{item.total()}</p>
 
                     </div>

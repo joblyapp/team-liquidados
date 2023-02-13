@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styles from "./styles.module.css";
 
-export default function Success({ operacion, setSuccess, setMode }) {
+export default function Success({ operacion, setSuccess, setMode, backButton }) {
 
     useEffect(()=>{
 

@@ -37,13 +37,7 @@ export default function Recovery({ setRecovery }) {
         if (recoveryMail) {
 
             axios
-                .post(`${process.env.REACT_APP_URL}/admin/forgot`, recoveryMail,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                            'Content-Type': 'application/json'
-                        }
-                    }
+                .post(`${process.env.REACT_APP_URL}/admin/forgot`, recoveryMail
                 )
                 .then((response) => {
                     console.log(response);
@@ -70,11 +64,9 @@ export default function Recovery({ setRecovery }) {
 
     function handleSubmitRecovery(e) {
         e.preventDefault();
-        console.log(document.getElementById("email").value)
-        setRecoveryMail({
-            email: document.getElementById("email").value
-        }
-        )
+        console.log(document.getElementById("email").value);
+        const email = document.getElementById("email").value;
+        setRecoveryMail({email: email})
     }
 
 

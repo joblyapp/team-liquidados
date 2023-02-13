@@ -3,6 +3,7 @@ import { confirmAlert } from "react-confirm-alert";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loading from "../loading";
 
 // A lista productos se le suma otro valor que es "isSelling". Si este valor es TRUE va a cambiar los botones de la derecha
 
@@ -23,10 +24,12 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
     useEffect(() => {
         console.log("rendering again")
         axios
-            .get(`${process.env.REACT_APP_URL}/products`,  { headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                'Content-Type': 'application/json'
-              }})
+            .get(`${process.env.REACT_APP_URL}/products`, {
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                    'Content-Type': 'application/json'
+                }
+            })
             .then((response) => {
                 setDatos(response.data)
                 setLoading(false);
@@ -43,10 +46,10 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
         axios
             .delete(`${process.env.REACT_APP_URL}/products/${id}`, {
                 headers: {
-                  Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                  'Content-Type': 'application/json'
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                    'Content-Type': 'application/json'
                 }
-              })
+            })
             .then((response) => {
                 console.log(response)
             })
@@ -58,7 +61,7 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
 
     // Confirm delete function
     function handleAlert(id) {
-        console.log("borranding this ID: " + id);
+        
 
         confirmAlert({
             customUI: ({ onClose }) => {
@@ -100,14 +103,15 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
 
         const sale = [...saleStatus];
         const newProduct = {
-            productId: {
+            productId:
+            {
                 _id: id,
                 name: name,
                 price: price,
-                
-            },
-            quantity: 1,
-            total() { return this.productId.price * this.quantity}
+                quantity: 1,
+            }
+            ,
+            total() { return this.productId.price * this.productId.quantity }
         }
 
         const elementIndex = sale.indexOf(sale.find(element => element.productId._id === id));
@@ -118,7 +122,7 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
             setAdding(false);
         }
         else {
-            sale[elementIndex].quantity++;
+            sale[elementIndex].productId.quantity++;
             setSaleStatus(sale);
             setAdding(false);
         }
@@ -150,15 +154,15 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
                 }
 
 
-            {isSelling && <button onClick={()=>setAdding(false)}> BACK</button>} 
+                {isSelling && <button onClick={() => setAdding(false)}> BACK</button>}
 
             </div>
 
-         
+
 
             :
 
-    <div className={styles.productsCard}> LOADING</div>
+            <Loading />
 
     )
 }

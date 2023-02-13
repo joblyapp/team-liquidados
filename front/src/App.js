@@ -18,7 +18,7 @@ function App() {
         <Route exact path='/sales' element={<SalesPage />} />
         <Route exact path='/products' element={<ProductsPage />} />
         <Route exact path='/stats' element={<StatsPage />} />
-        <Route exact path='/recover' element={<ChangePass />} />
+        <Route exact path='/reset-password/:token' element={<ChangePass />} />
 
 
       </Routes>
