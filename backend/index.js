@@ -29,8 +29,12 @@ app.use(morgan("tiny"));
 app.use(cors());
 
 // Routes
-app.use("/products", authenticateJWT, productsRoutes);
-app.use("/sales", authenticateJWT, salesRoutes);
+// app.use("/products", authenticateJWT, productsRoutes);
+app.use("/products", productsRoutes);
+
+// app.use("/sales", authenticateJWT, salesRoutes);
+app.use("/sales", salesRoutes);
+
 app.use("/admin", adminsRoutes);
 
 // Start server
