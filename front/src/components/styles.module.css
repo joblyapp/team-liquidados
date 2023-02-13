@@ -135,6 +135,7 @@ h3{
 
 .navImg img{
     height: 80px;
+    cursor: pointer;
 }
 
 .navMenu {

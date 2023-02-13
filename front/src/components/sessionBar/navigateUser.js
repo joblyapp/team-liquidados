@@ -23,6 +23,10 @@ export default function NavigateUser() {
             pass: null,
             loggedIn: false
         }));
+
+        sessionStorage.removeItem("token");
+
+
     }
 
 

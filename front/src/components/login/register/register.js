@@ -24,6 +24,7 @@ export default function Register({ setRegister }) {
                     setExito(true);
                 })
                 .catch((error) => {
+                    setError(true)
                     console.log(error);
                 })
                 .finally(()=>console.log(newUser));
@@ -43,12 +44,12 @@ export default function Register({ setRegister }) {
         }
         else if (error) {
             return (
-                <FailLogIn />
+                <FailLogIn setFail={setError} fail={error}/>
             )
         }
         else{
             return(
-                <RegisterForm setNewUser={setNewUser} setError={setError} setRegister={setRegister} setExito={setExito} />
+                <RegisterForm setRegister={setRegister} setNewUser={setNewUser} setError={setError} setExito={setExito} />
             )
         }
     }

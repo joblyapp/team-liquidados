@@ -1,0 +1,50 @@
+
+import styles from "../components/styles.module.css";
+
+
+export default function ChangePass() {
+
+    /* const { recoveryToken } = useParams(); */
+
+    function handleSubmitRegister(e) {
+
+        e.preventDefault();
+
+        const pass = document.getElementById("pass").value;
+        const passRepeat = document.getElementById("passRepeat").value;
+
+        if (pass === passRepeat) {
+
+            console.log("Se pudo enviar cambio de contraseña");
+
+
+        }
+        else {
+            console.log("No se pudo enviar cambio de contraseña");
+        }
+
+    }
+
+
+    return (
+
+        <div className={styles.centered}>
+
+            <form className={styles.box} onSubmit={handleSubmitRegister}>
+
+                <input type="password" id="pass" placeholder="Ingrese su contraseña" required></input>
+                <input type="password" id="passRepeat" placeholder="Ingrese nuevamente su contraseña" required></input>
+
+                <div className={styles.botones}>
+                    <input type="submit" value="Cambiar contraseña"></input>
+                </div>
+
+            </form>
+
+        </div>
+
+
+
+
+    )
+}
