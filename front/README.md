@@ -67,11 +67,11 @@ CREATED AN .ENV FILE
 
 * Change SCROLL MODE to PAGES MODE.
 
-* Change columns info.
+* Change columns info. DONE
 
 * Add IMAGE to a product. DONE.
 
-* Succes MESSAGGE for NEW PRODUCT.
+* Succes MESSAGGE for NEW PRODUCT and EDIT PRODUCT. DONE
 
 * WINDOWS EFFECT to ADD PRODUCT and EDIT PRODUCT component. DONE but i have an error. Its working with a Warning. NOT WARNING ANY MORE! DONE.
 

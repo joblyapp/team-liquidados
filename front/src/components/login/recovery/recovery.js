@@ -37,7 +37,7 @@ export default function Recovery({ setRecovery }) {
         if (recoveryMail) {
 
             axios
-                .post(`${process.env.REACT_APP_URL}/admin/forgot`, recoveryMail
+                .post(`${process.env.REACT_APP_URL}/admin/forgot-password`, recoveryMail
                 )
                 .then((response) => {
                     console.log(response);

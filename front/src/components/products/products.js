@@ -6,6 +6,7 @@ import ListaProductos from "./listaProductos";
 import categorias from "./categorias.json";
 import { confirmAlert } from "react-confirm-alert";
 import ProductsBar from "./productsBar";
+import SaleBar from "../sales/newSale/saleBar";
 
 
 export default function Products() {
@@ -83,7 +84,7 @@ export default function Products() {
             <h3>PRODUCTOS</h3>
           
             <ProductsBar setBusqueda={setBusqueda} categoriasDisponibles={categorias} setCategoria={setCategoria}/>
-
+            <SaleBar one="Categoría" two="Nombre" three="Precio" four="Acciones" />
             <ListaProductos setForceRender={setForceRender} forceRender={forceRender} value={busqueda} categoryValue={categoria} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} isSelling={false} />
 
             <div>
