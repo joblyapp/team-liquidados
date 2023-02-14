@@ -27,6 +27,19 @@ const SalesSchema = new Schema({
     default: Date.now,
     immutable: true,
   },
+  paymentForm: {
+    type: String,
+    enum: ["Debit", "Credit", "Cash"],
+    required: true,
+  },
+  isCancelled: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  cancellationReason: {
+    type: String,
+  },
 });
 
 //A method to get sales for a period of time
