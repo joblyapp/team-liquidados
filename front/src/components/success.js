@@ -1,13 +1,19 @@
 import { useEffect } from "react";
 import styles from "./styles.module.css";
 
-export default function Success({ operacion, setSuccess, setMode, backButton }) {
+export default function Success({ operacion, setSuccess, setMode, onClose }) {
 
     useEffect(()=>{
 
-        setTimeout(()=>{setSuccess(false); setMode("");}, 3000);
+        setTimeout(()=>{
+            setSuccess(false); 
+            setMode("");
+            console.log("im inside time out!");
+            onClose();
+        
+        }, 3000);
 
-    },[])
+    })
 
     return (
 

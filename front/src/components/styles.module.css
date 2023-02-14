@@ -188,3 +188,39 @@ h3{
     }
   }
   
+
+  .boxEmergent{
+    border: solid 2px rgb(0, 255, 128);
+    height: 50vh;
+    width: 50vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+  
+  .boxElement{
+    height: 50vh;
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .boxElement img{
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+  
+  }
+
+  .noProducts {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }

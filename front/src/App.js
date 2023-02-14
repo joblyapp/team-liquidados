@@ -20,7 +20,6 @@ function App() {
         <Route exact path='/stats' element={<StatsPage />} />
         <Route exact path='/reset-password/:token' element={<ChangePass />} />
 
-
       </Routes>
 
     </BrowserRouter>

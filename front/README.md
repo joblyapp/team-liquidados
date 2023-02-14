@@ -61,12 +61,17 @@ CREATED AN .ENV FILE
 
 ## To do
 
-* Add a message when products number is 0. "No se encontraron productos. Haga click en AGREGAR PRODUCTO para añadir un nuevo producto".
+* Add a message when products number is 0. "No se encontraron productos. Haga click en AGREGAR PRODUCTO para añadir un nuevo producto". DONE.
+
+* Add category filter. DONE        
 
 * Change SCROLL MODE to PAGES MODE.
 
-* Add IMAGE to a product.
+* Change columns info.
+
+* Add IMAGE to a product. DONE.
 
 * Succes MESSAGGE for NEW PRODUCT.
 
-* WINDOWS EFFECT to ADD PRODUCT component.
+* WINDOWS EFFECT to ADD PRODUCT and EDIT PRODUCT component. DONE but i have an error. Its working with a Warning. NOT WARNING ANY MORE! DONE.
+

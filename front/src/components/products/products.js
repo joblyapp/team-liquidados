@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles.module.css";
 import EditProduct from "./editProduct";
 import ListaProductos from "./listaProductos";
 import categorias from "./categorias.json";
-
+import { confirmAlert } from "react-confirm-alert";
+import ProductsBar from "./productsBar";
 
 
 export default function Products() {
 
     // Input
     const [busqueda, setBusqueda] = useState("");
+    const [categoria, setCategoria] = useState("All");
+
 
     // Enable Edit Mode both NEW PRODUCT or EDIT PRODUCT
     const [editMode, setEditMode] = useState(false);
@@ -19,13 +22,21 @@ export default function Products() {
     // Object that contains PRODUCT info
     const [productInfo, setProductInfo] = useState({});
 
+    // State to force render after deleting, adding or editing an element
+    const [forceRender, setForceRender] = useState(false);
+
     // Just to navigate
     const navigate = useNavigate();
 
 
-    function handleInputChange(e) {
-        setBusqueda(e.target.value);
-    }
+    useEffect(() => {
+        if (editMode || esNuevo) {
+            handleEditProduct(editMode, esNuevo, setEsNuevo, setEditMode);
+        }
+
+
+
+    }, [editMode, esNuevo])
 
 
     function handleBack(to) {
@@ -33,58 +44,54 @@ export default function Products() {
     }
 
 
-    function handleNewProduct() {
-        
+    function handleEditProduct(editMode, esNuevo, setEsNuevo, setEditMode) {
 
         confirmAlert({
-            customUI: ({ onClose }) => {
-                return (
-                    <div className={styles.alert}>
-                        <h1>Elminar Producto</h1>
-                        <p>¿Está seguro de que desea eliminar este producto?</p>
-                        <button onClick={onClose}>No</button>
-                        <button
-                            onClick={() => {
-                                handleDelete(id);
-                                onClose();
-                            }}
 
-                        >
-                            Yes
-                        </button>
-                    </div>
+            customUI: ({ onClose }) => {
+
+
+                return (
+
+                    <>
+                        {editMode ?
+                            <EditProduct setForceRender={setForceRender} forceRender={forceRender} onClose={onClose} esNuevo={esNuevo} setMode={setEditMode} id={productInfo.id} category={productInfo.category} name={productInfo.name} price={productInfo.price} categoriasDisponibles={categorias} />
+                            :
+                            esNuevo ?
+
+                                <EditProduct setForceRender={setForceRender} forceRender={forceRender} onClose={onClose} esNuevo={esNuevo} setMode={setEsNuevo} category={"1"} name={""} price={""} categoriasDisponibles={categorias} />
+                                :
+                                onClose()
+                        }
+
+                    </>
                 );
+
             }
+
+            ,
+            closeOnClickOutside: false
         });
 
     }
 
 
     return (
-        <>
 
+        <div className={styles.centered}>
 
-            {editMode
+            <h3>PRODUCTOS</h3>
+          
+            <ProductsBar setBusqueda={setBusqueda} categoriasDisponibles={categorias} setCategoria={setCategoria}/>
 
-                ? <EditProduct esNuevo={esNuevo} setMode={setEditMode} id={productInfo.id} category={productInfo.category} name={productInfo.name} price={productInfo.price} categoriasDisponibles={categorias} />
+            <ListaProductos setForceRender={setForceRender} forceRender={forceRender} value={busqueda} categoryValue={categoria} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} isSelling={false} />
 
-                : esNuevo
+            <div>
+                <button onClick={() => handleBack("/")}>Volver</button>
+                <button onClick={() => setEsNuevo(true)}>Nuevo Producto</button>
+            </div>
+        </div>
 
-                    ? <EditProduct esNuevo={esNuevo} setMode={setEsNuevo} category={""} name={""} price={""} categoriasDisponibles={categorias} />
-                    : <div className={styles.centered}>
-
-                        <h3>PRODUCTOS</h3>
-                        <input onChange={handleInputChange}></input>
-
-                        <ListaProductos value={busqueda} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} isSelling={false} />
-
-                        <div>
-                            <button onClick={() => handleBack("/")}>Volver</button>
-                            <button onClick={() => setEsNuevo(true)}>Nuevo Producto</button>
-                        </div>
-                    </div>
-            }
-        </>
 
     )
 }
