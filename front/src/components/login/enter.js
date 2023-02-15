@@ -37,6 +37,7 @@ export default function Enter({ setRecovery, setRegister }) {
             })
             .catch((error) => {
                 console.log(error);
+                setFail(true)
             })
             .finally(() => console.log("Submitted!"));
 

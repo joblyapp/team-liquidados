@@ -1,14 +1,21 @@
+import { useNavigate } from "react-router";
 import styles from "../styles.module.css";
 
 
-export default function NavigateLogo(){
+export default function NavigateLogo() {
 
-    return(
+  const navigate = useNavigate();
 
-        <div className={styles.navImg}>
-          <img src="./Marcas.png" alt="Don ventura logo"></img>
-        </div>
+  function handleClick() {
+    navigate("/");
+  }
 
-    )
+  return (
+
+    <div className={styles.navImg} onClick={handleClick}>
+      <img src="./Marcas.png" alt="Don ventura logo"></img>
+    </div>
+
+  )
 
 }

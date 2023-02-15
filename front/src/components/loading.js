@@ -1,11 +1,13 @@
-
-
+import styles from "./styles.module.css";
 
 export default function Loading() {
 
+
     return (
+        <div className={styles.centered}>
 
-        <div style={{ heigth: "100vh", width: "100vw" }}> LOADING </div>
-
+            <div className={styles.ldsCircle}> <div></div> </div>
+        
+        </div>
     )
 }

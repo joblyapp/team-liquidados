@@ -21,7 +21,7 @@ export default function OldSales({ setMode, mode }) {
     useEffect(() => {
 
         axios
-            .get(`${process.env.REACT_APP_URL}/Sales/`, {
+            .get(`${process.env.REACT_APP_URL}/Sales`, {
                 headers: {
                   Authorization: `Bearer ${sessionStorage.getItem("token")}`,
                   'Content-Type': 'application/json'
