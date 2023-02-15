@@ -3,10 +3,12 @@ import { confirmAlert } from "react-confirm-alert";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loading from "../loading";
+import NoProducts from "./noProducts";
 
 // A lista productos se le suma otro valor que es "isSelling". Si este valor es TRUE va a cambiar los botones de la derecha
 
-export default function ListaProductos({ value, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, setAdding }) {
+export default function ListaProductos({ setForceRender, forceRender, value, categoryValue, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, setAdding }) {
 
     // Loading wheel
     const [loading, setLoading] = useState(true);
@@ -14,27 +16,32 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
     // Data obtained from BackEnd
     const [datos, setDatos] = useState();
 
-    // State to force render after deleting an element
-    const [forceRender, setForceRender] = useState(false);
+    var complete;
 
-
-
-    // Hook to load information from DataBase. It render again after deleting a file
+    // Hook to load information from DataBase. It render again after deleting, editing or adding an item
     useEffect(() => {
+
         console.log("rendering again")
+        console.log(complete);
+        setLoading(true);
         axios
-            .get(`${process.env.REACT_APP_URL}/products`,  { headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                'Content-Type': 'application/json'
-              }})
+            .get(`${process.env.REACT_APP_URL}/products`, {
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                    'Content-Type': 'application/json'
+                }
+            })
             .then((response) => {
-                setDatos(response.data)
-                setLoading(false);
+                setDatos(response.data);
             })
             .catch((error) => {
                 console.log(error);
             })
-            .finally(() => setForceRender(false))
+            .finally(() => {
+                setForceRender(false);
+                setLoading(false);
+            })
+
     }, [forceRender])
 
     // Delete function
@@ -43,10 +50,10 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
         axios
             .delete(`${process.env.REACT_APP_URL}/products/${id}`, {
                 headers: {
-                  Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                  'Content-Type': 'application/json'
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                    'Content-Type': 'application/json'
                 }
-              })
+            })
             .then((response) => {
                 console.log(response)
             })
@@ -58,7 +65,7 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
 
     // Confirm delete function
     function handleAlert(id) {
-        console.log("borranding this ID: " + id);
+
 
         confirmAlert({
             customUI: ({ onClose }) => {
@@ -100,14 +107,15 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
 
         const sale = [...saleStatus];
         const newProduct = {
-            productId: {
+            productId:
+            {
                 _id: id,
                 name: name,
                 price: price,
-                
-            },
-            quantity: 1,
-            total() { return this.productId.price * this.quantity}
+                quantity: 1,
+            }
+            ,
+            total() { return this.productId.price * this.productId.quantity }
         }
 
         const elementIndex = sale.indexOf(sale.find(element => element.productId._id === id));
@@ -118,7 +126,7 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
             setAdding(false);
         }
         else {
-            sale[elementIndex].quantity++;
+            sale[elementIndex].productId.quantity++;
             setSaleStatus(sale);
             setAdding(false);
         }
@@ -133,7 +141,7 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
             <div className={styles.productsCard}>
 
                 {
-                    datos.filter(product => product.name.toLowerCase().includes(value) || String(product.id).includes(value)
+                    complete = datos.filter(product => product.name.toLowerCase().includes(value) && ((product.category === parseInt(categoryValue) || categoryValue === "All"))
                     ).map((item, key) => (
                         <div key={key} className={styles.listaProductos}>
                             <p>{item.category}</p>
@@ -147,18 +155,20 @@ export default function ListaProductos({ value, setProductInfo, setEditMode, isS
                         </div>
                     ))
 
+
                 }
 
+                {complete.length === 0 && <NoProducts />}
 
-            {isSelling && <button onClick={()=>setAdding(false)}> BACK</button>} 
+                {isSelling && <button onClick={() => setAdding(false)}> BACK</button>}
 
             </div>
 
-         
+
 
             :
 
-    <div className={styles.productsCard}> LOADING</div>
+            <Loading />
 
     )
 }

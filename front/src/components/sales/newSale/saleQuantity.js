@@ -21,13 +21,13 @@ function quantityChange(condition){
     console.log(sale);
 
     if(condition === "up"){
-        sale[index].quantity = sale[index].quantity + 1;
+        sale[index].productId.quantity = sale[index].productId.quantity + 1;
     }
-    else if (condition === "down" && sale[index].quantity > 0){
-        sale[index].quantity = sale[index].quantity - 1;
+    else if (condition === "down" && sale[index].productId.quantity > 0){
+        sale[index].productId.quantity = sale[index].productId.quantity - 1;
     }
 
-    if(sale[index].quantity === 0){
+    if(sale[index].productId.quantity === 0){
         deleteItem(sale,index);
     }
      
