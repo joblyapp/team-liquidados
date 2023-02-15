@@ -6,6 +6,20 @@ const fs = require("fs");
 //Models
 const Product = require("../models/Product"); // import the product model
 
+async function getProduct(req, res, next) {
+  let product;
+  try {
+    product = await Product.findById(req.params.id); // find the product by its id
+    if (product == null) {
+      return res.status(404).json({ message: "Cannot find product" });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+  res.product = product;
+  next();
+}
+
 //All Routes
 
 //Getting all
@@ -54,27 +68,27 @@ router.post("/", upload.single("image"), async (req, res) => {
 });
 
 // Updating one
-// router.patch("/:id", getProduct, async (req, res) => {
-//   if (req.body.name != null) {
-//     res.product.name = req.body.name;
-//   }
-//   if (req.body.category != null) {
-//     res.product.category = req.body.category;
-//   }
-//   if (req.body.description != null) {
-//     res.product.description = req.body.description;
-//   }
-//   if (req.body.price != null) {
-//     res.product.price = req.body.price;
-//   }
+router.patch("/:id", getProduct, async (req, res) => {
+  if (req.body.name != null) {
+    res.product.name = req.body.name;
+  }
+  if (req.body.category != null) {
+    res.product.category = req.body.category;
+  }
+  if (req.body.description != null) {
+    res.product.description = req.body.description;
+  }
+  if (req.body.price != null) {
+    res.product.price = req.body.price;
+  }
 
-//   try {
-//     const updatedProduct = await res.product.save(); // save the updated product
-//     res.json(updatedProduct);
-//   } catch (err) {
-//     res.status(400).json({ message: err.message }); // return an error message
-//   }
-// });
+  try {
+    const updatedProduct = await res.product.save(); // save the updated product
+    res.json(updatedProduct);
+  } catch (err) {
+    res.status(400).json({ message: err.message }); // return an error message
+  }
+});
 
 //Deactivate a product
 router.patch("deactivate/:id", async (req, res) => {
@@ -91,13 +105,13 @@ router.patch("deactivate/:id", async (req, res) => {
 });
 
 //Deliting one
-// router.delete("/:id", getProduct, async (req, res) => {
-//   try {
-//     await res.product.remove(); // delete the product from the database
-//     res.json({ message: "Deleted Product" });
-//   } catch (err) {
-//     res.status(500).json({ message: err.message }); // return an error message
-//   }
-// });
+router.delete("/:id", getProduct, async (req, res) => {
+  try {
+    await res.product.remove(); // delete the product from the database
+    res.json({ message: "Deleted Product" });
+  } catch (err) {
+    res.status(500).json({ message: err.message }); // return an error message
+  }
+});
 
 module.exports = router;
