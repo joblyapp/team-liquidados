@@ -47,7 +47,6 @@ h3{
 
 .productsCard{
     height: 70vh;
-    overflow-y: auto;
 }
 
 .listaProductos{
@@ -156,6 +155,21 @@ h3{
     color: #b40000;
 } 
 
+/* BUTTONS */
+
+.button {
+    max-height: 30px;
+    cursor: pointer;
+    padding: 5px;
+    border: solid 4px rgb(245, 242, 242);
+    color: #ed6f70;
+}
+
+.button:hover {
+    cursor: pointer;
+    color: #b40000;
+} 
+
 
 /* LOADING */
 
@@ -223,4 +237,12 @@ h3{
     justify-content: center;
     align-items: center;
 
+  }
+
+  .space{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70vw;
+    margin-top: 50px;
   }

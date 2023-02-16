@@ -54,7 +54,7 @@ CREATED AN .ENV FILE
 * Sales format correction. List of issues:
 
 ** Can't register a new sale. DONE
-** Can't get old sales error "Cannot populate path `products.productId` because it is not in your schema. Set the `strictPopulate` option to false to override." 
+** Can't get old sales error "Cannot populate path `products.productId` because it is not in your schema. Set the `strictPopulate` option to false to override." SOLVED
 
 * Adding LOADER for Loading component. DONE
 
@@ -75,3 +75,59 @@ CREATED AN .ENV FILE
 
 * WINDOWS EFFECT to ADD PRODUCT and EDIT PRODUCT component. DONE but i have an error. Its working with a Warning. NOT WARNING ANY MORE! DONE.
 
+
+# ------------------------------------------------------------------------------------------
+
+## TO DO
+
+
+RECOVER
+
+* Check if recovery MAIL works correctly. DONE
+* Add LOADING wheel before recieving Succeded Messagge. DONE
+
+* Create ROUTE to mail's LINK. DONE
+* Load CHANGE PASSWORD component. DONE
+* POST new password to back
+
+* Create success message / fail message. DONE
+
+EXTRAS
+
+* "Show Password" button. DONE
+
+
+
+SALES
+
+* Correct loading bug. DONE.
+* Sales still using the "productId" way at the back.
+
+* Loading Products bug. DONE
+* Check if adding product when it already exists works fine. DONE
+* Searching PRODUCT by name and Category. DONE 
+/// It was ticky because inside the "confirmAlert" windows i was not able to dinamically rerender the product list. I needed to create a new Component containing all the search but DONE
+* Increacing or decrease PRODUCT quantity. DONE
+
+* Not to delete product when quantity is "0". Just dont allow it and create a DELETE button.
+
+
+REGISTERING SALE
+
+* Completing all fields: 
+---- Need PRODUCTS array with "name, price, quantity", A TOTAL sale, PAY METHOD, ISCANCELLED= false. I NEED TO KNOW THE CORRECT FORMAT TO SEND paymentForm
+
+
+PRODUCT
+
+CATEGORY- How to add new category
+PRICE - Formatt to $******
+
+VISUAL order and options.
+
+
+
+
+OLD SALES
+
+- Convert OLD SALES in STATISTICS

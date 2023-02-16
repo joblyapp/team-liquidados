@@ -14,20 +14,20 @@ function deleteItem(array, index){
 function quantityChange(condition){
 
     const sale = [...saleStatus];
-    const product = saleStatus.find(x => x.productId.name === name);
+    const product = saleStatus.find(x => x.products.name === name);
     
     const index = sale.indexOf(product);
     console.log(index);
     console.log(sale);
 
     if(condition === "up"){
-        sale[index].productId.quantity = sale[index].productId.quantity + 1;
+        sale[index].products.quantity = sale[index].products.quantity + 1;
     }
-    else if (condition === "down" && sale[index].productId.quantity > 0){
-        sale[index].productId.quantity = sale[index].productId.quantity - 1;
+    else if (condition === "down" && sale[index].products.quantity > 0){
+        sale[index].products.quantity = sale[index].products.quantity - 1;
     }
 
-    if(sale[index].productId.quantity === 0){
+    if(sale[index].products.quantity === 0){
         deleteItem(sale,index);
     }
      

@@ -8,7 +8,7 @@ import NoProducts from "./noProducts";
 
 // A lista productos se le suma otro valor que es "isSelling". Si este valor es TRUE va a cambiar los botones de la derecha
 
-export default function ListaProductos({ setForceRender, forceRender, value, categoryValue, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, setAdding }) {
+export default function ListaProductos({ setForceRender, forceRender, value, categoryValue, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, goBack }) {
 
     // Loading wheel
     const [loading, setLoading] = useState(true);
@@ -43,6 +43,11 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
             })
 
     }, [forceRender])
+
+    useEffect(()=>{
+        console.log(value);
+
+    },[value])
 
     // Delete function
     function handleDelete(id) {
@@ -103,32 +108,35 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
     }
 
-    function handleAdd(name, price, id) {
-
+   async function handleAdd(name, price, id) {
+        console.log(saleStatus);
         const sale = [...saleStatus];
         const newProduct = {
-            productId:
+            products:
             {
                 _id: id,
                 name: name,
                 price: price,
                 quantity: 1,
             }
+
             ,
-            total() { return this.productId.price * this.productId.quantity }
+            total() { return this.products.price * this.products.quantity },
+
         }
 
-        const elementIndex = sale.indexOf(sale.find(element => element.productId._id === id));
+        const elementIndex = sale.indexOf(sale.find(element => element.products._id === id));
 
         if (elementIndex === -1) {
             sale.push(newProduct);
             setSaleStatus(sale);
-            setAdding(false);
+            console.log("here");   
+            goBack();
         }
         else {
-            sale[elementIndex].productId.quantity++;
+            sale[elementIndex].products.quantity++;
             setSaleStatus(sale);
-            setAdding(false);
+            goBack();
         }
 
     }
@@ -160,7 +168,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
                 {complete.length === 0 && <NoProducts />}
 
-                {isSelling && <button onClick={() => setAdding(false)}> BACK</button>}
+                {isSelling && <button onClick={goBack}> BACK</button>}
 
             </div>
 

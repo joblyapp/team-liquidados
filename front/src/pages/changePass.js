@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ChangePassForm from "../components/login/changePass/changePassForm";
-
+import FailLogIn from "../components/login/failLogIn";
 import Success from "../components/success";
 
 
@@ -10,29 +10,34 @@ export default function ChangePass() {
 
     const { recoveryToken } = useParams();
     const [success, setSuccess] = useState(false);
-    const {done, setDone} = useState(false);
+    const [fail, setFail] = useState(false);
+
+    const { done, setDone } = useState();
+
 
     const navigate = useNavigate();
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        if(done === ""){
+        if (done === "") {
             navigate("/");
         }
-        
-    },[done])
 
+    }, [done])
 
 
     return (
 
-       !success ? 
+        !success ?
 
-       <ChangePassForm recoveryToken={recoveryToken} setSuccess={setSuccess}/>
+            !fail ?
 
-       :
+                <ChangePassForm recoveryToken={recoveryToken} setSuccess={setSuccess} setFail={setFail}/>
+                :
+                <FailLogIn fail={fail} setFail={setFail}/>
+            :
 
-       <Success operacion="Cambio de contraseña" setSuccess={setSuccess} setMode={setDone} />
+            <Success operacion="Cambio de contraseña" setSuccess={setSuccess} setMode={setDone} />
 
 
 

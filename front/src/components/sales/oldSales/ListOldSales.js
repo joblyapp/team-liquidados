@@ -34,7 +34,7 @@ export default function ListOldSales({ oldSales, setIsEditing, setEditingId, isS
                             {item.products.map((product, key) => (
 
 
-                                <option key={key}> {product.productId.name}</option>
+                                <option key={key}> {product.name}</option>
 
                             )
                             )}
