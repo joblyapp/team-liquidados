@@ -135,6 +135,12 @@ OLD SALES
 
 ## IMPORTANT
 
-* I'm working on branch recovery. I went back from Simon's update. 
+* I'm working on branch recovery. I went back from Simon's update.
 
+# PAGINATION
 
+* Filter data after fetching it. DONE.
+* Filter data with onPage criterium (max 8). DONE
+* Create a PAGINATION LIST component. DONE.
+* Create PAGINATION SELECT. DONE.
+* Check if its works properly. DONE.

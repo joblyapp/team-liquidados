@@ -1,6 +1,7 @@
-h3{
+h3, h4, h2{
     margin: 0;
 }
+
 
 .box{
     border: solid 2px blue;
@@ -171,6 +172,15 @@ h3{
 } 
 
 
+.buttonActive{
+    background-color: lightblue;
+    border-radius: 50%;
+}
+.buttonNonActive{
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
 /* LOADING */
 
 .ldsCircle {
@@ -231,7 +241,7 @@ h3{
   }
 
   .noProducts {
-    height: 70vh;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -245,4 +255,14 @@ h3{
     align-items: center;
     width: 70vw;
     margin-top: 50px;
+  }
+
+  /* PAGINATION SELECT */
+
+  .paginationSelect {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
