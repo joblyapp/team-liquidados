@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ListaProductos from "../../products/listaProductos";
 import styles from "../../styles.module.css";
 import SaleBack from "../saleBack";
 import SaleBar from "./saleBar";
@@ -10,12 +9,16 @@ import Success from "../../success";
 
 
 
+
 export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) {
 
-    const [adding, setAdding] = useState(false);
+   
     const [load, setLoad] = useState(false);
     const [success, setSuccess] = useState(false);
-    
+    const [forceRender, setForceRender] = useState(false);
+
+  
+
     // We create a Sale  Status to register the products on current sale 
     const [saleStatus, setSaleStatus] = useState([]);
 
@@ -25,16 +28,16 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
     useEffect(() => {
 
         if (isEditing) {
-            
+
             var sale;
 
             axios
                 .get(`${process.env.REACT_APP_URL}/Sales/${isEditingId}`, {
                     headers: {
-                      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                      'Content-Type': 'application/json'
+                        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                        'Content-Type': 'application/json'
                     }
-                  })
+                })
                 .then((response) => {
                     console.log(response.data.products);
                     sale = response.data.products;
@@ -44,14 +47,14 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
                     ))
                     console.log(sale);
                     setSaleStatus(sale);
-                
+
 
                 })
                 .catch((error) => {
                     console.log(error);
                 })
                 .finally(() => {
-                
+
                     setLoad(false)
 
                 });
@@ -68,15 +71,12 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
 
                 <div className={styles.centered}>
 
-                    {adding ?
-
-                        <ListaProductos setSaleStatus={setSaleStatus} saleStatus={saleStatus} isSelling={true} setAdding={setAdding} />
-                        :
+                    {
                         <>
                             {!isEditing ? <h3>NUEVA VENTA</h3> : <h3>EDITAR VENTA</h3>}
 
                             <SaleBar one="Nombre" two="Precio" three="Cantidad" four="TOTAL" />
-                            <SaleDetails saleStatus={saleStatus} setSaleStatus={setSaleStatus} setAdding={setAdding} isEditing={isEditing} setMode={setMode} isEditingId={isEditingId} setSuccess={setSuccess} />
+                            <SaleDetails setForceRender={setForceRender} forceRender={forceRender} saleStatus={saleStatus} setSaleStatus={setSaleStatus} isEditing={isEditing} setMode={setMode} isEditingId={isEditingId} setSuccess={setSuccess} />
                             <SaleBack setMode={setMode} isEditing={isEditing} setIsEditing={setIsEditing} />
                         </>
 
@@ -89,6 +89,6 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
                 <Loading />
             :
 
-            <Success operacion="Venta" setSuccess={setSuccess} setMode={setMode}/>
+            <Success operacion="Venta" setSuccess={setSuccess} setMode={setMode} />
     )
 }

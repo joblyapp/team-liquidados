@@ -4,7 +4,7 @@ import styles from "../../styles.module.css";
 import axios from "axios";
 import RecoverySuccess from "./recoverySucces";
 import { useNavigate } from "react-router";
-
+import Loading from "../../loading";
 
 
 
@@ -13,6 +13,7 @@ export default function Recovery({ setRecovery }) {
     const [recoveryMail, setRecoveryMail] = useState();
     const [fail, setFail] = useState(false);
     const [exito, setExito] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -35,7 +36,7 @@ export default function Recovery({ setRecovery }) {
     useEffect(() => {
 
         if (recoveryMail) {
-
+            setLoading(true)
             axios
                 .post(`${process.env.REACT_APP_URL}/admin/forgot-password`, recoveryMail
                 )
@@ -48,7 +49,7 @@ export default function Recovery({ setRecovery }) {
                     setFail(true);
                 })
                 .finally(() => {
-
+                    setLoading(false);
                 }
 
                 );
@@ -74,7 +75,9 @@ export default function Recovery({ setRecovery }) {
 
         <div className={styles.centered}>
 
-            {!fail ?
+          {  !loading ?
+
+           !fail ?
 
                 !exito ?
 
@@ -94,14 +97,14 @@ export default function Recovery({ setRecovery }) {
 
                     <RecoverySuccess setExito={setExito} setRecovery={setRecovery} />
 
-
-
                 :
 
                 <FailLogIn setFail={setFail} fail={fail} />
-            }
+            :
 
+            <Loading />
 
+        }
         </div>
 
     )

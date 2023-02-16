@@ -1,6 +1,7 @@
-h3{
+h3, h4, h2{
     margin: 0;
 }
+
 
 .box{
     border: solid 2px blue;
@@ -47,7 +48,6 @@ h3{
 
 .productsCard{
     height: 70vh;
-    overflow-y: auto;
 }
 
 .listaProductos{
@@ -156,6 +156,30 @@ h3{
     color: #b40000;
 } 
 
+/* BUTTONS */
+
+.button {
+    max-height: 30px;
+    cursor: pointer;
+    padding: 5px;
+    border: solid 4px rgb(245, 242, 242);
+    color: #ed6f70;
+}
+
+.button:hover {
+    cursor: pointer;
+    color: #b40000;
+} 
+
+
+.buttonActive{
+    background-color: lightblue;
+    border-radius: 50%;
+}
+.buttonNonActive{
+    background-color: #ffffff;
+    border-radius: 50%;
+}
 
 /* LOADING */
 
@@ -217,10 +241,28 @@ h3{
   }
 
   .noProducts {
-    height: 70vh;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
+  }
+
+  .space{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70vw;
+    margin-top: 50px;
+  }
+
+  /* PAGINATION SELECT */
+
+  .paginationSelect {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }

@@ -1,3 +1,5 @@
+import styles from "../styles.module.css";
+
 export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCategoria }) {
 
     function handleInputChange(e) {
@@ -10,7 +12,7 @@ export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCat
 
     return (
 
-        <div>
+        <div className={styles.listaProductos}>
             <input onChange={handleInputChange}></input>
 
             <select id="categoryFilter" defaultValue={"All"} onChange={handleCatChange} type="number" required>

@@ -81,15 +81,24 @@ export default function Products() {
 
         <div className={styles.centered}>
 
-            <h3>PRODUCTOS</h3>
-          
-            <ProductsBar setBusqueda={setBusqueda} categoriasDisponibles={categorias} setCategoria={setCategoria}/>
+            <div className={styles.space}>
+
+                <div >
+                    <h3>PRODUCTOS</h3>
+                    <p>Export ⬇</p>
+                </div>
+
+                <button className={styles.button} onClick={() => setEsNuevo(true)}>Nuevo Producto</button>
+
+            </div>
+
+            <ProductsBar setBusqueda={setBusqueda} categoriasDisponibles={categorias} setCategoria={setCategoria} />
             <SaleBar one="Categoría" two="Nombre" three="Precio" four="Acciones" />
             <ListaProductos setForceRender={setForceRender} forceRender={forceRender} value={busqueda} categoryValue={categoria} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} isSelling={false} />
 
             <div>
                 <button onClick={() => handleBack("/")}>Volver</button>
-                <button onClick={() => setEsNuevo(true)}>Nuevo Producto</button>
+
             </div>
         </div>
 
