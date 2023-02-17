@@ -4,10 +4,10 @@ const Sales = require("../models/Sale");
 
 // Create a sale
 router.post("/", async (req, res) => {
-  const { products, total } = req.body;
+  const { products, total, paymentForm, cancellationReason } = req.body;
 
   try {
-    const sale = new Sales({ products, total });
+    const sale = new Sales({ products, total, paymentForm });
     await sale.save();
     res.status(201).json(sale);
   } catch (err) {
