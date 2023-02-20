@@ -144,3 +144,5 @@ OLD SALES
 * Create a PAGINATION LIST component. DONE.
 * Create PAGINATION SELECT. DONE.
 * Check if its works properly. DONE.
+
+ISSUE => When page is selected and the input or category changes, it must be resetted to 1. DONE.

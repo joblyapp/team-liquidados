@@ -23,7 +23,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] =  useState(8);
+    const [itemsPerPage, setItemsPerPage] = useState(8);
 
 
     // Hook to load information from DataBase. It render again after deleting, editing or adding an item
@@ -56,13 +56,14 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
     useEffect(() => {
         if (datos) {
-            setComplete(filtering(datos))
+            setComplete(filtering(datos));
+            setCurrentPage(1);
         }
+
     }, [value, categoryValue, datos])
 
     // Filter function
     function filtering(data) {
-        console.log("im filtering data")
         const temp = data.filter(product => product.name.toLowerCase().includes(value) && ((product.category === parseInt(categoryValue) || categoryValue === "All")));
         return temp;
     }
@@ -177,11 +178,11 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
                     goBack={goBack}
                 />
 
-                <PaginationSelect 
-                itemsPerPage={itemsPerPage}
-                setCurrentPage = {setCurrentPage}
-                totalItems = {complete.length}
-                currentPage={currentPage}
+                <PaginationSelect
+                    itemsPerPage={itemsPerPage}
+                    setCurrentPage={setCurrentPage}
+                    totalItems={complete.length}
+                    currentPage={currentPage}
 
                 />
 

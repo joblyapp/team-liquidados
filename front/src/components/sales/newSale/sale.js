@@ -78,6 +78,7 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
                             <SaleBar one="Nombre" two="Precio" three="Cantidad" four="TOTAL" />
                             <SaleDetails setForceRender={setForceRender} forceRender={forceRender} saleStatus={saleStatus} setSaleStatus={setSaleStatus} isEditing={isEditing} setMode={setMode} isEditingId={isEditingId} setSuccess={setSuccess} />
                             <SaleBack setMode={setMode} isEditing={isEditing} setIsEditing={setIsEditing} />
+                            
                         </>
 
                     }

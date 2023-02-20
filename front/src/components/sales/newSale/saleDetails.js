@@ -107,7 +107,6 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
                         saleStatus={saleStatus}
                         setSaleStatus={setSaleStatus}
                         onClose={onClose}
-
                     />
 
                 );
@@ -128,7 +127,12 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
 
                         <p>{item.products.name}</p>
                         <p>{item.products.price}</p>
-                        <SaleQuantity quantity={item.products.quantity} name={item.products.name} setSaleStatus={setSaleStatus} saleStatus={saleStatus} />
+                        <SaleQuantity
+                            quantity={item.products.quantity}
+                            name={item.products.name}
+                            setSaleStatus={setSaleStatus}
+                            saleStatus={saleStatus}
+                        />
                         <p>{item.total()}</p>
 
                     </div>
