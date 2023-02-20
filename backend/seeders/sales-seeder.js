@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Sales = require("../models/sale");
 const salesData = require("./sales-data.json");
 
-mongoose.connect(process.env.DB_CONNECTOR, { useNewUrlParser: true });
+mongoose.connect(`${process.env.DB_CONNECTOR}`, { useNewUrlParser: true });
 
 async function seedSales() {
   try {

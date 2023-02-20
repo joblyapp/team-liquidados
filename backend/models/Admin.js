@@ -80,7 +80,7 @@ AdminSchema.methods.sendPasswordResetEmail = function () {
 AdminSchema.statics.resetPassword = async function (password, resetToken) {
   try {
     const decoded = jwt.verify(resetToken, process.env.JWT_SECRET);
-    const admin = await this.findOne({ email: decoded.email });
+    const admin = await this.findOne({ _id: decoded._id });
     if (!admin) {
       return { error: "No account with that email exists." };
     }
