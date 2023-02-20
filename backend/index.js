@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cors = require("cors");
 //authentication function
-const authenticateJWT = require("./auth");
+const authenticateJWT = require("./middleware/auth");
 
 const app = express();
 

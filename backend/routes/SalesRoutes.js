@@ -4,10 +4,10 @@ const Sales = require("../models/Sale");
 
 // Create a sale
 router.post("/", async (req, res) => {
-  const { products, total } = req.body;
+  const { products, total, paymentForm, cancellationReason } = req.body;
 
   try {
-    const sale = new Sales({ products, total });
+    const sale = new Sales({ products, total, paymentForm });
     await sale.save();
     res.status(201).json(sale);
   } catch (err) {
@@ -41,9 +41,7 @@ router.get("/", async (req, res) => {
 // Get one sale
 router.get("/:id", async (req, res) => {
   try {
-    const sale = await Sales.findById(req.params.id).populate(
-      "products.productId"
-    );
+    const sale = await Sales.findById(req.params.id);
     if (!sale) {
       return res.status(404).json({ message: "Sale not found" });
     }
