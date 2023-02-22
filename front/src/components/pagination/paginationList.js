@@ -1,8 +1,8 @@
-import NoProducts from "../products/noProducts";
-import styles from "../styles.module.css";
+import PaginationProducts from "./paginationProducts";
+import PaginationSales from "./paginationSales";
 
 
-export default function PaginationList({ data, state, handleAdd, handleEdit, handleAlert, currentPage, itemsPerPage, goBack }) {
+export default function PaginationList({ data, state, handleAdd, handleEdit, handleAlert, currentPage, itemsPerPage, goBack, isSale }) {
 
 
     const lastPostIndex = currentPage * itemsPerPage;
@@ -10,28 +10,29 @@ export default function PaginationList({ data, state, handleAdd, handleEdit, han
     data = data.slice(firstPostIndex, lastPostIndex);
 
     return (
-
-        <div className={styles.productsCard}>
+        <>
 
             {
-                data.map((item, key) => (
-                    <div key={key} className={styles.listaProductos}>
-                        <p>{item.category}</p>
-                        <p>{item.name}</p>
-                        <p>{item.price}</p>
-                        <div className={styles.lateralButtons}>
-                            {!state && <button onClick={() => handleEdit(item._id, item.category, item.name, item.price, item.image)}>EDIT</button>}
-                            {!state && <button onClick={() => handleAlert(item._id)}>DELETE</button>}
-                            {state && <button onClick={() => handleAdd(item.name, item.price, item._id)}>+</button>}
-                        </div>
-                    </div>
-                ))
+                !isSale ?
+
+
+                    <PaginationProducts
+                        data={data}
+                        handleEdit={handleEdit}
+                        handleAlert={handleAlert}
+                        handleAdd={handleAdd}
+                        state={state}
+                        goBack={goBack}
+                    />
+
+                    :
+
+                    <PaginationSales
+                        data={data}
+                        handleClick={handleAlert}
+
+                    />
             }
-
-            {data.length === 0 && <NoProducts />}
-            {state && <button onClick={goBack}> BACK</button>}
-
-        </div>
-
+        </>
     )
 }

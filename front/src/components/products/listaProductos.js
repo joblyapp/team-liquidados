@@ -178,6 +178,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
                     currentPage={currentPage}
                     itemsPerPage={itemsPerPage}
                     goBack={goBack}
+                    isSale={false}
                 />
 
                 <PaginationSelect

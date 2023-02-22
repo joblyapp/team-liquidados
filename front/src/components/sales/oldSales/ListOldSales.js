@@ -1,9 +1,15 @@
-import styles from "../../styles.module.css";
+import { useEffect, useState } from "react";
+import PaginationList from "../../pagination/paginationList";
+import PaginationSelect from "../../pagination/paginationSelect";
 
 
 
+export default function ListOldSales({ oldSales, setIsEditing, setEditingId }) {
 
-export default function ListOldSales({ oldSales, setIsEditing, setEditingId, isStats }) {
+
+    // Pagination states
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(8);
 
 
     // When clicking on Sale Div we have to LOAD a SALE visual with sale's PRODUCTS loaded 
@@ -18,43 +24,23 @@ export default function ListOldSales({ oldSales, setIsEditing, setEditingId, isS
 
     return (
 
-        <div className={styles.productsCard}>
-            {oldSales.map((item, key) => (
+        <>
 
+            <PaginationList
+            data={oldSales}
+            handleAlert={handleClick}
+            currentPage={currentPage}
+            itemsPerPage={itemsPerPage}
+            isSale={true}
+            />
 
-                <div key={key} style={{ display: "flex" }}>
+            <PaginationSelect
+              itemsPerPage={itemsPerPage}
+              setCurrentPage={setCurrentPage}
+              totalItems={oldSales.length}
+              currentPage={currentPage}
+            />
 
-                    <div className={styles.listaProductos} >
-
-                        <p>{item.date.substring(0, 10)}</p>
-
-                        <p>{item.products.length}</p>
-
-                        <select>
-
-                            {item.products.map((product, key) => (
-
-
-                                <option key={key}> {product.name}</option>
-
-                            )
-                            )}
-
-                        </select>
-
-                        <p>{item.total}</p>
-
-                    </div>
-
-                    {!isStats && <button onClick={() => handleClick(item._id)}>Edit</button>}
-
-                </div>
-
-            )
-
-            )}
-        </div>
-
-
+        </>
     )
 }

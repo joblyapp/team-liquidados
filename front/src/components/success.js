@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import styles from "./styles.module.css";
 
-export default function Success({ operacion, setSuccess, setMode, onClose }) {
+export default function Success({ operacion, setSuccess, setMode, onClose, setIsEditing }) {
 
     useEffect(()=>{
 
         setTimeout(()=>{
             setSuccess(false); 
+            setIsEditing(false);
             setMode("");
             console.log("im inside time out!");
             onClose();
