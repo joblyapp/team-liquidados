@@ -7,6 +7,7 @@ import SaleBar from "../newSale/saleBar";
 import ListOldSales from "./ListOldSales";
 import Sale from "../newSale/sale";
 import StatsInputs from "../../stats/statsInputs"
+import UpperBar from "../../upperBar.js/upperBar";
 
 export default function OldSales({ setMode, mode }) {
 
@@ -74,11 +75,13 @@ export default function OldSales({ setMode, mode }) {
 
         <div className={styles.centered}>
 
+            <UpperBar setEsNuevo={null} sectionText="Ventas" buttonText={"Nueva Venta"} />
+
             {!loading ?
 
                 !isEditing ?
 
-                    <div className={styles.productCard}>
+                    <div >
 
                         <StatsInputs setCalendar={setCalendar} />
 

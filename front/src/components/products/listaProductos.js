@@ -10,7 +10,7 @@ import PaginationSelect from "../pagination/paginationSelect";
 
 // A lista productos se le suma otro valor que es "isSelling". Si este valor es TRUE va a cambiar los botones de la derecha
 
-export default function ListaProductos({ setForceRender, forceRender, value, categoryValue, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, goBack }) {
+export default function     ListaProductos({ setForceRender, forceRender, value, categoryValue, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, goBack }) {
 
     // Loading wheel
     const [loading, setLoading] = useState(true);

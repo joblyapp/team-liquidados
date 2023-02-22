@@ -70,6 +70,7 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
         else if (!esNuevo) {
 
             console.log("Inside If: EDIT PRODUCT for id: " + id)
+            
             axios
                 .patch(`${process.env.REACT_APP_URL}/products/${id}`, formData, {
                     headers: {
@@ -144,7 +145,7 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
 
             :
 
-            <Success operacion="Edicion de producto" setSuccess={setSuccess} setMode={setProduct} onClose={onClose} />
+            <Success operacion="Edicion de producto" setSuccess={setSuccess} setMode={setProduct} onClose={onClose}/>
 
 
     )

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { format } from 'fecha';
+import styles from "../styles.module.css";
 
 export default function StatsInputs({ setCalendar }) {
 
@@ -79,7 +80,7 @@ export default function StatsInputs({ setCalendar }) {
 
     return (
 
-        <>
+        <div className={styles.listaProductos}>
             <div>
                 <select defaultValue={selected} onChange={handleSelection}>
                     <option value="year">Último año</option>
@@ -101,7 +102,7 @@ export default function StatsInputs({ setCalendar }) {
                 ""}
 
             </div>
-        </>
+        </div>
 
     )
 }

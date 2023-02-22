@@ -216,3 +216,5 @@ DONE.
 * Add PAGINATION to SALES. DONE.
 
 * Add CALENDAR and DROPLIST to filter Old Sales. DONE.
+
+* Create Upper Bar for SALES.

@@ -7,6 +7,7 @@ import categorias from "./categorias.json";
 import { confirmAlert } from "react-confirm-alert";
 import ProductsBar from "./productsBar";
 import SaleBar from "../sales/newSale/saleBar";
+import UpperBar from "../upperBar.js/upperBar";
 
 
 export default function Products() {
@@ -81,16 +82,7 @@ export default function Products() {
 
         <div className={styles.centered}>
 
-            <div className={styles.space}>
-
-                <div >
-                    <h3>PRODUCTOS</h3>
-                    <p>Export ⬇</p>
-                </div>
-
-                <button className={styles.button} onClick={() => setEsNuevo(true)}>Nuevo Producto</button>
-
-            </div>
+            <UpperBar setEsNuevo={setEsNuevo} sectionText="Productos" buttonText="Nuevo Producto"/>
 
             <ProductsBar setBusqueda={setBusqueda} categoriasDisponibles={categorias} setCategoria={setCategoria} />
             <SaleBar one="Categoría" two="Nombre" three="Precio" four="Acciones" />
