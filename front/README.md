@@ -203,12 +203,12 @@ PATCH IS NOT REALLY CHANGING NOTHING!! FUCK! FUCK! FUCK!
 
 ## TODAY 22/2
 
-* Resolve the PATCH issue. I need Simon on this.
+* Resolve the PATCH issue. I need Simon on this. DONE
 
 
 # Sales
 
-* Delete the OLD SALES / NEW SALES selection page. I has to go directly to OLD SALES. 
+* Delete the OLD SALES / NEW SALES selection page. I has to go directly to OLD SALES.  DONE.
 - When Submitting Changes it goes back to Sale SELECTION page. SOLVED.
 
 DONE.
@@ -217,4 +217,4 @@ DONE.
 
 * Add CALENDAR and DROPLIST to filter Old Sales. DONE.
 
-* Create Upper Bar for SALES.
+* Create Upper Bar for SALES. DONE.
