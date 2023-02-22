@@ -199,3 +199,22 @@ I still get error when PATCH to OLD SALE by ID. I have to check what i'm sending
 - Need to send the changes correctly to the back. 
 
 PATCH IS NOT REALLY CHANGING NOTHING!! FUCK! FUCK! FUCK!
+
+
+## TODAY 22/2
+
+* Resolve the PATCH issue. I need Simon on this. DONE
+
+
+# Sales
+
+* Delete the OLD SALES / NEW SALES selection page. I has to go directly to OLD SALES.  DONE.
+- When Submitting Changes it goes back to Sale SELECTION page. SOLVED.
+
+DONE.
+
+* Add PAGINATION to SALES. DONE.
+
+* Add CALENDAR and DROPLIST to filter Old Sales. DONE.
+
+* Create Upper Bar for SALES. DONE.

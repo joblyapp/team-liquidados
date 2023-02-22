@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { format } from 'fecha';
+import styles from "../styles.module.css";
 
 export default function StatsInputs({ setCalendar }) {
 
 
-    const [selected, setSelected] = useState("custom");
+    const [selected, setSelected] = useState("week");
     const [custom, setCustom] = useState(false);
 
     const today = format(new Date(), 'isoDate');
@@ -68,6 +69,8 @@ export default function StatsInputs({ setCalendar }) {
         const dateFrom = document.getElementById("dateFrom").value;
         const dateTo = document.getElementById("dateTo").value;
 
+        console.log(dateFrom);
+
         setCalendar({
             "startDate": dateFrom,
             "endDate": dateTo
@@ -77,7 +80,7 @@ export default function StatsInputs({ setCalendar }) {
 
     return (
 
-        <>
+        <div className={styles.listaProductos}>
             <div>
                 <select defaultValue={selected} onChange={handleSelection}>
                     <option value="year">Último año</option>
@@ -99,7 +102,7 @@ export default function StatsInputs({ setCalendar }) {
                 ""}
 
             </div>
-        </>
+        </div>
 
     )
 }

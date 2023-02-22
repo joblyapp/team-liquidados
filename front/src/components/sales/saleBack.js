@@ -1,21 +1,23 @@
-export default function SaleBack({ setMode, isEditing, setIsEditing }){
+import { useNavigate } from "react-router-dom";
 
-function handleClick(){
+export default function SaleBack({ setMode, toMenu, setIsEditing }) {
 
-    if(isEditing){
+    const navigate = useNavigate();
+
+    function handleClick() {
+
+        if(toMenu){
+            navigate("/");
+        }
+
         setMode("old");
         console.log("to old");
         setIsEditing(false);
     }
-    else{
-        setMode(null);
-        console.log("to menu")
-    }
-}
 
-return (
-    
-    <button onClick={handleClick}> BACK </button>
-)
+    return (
+
+        <button onClick={handleClick}> BACK </button>
+    )
 
 }
