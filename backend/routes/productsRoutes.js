@@ -94,7 +94,7 @@ router.patch("/:id", getProduct, upload.single("image"), async (req, res) => {
   // Check if image was uploaded
   if (req.file) {
     res.product.image = {
-      data: req.file.buffer,
+      data: fs.readFileSync(req.file.path),
       contentType: req.file.mimetype,
     };
   }
