@@ -68,21 +68,35 @@ router.post("/", upload.single("image"), async (req, res) => {
 });
 
 // Updating one
-router.patch("/:id", getProduct, async (req, res) => {
-  if (req.body.name != null) {
-    res.product.name = req.body.name;
-  }
-  if (req.body.category != null) {
-    res.product.category = req.body.category;
-  }
-  if (req.body.description != null) {
-    res.product.description = req.body.description;
-  }
-  if (req.body.price != null) {
-    res.product.price = req.body.price;
-  }
-  if (req.body.image != null) {
-    res.product.image = req.body.image;
+router.patch("/:id", getProduct, upload.single("image"), async (req, res) => {
+  // if (req.body.name != null) {
+  //   res.product.name = req.body.name;
+  // }
+  // if (req.body.category != null) {
+  //   res.product.category = req.body.category;
+  // }
+  // if (req.body.description != null) {
+  //   res.product.description = req.body.description;
+  // }
+  // if (req.body.price != null) {
+  //   res.product.price = req.body.price;
+  // }
+  // if (req.body.image != null) {
+  //   res.product.image = req.body.image;
+  // }
+
+  // Update product fields
+  res.product.name = req.body.name || res.product.name;
+  res.product.description = req.body.description || res.product.description;
+  res.product.category = req.body.category || res.product.category;
+  res.product.price = req.body.price || res.product.price;
+
+  // Check if image was uploaded
+  if (req.file) {
+    res.product.image = {
+      data: req.file.buffer,
+      contentType: req.file.mimetype,
+    };
   }
 
   try {
