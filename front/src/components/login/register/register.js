@@ -18,7 +18,7 @@ export default function Register({ setRegister }) {
         if (newUser) {
 
             axios
-                .post(`${process.env.REACT_APP_URL}/admin/generate`, newUser)
+                .post(`${process.env.REACT_APP_URL}/admin`, newUser)
                 .then((response) => {
                     console.log(response)
                     setExito(true);

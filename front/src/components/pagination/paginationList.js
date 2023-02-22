@@ -20,7 +20,7 @@ export default function PaginationList({ data, state, handleAdd, handleEdit, han
                         <p>{item.name}</p>
                         <p>{item.price}</p>
                         <div className={styles.lateralButtons}>
-                            {!state && <button onClick={() => handleEdit(item._id, item.category, item.name, item.price)}>EDIT</button>}
+                            {!state && <button onClick={() => handleEdit(item._id, item.category, item.name, item.price, item.image)}>EDIT</button>}
                             {!state && <button onClick={() => handleAlert(item._id)}>DELETE</button>}
                             {state && <button onClick={() => handleAdd(item.name, item.price, item._id)}>+</button>}
                         </div>

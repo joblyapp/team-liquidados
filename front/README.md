@@ -135,7 +135,7 @@ OLD SALES
 
 ## IMPORTANT
 
-* I'm working on branch recovery. I went back from Simon's update.
+* I'm working on branch recovery. I went back from Simon's update. DONE.
 
 # PAGINATION
 
@@ -144,3 +144,58 @@ OLD SALES
 * Create a PAGINATION LIST component. DONE.
 * Create PAGINATION SELECT. DONE.
 * Check if its works properly. DONE.
+
+ISSUE => When page is selected and the input or category changes, it must be resetted to 1. DONE.
+
+
+# SALES CORRECTIONS
+
+* Editing an old Sale generates an error. 
+* Changing Old Sale's PRODUCT QUANTITY generates an error.
+* Registering changes in Old Sale generates an error.
+
+ANOTACIONES---->>>> Necesito definir claramente la estructura de cada venta y de cada producto. En la sección NUEVA VENTA estoy trabajando con la siguiente esctructura:
+
+-> VENTA [
+    0: [
+        products: {name:
+                    category:
+                    id:
+                    ...
+                  }
+        total: f()
+    ]
+]
+
+-> Del BACK yo recibo:
+
+{
+    date:
+    isCancelled:
+    products: [
+        {name, price, quantity, ...},
+        {name, price, quantity, ...},
+        {name, price, quantity, ...}
+    ]
+    total:
+    _id:
+}
+
+Necesito convertir lo que recibo en lo que maneja VENTAS.
+
+I still get error when PATCH to OLD SALE by ID. I have to check what i'm sending to backend. SOLVED!
+
+
+## Products
+
+* Implement the image upload input and send the data correctly to backend.
+
+- New Sale: I need an input that allows me to upload and image. DONE.
+- Need an image for that input. DONE.
+- Need that image to change when upload a new one. DONE.
+- Need to send the data correctly to the back. DONE.
+
+- Old Sale: I need to bring the image to the front. DONE.
+- Need to send the changes correctly to the back. 
+
+PATCH IS NOT REALLY CHANGING NOTHING!! FUCK! FUCK! FUCK!
