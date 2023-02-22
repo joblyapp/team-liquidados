@@ -11,6 +11,7 @@ export default function ListOldSales({ oldSales, setIsEditing, setEditingId, isS
 
         setEditingId(saleId);
         setIsEditing(true);
+        console.log("Sale ID:" + saleId)
 
     }
 

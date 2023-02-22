@@ -45,10 +45,7 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
             console.log(temporarySales)
 
             axios
-                .patch(`${process.env.REACT_APP_URL}/Sales/${isEditingId}`, {
-                    products: saleStatus.map(({ productId, quantity }) => ({ productId, quantity })),
-                    total: totalToPay
-                }, {
+                .patch(`${process.env.REACT_APP_URL}/Sales/${isEditingId}`, temporarySales, {
                     headers: {
                         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
                         'Content-Type': 'application/json'

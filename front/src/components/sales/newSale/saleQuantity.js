@@ -27,7 +27,7 @@ function quantityChange(condition){
         sale[index].products.quantity = sale[index].products.quantity - 1;
     }
 
-    if(sale[index].products.quantity === 0){
+    if(sale[index].quantity === 0){
         deleteItem(sale,index);
     }
      

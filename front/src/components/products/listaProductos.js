@@ -40,6 +40,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
             })
             .then((response) => {
                 setDatos(response.data);
+                console.log(response.data)
             })
             .catch((error) => {
                 console.log(error);
@@ -115,14 +116,15 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
     }
 
     // Turns on Edit Mode on parent component
-    function handleEdit(id, category, name, price) {
+    function handleEdit(id, category, name, price, image) {
         console.log("editing");
         setEditMode(true);
         setProductInfo({
             id: id,
             category: category,
             name: name,
-            price: price
+            price: price,
+            image: image
         });
 
     }

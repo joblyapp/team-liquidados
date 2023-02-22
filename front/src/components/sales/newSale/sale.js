@@ -12,12 +12,12 @@ import Success from "../../success";
 
 export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) {
 
-   
+
     const [load, setLoad] = useState(false);
     const [success, setSuccess] = useState(false);
     const [forceRender, setForceRender] = useState(false);
 
-  
+
 
     // We create a Sale  Status to register the products on current sale 
     const [saleStatus, setSaleStatus] = useState([]);
@@ -39,22 +39,25 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
                     }
                 })
                 .then((response) => {
-                    console.log(response.data.products);
-                    sale = response.data.products;
+                    console.log(response.data);
+                    // sale recieves the products array
+                    sale = response.data;
                     console.log(sale);
-                    sale.map((item) => (
-                        item.total = () => { return item.productId.price * item.quantity }
+
+                    // Then i map sale and create, for each product, an object with this format: {products: [], total:()}
+                    sale.products.map((item) => (
+                        item.products = { name: item.name, price: item.price, quantity: item.quantity },
+                        item.total = () => { return item.products.price * item.products.quantity }
                     ))
                     console.log(sale);
-                    setSaleStatus(sale);
-
-
+                    setSaleStatus(sale.products);
                 })
                 .catch((error) => {
                     console.log(error);
                 })
                 .finally(() => {
 
+                    console.log(saleStatus)
                     setLoad(false)
 
                 });
@@ -78,7 +81,7 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
                             <SaleBar one="Nombre" two="Precio" three="Cantidad" four="TOTAL" />
                             <SaleDetails setForceRender={setForceRender} forceRender={forceRender} saleStatus={saleStatus} setSaleStatus={setSaleStatus} isEditing={isEditing} setMode={setMode} isEditingId={isEditingId} setSuccess={setSuccess} />
                             <SaleBack setMode={setMode} isEditing={isEditing} setIsEditing={setIsEditing} />
-                            
+
                         </>
 
                     }

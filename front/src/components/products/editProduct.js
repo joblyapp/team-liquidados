@@ -2,91 +2,105 @@ import { useEffect, useState } from "react";
 import styles from "../styles.module.css";
 import axios from "axios";
 import Success from "../success";
-import productImages from "./productImages";
+import { Buffer } from "buffer";
 
-export default function EditProduct({ setForceRender, onClose, esNuevo, setMode, id, category, name, price, categoriasDisponibles }) {
+
+
+export default function EditProduct({ setForceRender, onClose, esNuevo, setMode, id, category, name, price, image, categoriasDisponibles }) {
 
     // Product data State. Only active when submitting form
     const [product, setProduct] = useState(null);
 
     const [success, setSuccess] = useState(false);
 
-    const [image, setImage] = useState();
+    const [productImage, setProductImage] = useState("./notFound.jpg");
 
-    useEffect(()=>{
-        if(category){
-        setImage(productImages[category])
-        console.log("This is category: "+ category);    
-    }
-    },[])
 
-    // Creating or editing product. It only works if something has changed
+
     useEffect(() => {
 
-        console.log("inside useEffect")
-        if (esNuevo && product) {
+        if (image) {
+
+            const dataBuffer = Buffer.from(image.data.data)
+            setProductImage(`data:image/png;base64,${dataBuffer.toString("base64")}`);
+
+        }
+
+
+    }, [productImage])
+
+    // When submitting form this function sets product state an trigger the useEffect hook
+    function handleEditSubmit(e) {
+
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('name', document.getElementById("name").value);
+        formData.append('price', document.getElementById("price").value);
+        formData.append('description', "testing");
+        formData.append('image', document.getElementById("image").files[0]);
+        formData.append('category', parseInt(document.getElementById("category").value))
+
+        console.log("Created form Data");
+
+        if (esNuevo) {
+
+            console.log("Inside If: NEW PRODUCT");
+
             axios
-                .post(`${process.env.REACT_APP_URL}/products`, product, {
+                .post(`${process.env.REACT_APP_URL}/products`, formData, {
                     headers: {
                         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'multipart/form-data'
                     }
                 })
                 .then((res) => {
                     setSuccess(true)
                     setMode(false);
                     setForceRender(true);
-                    
+                    console.log(res);
+
                 })
                 .catch(error => console.log(error))
                 .finally(() => {
-                   console.log(product)
+                    console.log("Succedeed")
                 })
         }
-        else if (product && !esNuevo) {
+        
+        else if (!esNuevo) {
+
+            console.log("Inside If: EDIT PRODUCT for id: " + id)
             axios
-                .patch(`${process.env.REACT_APP_URL}/products/${id}`, product, {
+                .patch(`${process.env.REACT_APP_URL}/products/${id}`, formData, {
                     headers: {
                         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'multipart/form-data'
                     }
                 })
-                .then(() =>{ 
+                .then((res) => {
                     setSuccess(true)
-                    setImage(productImages[category])
+                    setMode(false);
+                    setForceRender(true);
+                    console.log(res);
                 })
                 .catch(error => console.log(error))
                 .finally(() => {
-                    setMode(false);
-                    setForceRender(true)
+                    console.log("Succedeed")
                 })
         }
-
-    }, [product])
-
-    // When submitting form this function sets product state an trigger the useEffect hook
-    function handleEditSubmit(e) {
-        e.preventDefault();
-        setProduct({
-            category: parseInt(document.getElementById("category").value),
-            name: document.getElementById("name").value,
-            price: document.getElementById("price").value,
-            description: "testing"
-        })
-    }
-
-    function handleChange(e) {
-        category = e.target.value;
-        console.log(document.getElementById("category").value);
-        setImage(productImages[category]);
-        console.log("la imagen es: " + productImages[category]);
-       
     }
 
     // Cancel function
     function handleCancelar() {
         setMode(false);
         onClose();
+    }
+
+    function handleImage(e) {
+        e.preventDefault();
+        console.log(e.target.files[0]);
+        setProductImage(URL.createObjectURL(e.target.files[0]));
+        console.log(productImage);
     }
 
 
@@ -98,27 +112,31 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
 
                 {esNuevo ? <h2>Crear Producto</h2> : <h2>Editar Producto</h2>}
 
-                <div className={styles.boxEmergent} style={{ backgroundColor: "white" }}>
-                    <div className={styles.boxElement}>
-                        <img src={image} alt=""></img>
-                    </div>
-                    <form className={styles.boxElement} onSubmit={handleEditSubmit}>
+                <div>
 
-                        Categoría: <select id="category" defaultValue={category} onChange={handleChange} type="number" required>
+                    <form className={styles.boxEmergent} style={{ backgroundColor: "white" }} onSubmit={handleEditSubmit}>
 
-                            {categoriasDisponibles.map((item, key) => {
+                        <div className={styles.boxElement} style={{ justifyContent: "center" }}>
+                            <label className={styles.boxElement} for="image"><img src={productImage}></img></label>
+                            <input id="image" type="file" style={{ display: "none" }} onChange={handleImage}></input>
+                        </div>
+                        <div className={styles.boxElement}>
+                            Categoría: <select id="category" defaultValue={category} type="number" required>
 
-                                return (
-                                    <option key={key} value={item.id}>{`${item.id}: ${item.description}`}</option>
-                                )
+                                {categoriasDisponibles.map((item, key) => {
 
-                            })}
-                        </select>
-                        Nombre: <input id="name" defaultValue={name} type="text" maxLength="20" pattern="([^\s][A-z0-9À-ž\s]+)" required></input>
-                        Precio: <input id="price" defaultValue={price} type="number" maxLength="10" required></input>
-                        <div>
-                            <button onClick={handleCancelar}>Cancelar</button>
-                            <input type="submit" value="Confirmar"></input>
+                                    return (
+                                        <option key={key} value={item.id}>{`${item.id}: ${item.description}`}</option>
+                                    )
+
+                                })}
+                            </select>
+                            Nombre: <input id="name" defaultValue={name} type="text" maxLength="20" pattern="([^\s][A-z0-9À-ž\s]+)" required></input>
+                            Precio: <input id="price" defaultValue={price} type="number" maxLength="10" required></input>
+                            <div>
+                                <button onClick={handleCancelar}>Cancelar</button>
+                                <input type="submit" value="Confirmar"></input>
+                            </div>
                         </div>
                     </form>
                 </div>
