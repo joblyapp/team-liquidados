@@ -22,6 +22,8 @@ db.once("open", function () {
 const productsRoutes = require("./routes/productsRoutes.js");
 const salesRoutes = require("./routes/SalesRoutes.js");
 const adminsRoutes = require("./routes/adminsRoutes.js");
+const countersRoutes = require("./routes/counterRoutes.js");
+const categoriesRoutes = require("./routes/categoriesRoutes.js");
 
 // Middleware
 app.use(express.json());
@@ -31,6 +33,8 @@ app.use(cors());
 // Routes
 app.use("/products", authenticateJWT, productsRoutes);
 app.use("/sales", authenticateJWT, salesRoutes);
+app.use("/counter", authenticateJWT, countersRoutes);
+app.use("/category", authenticateJWT, categoriesRoutes);
 app.use("/admin", adminsRoutes);
 
 // Start server

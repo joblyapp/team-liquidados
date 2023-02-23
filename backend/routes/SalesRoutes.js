@@ -2,12 +2,20 @@ const express = require("express");
 const router = express.Router();
 const Sales = require("../models/Sale");
 
+const getNextSequenceValue = require("../middleware/getCounter");
+
 // Create a sale
 router.post("/", async (req, res) => {
-  const { products, total, paymentForm, cancellationReason } = req.body;
+  const nextSequenceValue = await getNextSequenceValue("sales");
+  const { products, total, paymentForm } = req.body;
 
   try {
-    const sale = new Sales({ products, total, paymentForm });
+    const sale = new Sales({
+      products,
+      total,
+      paymentForm,
+      number: nextSequenceValue,
+    });
     await sale.save();
     res.status(201).json(sale);
   } catch (err) {

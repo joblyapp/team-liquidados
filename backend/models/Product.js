@@ -31,6 +31,10 @@ const productSchema = new mongoose.Schema({
     data: Buffer, // holds the image data
     contentType: String, // holds the MIME type of the image
   },
+  number: {
+    type: Number,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Product", productSchema);
