@@ -6,6 +6,9 @@ const fs = require("fs");
 //Models
 const Product = require("../models/Product"); // import the product model
 
+//Function to get the Counter
+const getNextSequenceValue = require("../middleware/getCounter");
+
 async function getProduct(req, res, next) {
   let product;
   try {
@@ -19,8 +22,6 @@ async function getProduct(req, res, next) {
   res.product = product;
   next();
 }
-
-//All Routes
 
 //Getting all
 router.get("/", async (req, res) => {
@@ -49,7 +50,9 @@ router.get("/:id", async (req, res) => {
 //Creating one
 
 router.post("/", upload.single("image"), async (req, res) => {
+  const nextSequenceValue = await getNextSequenceValue("products");
   const newProduct = new Product({
+    number: nextSequenceValue,
     name: req.body.name,
     category: req.body.category,
     description: req.body.description,
@@ -69,22 +72,6 @@ router.post("/", upload.single("image"), async (req, res) => {
 
 // Updating one
 router.patch("/:id", getProduct, upload.single("image"), async (req, res) => {
-  // if (req.body.name != null) {
-  //   res.product.name = req.body.name;
-  // }
-  // if (req.body.category != null) {
-  //   res.product.category = req.body.category;
-  // }
-  // if (req.body.description != null) {
-  //   res.product.description = req.body.description;
-  // }
-  // if (req.body.price != null) {
-  //   res.product.price = req.body.price;
-  // }
-  // if (req.body.image != null) {
-  //   res.product.image = req.body.image;
-  // }
-
   // Update product fields
   res.product.name = req.body.name || res.product.name;
   res.product.description = req.body.description || res.product.description;
