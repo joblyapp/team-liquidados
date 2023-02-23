@@ -58,7 +58,7 @@ export default function Recovery({ setRecovery }) {
     }, [recoveryMail])
 
 
-    function handleClick(e){
+    function handleClick(e) {
         e.preventDefault();
         setRecovery(false);
     }
@@ -67,7 +67,7 @@ export default function Recovery({ setRecovery }) {
         e.preventDefault();
         console.log(document.getElementById("email").value);
         const email = document.getElementById("email").value;
-        setRecoveryMail({email: email})
+        setRecoveryMail({ email: email })
     }
 
 
@@ -75,36 +75,43 @@ export default function Recovery({ setRecovery }) {
 
         <div className={styles.centered}>
 
-          {  !loading ?
+            {!loading ?
 
-           !fail ?
+                !fail ?
 
-                !exito ?
+                    !exito ?
 
-                    <div className={styles.centered}>
-                        <form className={styles.box} onSubmit={handleSubmitRecovery}>
-                            <input type="email" id="email" placeholder="Ingrese su mail" required></input>
-                            <div className={styles.botones}>
-                                <input type="submit" value="Recuperar contraseña"></input>
-                            </div>
-                        </form>
+                        <div className={styles.centered}>
 
-                        <button onClick={handleClick}>VOLVER</button>
 
-                    </div>
+
+                            <form className={styles.box} onSubmit={handleSubmitRecovery}>
+                                
+                                <h3 className={styles.forgotMessage}>¿Olvidaste tu contraseña? No te preocupes, te enviaremos un mail con lo pasos a seguir.</h3>
+
+                                <input className={styles.inputs} type="email" id="email" placeholder="Ingrese su mail" required></input>
+
+                                <div className={styles.botones}>
+                                    <input className={styles.loginButton} type="submit" value="Recuperar contraseña"></input>
+                                </div>
+                            </form>
+
+                            <button onClick={handleClick}>VOLVER</button>
+
+                        </div>
+
+                        :
+
+                        <RecoverySuccess setExito={setExito} setRecovery={setRecovery} />
 
                     :
 
-                    <RecoverySuccess setExito={setExito} setRecovery={setRecovery} />
-
+                    <FailLogIn setFail={setFail} fail={fail} />
                 :
 
-                <FailLogIn setFail={setFail} fail={fail} />
-            :
+                <Loading />
 
-            <Loading />
-
-        }
+            }
         </div>
 
     )

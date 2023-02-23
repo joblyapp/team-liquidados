@@ -1,16 +1,41 @@
-h3, h4, h2{
-    margin: 0;
+/* GLOBAL STUFF */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --principal: #EE7070;
+    --secondary: #333333;
+    --third: #D9D9D9;
+    --back: #f5f5f5;
+    --blueButton: #0076FF;
 }
 
 
-.box{
-    border: solid 2px blue;
-    height: 50vh;
-    width: 50vw;
+h3,
+h4,
+h2 {
+    margin: 0;
+}
+
+body {
+    background-color: var(--back);
+}
+
+
+.box {
+
+    height: 52vh;
+    max-height: 562px;
+    width: 562px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: #FFFFFF;
 }
 
 .centered {
@@ -21,14 +46,15 @@ h3, h4, h2{
     align-items: center;
 }
 
-.botones{
+.botones {
     margin-top: 20px;
 }
 
-.recover{
+.recover {
     font-size: 10px;
     cursor: pointer;
-    color: rgb(52, 56, 59);
+    color: var(--blueButton);
+    margin-top: 32px;
 }
 
 .lateralButtons {
@@ -37,31 +63,166 @@ h3, h4, h2{
     justify-content: center;
 }
 
-.register{
+.register {
     display: flex;
     justify-content: space-around;
     align-items: center;
     gap: 10px;
 }
 
+
+/* LOGIN */
+
+.loginBox {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 562px;
+    height: 52vh;
+
+    background: #FFFFFF;
+    /* Gris */
+
+    border: 0.5px solid #D9D9D9;
+    border-radius: 16px;
+
+}
+
+.loginLogo {
+    width: 562px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginLogo img {
+    width: 228px;
+}
+
+.formBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 32px;
+
+    width: 450px;
+}
+
+.formBox p {
+    margin-bottom: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    padding-left: 2px;
+}
+
+.inputs {
+
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 10px;
+
+    height: 4.6vh;
+    width: 450px;
+
+
+    background: #FFFFFF;
+    /* Gris */
+
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+
+.inputs:focus {
+
+    border: 1px solid #555;
+
+}
+
+.inputs:valid {
+
+    border: 1px solid var(--blueButton);
+
+}
+
+
+
+
+.loginButton {
+    width: 450px;
+    height: 4.6vh;
+    cursor: pointer;
+
+    color: white;
+    background-color: var(--blueButton);
+
+    border-radius: 8px;
+    border: none;
+}
+
+.passContainer {
+
+    position: relative;
+}
+
+.showPass {
+
+    position: absolute;
+    background: transparent;
+    border: 0;
+    border-radius: 7px;
+    color: white;
+    padding: 15px;
+    cursor: pointer;
+    right: 0px;
+    top: 50%;
+    transform: translate(0, -50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.showPass img {
+    width: 20px;
+}
+
+.forgotMessage {
+    padding: 20px 20px 20px 20px;
+    margin-bottom: 42px;
+    text-align: center;
+}
+
+
+
 /* PRODUCTOS */
 
-.productsCard{
+.productsCard {
     height: 70vh;
 }
 
-.listaProductos{
+.listaProductos {
     text-align: center;
     width: 70vw;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);    
+    grid-template-columns: repeat(4, 1fr);
     border: solid 2px black;
 }
 
 
 /* Are you sure? */
 
-.alert{
+.alert {
     text-align: center;
     width: 40vw;
     height: 20vh;
@@ -72,28 +233,28 @@ h3, h4, h2{
 
 /* BARRA USUARIO */
 
-.sessionStyle{
+.sessionStyle {
     background-color: red;
     color: white;
     width: 12vw;
 }
 
-.logOut{
+.logOut {
     cursor: pointer;
     height: auto;
     background-color: rgb(2, 2, 2);
-    
+
 }
 
 /* WELCOME */
 
-.welcomeTouch{
+.welcomeTouch {
     width: 80vw;
     height: 80vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(6,1fr);
-    
+    grid-template-rows: repeat(6, 1fr);
+
 }
 
 .selectTouch {
@@ -133,7 +294,7 @@ h3, h4, h2{
     align-items: center;
 }
 
-.navImg img{
+.navImg img {
     height: 80px;
     cursor: pointer;
 }
@@ -154,7 +315,7 @@ h3, h4, h2{
 .navigateMenuButton:hover {
     cursor: pointer;
     color: #b40000;
-} 
+}
 
 /* BUTTONS */
 
@@ -169,14 +330,15 @@ h3, h4, h2{
 .button:hover {
     cursor: pointer;
     color: #b40000;
-} 
+}
 
 
-.buttonActive{
+.buttonActive {
     background-color: lightblue;
     border-radius: 50%;
 }
-.buttonNonActive{
+
+.buttonNonActive {
     background-color: #ffffff;
     border-radius: 50%;
 }
@@ -186,8 +348,9 @@ h3, h4, h2{
 .ldsCircle {
     display: inline-block;
     transform: translateZ(1px);
-  }
-  .ldsCircle > div {
+}
+
+.ldsCircle>div {
     display: inline-block;
     width: 64px;
     height: 64px;
@@ -195,74 +358,80 @@ h3, h4, h2{
     border-radius: 50%;
     background: #ce2897;
     animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-  }
-  @keyframes lds-circle {
-    0%, 100% {
-      animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
-    }
-    0% {
-      transform: rotateY(0deg);
-    }
-    50% {
-      transform: rotateY(1800deg);
-      animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
-    }
-    100% {
-      transform: rotateY(3600deg);
-    }
-  }
-  
+}
 
-  .boxEmergent{
+@keyframes lds-circle {
+
+    0%,
+    100% {
+        animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+    }
+
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    50% {
+        transform: rotateY(1800deg);
+        animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+    }
+
+    100% {
+        transform: rotateY(3600deg);
+    }
+}
+
+
+.boxEmergent {
     border: solid 2px rgb(0, 255, 128);
     height: 50vh;
     width: 50vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+}
 
 
-  
-  .boxElement{
+
+.boxElement {
     height: 50vh;
     width: 25vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  .boxElement img{
+.boxElement img {
     width: 80%;
     height: 80%;
     object-fit: contain;
-  
-  }
 
-  .noProducts {
+}
+
+.noProducts {
     height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-  }
+}
 
-  .space{
+.space {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 70vw;
     margin-top: 10px;
-  }
+}
 
-  /* PAGINATION SELECT */
+/* PAGINATION SELECT */
 
-  .paginationSelect {
+.paginationSelect {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-  }
+}

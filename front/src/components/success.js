@@ -6,6 +6,7 @@ export default function Success({ operacion, setSuccess, setMode, onClose, setIs
     useEffect(() => {
 
         setTimeout(() => {
+            
             setSuccess(false);
             if (setIsEditing) {
                 setIsEditing(false);

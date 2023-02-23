@@ -1,13 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import styles from "../../../components/styles.module.css";
 
 
 export default function ChangePassForm({ recoveryToken, setSuccess, setFail }) {
 
-    const [showPassword, setShowPassword] = useState(false);
-    const [inputType, setInputType] = useState("password");
+    const [showPassLogo, setShowPassLogo] = useState("../openPass.png")
 
     const resetToken = recoveryToken;
 
@@ -15,16 +13,17 @@ export default function ChangePassForm({ recoveryToken, setSuccess, setFail }) {
 
         e.preventDefault();
 
-        const pass = document.getElementById("pass").value;
+        const password = document.getElementById("pass").value;
         const passRepeat = document.getElementById("passRepeat").value;
 
-        if (pass === passRepeat) {
+        if (password === passRepeat) {
 
             console.log("Se pudo enviar cambio de contraseña (paso 1)");
-            console.log("enviando pass: " + pass + " y token: " + resetToken);
+            console.log("enviando pass: " + password + " y token: " + resetToken);
             axios
-                .post(`${process.env.REACT_APP_URL}/admin/reset`, { pass, resetToken })
+                .post(`${process.env.REACT_APP_URL}/admin/reset`, { password, resetToken })
                 .then((response) => {
+                    console.log(response);
                     console.log("La contraseña nueva ha sido recibida con éxito (paso 2)");
                     setSuccess(true);
                 })
@@ -32,39 +31,27 @@ export default function ChangePassForm({ recoveryToken, setSuccess, setFail }) {
                     console.log(error);
                     setFail(true);
                 })
-                .finally(() => {
-
-                });
-
 
         }
         else {
-            console.log("No se pudo enviar cambio de contraseña");
+            console.log("Las contraseñas no coinciden");
         }
 
     }
 
-    useEffect(()=>{
 
-        if(showPassword){
-            setInputType("text");
+    function handleClick(e, id) {
+        e.preventDefault();
+
+        var valor = document.getElementById(id).type;
+
+        if (valor === "password") {
+            document.getElementById(id).type = "text";
+            setShowPassLogo("../closedPass.png");
         }
         else {
-            setInputType("password");
-        }
-
-
-    },[showPassword])
-
-    function handleClick(e,id){
-        e.preventDefault();
-        var valor = document.getElementById(id).type;
-    
-        if (valor === "password"){
-            document.getElementById(id).type = "text";
-        }
-        else{
             document.getElementById(id).type = "password";
+            setShowPassLogo("../openPass.png");
         }
     }
 
@@ -73,24 +60,33 @@ export default function ChangePassForm({ recoveryToken, setSuccess, setFail }) {
         <div className={styles.centered}>
 
             <h1> NUEVA CONTRASEÑA</h1>
+            <div className={styles.box}>
 
-            <form className={styles.box} onSubmit={handleSubmitRegister}>
+                <form className={styles.formBox} onSubmit={handleSubmitRegister}>
 
-                <div>
-                    <input type={inputType} id="pass" placeholder="Ingrese su contraseña" required></input>
-                    <button onClick={(e)=>handleClick(e,"pass")}>👁</button>
-                </div>
+                    <div>
+                        <p>Ingrese su nueva contraseña</p>
+                        <div className={styles.passContainer} style={{ display: "flex" }}>
+                            <input className={styles.inputs} type="password" id="pass" placeholder="Ingrese su contraseña" required></input>
+                            <button className={styles.showPass} onClick={(e) => handleClick(e, "pass")}><img src={showPassLogo} alt="show password"></img></button>
+                        </div>
+                    </div>
 
-                <div>
-                    <input type={inputType} id="passRepeat" placeholder="Ingrese nuevamente su contraseña" required></input>
-                    <button onClick={(e)=>handleClick(e,"passRepeat")}>👁</button>
-                </div>
-                <div className={styles.botones}>
-                    <input type="submit" value="Cambiar contraseña"></input>
-                </div>
+                    <div>
+                        <p>Repita su nueva contraseña</p>
+                        <div className={styles.passContainer} style={{ display: "flex" }}>
+                            <input className={styles.inputs} type="password" id="passRepeat" placeholder="Ingrese su contraseña" required></input>
+                            <button className={styles.showPass} onClick={(e) => handleClick(e, "passRepeat")}><img src={showPassLogo} alt="show password"></img></button>
+                        </div>
+                    </div>
 
-            </form>
+                    <div className={styles.botones}>
+                        <input className={styles.loginButton} type="submit" value="Cambiar contraseña"></input>
+                    </div>
 
+                </form>
+
+            </div>
         </div>
 
 

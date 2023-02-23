@@ -16,7 +16,7 @@ export default function WelcomePage() {
      
             
                 <>
-                    <Session />
+                    
                     {!user.loggedIn
                         ? <LogIn />
                         : <Welcome user={user} />}

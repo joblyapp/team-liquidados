@@ -22,9 +22,9 @@ export default function Enter({ setRecovery, setRegister }) {
     const dispatch = useDispatch();
 
 
-  
+
     const checkUserData = useCallback(async (correo, contra) => {
-       
+
         axios
             .post(`${process.env.REACT_APP_URL}/admin/login`, userData)
             .then((response) => {
@@ -71,11 +71,19 @@ export default function Enter({ setRecovery, setRegister }) {
             ? <FailLogIn setFail={setFail} fail={fail} />
             :
             <div className={styles.centered}>
-                <EnterForm setUserData={setUserData} setRecovery={setRecovery} setRegister={setRegister} />
-                <div className={styles.register}>
-                    <button onClick={handleRegister} >Registrarse</button>
+
+                <div className={styles.loginLogo}><img src="./image.png"></img></div>
+
+                <div className={styles.loginBox}>
+                    <EnterForm setUserData={setUserData} setRecovery={setRecovery} setRegister={setRegister} />
                     <p className={styles.recover} onClick={handleRecovery}>Recuperar contraseña</p>
                 </div>
+
+                <div className={styles.register}>
+                    <button onClick={handleRegister} >Registrarse</button>
+                 
+                </div>
+
             </div>
     )
 }
