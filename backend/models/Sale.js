@@ -40,6 +40,10 @@ const SalesSchema = new Schema({
   cancellationReason: {
     type: String,
   },
+  number: {
+    type: Number,
+    required: true,
+  },
 });
 
 //A method to get sales for a period of time
