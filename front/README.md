@@ -218,3 +218,13 @@ DONE.
 * Add CALENDAR and DROPLIST to filter Old Sales. DONE.
 
 * Create Upper Bar for SALES. DONE.
+
+# TODAY 23/02
+
+## Login Visual
+
+* For the "remember me" checkbox: The token should be eternal?
+
+* Clone the dashboard created by Nicky. DONE.
+
+* ISSUE -> When changing password the Success component dont accept my setMode, so, it can't navigate to index page.

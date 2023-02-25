@@ -12,7 +12,7 @@ export default function ChangePass() {
     const [success, setSuccess] = useState(false);
     const [fail, setFail] = useState(false);
 
-    const { done, setDone } = useState();
+    const { done, setDone } = useState("ok");
 
 
     const navigate = useNavigate();
@@ -20,6 +20,7 @@ export default function ChangePass() {
     useEffect(() => {
 
         if (done === "") {
+            console.log("is done!")
             navigate("/");
         }
 
