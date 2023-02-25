@@ -6,7 +6,8 @@ const productSchema = new mongoose.Schema({
     required: true,
   },
   category: {
-    type: Number,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
     required: true,
   },
   description: {
@@ -28,7 +29,7 @@ const productSchema = new mongoose.Schema({
     default: Date.now,
   },
   image: {
-    data: Buffer, // holds the image data
+    path: String, // holds the image data
     contentType: String, // holds the MIME type of the image
   },
   number: {
