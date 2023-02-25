@@ -3,6 +3,7 @@ const router = express.Router();
 
 //Model
 const Category = require("../models/Category");
+const Product = require("../models/Product");
 
 //Function to get the Counter
 const getNextSequenceValue = require("../middleware/getCounter");
@@ -31,6 +32,30 @@ router.post("/", async (req, res) => {
     res.status(201).json(newCategory);
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+});
+
+// Deletes a category by ID
+router.delete("/:id", async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+
+    // Check if there are any products with this category
+    const productsWithCategory = await Product.find({ category: categoryId });
+
+    if (productsWithCategory.length > 0) {
+      return res.status(400).json({
+        message: "Cannot delete because there are products with this category",
+      });
+    }
+
+    // Delete the category
+    await Category.findByIdAndDelete(categoryId);
+
+    res.json({ message: "Category deleted" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
   }
 });
 
