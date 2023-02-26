@@ -26,7 +26,6 @@ async function getProduct(req, res, next) {
 //Getting all
 router.get("/", async (req, res) => {
   try {
-    console.log(upload);
     const products = await Product.find(); // get all products from the database
     res.json(products);
   } catch (err) {
@@ -58,7 +57,7 @@ router.post("/", upload.single("image"), async (req, res) => {
     description: req.body.description,
     price: req.body.price,
     image: {
-      data: fs.readFileSync(req.file.path),
+      path: req.file.path,
       contentType: req.file.mimetype,
     },
   });
@@ -81,7 +80,7 @@ router.patch("/:id", getProduct, upload.single("image"), async (req, res) => {
   // Check if image was uploaded
   if (req.file) {
     res.product.image = {
-      data: fs.readFileSync(req.file.path),
+      path: req.file.path,
       contentType: req.file.mimetype,
     };
   }

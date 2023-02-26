@@ -7,7 +7,6 @@ const Admin = require("../models/Admin");
 //Route for creating a new admin
 router.post("/", async (req, res) => {
   try {
-    console.log(req.body);
     const admin = new Admin(req.body);
     const salt = await bcrypt.genSalt(10);
     admin.password_hash = await bcrypt.hash(req.body.password, salt);
@@ -21,7 +20,6 @@ router.post("/", async (req, res) => {
 // Route for admin login
 
 router.post("/login", async (req, res) => {
-  console.log(req.body);
   try {
     const admin = await Admin.findOne({ email: req.body.email });
     if (!admin) return res.status(400).send("Email not found");
@@ -38,8 +36,6 @@ router.post("/forgot-password", async (req, res) => {
   try {
     const admin = await Admin.findOne({ email: req.body.email });
     if (!admin) return res.status(404).json({ message: "Admin not found" });
-    console.log(admin.login);
-
     await admin.sendPasswordResetEmail();
 
     return res.status(200).json({ message: "Password reset email sent" });

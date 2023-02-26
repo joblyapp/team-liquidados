@@ -31,7 +31,8 @@ app.use(morgan("tiny"));
 app.use(cors());
 
 // Routes
-app.use("/products", authenticateJWT, productsRoutes);
+// app.use("/products", authenticateJWT, productsRoutes);
+app.use("/products", productsRoutes);
 app.use("/sales", authenticateJWT, salesRoutes);
 app.use("/counter", authenticateJWT, countersRoutes);
 app.use("/category", authenticateJWT, categoriesRoutes);
