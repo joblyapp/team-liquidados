@@ -20,7 +20,9 @@ export default function EnterForm({ setUserData, color }) {
         e.preventDefault();
         setUserData({
             email: document.getElementById("email").value,
-            password: document.getElementById("pass").value
+            password: document.getElementById("pass").value,
+            remember: document.getElementById("remember").checked
+
         })
         console.log("SETTING USER DATA")
     }
@@ -62,7 +64,7 @@ export default function EnterForm({ setUserData, color }) {
                 </div>
                 <div className={styles.checkContainer} >
                     <label className={styles.labelOrder}>
-                        <input type="checkbox" value="recordarme"></input>Recordarme
+                        <input id="remember" type="checkbox" value="recordarme"></input>Recordarme
                     </label>
 
                 </div>

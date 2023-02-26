@@ -231,8 +231,9 @@ DONE.
 
 ## Implement REMEMBER ME autocomplete.
 
-* Save on Local Storage the information of email and password
+* Save on Local Storage the information of email and password. DONE
+- Add a new key on the USERDATA state. DONE
 
-* Create REMEMBER ME checkbox
+* Create REMEMBER ME checkbox. DONE
 
-* Recover the REMEMBERED data from local storage if it exist
+* Recover the REMEMBERED data from local storage if it exist. DONE.
