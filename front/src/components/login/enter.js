@@ -21,14 +21,13 @@ export default function Enter({ setRecovery, setRegister }) {
     // Redux receptor for user login
     const dispatch = useDispatch();
 
-
-
     const checkUserData = useCallback(async (correo, contra) => {
 
         axios
             .post(`${process.env.REACT_APP_URL}/admin/login`, userData)
             .then((response) => {
                 sessionStorage.setItem("token", response.data);
+                localStorage.setItem("remember", JSON.stringify(userData));
                 dispatch(login({
                     mail: userData.email,
                     pass: userData.password,

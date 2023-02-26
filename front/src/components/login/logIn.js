@@ -9,18 +9,7 @@ export default function LogIn() {
     const [recovery, setRecovery] = useState(false);
     const [register, setRegister] = useState(false);
 
-
-    const user = {
-        mail: "admin@admin.com",
-        pass: "123456"
-    };
-
-    const user2 = {
-        mail: "lucas@g.com",
-        pass: "1234"
-    }
-
-
+ 
     useEffect(()=>{
         check();
     },[recovery,register])
@@ -33,7 +22,7 @@ export default function LogIn() {
             return (<Register setRegister={setRegister}/>)
         }
         else{
-            return (<Enter user={user} user2={user2} setRecovery={setRecovery} setRegister={setRegister}/>)
+            return (<Enter setRecovery={setRecovery} setRegister={setRegister}/>)
         }
     }
 
