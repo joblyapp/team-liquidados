@@ -4,20 +4,24 @@ import Session from "../components/sessionBar/session";
 import StatsIndex from "../components/stats/statsIndex";
 import { selectUser } from "../features/userSlices";
 
-export default function StatsPage (){
+export default function StatsPage() {
 
-    
+
     // Redux selector
     const user = useSelector(selectUser);
 
 
-    return(
+    return (
         <>
-        <Session />
-        {!user.loggedIn
-            ? <LogIn />
-            : <StatsIndex />
-        }
-    </>
+
+            {!user.loggedIn
+                ? <LogIn />
+                :
+                <>
+                    <Session />
+                    <StatsIndex />
+                </>
+            }
+        </>
     )
 }

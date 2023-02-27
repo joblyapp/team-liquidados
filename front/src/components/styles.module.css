@@ -44,6 +44,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .botones {
@@ -51,16 +52,18 @@ body {
 }
 
 .recover {
-    font-size: 10px;
+    font-size: 16px;
     cursor: pointer;
     color: var(--blueButton);
     margin-top: 32px;
 }
 
 .lateralButtons {
+    height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    
 }
 
 .register {
@@ -224,16 +227,14 @@ body {
 
 /* PRODUCTOS */
 
-.productsCard {
-    height: 70vh;
-}
-
 .listaProductos {
+    height: 7vh;
     text-align: center;
     width: 70vw;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     border: solid 2px black;
+    box-sizing: border-box;
 }
 
 
@@ -440,12 +441,14 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 70vw;
-    margin-top: 10px;
+   
+    height: 10vh;
 }
 
 /* PAGINATION SELECT */
 
 .paginationSelect {
+    height: 7vh;
     width: 100%;
     display: flex;
     justify-content: center;

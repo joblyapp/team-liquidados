@@ -64,7 +64,7 @@ export default function EnterForm({ setUserData, color }) {
                 </div>
                 <div className={styles.checkContainer} >
                     <label className={styles.labelOrder}>
-                        <input id="remember" type="checkbox" value="recordarme"></input>Recordarme
+                        <input id="remember" type="checkbox" value="recordarme" defaultChecked={localStorage.hasOwnProperty("remember")}></input>Recordarme
                     </label>
 
                 </div>

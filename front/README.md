@@ -237,3 +237,27 @@ DONE.
 * Create REMEMBER ME checkbox. DONE
 
 * Recover the REMEMBERED data from local storage if it exist. DONE.
+
+* If fields are autocompleted the "remember" box has to be checked. DONE.
+
+* If the user enters an autocompleted information but unchecked the box, then the information has to be erased. DONE
+
+* Hide the upper bar when loggOut on PRODUCT and SALES pages. DONE.
+
+## PRODUCT AND SALE CORRECTIONS
+
+* Administrate the percentaje of viewport for "productList" class. IN PROCESS.
+
+
+## CATEGORIES
+
+* Droplist with posibility to write a new one. I send a "string" to the back-end.
+
+## SESSION BAR
+
+* Go to "/" when logging out!
+* Modal to change USER information.
+
+## PRODUCTS
+
+* Add the "$" logo to product price.

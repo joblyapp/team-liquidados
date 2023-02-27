@@ -14,10 +14,14 @@ export default function SalesPage() {
     return (
 
         <>
-            <Session />
+
             {!user.loggedIn
                 ? <LogIn />
-                : <SaleIndex />
+                :
+                <>
+                    <Session />
+                    <SaleIndex />
+                </>
             }
         </>
 
