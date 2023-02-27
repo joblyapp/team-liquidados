@@ -227,4 +227,13 @@ DONE.
 
 * Clone the dashboard created by Nicky. DONE.
 
-* ISSUE -> When changing password the Success component dont accept my setMode, so, it can't navigate to index page.
+* ISSUE -> When changing password the Success component dont accept my setMode, so, it can't navigate to index page. SOLVED.
+
+## Implement REMEMBER ME autocomplete.
+
+* Save on Local Storage the information of email and password. DONE
+- Add a new key on the USERDATA state. DONE
+
+* Create REMEMBER ME checkbox. DONE
+
+* Recover the REMEMBERED data from local storage if it exist. DONE.

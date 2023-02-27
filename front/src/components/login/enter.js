@@ -14,14 +14,13 @@ export default function Enter({ setRecovery, setRegister }) {
     // Datos del usuario
     const [userData, setUserData] = useState({
         email: null,
-        password: null
+        password: null,
+        remember: false
     });
 
 
     // Redux receptor for user login
     const dispatch = useDispatch();
-
-
 
     const checkUserData = useCallback(async (correo, contra) => {
 
@@ -29,6 +28,11 @@ export default function Enter({ setRecovery, setRegister }) {
             .post(`${process.env.REACT_APP_URL}/admin/login`, userData)
             .then((response) => {
                 sessionStorage.setItem("token", response.data);
+
+                if (userData.remember) {
+                    localStorage.setItem("remember", JSON.stringify(userData));
+                }
+
                 dispatch(login({
                     mail: userData.email,
                     pass: userData.password,
@@ -81,7 +85,7 @@ export default function Enter({ setRecovery, setRegister }) {
 
                 <div className={styles.register}>
                     <button onClick={handleRegister} >Registrarse</button>
-                 
+
                 </div>
 
             </div>
