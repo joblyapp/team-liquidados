@@ -7,15 +7,19 @@ import { selectUser } from "../features/userSlices";
 export default function ProductsPage() {
 
     // Redux selector
-    const user = useSelector (selectUser);
+    const user = useSelector(selectUser);
 
     return (
 
         <>
-            <Session />
+
             {!user.loggedIn
                 ? <LogIn />
-                : <Products />
+                :
+                <>
+                    <Session />
+                    <Products />
+                </>
             }
 
         </>
