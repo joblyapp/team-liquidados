@@ -32,6 +32,10 @@ export default function Enter({ setRecovery, setRegister }) {
                 if (userData.remember) {
                     localStorage.setItem("remember", JSON.stringify(userData));
                 }
+                else
+                {
+                    localStorage.removeItem("remember");
+                }
 
                 dispatch(login({
                     mail: userData.email,
@@ -76,16 +80,11 @@ export default function Enter({ setRecovery, setRegister }) {
             :
             <div className={styles.centered}>
 
-                <div className={styles.loginLogo}><img src="./image.png"></img></div>
+                <div className={styles.loginLogo}><img src="./imagen.svg"></img></div>
 
                 <div className={styles.loginBox}>
                     <EnterForm setUserData={setUserData} setRecovery={setRecovery} setRegister={setRegister} />
                     <p className={styles.recover} onClick={handleRecovery}>Recuperar contraseña</p>
-                </div>
-
-                <div className={styles.register}>
-                    <button onClick={handleRegister} >Registrarse</button>
-
                 </div>
 
             </div>
