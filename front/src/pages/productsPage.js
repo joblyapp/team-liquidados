@@ -1,27 +1,33 @@
 import { useSelector } from "react-redux";
 import LogIn from "../components/login/logIn";
 import Products from "../components/products/products";
-import Session from "../components/sessionBar/session";
+import NavBar from "../components/NavBar/NavBar";
+
 import { selectUser } from "../features/userSlices";
 
-export default function ProductsPage() {
+export default function ProductsPage({
+  loggedIn,
+  active,
+  setActive,
+  handleLogout,
+}) {
+  // Redux selector
+  const user = useSelector(selectUser);
 
-    // Redux selector
-    const user = useSelector(selectUser);
-
-    return (
-
+  return (
+    <>
+      {!loggedIn ? (
+        <LogIn />
+      ) : (
         <>
-
-            {!user.loggedIn
-                ? <LogIn />
-                :
-                <>
-                    <Session />
-                    <Products />
-                </>
-            }
-
+          <NavBar
+            handleLogout={handleLogout}
+            active={active}
+            setActive={setActive}
+          />
+          <Products />
         </>
-    )
+      )}
+    </>
+  );
 }

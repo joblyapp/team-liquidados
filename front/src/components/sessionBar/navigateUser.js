@@ -1,59 +1,53 @@
 import styles from "../styles.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, selectUser } from "../../features/userSlices"; 
+import { logout, selectUser } from "../../features/userSlices";
 import { useState } from "react";
 
 export default function NavigateUser() {
+  const [mouseOn, setMouseOn] = useState(false);
 
+  const user = useSelector(selectUser);
 
-    const [mouseOn, setMouseOn] = useState(false);
+  const dispatch = useDispatch();
 
-    const user = useSelector(selectUser);
+  function handleEnter() {
+    setMouseOn(!mouseOn);
+  }
 
-    const dispatch = useDispatch();
+  function handleLogOut() {
+    dispatch(
+      logout({
+        name: null,
+        mail: null,
+        pass: null,
+        loggedIn: false,
+      })
+    );
 
-    function handleEnter() {
-        setMouseOn(!mouseOn);
-    }
+    sessionStorage.removeItem("token");
+  }
 
-    function handleLogOut() {
-
-        dispatch(logout({
-            mail: null,
-            pass: null,
-            loggedIn: false
-        }));
-
-        sessionStorage.removeItem("token");
-
-
-    }
-
-
-    return (
-
-        <>
-            {user.mail ?
-                <div className={styles.sessionStyle}>
-                    <div onMouseEnter={handleEnter} onMouseLeave={handleEnter}>
-                        {mouseOn ?
-                            <div className={styles.logOut} onClick={handleLogOut}>Log Out</div>
-                            :
-                            user.mail
-                        }
-
-                    </div>
-                </div>
-
-                :
-                <div className={styles.sessionStyle}>
-                    <div>
-                        <p>No USER</p>
-                    </div>
-                </div>
-            }
-        </>
-
-    )
-
+  return (
+    <>
+      {user.mail ? (
+        <div className={styles.sessionStyle}>
+          <div onMouseEnter={handleEnter} onMouseLeave={handleEnter}>
+            {mouseOn ? (
+              <div className={styles.logOut} onClick={handleLogOut}>
+                Log Out
+              </div>
+            ) : (
+              user.mail
+            )}
+          </div>
+        </div>
+      ) : (
+        <div className={styles.sessionStyle}>
+          <div>
+            <p>No USER</p>
+          </div>
+        </div>
+      )}
+    </>
+  );
 }

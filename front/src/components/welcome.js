@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import styles from "../components/styles.module.css";
-import NavBar from "./NavBar/NavBar";
 
 export default function Welcome({ user }) {
   const nav = useNavigate();
@@ -11,7 +10,6 @@ export default function Welcome({ user }) {
 
   return (
     <>
-      <NavBar />
       <div className={styles.centered}>
         <div className={styles.welcomeTouch}>
           <h1
@@ -19,7 +17,7 @@ export default function Welcome({ user }) {
             style={{ gridColumn: "1 / 3", gridRow: "1 / 2" }}
           >
             {" "}
-            Usuario conectado: {user.mail}{" "}
+            {/* Usuario conectado: {user.mail}{" "} */}
           </h1>
           <h1
             style={{
