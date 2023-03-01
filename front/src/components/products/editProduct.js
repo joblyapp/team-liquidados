@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import styles from "../styles.module.css";
 import axios from "axios";
 import Success from "../success";
-import { Buffer } from "buffer";
+
+
 
 
 
@@ -20,12 +21,10 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
     useEffect(() => {
 
         if (image) {
-
-            const dataBuffer = Buffer.from(image.data.data)
-            setProductImage(`data:image/png;base64,${dataBuffer.toString("base64")}`);
-
+            
+            setProductImage(`${process.env.REACT_APP_URL}/${image.path}`);
+           
         }
-
 
     }, [productImage])
 
@@ -39,7 +38,7 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
         formData.append('price', document.getElementById("price").value);
         formData.append('description', "testing");
         formData.append('image', document.getElementById("image").files[0]);
-        formData.append('category', parseInt(document.getElementById("category").value))
+        formData.append('category', document.getElementById("category").value)
 
         console.log("Created form Data");
 
@@ -115,6 +114,8 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
 
                 <div>
 
+                
+
                     <form className={styles.boxEmergent} style={{ backgroundColor: "white" }} onSubmit={handleEditSubmit}>
 
                         <div className={styles.boxElement} style={{ justifyContent: "center" }}>
@@ -127,7 +128,7 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
                                 {categoriasDisponibles.map((item, key) => {
 
                                     return (
-                                        <option key={key} value={item.id}>{`${item.id}: ${item.description}`}</option>
+                                        <option key={key} value={item._id}>{`${item.number}: ${item.name}`}</option>
                                     )
 
                                 })}

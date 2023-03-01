@@ -1,7 +1,11 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import styles from "../styles.module.css";
 
 export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCategoria }) {
 
+ 
+ 
     function handleInputChange(e) {
         setBusqueda(e.target.value);
     }
@@ -9,6 +13,8 @@ export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCat
     function handleCatChange(e) {
         setCategoria(e.target.value);
     }
+
+
 
     return (
 
@@ -19,13 +25,15 @@ export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCat
 
                 <option value="All">Todos</option>
 
-                {categoriasDisponibles.map((item, key) => {
+                {
 
-                    return (
-                        <option key={key} value={item.id}>{`${item.id}: ${item.description}`}</option>
-                    )
+                    categoriasDisponibles.map((item, key) => {
 
-                })}
+                        return (
+                            <option key={key} value={item.number}>{`${item.number}: ${item.name}`}</option>
+                        )
+
+                    })}
             </select>
         </div>
     )

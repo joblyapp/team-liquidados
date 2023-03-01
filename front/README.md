@@ -255,9 +255,14 @@ DONE.
 
 ## SESSION BAR
 
-* Go to "/" when logging out!
+* Go to "/" when logging out! DONE.
 * Modal to change USER information.
 
 ## PRODUCTS
 
+* ISSUE: When creating a new product with no image it crash the server.
+
 * Add the "$" logo to product price.
+* Categories from back in the PRODUCTSBAR. DONE.
+* Categories from back in the EDIT PRODUCT modal.
+
