@@ -17,7 +17,8 @@
 
 h3,
 h4,
-h2 {
+h2,
+p {
     margin: 0;
 }
 
@@ -229,14 +230,24 @@ body {
 
 .listaProductos {
     height: 7vh;
+    width: 85vw;
+
     text-align: center;
-    width: 70vw;
+    align-items: center;
+  
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     border: solid 2px black;
     box-sizing: border-box;
+
+    margin: 0 0 0 0;
 }
 
+/* Make sure that the list ocuppy some space even if it is empty */ 
+.productsCard {
+   
+    height: 56vh;
+}
 
 /* Are you sure? */
 
@@ -352,11 +363,13 @@ body {
 
 
 .buttonActive {
+    width: 25px;
     background-color: lightblue;
     border-radius: 50%;
 }
 
 .buttonNonActive {
+    width: 25px;
     background-color: #ffffff;
     border-radius: 50%;
 }
@@ -440,7 +453,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 70vw;
+    width: 85vw;
    
     height: 10vh;
 }

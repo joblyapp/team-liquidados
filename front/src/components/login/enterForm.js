@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "../styles.module.css";
 import axios from "axios";
 
+
 export default function EnterForm({ setLoggedIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,11 +21,13 @@ export default function EnterForm({ setLoggedIn }) {
     } catch (error) {
       console.error(error);
     }
+
   };
 
   return (
     <div>
       <form className={styles.formBox} onSubmit={handleSubmit}>
+
         <div>
           <label>Correo electrónico</label>
           <input
@@ -35,6 +38,7 @@ export default function EnterForm({ setLoggedIn }) {
             placeholder="Ingrese su mail"
             required
           ></input>
+
         </div>
 
         <div>

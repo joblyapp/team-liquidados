@@ -4,11 +4,14 @@ import axios from "axios";
 import Logo from "../../Images/DonVenturaLogo.svg";
 
 export default function EnterForm({ setLoggedIn }) {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
+    
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/admin/login`,
@@ -18,9 +21,11 @@ export default function EnterForm({ setLoggedIn }) {
       sessionStorage.setItem("token", response.data.token);
       sessionStorage.setItem("name", response.data.name);
       setLoggedIn(true);
+
     } catch (error) {
       console.error(error);
     }
+  
   };
 
   return (

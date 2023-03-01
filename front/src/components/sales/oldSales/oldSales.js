@@ -81,7 +81,7 @@ export default function OldSales({ setMode, mode }) {
 
                 !isEditing ?
 
-                    <div >
+                    <div>
 
                         <StatsInputs setCalendar={setCalendar} />
 
