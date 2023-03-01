@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../styles.module.css";
 import axios from "axios";
 import Logo from "../../Images/DonVenturaLogo.svg";
@@ -16,7 +16,7 @@ export default function EnterForm({ setLoggedIn }) {
       );
       console.log(response.data); // handle response
       sessionStorage.setItem("token", response.data.token);
-      sessionStorage.setItem("name", response.data.admin.name);
+      sessionStorage.setItem("name", response.data.name);
       setLoggedIn(true);
     } catch (error) {
       console.error(error);

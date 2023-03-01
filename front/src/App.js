@@ -5,13 +5,10 @@ import WelcomePage from "./pages/welcomePage";
 import StatsPage from "./pages/statsPage";
 import SalesPage from "./pages/salesPage";
 import ChangePass from "./pages/changePass";
-import { selectUser } from "./features/userSlices";
-import { useSelector } from "react-redux";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [active, setActive] = useState("");
-  const user = useSelector(selectUser);
 
   useEffect(() => {
     // check if user is logged in when the component mounts
