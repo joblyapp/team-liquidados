@@ -25,7 +25,9 @@ router.post("/login", async (req, res) => {
     if (!admin) return res.status(400).send("Email not found");
 
     const token = await admin.login(req.body.password);
-    res.header("Authorization", `Bearer ${token}`).send(token);
+    res
+      .header("Authorization", `Bearer ${token}`)
+      .send({ name: admin.name, token });
   } catch (error) {
     res.status(400).send(error.message);
   }
