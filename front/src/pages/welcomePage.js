@@ -1,7 +1,6 @@
 import LogIn from "../components/login/logIn";
 import Welcome from "../components/welcome";
 import NavBar from "../components/NavBar/NavBar";
-import AdminUser from "../components/adminUser/adminUser";
 
 export default function WelcomePage({
   loggedIn,
@@ -15,7 +14,7 @@ export default function WelcomePage({
   return (
     <>
       {!loggedIn ? (
-        <LogIn setLoggedIn={setLoggedIn} />
+        <LogIn setLoggedIn={setLoggedIn} setActive={setActive} />
       ) : (
         <>
           {loggedIn && (

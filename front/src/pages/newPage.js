@@ -1,22 +1,21 @@
-import { useSelector } from "react-redux";
-import ChangePass from "./changePass";
-import Session from "../components/sessionBar/session";
-import { selectUser } from "../features/userSlices";
+// import { useSelector } from "react-redux";
+// import ChangePass from "./changePass";
+// import Session from "../components/sessionBar/session";
+// import { selectUser } from "../features/userSlices";
 
-export default function NewPage() {
+// export default function NewPage() {
 
-    const user = useSelector(selectUser);
+//     const user = useSelector(selectUser);
 
+//     return (
 
-    return (
-
-        <>
-              <>
-                    <Session />
-                    {!user.loggedIn
-                        ? <ChangePass />
-                        : ""}
-                </>
-        </>
-    )
-}
+//         <>
+//               <>
+//                     <Session />
+//                     {!user.loggedIn
+//                         ? <ChangePass />
+//                         : ""}
+//                 </>
+//         </>
+//     )
+// }

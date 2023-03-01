@@ -50,7 +50,11 @@ const Navbar = ({ handleLogout, active, setActive }) => {
       </div>
       <div className="navbar-avatar">
         <img src={Avatar} alt="Avatar" />
-        <p>{sessionStorage.getItem("name")}</p>
+        <div>
+          <p>{sessionStorage.getItem("name")}</p>
+          <span>Administrador</span>
+        </div>
+
         <button onClick={handleMenuToggle}>
           <FaChevronDown
             className={`navbar-avatar-chevron ${showMenu ? "rotate" : ""}`}
@@ -60,9 +64,6 @@ const Navbar = ({ handleLogout, active, setActive }) => {
           <div className="navbar-avatar-dropdown">
             <Link to="/perfil" className="navbar-avatar-dropdown-link">
               Perfil
-            </Link>
-            <Link to="/configuracion" className="navbar-avatar-dropdown-link">
-              Configuración
             </Link>
             <Link
               onClick={() => handleLogout()}
