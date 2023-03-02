@@ -17,7 +17,9 @@ export default function LogIn({ setLoggedIn, setActive }) {
   );
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
+    
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/admin/login`,
@@ -38,6 +40,7 @@ export default function LogIn({ setLoggedIn, setActive }) {
     } catch (error) {
       console.error(error);
     }
+  
   };
 
   const handleRememberMeChange = (e) => {

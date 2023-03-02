@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { format } from 'fecha';
 import styles from "../styles.module.css";
 
+
+
+
+
+
 export default function StatsInputs({ setCalendar }) {
+
 
 
     const [selected, setSelected] = useState("week");
@@ -80,7 +86,31 @@ export default function StatsInputs({ setCalendar }) {
 
     return (
 
-        <div className={styles.listaProductos}>
+        <div className={`${styles.listaProductos} ${styles.gapping}`}>
+
+            <form className={styles.calendar} onSubmit={handleSubmit}>
+                <input
+                    id="dateFrom"
+                    type="date"
+                    placeholder="From"
+
+                    disabled={!custom}>
+
+                </input>
+                <p>-</p>
+                <input
+                    id="dateTo"
+                    type="date"
+
+                    placeholder="From"
+
+                    disabled={!custom}>
+
+                </input>
+                <input type="submit" value="Buscar" disabled={!custom}></input>
+            </form>
+
+
             <div>
                 <select defaultValue={selected} onChange={handleSelection}>
                     <option value="year">Último año</option>
@@ -92,14 +122,9 @@ export default function StatsInputs({ setCalendar }) {
             </div>
             <div>
 
-                {custom ?
-                <form onSubmit={handleSubmit}>
-                    <input id="dateFrom" type="date"></input>
-                    <input id="dateTo" type="date"></input>
-                    <input type="submit" value="Buscar"></input>
-                </form>
-                :
-                ""}
+
+
+
 
             </div>
         </div>

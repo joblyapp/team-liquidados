@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../styles.module.css";
 import EditProduct from "./editProduct";
 import ListaProductos from "./listaProductos";
-import categorias from "./categorias.json";
+
 import { confirmAlert } from "react-confirm-alert";
 import ProductsBar from "./productsBar";
 import SaleBar from "../sales/newSale/saleBar";
@@ -15,8 +15,11 @@ export default function Products() {
 
     // Input
     const [busqueda, setBusqueda] = useState("");
+    // Choosen category
     const [categoria, setCategoria] = useState("All");
 
+    // All CATEGORIES from database
+    const [categorias, setCategorias] = useState([]);
 
     // Enable Edit Mode both NEW PRODUCT or EDIT PRODUCT
     const [editMode, setEditMode] = useState(false);
@@ -31,22 +34,23 @@ export default function Products() {
     // Just to navigate
     const navigate = useNavigate();
 
-    useEffect(()=>{
+    useEffect(() => {
         axios
-        .get(`${process.env.REACT_APP_URL}/category`, {
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((response) => {
-           console.log(response.data)
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+            .get(`${process.env.REACT_APP_URL}/category`, {
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => {
+                console.log(response.data)
+                setCategorias(response.data)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
 
-    },[])
+    }, [])
 
     useEffect(() => {
         if (editMode || esNuevo) {

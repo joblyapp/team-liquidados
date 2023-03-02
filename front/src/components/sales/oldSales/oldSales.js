@@ -8,6 +8,8 @@ import ListOldSales from "./ListOldSales";
 import Sale from "../newSale/sale";
 import StatsInputs from "../../stats/statsInputs"
 import UpperBar from "../../upperBar.js/upperBar";
+import { confirmAlert } from "react-confirm-alert";
+
 
 export default function OldSales({ setMode, mode }) {
 
@@ -71,6 +73,59 @@ export default function OldSales({ setMode, mode }) {
     }, [calendar])
 
 
+
+    useEffect(() => {
+        if (isEditing) {
+            // Confirm CANCEL modal
+
+            confirmAlert({
+                customUI: ({ onClose }) => {
+                    return (
+                        <div className={styles.alert}>
+                            <h1>Cancelar Venta</h1>
+                            <p>¿Está seguro de que desea cancelar esta venta?</p>
+                            <button onClick={onClose}>No</button>
+                            <button
+                                onClick={() => {
+                                    handleCancelSale(editingId);
+                                    onClose();
+                                }}
+
+                            >
+                                Yes
+                            </button>
+                        </div>
+                    );
+                }
+            });
+
+
+        }
+
+
+    }, [editingId])
+
+
+function handleCancelSale(id){
+    axios
+    .patch(`${process.env.REACT_APP_URL}/Sales/${id}`, {isCancelled:true}, {
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+            'Content-Type': 'application/json'
+        }
+    })
+    .then((response) => {
+        console.log(response);
+        
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+    .finally(() => {
+
+    });
+}
+
     return (
 
         <div className={styles.centered}>
@@ -79,22 +134,18 @@ export default function OldSales({ setMode, mode }) {
 
             {!loading ?
 
-                !isEditing ?
+                <div>
 
-                    <div >
+                    <StatsInputs setCalendar={setCalendar} />
 
-                        <StatsInputs setCalendar={setCalendar} />
+                    <SaleBar one="check" two="Código de Factura" three="Estado" four="Forma de Pago" five="Fecha" six="Monto" seven="Acción" />
 
-                        <SaleBar one="Fecha" two="Cantidad de Productos" three="Productos" four="TOTAL" />
+                    <ListOldSales oldSales={oldSales} setIsEditing={setIsEditing} setEditingId={setEditingId} />
 
-                        <ListOldSales oldSales={oldSales} setIsEditing={setIsEditing} setEditingId={setEditingId} />
+                    <SaleBack setMode={setMode} toMenu={true} setIsEditing={setIsEditing} />
 
-                        <SaleBack setMode={setMode} toMenu={true} setIsEditing={setIsEditing} />
+                </div>
 
-                    </div>
-                    :
-
-                    <Sale setMode={setMode} isEditing={isEditing} isEditingId={editingId} setIsEditing={setIsEditing} />
                 :
 
                 <Loading />}

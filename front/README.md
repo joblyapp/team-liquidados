@@ -255,9 +255,40 @@ DONE.
 
 ## SESSION BAR
 
-* Go to "/" when logging out!
+* Go to "/" when logging out! DONE.
 * Modal to change USER information.
 
 ## PRODUCTS
 
+* ISSUE: When creating a new product with no image it crash the server.
+
 * Add the "$" logo to product price.
+* Categories from back in the PRODUCTSBAR. DONE.
+* Categories from back in the EDIT PRODUCT modal.
+
+
+## SALES CSS
+
+* Turn WIDTH to 85%. DONE.
+* Round the PAGINATION BUTTONS. DONE.
+* Show CALENDAR both disable and able. DONE.
+* Change order between CALENDAR and DROPLIST. DONE.
+
+* Change the columns names. DONE.
+* Change the columns information. DONE.
+
+* Add border radius to all inputs. 
+
+* Add "rsuite" for datePicker
+
+
+* Delete the EDIT SALES button. DONE.
+
+* Add CHECKALL checkbox in the SaleBar component. DONE.
+* Check all and uncheck all when clicking on CHECKALL box. DONE.
+* ISSUE: When navigating on PAGINATION and it loads less than eight elements, the extra elements from previous pages just uncheck. SOLVED with a defaultChecked attribute.
+
+* Create the STATE buttons. DONE.
+
+* Create de CANCEL action button. DONE.
+- Create the Modal to confirm and explain why. DONE.
