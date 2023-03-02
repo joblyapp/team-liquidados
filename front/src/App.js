@@ -5,9 +5,11 @@ import WelcomePage from "./pages/welcomePage";
 import StatsPage from "./pages/statsPage";
 import SalesPage from "./pages/salesPage";
 import ChangePass from "./pages/changePass";
+import RecoveryPage from "./pages/RecoveryPage";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  //state to show for the selected link in navbar
   const [active, setActive] = useState("");
 
   useEffect(() => {
@@ -66,6 +68,7 @@ function App() {
             />
           }
         />
+        <Route exact path="/recovery" element={<RecoveryPage />} />
         <Route exact path="/stats" element={<StatsPage />} />
         <Route
           exact
