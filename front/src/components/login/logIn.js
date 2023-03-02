@@ -2,8 +2,9 @@ import { useState } from "react";
 import styles from "../styles.module.css";
 import axios from "axios";
 import Logo from "../../Images/DonVenturaLogo.svg";
-import "./logIn.css";
 import { Link } from "react-router-dom";
+import showPassword from "../../Images/icons/showPassword.png";
+import hidePassword from "../../Images/icons/hidePassword.png";
 
 export default function LogIn({ setLoggedIn, setActive }) {
   const [email, setEmail] = useState(
@@ -15,11 +16,11 @@ export default function LogIn({ setLoggedIn, setActive }) {
   const [rememberMe, setRememberMe] = useState(
     localStorage.getItem("rememberMe") === "true"
   );
+  const [revealPassword, setRevealPassword] = useState(false);
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
-    
+
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/admin/login`,
@@ -40,7 +41,6 @@ export default function LogIn({ setLoggedIn, setActive }) {
     } catch (error) {
       console.error(error);
     }
-  
   };
 
   const handleRememberMeChange = (e) => {
@@ -49,9 +49,13 @@ export default function LogIn({ setLoggedIn, setActive }) {
     localStorage.setItem("rememberMe", isChecked);
   };
 
+  const toggleRevealPassword = () => {
+    setRevealPassword(!revealPassword);
+  };
+
   return (
     <div className={styles.centered}>
-      <img style={{ width: 250 }} src={Logo}></img>
+      <img style={{ width: 250 }} src={Logo} alt="Logo"></img>
       <div className={`${styles.loginBox}`}>
         <form className={styles.formBox} onSubmit={handleSubmit}>
           <div>
@@ -63,12 +67,7 @@ export default function LogIn({ setLoggedIn, setActive }) {
               id="email"
               placeholder="Ingrese su mail"
               required
-              defaultValue={
-                sessionStorage.getItem("email")
-                  ? sessionStorage.getItem("email")
-                  : ""
-              }
-              value={email}
+              value={email ? email : ""}
             ></input>
           </div>
 
@@ -78,20 +77,19 @@ export default function LogIn({ setLoggedIn, setActive }) {
               <input
                 onChange={(e) => setPassword(e.target.value)}
                 className={styles.inputs}
-                type="password"
+                type={revealPassword ? "text" : "password"}
                 id="pass"
-                defaultValue={
-                  sessionStorage.getItem("password")
-                    ? sessionStorage.getItem("password")
-                    : ""
-                }
                 placeholder="Ingrese su contraseña"
                 required
-                value={password}
+                value={password ? password : ""}
               ></input>
-              <button className={styles.showPass}>
-                {/* <img src={showPassLogo} alt="show password"></img> */}
-              </button>
+
+              <img
+                onClick={toggleRevealPassword}
+                className={styles.showPass}
+                src={!revealPassword ? showPassword : hidePassword}
+                alt="show password icon"
+              />
             </div>
           </div>
           <div className={styles.checkContainer}>
