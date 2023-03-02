@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import styles from "../../../components/styles.module.css";
+import styles from "../../components/styles.module.css";
 
 export default function ChangePassForm({ recoveryToken, setSuccess, setFail }) {
   const [showPassLogo, setShowPassLogo] = useState("../openPass.png");

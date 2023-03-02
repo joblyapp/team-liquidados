@@ -182,32 +182,25 @@ body {
 }
 
 .passContainer {
-
     position: relative;
 }
 
 .showPass {
-
     position: absolute;
-    background: transparent;
-    border: 0;
-    border-radius: 7px;
+    top: -5px;
+    right: 5px;
     color: white;
     padding: 15px;
     cursor: pointer;
-    right: 0px;
-    top: 50%;
-    transform: translate(0, -50%);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+    z-index: 2;
+    width: 1.7rem;
 }
 
-.showPass img {
-    width: 20px;
-}
+.showPass:hover {
+    transform: scale(1.2);
+    transition: transform 0.2s ease-in-out;
+  }
+
 
 .forgotMessage {
     padding: 20px 20px 20px 20px;
@@ -218,7 +211,7 @@ body {
 .checkContainer {
     width: 450px;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     font-size: 16px;
 }
 

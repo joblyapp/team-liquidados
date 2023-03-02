@@ -1,25 +1,16 @@
-// import { useSelector } from "react-redux";
-// import LogIn from "../components/login/logIn";
-// import Session from "../components/sessionBar/session";
-// import StatsIndex from "../components/stats/statsIndex";
-// import { selectUser } from "../features/userSlices";
+import LogIn from "../components/login/logIn";
+import StatsIndex from "../components/stats/statsIndex";
 
-// export default function StatsPage() {
-
-//     // Redux selector
-//     const user = useSelector(selectUser);
-
-//     return (
-//         <>
-
-//             {!user.loggedIn
-//                 ? <LogIn />
-//                 :
-//                 <>
-//                     <Session />
-//                     <StatsIndex />
-//                 </>
-//             }
-//         </>
-//     )
-// }
+export default function StatsPage({ loggedIn }) {
+  return (
+    <>
+      {!loggedIn ? (
+        <LogIn />
+      ) : (
+        <>
+          <StatsIndex />
+        </>
+      )}
+    </>
+  );
+}

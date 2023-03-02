@@ -6,6 +6,7 @@ import StatsPage from "./pages/statsPage";
 import SalesPage from "./pages/salesPage";
 import ChangePass from "./pages/changePass";
 import RecoveryPage from "./pages/RecoveryPage";
+import ChangePassForm from "./components/changePass/changePassForm";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -69,11 +70,15 @@ function App() {
           }
         />
         <Route exact path="/recovery" element={<RecoveryPage />} />
-        <Route exact path="/stats" element={<StatsPage />} />
+        <Route
+          exact
+          path="/stats"
+          element={<StatsPage loggedIn={loggedIn} />}
+        />
         <Route
           exact
           path="/reset-password/:recoveryToken"
-          element={<ChangePass />}
+          element={<ChangePassForm />}
         />
       </Routes>
     </BrowserRouter>
