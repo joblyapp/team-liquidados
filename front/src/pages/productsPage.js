@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import LogIn from "../components/login/logIn";
 import Products from "../components/products/products";
 import NavBar from "../components/NavBar/NavBar";
