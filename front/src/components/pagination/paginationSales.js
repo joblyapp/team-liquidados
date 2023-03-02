@@ -15,27 +15,23 @@ export default function PaginationSales({ data, handleClick }) {
 
                     <div className={styles.listaProductos} >
 
+                        <input type="checkbox"></input>
+
+                        <p>{item._id.substring(0, 10)}</p>
+
+                        {item.isCancelled ? <p>CANCELLED</p> : <p>GOOD</p>}
+
+                        <p>{item.paymentForm}</p>
+
                         <p>{item.date.substring(0, 10)}</p>
-
-                        <p>{item.products.length}</p>
-
-                        <select>
-
-                            {item.products.map((product, key) => (
-
-
-                                <option key={key}> {product.name}</option>
-
-                            )
-                            )}
-
-                        </select>
 
                         <p>{item.total}</p>
 
+                        <button onClick={() => handleClick(item._id)}>Edit</button>
+
                     </div>
 
-                    <button onClick={() => handleClick(item._id)}>Edit</button>
+
 
                 </div>
 

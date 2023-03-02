@@ -64,7 +64,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
+
 }
 
 .register {
@@ -74,6 +74,10 @@ body {
     gap: 10px;
 }
 
+
+.gapping {
+    gap: 20px;
+}
 
 /* LOGIN */
 
@@ -234,18 +238,32 @@ body {
 
     text-align: center;
     align-items: center;
-  
+
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     border: solid 2px black;
     box-sizing: border-box;
 
     margin: 0 0 0 0;
+
+    background-color: white;
 }
 
-/* Make sure that the list ocuppy some space even if it is empty */ 
+.listaProductos 
+input,
+select
+
+{
+    border: 0.5px solid #D9D9D9;
+    border-radius: 8px;
+
+    background-color: #f9f9f9;
+}
+
+
+/* Make sure that the list ocuppy some space even if it is empty */
 .productsCard {
-   
+
     height: 56vh;
 }
 
@@ -454,8 +472,14 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 85vw;
-   
+
     height: 10vh;
+}
+
+.calendar {
+    display: flex;
+    gap: 10px;
+    margin-left: 10px;
 }
 
 /* PAGINATION SELECT */
@@ -467,4 +491,8 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
+}
+
+.whiteIt {
+    background-color: white;
 }

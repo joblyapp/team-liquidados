@@ -266,3 +266,20 @@ DONE.
 * Categories from back in the PRODUCTSBAR. DONE.
 * Categories from back in the EDIT PRODUCT modal.
 
+
+## SALES CSS
+
+* Turn WIDTH to 85%. DONE.
+* Round the PAGINATION BUTTONS. DONE.
+* Show CALENDAR both disable and able. DONE.
+* Change order between CALENDAR and DROPLIST. DONE.
+
+* Change the columns names. DONE.
+* Change the columns information. DONE.
+
+* Add border radius to all inputs. 
+
+* Add "rsuite" for datePicker
+
+
+* No se pueden EDITAR VENTAS.

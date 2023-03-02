@@ -85,7 +85,7 @@ export default function OldSales({ setMode, mode }) {
 
                         <StatsInputs setCalendar={setCalendar} />
 
-                        <SaleBar one="Fecha" two="Cantidad de Productos" three="Productos" four="TOTAL" />
+                        <SaleBar one="CHECK" two="Código de Factura" three="Estado" four="Forma de Pago" five="Fecha" six="Monto" seven="Acción" />
 
                         <ListOldSales oldSales={oldSales} setIsEditing={setIsEditing} setEditingId={setEditingId} />
 
