@@ -291,4 +291,6 @@ DONE.
 * Create the STATE buttons. DONE.
 
 * Create de CANCEL action button. DONE.
-- Create the Modal to confirm and explain why. DONE.
+
+- Create the Modal to confirm and explain why.
+- Reload page when some state changes. DONE.
