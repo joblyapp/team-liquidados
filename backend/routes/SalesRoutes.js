@@ -78,16 +78,15 @@ router.patch("/:id", async (req, res) => {
 });
 
 // Delete a sale
+//A sale CANNOT be deleted to keep sales records
+//instead its set to cancelled
+
 router.delete("/:id", async (req, res) => {
   try {
-    const sale = await Sales.findById(req.params.id);
-    if (!sale) {
-      return res.status(404).json({ message: "Sale not found" });
-    }
-    await sale.remove();
-    res.json({ message: "Sale deleted" });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    const sale = await Sales.cancelSale(req.params.id);
+    res.status(200).json(sale);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to cancel sale" });
   }
 });
 
