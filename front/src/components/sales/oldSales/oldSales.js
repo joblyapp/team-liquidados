@@ -23,6 +23,9 @@ export default function OldSales({ setMode, mode }) {
     // Create a calendar state for filtering Old Sales
     const [calendar, setCalendar] = useState(null);
 
+    // Create a state for description when cancelling a sale
+    const [saleCancel, setSaleCancel] = useState("");
+
 
     useEffect(() => {
 
@@ -83,27 +86,42 @@ export default function OldSales({ setMode, mode }) {
             confirmAlert({
                 customUI: ({ onClose }) => {
                     return (
-                        <div className={styles.alert}>
-                            <h1>Cancelar Venta</h1>
-                            <p>¿Está seguro de que desea cancelar esta venta?</p>
+                        <div className={styles.alertDescription}>
+                            <div>                            <h1>Cancelar Venta</h1>
+                                <div>
+                                    <p>¿Está seguro de que desea cancelar esta venta?</p>
+                                    <p>Por favor indique los motivos de la cancelación. Esta descripción quedará registrada</p>
+                                </div>
+                            </div>
+
                             <textarea
+                                onChange={handleTextChange}
+                                id="cancelDescription"
+                                className={styles.textArea}
                                 autoFocus
                                 placeholder="Por favor indique los motivos de la cancelación"
                                 minLength="20"
                                 required
-                                style={{width:"200px"}}
-                            >
-                            </textarea>
-                            <button onClick={onClose}>No</button>
-                            <button
-                                onClick={() => {
-                                    handleCancelSale(editingId);
-                                    onClose();
-                                }}
 
                             >
-                                Yes
-                            </button>
+                            </textarea>
+
+                            <div className={styles.buttonSet}>
+                                <button
+                                    onClick={onClose}
+                                    className={styles.buttonNo}>
+                                    No
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        handleCancelSale(editingId);
+                                        onClose();
+                                    }}
+                                    className={styles.buttonYes}
+                                >
+                                    Si
+                                </button>
+                            </div>
                         </div>
                     );
                 }
@@ -114,6 +132,10 @@ export default function OldSales({ setMode, mode }) {
 
 
     }, [editingId])
+
+    function handleTextChange(e){
+        setSaleCancel(e.target.value); 
+    }
 
 
     function handleCancelSale(id) {
