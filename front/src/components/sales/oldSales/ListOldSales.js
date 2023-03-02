@@ -13,6 +13,8 @@ export default function ListOldSales({ oldSales, setIsEditing, setEditingId }) {
 
 
     // When clicking on Sale Div we have to LOAD a SALE visual with sale's PRODUCTS loaded 
+
+
     function handleClick(saleId) {
 
         setEditingId(saleId);
@@ -22,23 +24,25 @@ export default function ListOldSales({ oldSales, setIsEditing, setEditingId }) {
     }
 
 
+
+
     return (
 
         <>
 
             <PaginationList
-            data={oldSales}
-            handleAlert={handleClick}
-            currentPage={currentPage}
-            itemsPerPage={itemsPerPage}
-            isSale={true}
+                data={oldSales}
+                handleAlert={handleClick}
+                currentPage={currentPage}
+                itemsPerPage={itemsPerPage}
+                isSale={true}
             />
 
             <PaginationSelect
-              itemsPerPage={itemsPerPage}
-              setCurrentPage={setCurrentPage}
-              totalItems={oldSales.length}
-              currentPage={currentPage}
+                itemsPerPage={itemsPerPage}
+                setCurrentPage={setCurrentPage}
+                totalItems={oldSales.length}
+                currentPage={currentPage}
             />
 
         </>

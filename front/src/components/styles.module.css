@@ -249,11 +249,8 @@ body {
     background-color: white;
 }
 
-.listaProductos 
-input,
-select
-
-{
+.listaProductos input,
+select {
     border: 0.5px solid #D9D9D9;
     border-radius: 8px;
 
@@ -318,6 +315,17 @@ select
     text-align: center;
 }
 
+
+.cancelledSale {
+    background: rgba(238, 112, 112, 0.4);
+    border-radius: 8px;
+}
+
+.facturedSale {
+    background: rgba(22, 199, 154, 0.2);
+    border-radius: 8px;
+    color: #16C79A;
+}
 
 /* Sale quantity buttons*/
 

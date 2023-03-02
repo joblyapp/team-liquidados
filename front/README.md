@@ -282,4 +282,13 @@ DONE.
 * Add "rsuite" for datePicker
 
 
-* No se pueden EDITAR VENTAS.
+* Delete the EDIT SALES button. DONE.
+
+* Add CHECKALL checkbox in the SaleBar component. DONE.
+* Check all and uncheck all when clicking on CHECKALL box. DONE.
+* ISSUE: When navigating on PAGINATION and it loads less than eight elements, the extra elements from previous pages just uncheck. SOLVED with a defaultChecked attribute.
+
+* Create the STATE buttons. DONE.
+
+* Create de CANCEL action button. DONE.
+- Create the Modal to confirm and explain why. DONE.
