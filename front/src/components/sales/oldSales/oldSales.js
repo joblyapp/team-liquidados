@@ -23,6 +23,9 @@ export default function OldSales({ setMode, mode }) {
     // Create a calendar state for filtering Old Sales
     const [calendar, setCalendar] = useState(null);
 
+    // Create a state for description when cancelling a sale
+    const [saleCancel, setSaleCancel] = useState("");
+
 
     useEffect(() => {
 
@@ -70,30 +73,55 @@ export default function OldSales({ setMode, mode }) {
 
         }
 
-    }, [calendar])
+    }, [calendar, isEditing])
 
 
 
     useEffect(() => {
+
         if (isEditing) {
+
             // Confirm CANCEL modal
 
             confirmAlert({
                 customUI: ({ onClose }) => {
                     return (
-                        <div className={styles.alert}>
-                            <h1>Cancelar Venta</h1>
-                            <p>¿Está seguro de que desea cancelar esta venta?</p>
-                            <button onClick={onClose}>No</button>
-                            <button
-                                onClick={() => {
-                                    handleCancelSale(editingId);
-                                    onClose();
-                                }}
+                        <div className={styles.alertDescription}>
+                            <div>                            <h1>Cancelar Venta</h1>
+                                <div>
+                                    <p>¿Está seguro de que desea cancelar esta venta?</p>
+                                    <p>Por favor indique los motivos de la cancelación. Esta descripción quedará registrada</p>
+                                </div>
+                            </div>
+
+                            <textarea
+                                onChange={handleTextChange}
+                                id="cancelDescription"
+                                className={styles.textArea}
+                                autoFocus
+                                placeholder="Por favor indique los motivos de la cancelación"
+                                minLength="20"
+                                required
 
                             >
-                                Yes
-                            </button>
+                            </textarea>
+
+                            <div className={styles.buttonSet}>
+                                <button
+                                    onClick={onClose}
+                                    className={styles.buttonNo}>
+                                    No
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        handleCancelSale(editingId);
+                                        onClose();
+                                    }}
+                                    className={styles.buttonYes}
+                                >
+                                    Si
+                                </button>
+                            </div>
                         </div>
                     );
                 }
@@ -105,26 +133,30 @@ export default function OldSales({ setMode, mode }) {
 
     }, [editingId])
 
+    function handleTextChange(e){
+        setSaleCancel(e.target.value); 
+    }
 
-function handleCancelSale(id){
-    axios
-    .patch(`${process.env.REACT_APP_URL}/Sales/${id}`, {isCancelled:true}, {
-        headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-            'Content-Type': 'application/json'
-        }
-    })
-    .then((response) => {
-        console.log(response);
-        
-    })
-    .catch((error) => {
-        console.log(error);
-    })
-    .finally(() => {
 
-    });
-}
+    function handleCancelSale(id) {
+        axios
+            .delete(`${process.env.REACT_APP_URL}/Sales/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => {
+                console.log(response);
+
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+            .finally(() => {
+                setIsEditing(false);
+            });
+    }
 
     return (
 

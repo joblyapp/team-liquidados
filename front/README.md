@@ -291,4 +291,15 @@ DONE.
 * Create the STATE buttons. DONE.
 
 * Create de CANCEL action button. DONE.
-- Create the Modal to confirm and explain why. DONE.
+
+- Create the Modal to confirm and explain why. IN PROCESS.
+- Reload page when some state changes. DONE.
+
+* CANCEL modal
+
+- Create the textarea. DONE.
+- Don't allow resizing. DONE.
+- Css to buttons. DONE.
+- Close and reload when YES. DONE.
+- Styling text. DONE.
+- Send the user description when cancelling a sale.

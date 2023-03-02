@@ -268,6 +268,56 @@ select {
 }
 
 
+
+
+.alertDescription {
+    text-align: center;
+    width: 562px;
+    height: 54vh;
+    padding: 40px;
+
+    box-sizing: border-box;
+
+    background: #FFFFFF;
+    border-radius: 16px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+
+.alertDescription::before {
+    content: '';
+    background-color: #333333;
+    position: absolute;
+    opacity: 0.3;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+.alertDescription h1 {
+    text-align: left;
+    margin: 0 0 20px 0;
+}
+
+
+.alertDescription p {
+    font-size: 14px;
+    text-align: left;
+}
+
+.textArea {
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    
+    height: 12vh;
+    resize: none;
+}
+
 /* BARRA USUARIO */
 
 .sessionStyle {
@@ -392,6 +442,40 @@ select {
     background-color: #ffffff;
     border-radius: 50%;
 }
+
+
+.buttonNo {
+    cursor: pointer;
+    width: 86px;
+    height: 4vh;
+    border: 1px solid var(--blueButton);
+    border-radius: 8px;
+    background-color: white;
+
+    color: var(--blueButton);
+
+    
+}
+
+.buttonYes {
+    cursor: pointer;
+    width: 86px;
+    height: 4vh;
+
+    background: var(--blueButton);
+    border-radius: 8px;
+
+    border: none;
+
+    color: white;
+}
+
+.buttonSet {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px
+}
+
 
 /* LOADING */
 
