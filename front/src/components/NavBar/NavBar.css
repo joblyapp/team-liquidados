@@ -40,7 +40,12 @@
     color: #fff;
     font-size: 18px;
     margin-left: 24px;
+    margin-right: 24px;
     text-decoration: none;
+  }
+
+  .navbar-link:first-child {
+    margin-left: 48px;
   }
   
   .navbar-link:hover {
@@ -68,7 +73,15 @@
   }
   .navbar-avatar p {
     color: white;
+    margin: 0;
+    font-weight: bold;
   }
+  .navbar-avatar span {
+    display: flex;
+    color: white;
+    font-size: 12px;
+  }
+  
   
   .navbar-avatar-dropdown {
     position: absolute;
