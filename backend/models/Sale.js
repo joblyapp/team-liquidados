@@ -63,4 +63,17 @@ SalesSchema.statics.getSalesBetweenDates = function (
   );
 };
 
+SalesSchema.statics.cancelSale = async function (saleId) {
+  try {
+    const sale = await this.findByIdAndUpdate(
+      saleId,
+      { isCancelled: true },
+      { new: true }
+    );
+    return sale;
+  } catch (error) {
+    throw new Error("Unable to cancel sale");
+  }
+};
+
 module.exports = mongoose.model("Sales", SalesSchema);

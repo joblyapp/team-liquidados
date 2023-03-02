@@ -29,7 +29,7 @@ const productSchema = new mongoose.Schema({
     default: Date.now,
   },
   image: {
-    path: String, // holds the image data
+    path: String, // holds the image path
     contentType: String, // holds the MIME type of the image
   },
   number: {

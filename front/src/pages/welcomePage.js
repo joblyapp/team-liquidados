@@ -1,26 +1,35 @@
-import Session from "../components/sessionBar/session";
-import { useSelector } from "react-redux";
-import { selectUser } from "../features/userSlices";
 import LogIn from "../components/login/logIn";
 import Welcome from "../components/welcome";
+import NavBar from "../components/NavBar/NavBar";
 
+export default function WelcomePage({
+  loggedIn,
+  active,
+  setActive,
+  handleLogout,
+  setLoggedIn,
+}) {
+  // Redux selector
 
-
-export default function WelcomePage() {
-
-
-    // Redux selector
-    const user = useSelector(selectUser);
-
-    return (
-     
-            
-                <>
-                    
-                    {!user.loggedIn
-                        ? <LogIn />
-                        : <Welcome user={user} />}
-                </>
-    
-    )
+  return (
+    <>
+      {!loggedIn ? (
+        <LogIn setLoggedIn={setLoggedIn} setActive={setActive} />
+      ) : (
+        <>
+          {loggedIn && (
+            <>
+              {" "}
+              <NavBar
+                handleLogout={handleLogout}
+                active={active}
+                setActive={setActive}
+              />{" "}
+              <Welcome />{" "}
+            </>
+          )}
+        </>
+      )}
+    </>
+  );
 }

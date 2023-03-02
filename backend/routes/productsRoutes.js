@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/upload");
-const fs = require("fs");
 
 //Models
 const Product = require("../models/Product"); // import the product model
