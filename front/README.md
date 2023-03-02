@@ -302,4 +302,7 @@ DONE.
 - Css to buttons. DONE.
 - Close and reload when YES. DONE.
 - Styling text. DONE.
-- Send the user description when cancelling a sale.
+
+- Send the user description when cancelling a sale. 00000000000000000000000000000
+
+ISSUE: when loading last month sales, it loads the sales of current month. I need to filter sales from las 30 days.
