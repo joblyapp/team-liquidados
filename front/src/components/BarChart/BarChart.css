@@ -1,0 +1,16 @@
+.chart {
+  width: 600px;
+  height: 350px;
+  margin-top: 200px;
+  margin-left: 200px;
+}
+
+.chart_container {
+    display: flex;
+}
+
+.pie {
+    margin-top: 150px;
+    margin-left: 300px;
+    
+}

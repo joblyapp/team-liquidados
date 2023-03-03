@@ -3,6 +3,7 @@ import "./Welcome.css";
 import ProductsIcon from "../../Images/icons/ProductsIcon.svg";
 import ChevronRight from "../../Images/icons/ChevronRight.svg";
 import ShoppingCart from "../../Images/icons/ShoppingCart.svg";
+import BarChart from "../BarChart/BarChart";
 
 export default function Welcome() {
   return (
@@ -39,6 +40,8 @@ export default function Welcome() {
           </Link>
         </div>
       </div>
+
+      <BarChart />
     </>
   );
 }
