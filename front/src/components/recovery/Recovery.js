@@ -5,6 +5,8 @@ import axios from "axios";
 import RecoverySuccess from "./recoverySucces";
 import { useNavigate } from "react-router";
 import Loading from "../loading";
+import Logo from "../../Images/DonVenturaLogo.svg";
+import "./Recovery.css";
 
 export default function Recovery({ setRecovery }) {
   const [recoveryMail, setRecoveryMail] = useState();
@@ -66,6 +68,7 @@ export default function Recovery({ setRecovery }) {
         !fail ? (
           !exito ? (
             <div className={styles.centered}>
+              <img style={{ width: 250 }} src={Logo} alt="Logo"></img>
               <form className={styles.box} onSubmit={handleSubmitRecovery}>
                 <h3 className={styles.forgotMessage}>
                   ¿Olvidaste tu contraseña? No te preocupes, te enviaremos un
@@ -82,7 +85,7 @@ export default function Recovery({ setRecovery }) {
 
                 <div className={styles.botones}>
                   <input
-                    className={styles.loginButton}
+                    className="button"
                     type="submit"
                     value="Recuperar contraseña"
                   ></input>

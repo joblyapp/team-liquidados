@@ -1,0 +1,11 @@
+
+.button {
+    width: 450px;
+    height: 4.6vh;
+    cursor: pointer;
+    color: white;
+    background-color: var(--blueButton);
+    border-radius: 8px;
+    border: none;
+    margin-top: 2rem;
+}
