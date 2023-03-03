@@ -1,5 +1,5 @@
 import LogIn from "../components/login/logIn";
-import Welcome from "../components/welcome";
+import Welcome from "../components/Welcome/welcome";
 import NavBar from "../components/NavBar/NavBar";
 
 export default function WelcomePage({
