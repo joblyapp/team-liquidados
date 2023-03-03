@@ -33,21 +33,15 @@ export default function PaginationSales({ data, handleClick }) {
 
                         <p>${item.total}</p>
 
-
-
-                        <div style={{display:"flex", justifyContent:"center"}}>
+                        <div style={{ display: "flex", justifyContent: "center" }}>
                             <img
+                                className={!item.isCancelled ? "" : styles.disableButton}
                                 src="./cancel.svg"
-                                onClick={() => handleClick(item._id)}
+                                onClick={!item.isCancelled ? (() => handleClick(item._id)) : undefined}
                                 style={{ cursor: "pointer" }}>
                             </img>
                         </div>
-
-
                     </div>
-
-
-
                 </div>
 
             )

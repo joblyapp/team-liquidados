@@ -95,7 +95,7 @@ export default function OldSales({ setMode, mode }) {
                             </div>
 
                             <textarea
-                                onChange={handleTextChange}
+
                                 id="cancelDescription"
                                 className={styles.textArea}
                                 autoFocus
@@ -108,14 +108,19 @@ export default function OldSales({ setMode, mode }) {
 
                             <div className={styles.buttonSet}>
                                 <button
-                                    onClick={onClose}
+                                    onClick={() => {
+                                        setEditingId("none");    
+                                        setIsEditing(false);
+                                        onClose()
+                                    }}
                                     className={styles.buttonNo}>
                                     No
                                 </button>
                                 <button
                                     onClick={() => {
-                                        handleCancelSale(editingId);
-                                        onClose();
+                                        setSaleCancel(document.getElementById("cancelDescription").value);
+                                        handleCancelSale(editingId, saleCancel, onClose);
+
                                     }}
                                     className={styles.buttonYes}
                                 >
@@ -133,28 +138,29 @@ export default function OldSales({ setMode, mode }) {
 
     }, [editingId])
 
-    function handleTextChange(e){
-        setSaleCancel(e.target.value); 
-    }
 
 
-    function handleCancelSale(id) {
+    function handleCancelSale(id, description, onClose) {
+
         axios
             .delete(`${process.env.REACT_APP_URL}/Sales/${id}`, {
                 headers: {
                     Authorization: `Bearer ${sessionStorage.getItem("token")}`,
                     'Content-Type': 'application/json'
-                }
+                }, description
             })
+
             .then((response) => {
-                console.log(response);
+                
+                setIsEditing(false);
+                setEditingId("null");
 
             })
             .catch((error) => {
                 console.log(error);
             })
             .finally(() => {
-                setIsEditing(false);
+                onClose()
             });
     }
 

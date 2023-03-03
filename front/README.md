@@ -303,10 +303,15 @@ DONE.
 - Close and reload when YES. DONE.
 - Styling text. DONE.
 
-- Send the user description when cancelling a sale. 00000000000000000000000000000 TO DO 00000000000000000000
+
 
 ISSUE: when loading last month sales, it loads the sales of current month. I need to filter sales from las 30 days. SOLVED!
 
 # CALENDAR
 * Change the input date placeholder from "DD/MM/YYYY" to "FROM / TO". DONE.
 
+# COMPLETING CANCEL SALES
+
+* Send the user description when cancelling a sale. DONE.
+* Dont allow to cancel when the sale is already cancelled. DONE.
+* ISSUE: Alert modal doesn't work after using it one time.
