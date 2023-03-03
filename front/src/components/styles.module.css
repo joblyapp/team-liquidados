@@ -22,6 +22,9 @@ p {
     margin: 0;
 }
 
+
+
+
 body {
     background-color: var(--back);
 }
@@ -474,6 +477,9 @@ select {
     gap: 16px
 }
 
+.disableButton {
+    opacity: 0.3;
+}
 
 /* LOADING */
 
