@@ -83,7 +83,10 @@ router.patch("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const sale = await Sales.cancelSale(req.params.id);
+    const sale = await Sales.cancelSale(
+      req.params.id,
+      req.body.cancellationReason
+    );
     res.status(200).json(sale);
   } catch (error) {
     res.status(500).json({ error: "Failed to cancel sale" });

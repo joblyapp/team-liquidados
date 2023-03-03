@@ -63,11 +63,11 @@ SalesSchema.statics.getSalesBetweenDates = function (
   );
 };
 
-SalesSchema.statics.cancelSale = async function (saleId) {
+SalesSchema.statics.cancelSale = async function (saleId, cancellationReason) {
   try {
     const sale = await this.findByIdAndUpdate(
       saleId,
-      { isCancelled: true },
+      { isCancelled: true, cancellationReason },
       { new: true }
     );
     return sale;
