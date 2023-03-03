@@ -22,7 +22,7 @@ export default function StatsInputs({ setCalendar }) {
 
     tomorrow.setDate(tomorrow.getDate() + 1);
     week.setDate(week.getDate() - 7);
-    month.setDate(1);
+    month.setDate(week.getDate() - 30);
 
     tomorrow = format(tomorrow, 'isoDate');
     week = format(week, 'isoDate');
@@ -91,18 +91,20 @@ export default function StatsInputs({ setCalendar }) {
             <form className={styles.calendar} onSubmit={handleSubmit}>
                 <input
                     id="dateFrom"
-                    type="date"
+                    type="text"
                     placeholder="From"
-
+                    onFocus={(e) => e.target.type = 'date'}
+                    onBlur={(e) => e.target.type = 'text'}
                     disabled={!custom}>
 
                 </input>
                 <p>-</p>
                 <input
                     id="dateTo"
-                    type="date"
-
-                    placeholder="From"
+                    type="text"
+                    onFocus={(e) => e.target.type = 'date'}
+                    onBlur={(e) => e.target.type = 'text'}
+                    placeholder="To"
 
                     disabled={!custom}>
 
