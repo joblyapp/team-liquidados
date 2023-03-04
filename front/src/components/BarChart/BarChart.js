@@ -6,12 +6,25 @@ import React from "react";
 
 export default function BarChart() {
   const chartData = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ],
     datasets: [
       {
-        label: "Sales",
-        data: [12, 19, 3, 5, 2, 3, 20],
-        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        label: "Ventas",
+        data: [12, 19, 3, 5, 2, 3, 20, 40, 2, 8, 25, 15],
+        backgroundColor: "rgba(54, 162, 235)",
         borderColor: "rgba(54, 162, 235, 1)",
         borderWidth: 1,
       },
@@ -19,7 +32,7 @@ export default function BarChart() {
   };
 
   const pieData = {
-    labels: ["Category A", "Category B", "Category C"],
+    labels: ["Alimentos", "Aseo", "Pelucas"],
     datasets: [
       {
         label: "Categories",
@@ -32,7 +45,7 @@ export default function BarChart() {
   return (
     <>
       <div className="chart_container">
-        <div className="chart">
+        <div className="chart bar">
           <Bar data={chartData} />
         </div>
         <div className="chart pie">

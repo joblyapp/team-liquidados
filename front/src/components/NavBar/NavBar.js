@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import "./NavBar.css";
@@ -9,6 +9,8 @@ const Navbar = ({ handleLogout, active, setActive }) => {
   //state for displayng the avatar drop down menu
   const [showMenu, setShowMenu] = useState(false);
   //state to keep track which link has the active state
+  const avatarMenuRef = useRef(null);
+  //used to check if clicked outside avatar dropdown
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
@@ -17,6 +19,23 @@ const Navbar = ({ handleLogout, active, setActive }) => {
   const handleClick = (e, name) => {
     setActive(name);
   };
+
+  useEffect(() => {
+    // add event listener to the document to listen for clicks outside of the avatar menu
+    const handleOutsideClick = (event) => {
+      if (
+        avatarMenuRef.current &&
+        !avatarMenuRef.current.contains(event.target)
+      ) {
+        setShowMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      // remove event listener when component unmounts
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [avatarMenuRef]);
 
   return (
     <nav className="navbar">
@@ -61,7 +80,7 @@ const Navbar = ({ handleLogout, active, setActive }) => {
           />
         </button>
         {showMenu && (
-          <div className="navbar-avatar-dropdown">
+          <div className="navbar-avatar-dropdown" ref={avatarMenuRef}>
             <Link to="/perfil" className="navbar-avatar-dropdown-link">
               Perfil
             </Link>
