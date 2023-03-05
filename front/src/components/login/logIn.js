@@ -17,6 +17,7 @@ export default function LogIn({ setLoggedIn, setActive }) {
     localStorage.getItem("rememberMe") === "true"
   );
   const [revealPassword, setRevealPassword] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,6 +41,7 @@ export default function LogIn({ setLoggedIn, setActive }) {
       }
     } catch (error) {
       console.error(error);
+      setShowError(true);
     }
   };
 
@@ -103,7 +105,9 @@ export default function LogIn({ setLoggedIn, setActive }) {
               Recordarme
             </label>
           </div>
-
+          {showError && (
+            <p style={{ color: "red" }}>Credenciales incorrectas</p>
+          )}
           <div className={styles.botones}>
             <input
               className={styles.loginButton}
