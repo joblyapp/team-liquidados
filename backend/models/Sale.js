@@ -29,7 +29,7 @@ const SalesSchema = new Schema({
   },
   paymentForm: {
     type: String,
-    enum: ["Debit", "Credit", "Cash"],
+    enum: ["Debito", "Credito", "Efectivo"],
     required: true,
   },
   isCancelled: {
