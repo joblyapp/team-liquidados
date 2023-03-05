@@ -2,7 +2,7 @@ import PaginationProducts from "./paginationProducts";
 import PaginationSales from "./paginationSales";
 
 
-export default function PaginationList({ data, state, handleAdd, handleEdit, handleAlert, currentPage, itemsPerPage, goBack, isSale }) {
+export default function PaginationList({ data, state, handleAdd, handleEdit, handleAlert, currentPage, itemsPerPage, goBack, isSale, columns }) {
 
 
     const lastPostIndex = currentPage * itemsPerPage;
@@ -30,7 +30,7 @@ export default function PaginationList({ data, state, handleAdd, handleEdit, han
                     <PaginationSales
                         data={data}
                         handleClick={handleAlert}
-
+                        columns={columns}
                     />
             }
         </>

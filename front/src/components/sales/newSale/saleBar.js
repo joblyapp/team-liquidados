@@ -1,14 +1,18 @@
 import styles from "../../styles.module.css";
 
-export default function SaleBar({ one, two, three, four, five, six, seven }) {
+export default function SaleBar({ col }) {
 
-    const check = one === "check";
+
     const boxes = document.getElementsByClassName("box");
+
+    const columns = col.length;
+    
+    document.documentElement.style.setProperty("--col", columns);
 
 
 
     function handleCheckAll(e) {
-        
+
         if (document.getElementById("checkAll").checked) {
             for (let i = 0; i < boxes.length; i++) {
                 boxes[i].checked = true;
@@ -25,24 +29,45 @@ export default function SaleBar({ one, two, three, four, five, six, seven }) {
 
     return (
 
-        <div style={{ backgroundColor: "lightBlue", textAlign: "center" }} className={`${styles.listaProductos} ${styles.listaBar}`}>
-
-            {check ?
-                <input
-                    type="checkbox"
-                    id="checkAll"
-                    onClick={handleCheckAll}
-                >
-                </input>
+        <div style={{ backgroundColor: "lightBlue", textAlign: "center", gridTemplateColumns: `repeat(${columns}, 1fr)` }} className={`${styles.listaProductos} ${styles.listaBar}`}>
+            {/*
+                {
+                    check?
+                        
                 :
-                ""}
+    ""
+}
             <p> {two}</p>
             <p> {three}</p>
             <p> {four}</p>
             <p> {five}</p>
             <p> {six}</p>
             <p> {seven}</p>
-        </div>
+        </div >
     )
+*/}
 
+            {col.map((item, key) => {
+                if (item === "check") {
+                    const boxes = document.getElementsByClassName("box");
+                    return (
+                        <input key={key}
+                            type="checkbox"
+                            id="checkAll"
+                            onClick={handleCheckAll}
+                        >
+                        </input>
+                    )
+                }
+                else {
+                    return (
+                        <p key={key}>{item}</p>
+                    )
+                }
+
+            })}
+
+        </div>
+
+    )
 }

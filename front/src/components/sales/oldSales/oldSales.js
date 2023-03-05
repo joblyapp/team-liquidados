@@ -25,7 +25,15 @@ export default function OldSales({ setMode, mode }) {
 
     // Create a state for description when cancelling a sale
     const [saleCancel, setSaleCancel] = useState("");
-
+    const col = [
+        "check",
+        "Código de Factura",
+        "Estado",
+        "Forma de Pago",
+        "Fecha",
+        "Monto",
+        "Acción"
+    ]
 
     useEffect(() => {
 
@@ -109,7 +117,7 @@ export default function OldSales({ setMode, mode }) {
                             <div className={styles.buttonSet}>
                                 <button
                                     onClick={() => {
-                                        setEditingId("none");    
+                                        setEditingId("none");
                                         setIsEditing(false);
                                         onClose()
                                     }}
@@ -151,7 +159,7 @@ export default function OldSales({ setMode, mode }) {
             })
 
             .then((response) => {
-                
+
                 setIsEditing(false);
                 setEditingId("null");
 
@@ -168,26 +176,27 @@ export default function OldSales({ setMode, mode }) {
 
         <div className={styles.centered}>
 
-            <UpperBar setEsNuevo={null} sectionText="Ventas" buttonText={"Nueva Venta"} />
+            <div>
 
-            {!loading ?
+                <UpperBar setEsNuevo={null} sectionText="Ventas" buttonText={"Nueva Venta"} />
 
-                <div>
+                {!loading ?
 
-                    <StatsInputs setCalendar={setCalendar} />
+                    <div  style={{backgroundColor:"white"}}>
 
-                    <SaleBar one="check" two="Código de Factura" three="Estado" four="Forma de Pago" five="Fecha" six="Monto" seven="Acción" />
+                        <StatsInputs setCalendar={setCalendar} />
 
-                    <ListOldSales oldSales={oldSales} setIsEditing={setIsEditing} setEditingId={setEditingId} />
+                        <SaleBar col={col} />
 
-                    <SaleBack setMode={setMode} toMenu={true} setIsEditing={setIsEditing} />
+                        <ListOldSales oldSales={oldSales} setIsEditing={setIsEditing} setEditingId={setEditingId} columns={col.length} />
 
-                </div>
 
-                :
+                    </div>
 
-                <Loading />}
+                    :
 
+                    <Loading />}
+            </div>
         </div>
     )
 }
