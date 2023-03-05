@@ -314,4 +314,21 @@ ISSUE: when loading last month sales, it loads the sales of current month. I nee
 
 * Send the user description when cancelling a sale. DONE.
 * Dont allow to cancel when the sale is already cancelled. DONE.
-* ISSUE: Alert modal doesn't work after using it one time.
+* ISSUE: Alert modal doesn't work after using it one time. DONE.
+
+## SALE SHOW
+
+* I need a modal to show the sales information. DONE.
+
+* IMPORTANT: Change SALESBAR to recieve an array instead of individual column names. DONE.
+
+* Working on modal. DONE.
+
+CSS
+- Add background blur. DONE
+
+- Need "go back" button. DONE.
+- Need to see "Total Sale". DONE.
+- ADD pay method. DONE.
+- ADD Sale state. DONE.
+- ADD sale number. DONE.

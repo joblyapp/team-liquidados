@@ -2,6 +2,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+
 * {
     font-family: 'Poppins', sans-serif;
 }
@@ -12,6 +20,7 @@
     --third: #D9D9D9;
     --back: #f5f5f5;
     --blueButton: #0076FF;
+    --col: "4";
 }
 
 
@@ -234,13 +243,14 @@ body {
     align-items: center;
 
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    border: solid 2px black;
+   
+    border-bottom: 0.5px solid #D9D9D9;
     box-sizing: border-box;
-
+    grid-template-columns: repeat(4, 1fr);
     margin: 0 0 0 0;
 
-    background-color: white;
+   
+    box-sizing: border-box;
 }
 
 .listaProductos input,
@@ -255,7 +265,9 @@ select {
 /* Make sure that the list ocuppy some space even if it is empty */
 .productsCard {
 
+   
     height: 56vh;
+    box-sizing: border-box;
 }
 
 /* Are you sure? */
@@ -300,6 +312,24 @@ select {
     z-index: -1;
 }
 
+.someAlert::before{
+    content: '';
+    background-color: #333333;
+    position: absolute;
+    opacity: 0.3;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+}
+
+.someAlert {
+   
+    border-radius: 16px;
+    background-color: white;
+}
+
 .alertDescription h1 {
     text-align: left;
     margin: 0 0 20px 0;
@@ -317,6 +347,28 @@ select {
     
     height: 12vh;
     resize: none;
+}
+
+
+
+.descriptionCancel {
+    position: absolute;
+    margin: auto auto;
+
+    left: 25vw;
+    bottom: 150px;
+
+    width: 500px;
+    height: 30vh;
+
+    background-color: #feffff;
+    border: 3px solid rgba(238, 112, 112, 0.4);
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    transition: all 1s ease-in-out;
+ 
 }
 
 /* BARRA USUARIO */
@@ -369,6 +421,11 @@ select {
     background: rgba(22, 199, 154, 0.2);
     border-radius: 8px;
     color: #16C79A;
+}
+
+.saleInfo {
+    width: 42px;
+    opacity: 0.9;
 }
 
 /* Sale quantity buttons*/
@@ -557,11 +614,15 @@ select {
 }
 
 .space {
+   
+
+    padding: 20px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 85vw;
-
+   
     height: 10vh;
 }
 

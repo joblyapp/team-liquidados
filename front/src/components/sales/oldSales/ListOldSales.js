@@ -4,7 +4,7 @@ import PaginationSelect from "../../pagination/paginationSelect";
 
 
 
-export default function ListOldSales({ oldSales, setIsEditing, setEditingId }) {
+export default function ListOldSales({ oldSales, setIsEditing, setEditingId, columns }) {
 
 
     // Pagination states
@@ -36,6 +36,7 @@ export default function ListOldSales({ oldSales, setIsEditing, setEditingId }) {
                 currentPage={currentPage}
                 itemsPerPage={itemsPerPage}
                 isSale={true}
+                columns={columns}
             />
 
             <PaginationSelect

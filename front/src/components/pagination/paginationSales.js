@@ -1,7 +1,31 @@
 import styles from "../styles.module.css";
+import SaleInfo from "../../Images/icons/showSale.svg";
+import { confirmAlert } from "react-confirm-alert";
+import ShowSale from "../sales/oldSales/showSale";
 
-export default function PaginationSales({ data, handleClick }) {
+export default function PaginationSales({ data, handleClick, columns }) {
 
+    function handleInfo(id){
+
+        confirmAlert({
+
+            customUI: ({ onClose }) => {
+
+
+                return (
+
+                    <>
+                        <ShowSale saleId={id} onClose={onClose}/>
+                    </>
+                );
+
+            }
+
+            ,
+            closeOnClickOutside: false
+        });
+
+    }
 
 
     return (
@@ -13,7 +37,7 @@ export default function PaginationSales({ data, handleClick }) {
 
                 <div key={key} style={{ display: "flex" }}>
 
-                    <div className={styles.listaProductos} >
+                    <div className={styles.listaProductos} style={{gridTemplateColumns: `repeat(${columns}, 1fr)`}}>
 
                         <input
                             type="checkbox"
@@ -40,6 +64,16 @@ export default function PaginationSales({ data, handleClick }) {
                                 onClick={!item.isCancelled ? (() => handleClick(item._id)) : undefined}
                                 style={{ cursor: "pointer" }}>
                             </img>
+
+                            <img
+
+                                className={styles.saleInfo}
+                                src={SaleInfo}
+                                onClick={()=> handleInfo(item._id)}
+                                style={{ cursor: "pointer" }}>
+
+                            </img>
+
                         </div>
                     </div>
                 </div>
