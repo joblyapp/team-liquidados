@@ -538,6 +538,20 @@ select {
     opacity: 0.3;
 }
 
+.buttonExport {
+    background-color: transparent;
+    border: none;
+    color: var(--blueButton);
+}
+
+.buttonExport:enabled {
+    cursor: pointer;
+}
+
+.buttonExport:disabled {
+   opacity: 0.3;
+}
+
 /* LOADING */
 
 .ldsCircle {

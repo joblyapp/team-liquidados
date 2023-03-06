@@ -332,3 +332,36 @@ CSS
 - ADD pay method. DONE.
 - ADD Sale state. DONE.
 - ADD sale number. DONE.
+
+## EXPORT FUNCTION TO SALES
+
+* Add the react-json-to-excel package. DONE
+
+* Add the file-saver xlsx dependencie. DONE.
+
+* Pass oldSales as prop to UpperBar component. DONE.
+
+* Add OnClick function. DONE.
+
+* How to know which items are checked? SOLVED!
+
+-> First create an id for every checkbox. This id has to be equal to sale _id. DONE
+-> Then i need to check all checked boxes and add the id to an array. DONE.
+-> After that i need to filter all the information based on the IDs array. DONE.
+
+* Export the selected Sales to a xlsx file. DONE
+
+-> First i need to format the info and the headers. ISSUE: the changes i make to filteredSales JSON modifies the original data JSON. SOLVED! using a parse method to copy the original JSON.
+
+<<<<<<<<<< IMPORTANT >>>>>>>>>>
+
+## check boxes
+
+-> ISSUE: the checkboxes reload when user change Pages of Pagination. CAN'T ACHIEVE A PERFECT COORDINATION BEETWEEN THE CHECKED BOOLEAN INSIDE THE OLDSALES STATE AND THE CHECKBOX ITSELF. SOLVED creating a control array with the id of checked boxes.
+
+* Need to check all boxes when clicking the Bar checkbox. DONE
+
+
+-> ISSUE: can't send the cancellation reason to the backend.
+
+<<<<<<<<<< IMPORTANT >>>>>>>>>>

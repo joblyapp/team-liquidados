@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import SaleBack from "../saleBack";
 import styles from "../../styles.module.css";
 import Loading from "../../loading";
 import SaleBar from "../newSale/saleBar";
 import ListOldSales from "./ListOldSales";
-import Sale from "../newSale/sale";
 import StatsInputs from "../../stats/statsInputs"
 import UpperBar from "../../upperBar.js/upperBar";
 import { confirmAlert } from "react-confirm-alert";
@@ -25,6 +23,10 @@ export default function OldSales({ setMode, mode }) {
 
     // Create a state for description when cancelling a sale
     const [saleCancel, setSaleCancel] = useState("");
+
+    // Manage the checkedBoxes
+    const [checkedBoxes, setCheckedBoxes] = useState([]);
+
     const col = [
         "check",
         "Código de Factura",
@@ -34,6 +36,8 @@ export default function OldSales({ setMode, mode }) {
         "Monto",
         "Acción"
     ]
+
+
 
     useEffect(() => {
 
@@ -50,13 +54,16 @@ export default function OldSales({ setMode, mode }) {
                     console.log(response)
                     setOldSales(response.data)
                 })
+
                 .catch((error) => {
                     console.log(error);
                 })
                 .finally(() => {
+
                     setLoading(false);
                 })
         }
+
 
         else {
 
@@ -75,6 +82,7 @@ export default function OldSales({ setMode, mode }) {
                     console.log(error);
                 })
                 .finally(() => {
+
                     setLoading(false);
                 })
 
@@ -105,10 +113,12 @@ export default function OldSales({ setMode, mode }) {
                             <textarea
 
                                 id="cancelDescription"
+
                                 className={styles.textArea}
                                 autoFocus
                                 placeholder="Por favor indique los motivos de la cancelación"
                                 minLength="20"
+                                onChange={(e) => setSaleCancel(e.target.value)}
                                 required
 
                             >
@@ -126,7 +136,7 @@ export default function OldSales({ setMode, mode }) {
                                 </button>
                                 <button
                                     onClick={() => {
-                                        setSaleCancel(document.getElementById("cancelDescription").value);
+
                                         handleCancelSale(editingId, saleCancel, onClose);
 
                                     }}
@@ -155,11 +165,14 @@ export default function OldSales({ setMode, mode }) {
                 headers: {
                     Authorization: `Bearer ${sessionStorage.getItem("token")}`,
                     'Content-Type': 'application/json'
-                }, description
-            })
+                }
+            },
+                description
+
+            )
 
             .then((response) => {
-
+                console.log(response);
                 setIsEditing(false);
                 setEditingId("null");
 
@@ -178,17 +191,17 @@ export default function OldSales({ setMode, mode }) {
 
             <div>
 
-                <UpperBar setEsNuevo={null} sectionText="Ventas" buttonText={"Nueva Venta"} />
+                <UpperBar setEsNuevo={null} sectionText="Ventas" buttonText={"Nueva Venta"} data={oldSales} checkedBoxes={checkedBoxes}/>
 
                 {!loading ?
 
-                    <div  style={{backgroundColor:"white"}}>
+                    <div style={{ backgroundColor: "white" }}>
 
                         <StatsInputs setCalendar={setCalendar} />
 
-                        <SaleBar col={col} />
+                        <SaleBar col={col} setCheckedBoxes={setCheckedBoxes} oldSales={oldSales}/>
 
-                        <ListOldSales oldSales={oldSales} setIsEditing={setIsEditing} setEditingId={setEditingId} columns={col.length} />
+                        <ListOldSales oldSales={oldSales} setIsEditing={setIsEditing} setEditingId={setEditingId} columns={col.length} checkedBoxes={checkedBoxes} setCheckedBoxes={setCheckedBoxes}/>
 
 
                     </div>
