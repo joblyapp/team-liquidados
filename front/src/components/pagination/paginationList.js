@@ -2,12 +2,14 @@ import PaginationProducts from "./paginationProducts";
 import PaginationSales from "./paginationSales";
 
 
-export default function PaginationList({ data, state, handleAdd, handleEdit, handleAlert, currentPage, itemsPerPage, goBack, isSale, columns }) {
+export default function PaginationList({ data, state, handleAdd, handleEdit, handleAlert, currentPage, itemsPerPage, goBack, isSale, columns, checkedBoxes, setCheckedBoxes }) {
 
 
     const lastPostIndex = currentPage * itemsPerPage;
     const firstPostIndex = lastPostIndex - itemsPerPage;
-    data = data.slice(firstPostIndex, lastPostIndex);
+
+    var slicedData = data.slice(firstPostIndex, lastPostIndex);
+
 
     return (
         <>
@@ -17,7 +19,8 @@ export default function PaginationList({ data, state, handleAdd, handleEdit, han
 
 
                     <PaginationProducts
-                        data={data}
+                        
+                        data={slicedData}
                         handleEdit={handleEdit}
                         handleAlert={handleAlert}
                         handleAdd={handleAdd}
@@ -28,9 +31,12 @@ export default function PaginationList({ data, state, handleAdd, handleEdit, han
                     :
 
                     <PaginationSales
-                        data={data}
+                        
+                        data={slicedData}
                         handleClick={handleAlert}
                         columns={columns}
+                        checkedBoxes={checkedBoxes}
+                        setCheckedBoxes= {setCheckedBoxes}
                     />
             }
         </>
