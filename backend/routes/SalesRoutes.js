@@ -77,11 +77,11 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-// Delete a sale
+// Cancel a sale
 //A sale CANNOT be deleted to keep sales records
 //instead its set to cancelled
 
-router.delete("/:id", async (req, res) => {
+router.patch("/cancel/:id", async (req, res) => {
   try {
     const sale = await Sales.cancelSale(
       req.params.id,
