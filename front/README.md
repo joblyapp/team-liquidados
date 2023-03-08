@@ -365,3 +365,23 @@ CSS
 -> ISSUE: can't send the cancellation reason to the backend.
 
 <<<<<<<<<< IMPORTANT >>>>>>>>>>
+
+## Little Issues
+
+* Show the cancelDescription on Show Sale component.
+
+* Avoid the list of sales to load twice. DONE.
+
+* Add the "no sales" component.
+
+* Set the default calendar to the best date range. I think its LAST WEEK.
+
+
+
+* CSS
+
+- Date inputs.
+- Add arrows to PAGINATION SELECT.
+- English words to Spanish.
+- ORDENAR button
+- Border radius.

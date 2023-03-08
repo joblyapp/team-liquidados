@@ -8,6 +8,7 @@ export default function NoProducts() {
 
         <div className={styles.noProducts}>
 
+            <img></img>
             <h2>No se encuentran productos</h2>
             <h4>Puede ingresar un Nuevo Producto haciendo click en el botón</h4>
 

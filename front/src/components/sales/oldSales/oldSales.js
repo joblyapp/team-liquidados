@@ -7,6 +7,7 @@ import ListOldSales from "./ListOldSales";
 import StatsInputs from "../../stats/statsInputs"
 import UpperBar from "../../upperBar.js/upperBar";
 import { confirmAlert } from "react-confirm-alert";
+import { format } from "fecha";
 
 
 export default function OldSales({ setMode, mode }) {
@@ -18,7 +19,7 @@ export default function OldSales({ setMode, mode }) {
     const [isEditing, setIsEditing] = useState(false);
     const [editingId, setEditingId] = useState(null);
 
-    // Create a calendar state for filtering Old Sales
+    // Create a calendar state for filtering Old Sales. By default will be last year
     const [calendar, setCalendar] = useState(null);
 
     // Create a state for description when cancelling a sale
@@ -38,8 +39,28 @@ export default function OldSales({ setMode, mode }) {
     ]
 
 
+    useEffect(()=>{
+        var week = new Date();
+        week.setDate(week.getDate() - 7);
+        week = format(week, 'isoDate');
+        var today = format(new Date(), 'isoDate');
+
+        setCalendar({
+            "startDate": week,
+            "endDate": today
+        })
+
+    },[])
+
+    var week = new Date();
+    week.setDate(week.getDate() - 7);
+    week = format(week, 'isoDate');
+    var today = format(new Date(), 'isoDate');
 
     useEffect(() => {
+
+        // Now the UseEffect checks if there is a CALENDAR setted. If it is, calls "statistics". If not, calls "sales".
+        // I'll avoid to call "sales" and call "statistics" from the beginning. There are a lot of lines of code.
 
         if (calendar) {
 
@@ -64,7 +85,7 @@ export default function OldSales({ setMode, mode }) {
                 })
         }
 
-
+/*
         else {
 
             axios
@@ -88,7 +109,7 @@ export default function OldSales({ setMode, mode }) {
 
 
         }
-
+*/
     }, [calendar, isEditing])
 
 
@@ -137,7 +158,7 @@ export default function OldSales({ setMode, mode }) {
                                 <button
                                     onClick={() => {
 
-                                        handleCancelSale(editingId, saleCancel, onClose);
+                                        handleCancelSale(editingId, "saleCancel", onClose);
 
                                     }}
                                     className={styles.buttonYes}
@@ -159,6 +180,8 @@ export default function OldSales({ setMode, mode }) {
 
 
     function handleCancelSale(id, description, onClose) {
+
+        console.log(description);
 
         axios
             .delete(`${process.env.REACT_APP_URL}/Sales/${id}`, {
