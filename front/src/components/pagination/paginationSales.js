@@ -2,6 +2,7 @@ import styles from "../styles.module.css";
 import SaleInfo from "../../Images/icons/showSale.svg";
 import { confirmAlert } from "react-confirm-alert";
 import ShowSale from "../sales/oldSales/showSale";
+import { useEffect } from "react";
 
 
 export default function PaginationSales({ data, handleClick, columns, checkedBoxes, setCheckedBoxes }) {
@@ -45,10 +46,9 @@ export default function PaginationSales({ data, handleClick, columns, checkedBox
       
     }
 
- 
+
 
     return (
-
 
 
         <div className={styles.productsCard}>

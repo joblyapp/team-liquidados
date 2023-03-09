@@ -8,8 +8,8 @@ export default function PaginationList({ data, state, handleAdd, handleEdit, han
     const lastPostIndex = currentPage * itemsPerPage;
     const firstPostIndex = lastPostIndex - itemsPerPage;
 
-    var slicedData = data.slice(firstPostIndex, lastPostIndex);
-
+    data = data.slice(firstPostIndex, lastPostIndex);
+ 
 
     return (
         <>
@@ -20,7 +20,7 @@ export default function PaginationList({ data, state, handleAdd, handleEdit, han
 
                     <PaginationProducts
                         
-                        data={slicedData}
+                        data={data}
                         handleEdit={handleEdit}
                         handleAlert={handleAlert}
                         handleAdd={handleAdd}
@@ -32,7 +32,7 @@ export default function PaginationList({ data, state, handleAdd, handleEdit, han
 
                     <PaginationSales
                         
-                        data={slicedData}
+                        data={data}
                         handleClick={handleAlert}
                         columns={columns}
                         checkedBoxes={checkedBoxes}

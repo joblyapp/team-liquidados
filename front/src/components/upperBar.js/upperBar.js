@@ -10,12 +10,12 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
 
 
 
-    useEffect(()=>{
-    
-        if(checkedBoxes.length != 0){
+    useEffect(() => {
+
+        if (checkedBoxes.length != 0) {
             setAbleToExport(true)
         }
-        else{
+        else {
             setAbleToExport(false)
         }
 
@@ -39,7 +39,7 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
 
         var filteredIds = [];
         var filteredSales = JSON.parse(JSON.stringify(data));
-        
+
 
         filteredSales.map(item => {
             if (checkedBoxes.includes(item._id)) {
@@ -89,15 +89,23 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
         <div className={styles.space}>
 
             <div>
+
                 <h3>{sectionText}</h3>
 
                 <button className={styles.buttonExport} onClick={handleExport} disabled={!ableToExport}>
-                    <p style={{ textDecoration: "underline"}}><img src={ExportLogo} style={{ maxWidth: "12px" }}></img> Export </p>
+                    <img src={ExportLogo} style={{ maxWidth: "12px" }}></img><p style={{ textDecoration: "underline" }}> Export </p>
                 </button>
 
             </div>
 
-            <button className={styles.button} onClick={() => setEsNuevo(true)}>{buttonText}</button>
+            <button
+                className={`${styles.buttonYes} ${styles.buttonAdd}`}
+                onClick={() => setEsNuevo(true)}
+                style={{
+                    backgroundColor: "#16C79A"
+                    
+                }}>
+                {buttonText}</button>
 
         </div>
     )

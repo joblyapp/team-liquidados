@@ -26,7 +26,7 @@ export default function ShowSale({ saleId, onClose }) {
             sum = sum + item.products.price * item.products.quantity
         ))
         console.log("La suma total es de: " + sum);
-        setTotalToPay(sum);
+        setTotalToPay(sum.toFixed(2));
     }
 
 
@@ -113,7 +113,7 @@ export default function ShowSale({ saleId, onClose }) {
                             )}
 
                         </div>
-                        <div className={styles.descriptionCancel} style={description ? {display:"flex"} : {display:"none"}}><p>This is the description of why the employee cancel the Sale</p></div>
+                        <div className={styles.descriptionCancel} style={description ? {display:"flex"} : {display:"none"}}><p>{saleData.cancellationReason}</p></div>
                         <div className={styles.listaProductos}>
                             <div><p> {saleData.paymentForm}</p> </div>
                             <div > {saleData.isCancelled ? <p onMouseEnter={() => setDescription(true)} onMouseLeave={() => setDescription(false)}className={styles.cancelledSale}>Cancelado</p> : <p className={styles.facturedSale}>Facturado</p>}  </div>
