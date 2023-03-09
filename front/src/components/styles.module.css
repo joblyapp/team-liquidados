@@ -4,10 +4,13 @@
 
 html {
     box-sizing: border-box;
-  }
-  *, *:before, *:after {
+}
+
+*,
+*:before,
+*:after {
     box-sizing: inherit;
-  }
+}
 
 
 * {
@@ -145,7 +148,6 @@ body {
 
 .inputs {
 
-
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -175,6 +177,36 @@ body {
 .inputs:valid {
 
     border: 1px solid var(--blueButton);
+
+}
+
+
+.inputsBar {
+
+
+    flex-direction: row;
+
+    padding: 5px;
+    gap: 10px;
+
+    height: 4.6vh;
+    max-width: 200px;
+
+
+    background: var(--back);
+    /* Gris */
+
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+
+}
+
+
+.inputsBar:focus {
+
+    border: 1px solid #555;
 
 }
 
@@ -209,7 +241,7 @@ body {
 .showPass:hover {
     transform: scale(1.2);
     transition: transform 0.2s ease-in-out;
-  }
+}
 
 
 .forgotMessage {
@@ -243,13 +275,13 @@ body {
     align-items: center;
 
     display: grid;
-   
+
     border-bottom: 0.5px solid #D9D9D9;
     box-sizing: border-box;
     grid-template-columns: repeat(4, 1fr);
     margin: 0 0 0 0;
 
-   
+
     box-sizing: border-box;
 }
 
@@ -265,7 +297,7 @@ select {
 /* Make sure that the list ocuppy some space even if it is empty */
 .productsCard {
 
-   
+
     height: 56vh;
     box-sizing: border-box;
 }
@@ -312,7 +344,7 @@ select {
     z-index: -1;
 }
 
-.someAlert::before{
+.someAlert::before {
     content: '';
     background-color: #333333;
     position: absolute;
@@ -325,7 +357,7 @@ select {
 }
 
 .someAlert {
-   
+
     border-radius: 16px;
     background-color: white;
 }
@@ -344,7 +376,7 @@ select {
 .textArea {
     border: 1px solid #D9D9D9;
     border-radius: 8px;
-    
+
     height: 12vh;
     resize: none;
 }
@@ -368,7 +400,7 @@ select {
     box-sizing: border-box;
 
     transition: all 1s ease-in-out;
- 
+
 }
 
 /* BARRA USUARIO */
@@ -427,6 +459,12 @@ select {
     width: 42px;
     opacity: 0.9;
 }
+
+.showBox {
+    border: 0.5px solid #D9D9D9;
+    border-radius: 8px;
+}
+
 
 /* Sale quantity buttons*/
 
@@ -490,17 +528,24 @@ select {
 
 
 .buttonActive {
-    width: 25px;
-    background-color: lightblue;
-    border-radius: 50%;
+    width: 32px;
+    height: 3.1vh;
+    background: #FFFFFF;
+    border-radius: 8px;
+    border: 2px solid var(--blueButton);
 }
 
 .buttonNonActive {
-    width: 25px;
-    background-color: #ffffff;
-    border-radius: 50%;
+    width: 32px;
+    height: 3.1vh;
+    background: #FFFFFF;
+    border-radius: 8px;
+    border: 1px solid rgba(128, 128, 128, 0.301);
 }
 
+.buttonNonActive:hover {
+    border: 2px solid rgba(128, 128, 128, 0.301);
+}
 
 .buttonNo {
     cursor: pointer;
@@ -512,7 +557,7 @@ select {
 
     color: var(--blueButton);
 
-    
+
 }
 
 .buttonYes {
@@ -528,6 +573,22 @@ select {
     color: white;
 }
 
+.buttonAdd {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 207px;
+    height: 4.6vh;
+    padding: 12px 32px;
+}
+
+.buttonAdd:hover {
+    border:10px solid #00ff0d;
+    transition: all 1s ease;
+}
+
 .buttonSet {
     display: flex;
     justify-content: flex-end;
@@ -539,6 +600,10 @@ select {
 }
 
 .buttonExport {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
     background-color: transparent;
     border: none;
     color: var(--blueButton);
@@ -549,7 +614,7 @@ select {
 }
 
 .buttonExport:disabled {
-   opacity: 0.3;
+    opacity: 0.3;
 }
 
 /* LOADING */
@@ -628,15 +693,15 @@ select {
 }
 
 .space {
-   
 
-    padding: 20px;
+
+    padding: 20px 0px 20px 20px;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 85vw;
-   
+
     height: 10vh;
 }
 
@@ -655,6 +720,7 @@ select {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    background-color: transparent;
 }
 
 .whiteIt {

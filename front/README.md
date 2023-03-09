@@ -362,6 +362,34 @@ CSS
 * Need to check all boxes when clicking the Bar checkbox. DONE
 
 
--> ISSUE: can't send the cancellation reason to the backend.
+-> ISSUE: can't send the cancellation reason to the backend. DONE.
 
 <<<<<<<<<< IMPORTANT >>>>>>>>>>
+
+## Little Issues
+
+* Show the cancelDescription on Show Sale component. DONE.
+
+* Avoid the list of sales to load twice. DONE.
+
+* Add the "no sales" component. DONE.
+
+* Set the default calendar to the best date range. I think its LAST WEEK. DONE.
+
+
+
+* CSS
+
+- Date inputs. DONE.
+- Add arrows to PAGINATION SELECT. DONE.
+- English words to Spanish. DONE.
+- ORDENAR button. DONE.
+- Border radius. DONE.
+- Nueva Venta styling. DONE.
+
+* Functionalities
+
+- Change ORDER of showed sales. DONE
+- The TOTAL on ShowSale has too many decimal numbers and the addition is wrong. DONE.
+
+- Make the PAGINATION NUMEBERS shorter. DONE.

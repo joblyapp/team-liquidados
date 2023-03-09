@@ -7,6 +7,7 @@ import ListOldSales from "./ListOldSales";
 import StatsInputs from "../../stats/statsInputs"
 import UpperBar from "../../upperBar.js/upperBar";
 import { confirmAlert } from "react-confirm-alert";
+import { format } from "fecha";
 
 
 export default function OldSales({ setMode, mode }) {
@@ -18,7 +19,7 @@ export default function OldSales({ setMode, mode }) {
     const [isEditing, setIsEditing] = useState(false);
     const [editingId, setEditingId] = useState(null);
 
-    // Create a calendar state for filtering Old Sales
+    // Create a calendar state for filtering Old Sales. By default will be last year
     const [calendar, setCalendar] = useState(null);
 
     // Create a state for description when cancelling a sale
@@ -26,6 +27,9 @@ export default function OldSales({ setMode, mode }) {
 
     // Manage the checkedBoxes
     const [checkedBoxes, setCheckedBoxes] = useState([]);
+
+    // 
+    const [reverse, setReverse] = useState(false);
 
     const col = [
         "check",
@@ -37,9 +41,37 @@ export default function OldSales({ setMode, mode }) {
         "Acción"
     ]
 
+    // Reverse when clicking on ORDENAR button
+    useEffect(() => {
+
+        if (reverse) {
+            setOldSales(oldSales.reverse())
+            setReverse(false);
+        }
+
+
+    }, [reverse])
 
 
     useEffect(() => {
+
+        var first = new Date(null);
+        first = format(first, 'isoDate');
+        var today = format(new Date(), 'isoDate');
+
+        setCalendar({
+            "startDate": first,
+            "endDate": today
+        })
+
+    }, [])
+
+
+
+    useEffect(() => {
+
+        // Now the UseEffect checks if there is a CALENDAR setted. If it is, calls "statistics". If not, calls "sales".
+        // I'll avoid to call "sales" and call "statistics" from the beginning. There are a lot of lines of code.
 
         if (calendar) {
 
@@ -51,7 +83,7 @@ export default function OldSales({ setMode, mode }) {
                     }
                 })
                 .then((response) => {
-                    console.log(response)
+                    console.log(response.data)
                     setOldSales(response.data)
                 })
 
@@ -64,31 +96,31 @@ export default function OldSales({ setMode, mode }) {
                 })
         }
 
-
-        else {
-
-            axios
-                .get(`${process.env.REACT_APP_URL}/Sales`, {
-                    headers: {
-                        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then((response) => {
-                    console.log(response);
-                    setOldSales(response.data)
-                })
-                .catch((error) => {
-                    console.log(error);
-                })
-                .finally(() => {
-
-                    setLoading(false);
-                })
-
-
-        }
-
+        /*
+                else {
+        
+                    axios
+                        .get(`${process.env.REACT_APP_URL}/Sales`, {
+                            headers: {
+                                Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then((response) => {
+                            console.log(response);
+                            setOldSales(response.data)
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        })
+                        .finally(() => {
+        
+                            setLoading(false);
+                        })
+        
+        
+                }
+        */
     }, [calendar, isEditing])
 
 
@@ -160,14 +192,16 @@ export default function OldSales({ setMode, mode }) {
 
     function handleCancelSale(id, description, onClose) {
 
+        console.log(description);
+
         axios
-            .delete(`${process.env.REACT_APP_URL}/Sales/${id}`, {
+            .patch(`${process.env.REACT_APP_URL}/Sales/cancel/${id}`, { "cancellationReason": description }, {
                 headers: {
                     Authorization: `Bearer ${sessionStorage.getItem("token")}`,
                     'Content-Type': 'application/json'
                 }
             },
-                description
+
 
             )
 
@@ -191,21 +225,22 @@ export default function OldSales({ setMode, mode }) {
 
             <div>
 
-                <UpperBar setEsNuevo={null} sectionText="Ventas" buttonText={"Nueva Venta"} data={oldSales} checkedBoxes={checkedBoxes}/>
+
 
                 {!loading ?
+                    <>
+                        <UpperBar setEsNuevo={null} sectionText="Ventas" buttonText={"+ Nueva Venta"} data={oldSales} checkedBoxes={checkedBoxes} />
 
-                    <div style={{ backgroundColor: "white" }}>
+                        <div style={{ backgroundColor: "white" }} className={styles.showBox}>
 
-                        <StatsInputs setCalendar={setCalendar} />
+                            <StatsInputs setCalendar={setCalendar} setReverse={setReverse} />
 
-                        <SaleBar col={col} setCheckedBoxes={setCheckedBoxes} oldSales={oldSales}/>
+                            <SaleBar col={col} setCheckedBoxes={setCheckedBoxes} oldSales={oldSales} />
 
-                        <ListOldSales oldSales={oldSales} setIsEditing={setIsEditing} setEditingId={setEditingId} columns={col.length} checkedBoxes={checkedBoxes} setCheckedBoxes={setCheckedBoxes}/>
+                            <ListOldSales oldSales={oldSales} setIsEditing={setIsEditing} setEditingId={setEditingId} columns={col.length} checkedBoxes={checkedBoxes} setCheckedBoxes={setCheckedBoxes} />
 
-
-                    </div>
-
+                        </div>
+                    </>
                     :
 
                     <Loading />}
