@@ -7,11 +7,11 @@ import styles from "../styles.module.css";
 
 
 
-export default function StatsInputs({ setCalendar }) {
+export default function StatsInputs({ setCalendar, setReverse }) {
 
 
 
-    const [selected, setSelected] = useState("week");
+    const [selected, setSelected] = useState("custom");
     const [custom, setCustom] = useState(false);
 
     const today = format(new Date(), 'isoDate');
@@ -84,19 +84,25 @@ export default function StatsInputs({ setCalendar }) {
 
     }
 
+    function handleOrder(){
+        setReverse(true);
+    }
+
     return (
 
-        <div className={`${styles.listaProductos} ${styles.gapping}`}>
+        <div className={`${styles.listaProductos} ${styles.gapping} ${styles.whiteIt}`}>
 
             <form className={styles.calendar} onSubmit={handleSubmit}>
                 <input
                     id="dateFrom"
                     type="text"
-                    placeholder="From"
+                    placeholder="Desde"
                     onFocus={(e) => e.target.type = 'date'}
                     onBlur={(e) => e.target.type = 'text'}
-                    disabled={!custom}>
-
+                    disabled={!custom}
+                    className={styles.inputsBar}
+                    style={{maxWidth:"200px"}}>
+                        
                 </input>
                 <p>-</p>
                 <input
@@ -104,9 +110,10 @@ export default function StatsInputs({ setCalendar }) {
                     type="text"
                     onFocus={(e) => e.target.type = 'date'}
                     onBlur={(e) => e.target.type = 'text'}
-                    placeholder="To"
-
-                    disabled={!custom}>
+                    placeholder="Hasta"
+                    disabled={!custom}
+                    className={styles.inputsBar}
+                    style={{maxWidth:"200px"}}>
 
                 </input>
                 <input type="submit" value="Buscar" disabled={!custom}></input>
@@ -114,7 +121,7 @@ export default function StatsInputs({ setCalendar }) {
 
 
             <div>
-                <select defaultValue={selected} onChange={handleSelection}>
+                <select className={styles.inputsBar} defaultValue={selected} onChange={handleSelection}>
                     <option value="year">Último año</option>
                     <option value="month">Último mes</option>
                     <option value="week">Última semana</option>
@@ -122,6 +129,8 @@ export default function StatsInputs({ setCalendar }) {
                     <option value="custom">Personalizado</option>
                 </select>
             </div>
+
+            <button onClick={handleOrder} className={styles.inputsBar}>⬆⬇ Ordenar</button>
             <div>
 
 
