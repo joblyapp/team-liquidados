@@ -526,13 +526,44 @@ select {
 }
 
 
+@keyframes nextPage {
+    0% {
+      opacity: 0;
+      transform: translate(10em, 0);
+    }
+  
+    100% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+  
+  @keyframes prevPage {
+    0% {
+      opacity: 0;
+      transform: translate(-10em, 0);
+    }
+  
+    100% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+
+
 .buttonActive {
     width: 32px;
     height: 3.1vh;
     background: #FFFFFF;
     border-radius: 8px;
     border: 2px solid var(--blueButton);
+    transform: scale(1.1);
+   
+   
 }
+
+
 
 .buttonNonActive {
     width: 32px;
@@ -540,6 +571,9 @@ select {
     background: #FFFFFF;
     border-radius: 8px;
     border: 1px solid rgba(128, 128, 128, 0.301);
+
+    transition: border 1s ease-out;
+ 
 }
 
 .buttonNonActive:hover {

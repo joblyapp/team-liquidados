@@ -392,4 +392,8 @@ CSS
 - Change ORDER of showed sales. DONE
 - The TOTAL on ShowSale has too many decimal numbers and the addition is wrong. DONE.
 
-- Make the PAGINATION NUMEBERS shorter. DONE.
+- Make the PAGINATION NUMBERS shorter. DONE.
+
+## PAGINATION fixes
+
+* Not to resize when changing pages. DONE.
