@@ -17,9 +17,20 @@ export default function PaginationSelect({ setCurrentPage, itemsPerPage, totalIt
     // Create a variable to count the non existing previous or post current pages in order to mantain the anchor
     let debt = 0;
 
-    // Check if dots are needed
-    const leftNeeded = currentPage > pages[0] + 2;
-    const rightNeeded = currentPage < pages.length - 2;
+    var leftNeeded ;
+    var rightNeeded;
+
+    // Check if dots are needed and Adjust for quantity
+    if (pages.length > 9) {
+
+        leftNeeded = currentPage > pages[0] + 2;
+        rightNeeded = currentPage < pages.length - 2;
+
+    }
+    else{
+        leftNeeded = false;
+        rightNeeded = false;
+    }
 
     // First we add the FIRST number and add "..."
 
@@ -73,73 +84,88 @@ export default function PaginationSelect({ setCurrentPage, itemsPerPage, totalIt
         for (let i = currentPage - (5 + debt); i < currentPage - 3; i++) {
 
             if (pages[i]) {
-                console.log(adjustedPages)
+               
                 adjustedPages.splice(2 + j, 0, pages[i])
                 j++;
             }
         }
-
     }
-    // Add the points at the end
-    if (rightNeeded) {
-        adjustedPages.push("...");
-        adjustedPages.push(pages[pages.length - 1])
-    }
-
-
-
-
-    function handleClick(e, current, page) {
-        e.preventDefault();
-
-        console.log("current: " + current)
-        console.log("Page: " + page)
-
-        if (e.target.value > current) {
-            console.log("move right");
-           
+    else if (!rightNeeded && !leftNeeded) {
+        for (let i = currentPage + 2; i < currentPage + 4 + debt; i++) {
+            if (pages[i]) {
+                adjustedPages.push(pages[i]);
+            }
         }
 
-        if (e.target.value < current) {
-            console.log("move left");
-        }
+        let j = 0;
+        for (let i = currentPage - (5 + debt); i < currentPage - 3; i++) {
 
-
-
-        setCurrentPage(page);
-
-    }
-
-
-
-    function handleArrow(to) {
-        switch (to) {
-
-            case "up": if (currentPage < pages.length) { setCurrentPage(currentPage + 1) }
-                break;
-            case "down": if (currentPage > 1) {
-                setCurrentPage(currentPage - 1)
-                break;
+            if (pages[i]) {
+              
+                adjustedPages.splice( j, 0, pages[i])
+                j++;
             }
         }
     }
 
-    return (
 
-        <div className={styles.paginationSelect}>
-            <button
-                className={styles.buttonNonActive}
-                onClick={() => handleArrow("down")}>
-                &lt; </button>
-            {adjustedPages.map((page, key) => {
-                return (
-                    <button id={page} className={page == currentPage ? styles.buttonActive : styles.buttonNonActive} key={key} onClick={page != "..." ? (e) => handleClick(e, currentPage, page) : null} value={page}> {page} </button>
-                )
-            })}
-            <button
-                className={styles.buttonNonActive}
-                onClick={() => handleArrow("up")}>
-                &gt; </button>
-        </div>
-    )
+// Add the points at the end
+if (rightNeeded) {
+    adjustedPages.push("...");
+    adjustedPages.push(pages[pages.length - 1])
+}
+
+
+function handleClick(e, current, page) {
+    e.preventDefault();
+
+  
+
+    if (e.target.value > current) {
+        console.log("move right");
+
+    }
+
+    if (e.target.value < current) {
+        console.log("move left");
+    }
+
+
+
+    setCurrentPage(page);
+
+}
+
+
+
+function handleArrow(to) {
+    switch (to) {
+
+        case "up": if (currentPage < pages.length) { setCurrentPage(currentPage + 1) }
+            break;
+        case "down": if (currentPage > 1) {
+            setCurrentPage(currentPage - 1)
+            break;
+        }
+    }
+}
+
+return (
+
+    <div className={styles.paginationSelect}>
+        <button
+            className={styles.buttonNonActive}
+            onClick={() => handleArrow("down")}>
+            &lt; </button>
+        {adjustedPages.map((page, key) => {
+            return (
+                <button id={page} className={page == currentPage ? styles.buttonActive : styles.buttonNonActive} key={key} onClick={page != "..." ? (e) => handleClick(e, currentPage, page) : null} value={page}> {page} </button>
+            )
+        })}
+        <button
+            className={styles.buttonNonActive}
+            onClick={() => handleArrow("up")}>
+            &gt; </button>
+    </div>
+)
 }

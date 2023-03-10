@@ -397,3 +397,6 @@ CSS
 ## PAGINATION fixes
 
 * Not to resize when changing pages. DONE.
+* The size is forced when the pages are too few. DONE
+
+* Eliminate console.logs. DONE.
