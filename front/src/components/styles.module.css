@@ -231,11 +231,10 @@ body {
     position: absolute;
     top: -5px;
     right: 5px;
-    color: white;
+    color: black;
     padding: 15px;
     cursor: pointer;
-    z-index: 2;
-    width: 1.7rem;
+    width: 3.5rem;
 }
 
 .showPass:hover {

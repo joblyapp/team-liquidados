@@ -27,7 +27,7 @@ export default function LogIn({ setLoggedIn, setActive }) {
         `${process.env.REACT_APP_URL}/admin/login`,
         { email, password }
       );
-      console.log(response.data); // handle response
+      // console.log(response.data); // handle response
       sessionStorage.setItem("token", response.data.token);
       sessionStorage.setItem("name", response.data.name);
       sessionStorage.setItem("email", email);
