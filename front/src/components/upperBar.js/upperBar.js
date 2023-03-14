@@ -3,7 +3,7 @@ import { exportToExcel } from 'react-json-to-excel';
 import ExportLogo from "../../Images/icons/upload.svg";
 import { useEffect, useState } from "react";
 
-export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, checkedBoxes }) {
+export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, checkedBoxes, setProductSearch }) {
 
 
     const [ableToExport, setAbleToExport] = useState(false);
@@ -12,12 +12,18 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
 
     useEffect(() => {
 
-        if (checkedBoxes.length != 0) {
-            setAbleToExport(true)
+        if (checkedBoxes) {
+
+            if (checkedBoxes.length !== 0) {
+                setAbleToExport(true)
+            }
+            else {
+                setAbleToExport(false)
+            }
+
         }
-        else {
-            setAbleToExport(false)
-        }
+
+
 
     }, [checkedBoxes])
 
@@ -83,7 +89,7 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
 
     }
 
-
+    
     return (
 
         <div className={styles.space}>
@@ -92,18 +98,30 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
 
                 <h3>{sectionText}</h3>
 
-                <button className={styles.buttonExport} onClick={handleExport} disabled={!ableToExport}>
-                    <img src={ExportLogo} style={{ maxWidth: "12px" }}></img><p style={{ textDecoration: "underline" }}> Export </p>
-                </button>
+                {checkedBoxes &&
+
+                    <button className={styles.buttonExport} onClick={handleExport} disabled={!ableToExport}>
+                        <img
+                            src={ExportLogo}
+                            style={{ maxWidth: "12px" }}>
+                        </img>
+                        <p
+                            style={{ textDecoration: "underline" }}
+                        >
+                            Export </p>
+                    </button>
+
+                }
+
 
             </div>
 
             <button
                 className={`${styles.buttonYes} ${styles.buttonAdd}`}
-                onClick={() => setEsNuevo(true)}
+                onClick={() => setProductSearch(true)}
                 style={{
                     backgroundColor: "#16C79A"
-                    
+
                 }}>
                 {buttonText}</button>
 

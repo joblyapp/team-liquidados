@@ -6,10 +6,10 @@ import OldSales from "./oldSales/oldSales";
 
 export default function SaleIndex() {
 
-    const [mode, setMode] = useState("old");
+    const [mode, setMode] = useState(false);
 
     function checkSale() {
-        if (mode === "new") {
+        if (mode) {
             return (<Sale setMode={setMode} />)
         }
         else {

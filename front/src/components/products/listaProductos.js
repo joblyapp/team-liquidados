@@ -10,10 +10,10 @@ import PaginationSelect from "../pagination/paginationSelect";
 
 // A lista productos se le suma otro valor que es "isSelling". Si este valor es TRUE va a cambiar los botones de la derecha
 
-export default function     ListaProductos({ setForceRender, forceRender, value, categoryValue, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, goBack }) {
+export default function ListaProductos({ setForceRender, forceRender, value, categoryValue, categoriasDisponibles, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, goBack, setShowBars, productsTemp, setProductsTemp }) {
 
     // Loading wheel
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState();
 
     // Data obtained from BackEnd
     const [datos, setDatos] = useState(null);
@@ -21,15 +21,24 @@ export default function     ListaProductos({ setForceRender, forceRender, value,
     // To check the filter result
     const [complete, setComplete] = useState([]);
 
+    // Temporary added products
+    const [addedList, setAddedList] = useState([]);
+
+    // Disabled products
+    const [disableList, setDisableList] = useState( saleStatus.map((item)=> item.products._id) )
+
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(8);
 
 
+
+
     // Hook to load information from DataBase. It render again after deleting, editing or adding an item
     useEffect(() => {
 
-        console.log("rendering again")
+        setAddedList(saleStatus.map((item) => item.products._id))
+
         setLoading(true);
         axios
             .get(`${process.env.REACT_APP_URL}/products`, {
@@ -48,8 +57,9 @@ export default function     ListaProductos({ setForceRender, forceRender, value,
             .finally(() => {
                 setForceRender(false);
                 setLoading(false);
-                console.log(datos)
+                setShowBars(true);
             })
+
 
     }, [forceRender])
 
@@ -98,13 +108,13 @@ export default function     ListaProductos({ setForceRender, forceRender, value,
                     <div className={styles.alert}>
                         <h1>Elminar Producto</h1>
                         <p>¿Está seguro de que desea eliminar este producto?</p>
-                        <button onClick={onClose}>No</button>
+                        <button className={styles.buttonNo} onClick={onClose}>No</button>
                         <button
                             onClick={() => {
                                 handleDelete(id);
                                 onClose();
                             }}
-
+                            className={styles.buttonYes}
                         >
                             Yes
                         </button>
@@ -129,7 +139,8 @@ export default function     ListaProductos({ setForceRender, forceRender, value,
 
     }
 
-    async function handleAdd(name, price, id) {
+    async function handleAdd(name, price, id, cat) {
+        /*
         console.log(saleStatus);
         const sale = [...saleStatus];
         const newProduct = {
@@ -159,14 +170,68 @@ export default function     ListaProductos({ setForceRender, forceRender, value,
             setSaleStatus(sale);
             goBack();
         }
+*/
+
+        const sale = [...productsTemp];
+        console.log(sale)
+        
+        // create a product
+
+        const newProduct = {
+            products:
+            {
+                _id: id,
+                name: name,
+                price: price,
+                quantity: 1,
+                category: cat
+            }
+
+            ,
+            total() { return this.products.price * this.products.quantity },
+
+        }
+
+
+        const elementIndex = sale.indexOf(sale.find(element => element.products._id === id));
+        console.log(elementIndex);
+        console.log(sale)
+
+        if (elementIndex === -1) {
+
+            // Add the product to the temp array
+            sale.push(newProduct);
+            setProductsTemp(sale);
+
+            // Add the product the the temporary added list
+            const added = [...addedList];
+            added.push(id);
+            setAddedList(added);
+
+        }
+
+        else {
+            // Delete the product from temporary product list
+            sale.splice(elementIndex, 1);
+            setProductsTemp(sale);
+
+            // Delete product from added List
+            const added = [...addedList];
+            added.splice(added.indexOf(id), 1);
+            setAddedList(added);
+
+
+        }
+
 
     }
 
 
     return (
 
-        !loading ?
+        !loading
 
+            ?
 
             <>
                 <PaginationList
@@ -179,6 +244,9 @@ export default function     ListaProductos({ setForceRender, forceRender, value,
                     itemsPerPage={itemsPerPage}
                     goBack={goBack}
                     isSale={false}
+                    addedList={addedList}
+                    disableList={disableList}
+                    categoriasDisponibles={categoriasDisponibles}
                 />
 
                 <PaginationSelect

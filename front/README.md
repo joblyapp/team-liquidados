@@ -400,3 +400,49 @@ CSS
 * The size is forced when the pages are too few. DONE
 
 * Eliminate console.logs. DONE.
+
+* Change NEW SALE hover effect. DONE (up to discuss)
+
+## NEW SALE
+
+* Activate the NEW SALE button. DONE.
+
+* Provide correct information to SALES BAR. DONE.
+
+* Add UPPER BAR. DONE.
+
+* Add NO PRODUCTS component. DONE.
+
+* Adjust Sale Details structure. DONE.
+
+* Delete old "ADD PRODUCT" button and set the new one. DONE.
+
+* Create the SaleInputs component with Date and Pay Method. DONE.
+
+* Add DELETE product action. DONE.
+
+* Adjust quantity buttons visual. DONE.
+
+* Style Add buttons. DONE.
+
+* Disable Add button for added products.
+- Can create a CONFIRM button and add one by one the products.
+
+<<<<<<<<<<<<<< can work it using al id's array for already loaded products >>>>>>>>>>>>>>
+
+* This is the way
+
+- Make the ADD button a checkbox that adds products to a list. DONE.
+
+- Set the saleStatus when clicking the CONFIRMAR button, based on that list. DONE.
+
+
+
+
+* To adjust:
+
+- When clicking on "VENTAS" its goes directly to "NUEVA VENTA". SOLVED
+- When LOADING products the UpperBar and ProductBar are outside LOADING component.SOLVED.
+- Add white background and windows effect. SOLVED.
+
+* Register Sale button. DONE.

@@ -18,7 +18,7 @@ export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCat
 
     return (
 
-        <div className={styles.listaProductos}>
+        <div className={styles.listaProductos} style={{paddingLeft: "56px"}}>
             <input onChange={handleInputChange}></input>
 
             <select id="categoryFilter" defaultValue={"All"} onChange={handleCatChange} type="number" required>
