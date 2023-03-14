@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import styles from "../styles.module.css";
 
-export default function SaleBack({ setMode, toMenu, setIsEditing }) {
+
+export default function SaleBack({ setMode, toMenu }) {
 
     const navigate = useNavigate();
 
@@ -9,15 +11,15 @@ export default function SaleBack({ setMode, toMenu, setIsEditing }) {
         if(toMenu){
             navigate("/");
         }
-
-        setMode("old");
-        console.log("to old");
-        setIsEditing(false);
+        setMode(false);
     }
 
     return (
 
-        <button onClick={handleClick}> BACK </button>
+        <button 
+        onClick={handleClick}
+        className={styles.buttonNo}
+        > BACK </button>
     )
 
 }

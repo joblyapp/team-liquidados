@@ -2,16 +2,71 @@ import { useEffect, useState } from "react";
 import styles from "../../styles.module.css";
 import SaleQuantity from "./saleQuantity";
 import axios from "axios";
-import categorias from "../../products/categorias.json";
 import { confirmAlert } from "react-confirm-alert";
 import ProductSearch from "./productSearch";
+import NoProducts from "../../products/noProducts";
+import Delete from "../../../Images/icons/delete.svg"
+import SaleBack from "../saleBack";
 
-export default function SaleDetails({ setForceRender, forceRender, saleStatus, setSaleStatus, isEditing, setMode, isEditingId, setSuccess }) {
+export default function SaleDetails({ setForceRender, forceRender, saleStatus, setSaleStatus, isEditing, isEditingId, setSuccess, columns, productSearch, setProductSearch, setMode, payMethod }) {
 
     const [totalToPay, setTotalToPay] = useState(0);
-    const [payMethod, setPayMethod] = useState("Cash");
+    const [empty, setEmpty] = useState(true);
 
 
+    // Get categories state
+    const [categorias, setCategorias] = useState([]);
+
+
+
+    function getCategories() {
+
+        axios
+            .get(`${process.env.REACT_APP_URL}/category`, {
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => {
+                console.log(response.data);
+                setCategorias(response.data)
+
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
+    }
+
+    useEffect(() => {
+        getCategories();
+    }, [])
+
+    // Check if the sale data (saleStatus) is empty
+    useEffect(() => {
+        if (saleStatus.length === 0) {
+            setEmpty(true)
+        }
+        else {
+            setEmpty(false);
+        }
+        // Just checking
+        console.log(columns)
+
+    }, [saleStatus])
+
+
+    useEffect(() => {
+
+        if (productSearch) {
+            handleAddProduct();
+        }
+
+
+    }, [productSearch])
+
+    // Fuction to calculate total
     function calculateTotal(products) {
         var sum = 0;
         products.map((item) => (
@@ -21,6 +76,7 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
         setTotalToPay(sum);
     }
 
+    // Calculate total every time the Sale Status change
     useEffect(() => {
 
         if (saleStatus) {
@@ -30,13 +86,14 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
 
     }, [saleStatus])
 
+
     // This function send to de backEnd a JSON structured like this {products: [] total: {}}
     function handleSale() {
 
         if (isEditing) {
 
             const temporarySales = {
-                products: saleStatus.map(({ products }) => ({ name: products.name, price: products.price, quantity: products.quantity })),
+                products: saleStatus.map(({ products }) => ({ name: products.name, price: products.price, quantity: products.quantity, category: products.category })),
                 total: totalToPay,
                 isCancelled: false,
                 paymentForm: payMethod
@@ -65,9 +122,8 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
         else {
             console.log("Payment Form: " + typeof payMethod)
             const temporarySales = {
-                products: saleStatus.map(({ products }) => ({ name: products.name, price: products.price, quantity: products.quantity })),
+                products: saleStatus.map(({ products }) => ({ name: products.name, price: products.price, quantity: products.quantity, category: products.category })),
                 total: totalToPay,
-                isCancelled: false,
                 paymentForm: payMethod
             };
 
@@ -90,12 +146,16 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
         }
     }
 
+
+    // ADD PRODUCT modal
     function handleAddProduct() {
+
         confirmAlert({
 
             customUI: ({ onClose }) => {
 
                 return (
+
 
                     <ProductSearch
                         categorias={categorias}
@@ -106,54 +166,118 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
                         onClose={onClose}
                     />
 
+
+
                 );
             },
             closeOnClickOutside: false
         });
+        setProductSearch(false);
     }
 
+    // Delete Product Modal
+    function handleDeleteProduct(id) {
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <div className={styles.alertDescription}>
+                        <div>
+                            <h1>Elminar Producto</h1>
+                            <p>¿Está seguro de que desea eliminar este producto de la venta?</p>
+                        </div>
+                        <div className={styles.buttonSet}>
+                            <button className={styles.buttonNo} onClick={onClose}>No</button>
+                            <button
+                                onClick={() => {
+                                    const sale = [...saleStatus];
+                                    const elementIndex = sale.indexOf(sale.find(element => element.products._id === id));
+                                    sale.splice(elementIndex, 1);
+
+                                    setSaleStatus(sale);
+                                    onClose();
+                                }}
+                                className={styles.buttonYes}
+                            >
+                                Yes
+                            </button>
+                        </div>
+                    </div>
+                );
+            }
+        });
+
+
+    }
 
     return (
 
         <>
-            <div className={styles.productsCard}>
 
-                {saleStatus.map((item, key) => (
+            {!empty ?
 
-                    <div key={key} className={styles.listaProductos}>
+                <>
+                    <div className={styles.productsCard}>
 
-                        <p>{item.products.name}</p>
-                        <p>{item.products.price}</p>
-                        <SaleQuantity
-                            quantity={item.products.quantity}
-                            name={item.products.name}
-                            setSaleStatus={setSaleStatus}
-                            saleStatus={saleStatus}
-                        />
-                        <p>{item.total()}</p>
+                        {saleStatus.map((item, key) => (
+
+                            <div key={key} className={styles.listaProductos} style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
+
+                                <p>{item.products.name}</p>
+                                <p>{categorias[categorias.findIndex(el => el._id === item.products.category)]?.name}</p>
+                                <p>{item.products.price}</p>
+                                <p>{item.total()}</p>
+                                <SaleQuantity
+                                    quantity={item.products.quantity}
+                                    name={item.products.name}
+                                    setSaleStatus={setSaleStatus}
+                                    saleStatus={saleStatus}
+                                />
+                                <div
+                                    style={{ display: "flex", justifyContent: "center" }}
+                                    onClick={() => handleDeleteProduct(item.products._id)}>
+                                    <img
+                                        src={Delete}
+                                        style={{ cursor: "pointer" }}>
+                                    </img>
+
+                                </div>
+
+
+                            </div>
+
+                        )
+                        )}
 
                     </div>
+                    <div className={styles.listaProductos} style={{ borderTop: "1px solid lightGrey" }}>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p style={{ fontWeight: "bold" }}>TOTAL $ {totalToPay}</p>
+                    </div>
 
-                )
-                )}
 
-            </div>
-            <div className={styles.listaProductos}>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p style={{ fontWeight: "bold" }}>{totalToPay}</p>
-            </div>
+                    <div className={`${styles.buttonSet} ${styles.buttonSales} `}>
 
-            <select onChange={(e) => setPayMethod(e.target.value)} defaultValue={saleStatus.paymentForm}>
-                <option value="Cash">Efectivo</option>
-                <option value="Debit">Tarjeta de Débito</option>
-                <option value="Credit">Tarjeta de Crédito</option>
-            </select>
 
-            <button onClick={handleAddProduct}>ADD NEW PRODUCT</button>
-            <button onClick={handleSale}>REGISTER SALE</button>
+                        <SaleBack setMode={setMode} isEditing={isEditing} />
+                        <button
+                            onClick={handleSale}
+                            className={styles.buttonYes}>
+                            Confirmar
+                        </button>
 
+
+
+                    </div>
+                </>
+
+                :
+
+                <NoProducts sectionName="Productos" sectionNew="un nuevo Producto" icon="➕" />
+
+
+            }
         </>
     )
 

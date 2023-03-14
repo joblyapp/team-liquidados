@@ -6,6 +6,8 @@ import SaleDetails from "./saleDetails";
 import Loading from "../../loading";
 import axios from "axios";
 import Success from "../../success";
+import UpperBar from "../../upperBar.js/upperBar";
+import SaleInputs from "./saleInputs";
 
 
 
@@ -17,11 +19,20 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
     const [success, setSuccess] = useState(false);
     const [forceRender, setForceRender] = useState(false);
 
+    // State to register the pay method
+    const [payMethod, setPayMethod] = useState("Efectivo");
 
 
-    // We create a Sale  Status to register the products on current sale 
+
+    const col = ["Producto", "Categoría", "Precio Unitario", "Precio Total", "Cantidad", "Acciones"];
+
+
+
+    // Create a Sale  Status to register the products on current sale 
     const [saleStatus, setSaleStatus] = useState([]);
 
+    // Create a state for product search
+    const [productSearch, setProductSearch] = useState(false);
 
 
     // If we are editing a Sale, load the current sale information
@@ -62,6 +73,7 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
 
                 });
         }
+
     }, [])
 
 
@@ -76,11 +88,16 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
 
                     {
                         <>
-                            {!isEditing ? <h3>NUEVA VENTA</h3> : <h3>VER VENTA</h3>}
+                            <UpperBar sectionText="Agregar Venta" buttonText="+ Agregar Producto" checkedBoxes={null} setProductSearch={setProductSearch} />
 
-                            <SaleBar one="Nombre" two="Precio" three="Cantidad" four="TOTAL" />
-                            <SaleDetails setForceRender={setForceRender} forceRender={forceRender} saleStatus={saleStatus} setSaleStatus={setSaleStatus} isEditing={isEditing} setMode={setMode} isEditingId={isEditingId} setSuccess={setSuccess} />
-                            <SaleBack setMode={setMode} isEditing={isEditing} setIsEditing={setIsEditing} />
+                            <div style={{ backgroundColor: "white" }} className={styles.showBox}>
+
+                                <SaleInputs paymentForm={saleStatus.paymentForm} setPayMethod={setPayMethod} />
+                                <SaleBar col={col} />
+                                <SaleDetails setForceRender={setForceRender} forceRender={forceRender} saleStatus={saleStatus} setSaleStatus={setSaleStatus} isEditing={isEditing} isEditingId={isEditingId} setSuccess={setSuccess} columns={col.length} productSearch={productSearch} setProductSearch={setProductSearch} setPayMethod={setPayMethod} payMethod={payMethod} setMode={setMode} />
+
+                            </div>
+
 
                         </>
 
@@ -93,6 +110,6 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
                 <Loading />
             :
 
-            <Success operacion="Venta" setSuccess={setSuccess} setMode={setMode} setIsEditing={setIsEditing}/>
+            <Success operacion="Venta" setSuccess={setSuccess} setMode={setMode} setIsEditing={setIsEditing} />
     )
 }

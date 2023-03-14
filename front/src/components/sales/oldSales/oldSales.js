@@ -229,7 +229,7 @@ export default function OldSales({ setMode, mode }) {
 
                 {!loading ?
                     <>
-                        <UpperBar setEsNuevo={null} sectionText="Ventas" buttonText={"+ Nueva Venta"} data={oldSales} checkedBoxes={checkedBoxes} />
+                        <UpperBar setEsNuevo={setMode} sectionText="Ventas" buttonText={"+ Nueva Venta"} data={oldSales} checkedBoxes={checkedBoxes} setProductSearch={setMode}/>
 
                         <div style={{ backgroundColor: "white" }} className={styles.showBox}>
 

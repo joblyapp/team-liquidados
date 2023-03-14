@@ -39,9 +39,9 @@ function quantityChange(condition){
     
     return (
         <div className={styles.saleButtons}>
-            <button onClick={()=> quantityChange("down")}>-</button>
-            <p> {quantity} </p>
-            <button onClick={()=> quantityChange("up")}>+</button>
+            <button onClick={()=> quantityChange("down")} className={styles.buttonYes} style={{width: "32px"}}>-</button>
+            <p className={styles.quantityNumber} style={{width: "32px"}}> {quantity} </p>
+            <button onClick={()=> quantityChange("up")} className={styles.buttonYes} style={{width: "32px"}} >+</button>
         </div>
     )
 }
