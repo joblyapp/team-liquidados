@@ -25,7 +25,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
     const [addedList, setAddedList] = useState([]);
 
     // Disabled products
-    const [disableList, setDisableList] = useState( saleStatus.map((item)=> item.products._id) )
+    const [disableList, setDisableList] = useState(saleStatus && saleStatus.map((item)=> item.products._id) || null )
 
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
@@ -37,7 +37,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
     // Hook to load information from DataBase. It render again after deleting, editing or adding an item
     useEffect(() => {
 
-        setAddedList(saleStatus.map((item) => item.products._id))
+        setAddedList(saleStatus && saleStatus.map((item) => item.products._id))
 
         setLoading(true);
         axios
@@ -75,7 +75,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
     // Filter function
     function filtering(data) {
-        const temp = data.filter(product => product.name.toLowerCase().includes(value) && ((product.category === parseInt(categoryValue) || categoryValue === "All")));
+        const temp = data.filter(product => product.name.toLowerCase().includes(value) && ((product.category === categoryValue || categoryValue === "All")));
         return temp;
     }
 

@@ -31,25 +31,20 @@ export default function Products() {
     // State to force render after deleting, adding or editing an element
     const [forceRender, setForceRender] = useState(false);
 
+    // Columns for list
+
+    const col = [
+        "Producto",
+        "Tipo",
+        "Precio de Venta",
+        "Acciones"
+    ]
+
     // Just to navigate
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios
-            .get(`${process.env.REACT_APP_URL}/category`, {
-                headers: {
-                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then((response) => {
-                console.log(response.data)
-                setCategorias(response.data)
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-
+        getCategories()
     }, [])
 
     useEffect(() => {
@@ -60,6 +55,26 @@ export default function Products() {
 
 
     }, [editMode, esNuevo])
+
+    function getCategories() {
+
+        axios
+            .get(`${process.env.REACT_APP_URL}/category`, {
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => {
+                console.log(response.data);
+                setCategorias(response.data)
+
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
+    }
 
 
     function handleBack(to) {
@@ -103,11 +118,11 @@ export default function Products() {
 
         <div className={styles.centered}>
 
-            <UpperBar setEsNuevo={setEsNuevo} sectionText="Productos" buttonText="Nuevo Producto" />
+            <UpperBar setProductSearch={setEsNuevo} sectionText="Productos" buttonText="Nuevo Producto" />
 
             <ProductsBar setBusqueda={setBusqueda} categoriasDisponibles={categorias} setCategoria={setCategoria} />
-            <SaleBar one="Categoría" two="Nombre" three="Precio" four="Acciones" />
-            <ListaProductos setForceRender={setForceRender} forceRender={forceRender} value={busqueda} categoryValue={categoria} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} isSelling={false} />
+            <SaleBar col={col} />
+            <ListaProductos setForceRender={setForceRender} forceRender={forceRender} value={busqueda} categoryValue={categoria} categoriasDisponibles={categorias} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} isSelling={false} />
 
             {/* Not back button right now 
             <div>

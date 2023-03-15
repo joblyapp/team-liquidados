@@ -2,6 +2,7 @@ import styles from "../styles.module.css";
 import { exportToExcel } from 'react-json-to-excel';
 import ExportLogo from "../../Images/icons/upload.svg";
 import { useEffect, useState } from "react";
+import SaleBack from "../sales/saleBack";
 
 export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, checkedBoxes, setProductSearch }) {
 
@@ -93,9 +94,9 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
     return (
 
         <div className={styles.space}>
-
+      
             <div>
-
+          
                 <h3>{sectionText}</h3>
 
                 {checkedBoxes &&
@@ -118,7 +119,7 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
 
             <button
                 className={`${styles.buttonYes} ${styles.buttonAdd}`}
-                onClick={() => setProductSearch(true)}
+                onClick= {() => setProductSearch(true)}
                 style={{
                     backgroundColor: "#16C79A"
 

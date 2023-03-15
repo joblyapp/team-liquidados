@@ -56,7 +56,7 @@ export default function LogIn({ setLoggedIn, setActive }) {
   };
 
   return (
-    <div className={styles.centered}>
+    <div className={styles.centered} style={{height: "100vh", justifyContent:"center"}}>
       <img style={{ width: 250 }} src={Logo} alt="Logo"></img>
       <div className={`${styles.loginBox}`}>
         <form className={styles.formBox} onSubmit={handleSubmit}>

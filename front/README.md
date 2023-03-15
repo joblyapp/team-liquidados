@@ -446,3 +446,14 @@ CSS
 - Add white background and windows effect. SOLVED.
 
 * Register Sale button. DONE.
+
+
+## NEW FEATURES
+
+* Center vertically the styles.centered Login divs. DONE.
+
+* Back button on NEW SALE. 
+
+* Categories FILTER working properly. DONE.
+
+* Eliminate the blue background from titles.
