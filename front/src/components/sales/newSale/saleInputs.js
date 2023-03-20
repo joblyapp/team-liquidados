@@ -10,7 +10,7 @@ export default function SaleInputs({ setPayMethod, paymentForm }) {
 
 
 
-        <div className={`${styles.listaProductos} ${styles.whiteIt}`}>
+        <div className={`${styles.listaProductos} ${styles.whiteIt} ${styles.borderTop}`}>
 
             <input
                 id="dateTo"

@@ -19,7 +19,7 @@ export default function SaleBack({ setMode, toMenu }) {
         <button 
         onClick={handleClick}
         className={styles.buttonNo}
-        > BACK </button>
+        > Volver </button>
     )
 
 }

@@ -3,8 +3,7 @@ import styles from "../styles.module.css";
 
 export default function PaginationProducts({ data, handleEdit, handleAlert, handleAdd, state, addedList, disableList, categoriasDisponibles }) {
 
-    console.log(addedList)
-
+    
     return (
 
         <div className={styles.productsCard}>
@@ -42,7 +41,7 @@ export default function PaginationProducts({ data, handleEdit, handleAlert, hand
                 ))
             }
 
-            {data.length === 0 && <NoProducts />}
+            {data.length === 0 && <NoProducts sectionName="Productos" sectionNew="Nuevo producto" icon="📦"/>}
 
 
         </div>

@@ -286,7 +286,6 @@ font-size: 12px;
     grid-template-columns: repeat(4, 1fr);
     margin: 0 0 0 0;
 
-
     box-sizing: border-box;
 }
 
@@ -469,8 +468,13 @@ select {
    
     border-bottom: 0px;
     border-radius: 8px;
+    z-index: 1;
 }
 
+.borderTop {
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
 
 /* Sale quantity buttons*/
 
@@ -708,6 +712,18 @@ select {
     opacity: 0.3;
 }
 
+
+.backCross {
+    cursor: pointer;
+    background-color: transparent;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    padding: 20px;
+ 
+}
+
 /* LOADING */
 
 .ldsCircle {
@@ -721,7 +737,7 @@ select {
     height: 64px;
     margin: 8px;
     border-radius: 50%;
-    background: #ce2897;
+    background: var(--principal);
     animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 
@@ -785,7 +801,6 @@ select {
 
 .space {
 
-
     padding: 20px 0px 20px 20px;
 
     display: flex;
@@ -794,7 +809,6 @@ select {
     width: 81vw;
 
     height: 10vh;
-
 
 }
 

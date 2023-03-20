@@ -91,7 +91,7 @@ export default function ShowSale({ saleId, onClose }) {
                             <h3>Venta Número: {saleData.number}</h3>
 
                             <div>{saleData.date.substring(0, 10)} </div>
-                            <button onClick={handleBack} >BACK</button>
+                            <button className={styles.backCross} onClick={handleBack} >X</button>
                         </div>
 
 
@@ -103,9 +103,9 @@ export default function ShowSale({ saleId, onClose }) {
                                 <div key={key} className={styles.listaProductos}>
 
                                     <p>{item.products.name}</p>
-                                    <p>{item.products.price}</p>
+                                    <p>${item.products.price}</p>
                                     <p>{item.products.quantity}</p>
-                                    <p>{item.total()}</p>
+                                    <p>${item.total()}</p>
 
                                 </div>
 
@@ -119,7 +119,7 @@ export default function ShowSale({ saleId, onClose }) {
                             <div > {saleData.isCancelled ? <p onMouseEnter={() => setDescription(true)} onMouseLeave={() => setDescription(false)}className={styles.cancelledSale}>Cancelado</p> : <p className={styles.facturedSale}>Facturado</p>}  </div>
                                    
                             <p></p>
-                            <p style={{ fontWeight: "bold" }}>{totalToPay}</p>
+                            <h3 style={{ fontWeight: "bold" }}>TOTAL ${totalToPay}</h3>
                         </div>
 
 

@@ -33,18 +33,22 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
 
         e.preventDefault();
 
+        const image = document.getElementById("image").files[0];
+        console.log(image);
+
         const formData = new FormData();
         formData.append('name', document.getElementById("name").value);
         formData.append('price', document.getElementById("price").value);
         formData.append('description', "testing");
-        formData.append('image', document.getElementById("image").files[0]);
-        formData.append('category', document.getElementById("category").value)
+        formData.append('image', image);
+        formData.append('category', document.getElementById("category").value);
 
         console.log("Created form Data");
 
         if (esNuevo) {
 
             console.log("Inside If: NEW PRODUCT");
+            console.log(document.getElementById("image").files[0]);
 
             axios
                 .post(`${process.env.REACT_APP_URL}/products`, formData, {
@@ -116,11 +120,11 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
 
                 
 
-                    <form className={styles.boxEmergent} style={{ backgroundColor: "white" }} onSubmit={handleEditSubmit}>
+                    <form className={styles.boxEmergent} style={{ backgroundColor: "white" }} onSubmit={handleEditSubmit} method="post" enctype="multipart/form-data">
 
                         <div className={styles.boxElement} style={{ justifyContent: "center" }}>
                             <label className={styles.boxElement} for="image"><img src={productImage}></img></label>
-                            <input id="image" type="file" style={{ display: "none" }} onChange={handleImage}></input>
+                            <input id="image" type="file" name="image" style={{ display: "none" }} onChange={handleImage}></input>
                         </div>
                         <div className={styles.boxElement}>
                             Categoría: <select id="category" defaultValue={category} type="number" required>

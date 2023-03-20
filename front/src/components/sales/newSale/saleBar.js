@@ -31,7 +31,7 @@ export default function SaleBar({ col, setCheckedBoxes, oldSales }) {
 
         return (
 
-            <div style={{ backgroundColor: " white", textAlign: "center", gridTemplateColumns: `repeat(${columns}, 1fr)` }} className={`${styles.listaProductos} ${styles.listaBar}`}>
+            <div style={{ backgroundColor: " white", textAlign: "center", gridTemplateColumns: `repeat(${columns}, 1fr)` }} className={`${styles.listaProductos}`}>
 
 
                 {col.map((item, key) => {

@@ -10,7 +10,7 @@ import PaginationSelect from "../pagination/paginationSelect";
 
 // A lista productos se le suma otro valor que es "isSelling". Si este valor es TRUE va a cambiar los botones de la derecha
 
-export default function ListaProductos({ setForceRender, forceRender, value, categoryValue, categoriasDisponibles, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, goBack, setShowBars, productsTemp, setProductsTemp }) {
+export default function ListaProductos({ setForceRender, forceRender, value, categoryValue, categoriasDisponibles, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, goBack, setShowBars, productsTemp, setProductsTemp, setReverse, reverse }) {
 
     // Loading wheel
     const [loading, setLoading] = useState();
@@ -63,7 +63,17 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
     }, [forceRender])
 
+    // Reverse when clicking on ORDENAR button
+    useEffect(() => {
 
+        if (reverse) {
+            setDatos(datos.reverse())
+            setReverse(false);
+            console.log("reversing")
+        }
+
+
+    }, [reverse])
 
     useEffect(() => {
         if (datos) {
@@ -188,7 +198,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
             }
 
             ,
-            total() { return this.products.price * this.products.quantity },
+            total() { return (this.products.price * this.products.quantity)},
 
         }
 
@@ -207,7 +217,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
             const added = [...addedList];
             added.push(id);
             setAddedList(added);
-
+            console.log(sale);
         }
 
         else {
