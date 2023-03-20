@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styles from "../../styles.module.css";
-import SaleBack from "../saleBack";
 import SaleBar from "./saleBar";
 import SaleDetails from "./saleDetails";
 import Loading from "../../loading";

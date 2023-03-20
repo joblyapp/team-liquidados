@@ -231,7 +231,7 @@ export default function OldSales({ setMode, mode }) {
                     <>
                         <UpperBar setEsNuevo={setMode} sectionText="Ventas" buttonText={"+ Nueva Venta"} data={oldSales} checkedBoxes={checkedBoxes} setProductSearch={setMode}/>
 
-                        <div style={{ backgroundColor: "white" }} className={styles.showBox}>
+                        <div style={{ backgroundColor: "white" }} className= {styles.showBox}>
 
                             <StatsInputs setCalendar={setCalendar} setReverse={setReverse} />
 

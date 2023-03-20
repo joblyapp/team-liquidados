@@ -28,6 +28,8 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
 
     }, [checkedBoxes])
 
+    // Export format functions
+
     function changeKeyName(oldName, newName, el) {
 
         el[newName] = el[oldName];
@@ -37,7 +39,6 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
     function deleteElement(oldName, el) {
         delete el[oldName];
     }
-
 
 
     async function handleExport(e) {
@@ -90,16 +91,16 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
 
     }
 
-    
+
     return (
 
         <div className={styles.space}>
-      
+
             <div>
-          
+
                 <h3>{sectionText}</h3>
 
-                {checkedBoxes &&
+                {checkedBoxes ?
 
                     <button className={styles.buttonExport} onClick={handleExport} disabled={!ableToExport}>
                         <img
@@ -112,6 +113,18 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
                             Export </p>
                     </button>
 
+                    :
+
+                    <button className={styles.buttonExport} onClick={handleExport} disabled={true}>
+                        <img
+                            src={ExportLogo}
+                            style={{ maxWidth: "12px" }}>
+                        </img>
+                        <p
+                            style={{ textDecoration: "underline" }}
+                        >
+                            Export </p>
+                    </button>
                 }
 
 
@@ -119,7 +132,7 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
 
             <button
                 className={`${styles.buttonYes} ${styles.buttonAdd}`}
-                onClick= {() => setProductSearch(true)}
+                onClick={() => setProductSearch(true)}
                 style={{
                     backgroundColor: "#16C79A"
 
