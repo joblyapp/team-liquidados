@@ -25,7 +25,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
     const [addedList, setAddedList] = useState([]);
 
     // Disabled products
-    const [disableList, setDisableList] = useState(saleStatus && saleStatus.map((item)=> item.products._id) || null )
+    const [disableList, setDisableList] = useState(saleStatus && saleStatus.map((item) => item.products._id) || null)
 
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
@@ -40,6 +40,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
         setAddedList(saleStatus && saleStatus.map((item) => item.products._id))
 
         setLoading(true);
+
         axios
             .get(`${process.env.REACT_APP_URL}/products`, {
                 headers: {
@@ -63,25 +64,32 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
     }, [forceRender])
 
-    // Reverse when clicking on ORDENAR button
+    // Filter data when changing search or category.
     useEffect(() => {
 
-        if (reverse) {
-            setDatos(datos.reverse())
-            setReverse(false);
-            console.log("reversing")
-        }
-
-
-    }, [reverse])
-
-    useEffect(() => {
         if (datos) {
             setComplete(filtering(datos));
             setCurrentPage(1);
         }
 
     }, [value, categoryValue, datos])
+
+    // Reverse when clicking on ORDENAR button
+    useEffect(() => {
+
+        if (reverse) {
+            setComplete(complete.reverse())
+            setReverse(false);
+
+            console.log("reversing");
+        }
+        else {
+            console.log("not working")
+        }
+
+    }, [reverse])
+
+
 
     // Filter function
     function filtering(data) {
@@ -184,7 +192,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
         const sale = [...productsTemp];
         console.log(sale)
-        
+
         // create a product
 
         const newProduct = {
@@ -198,7 +206,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
             }
 
             ,
-            total() { return (this.products.price * this.products.quantity)},
+            total() { return (this.products.price * this.products.quantity) },
 
         }
 

@@ -488,3 +488,20 @@ CSS
 * Change BACK button to VOLVER.
 
 
+## NEW CORRECTIONS
+
+* Add icon to search and move cursor to the right. DONE.
+* Order button not working. DONE.
+* Correct products images height. DONE.
+* Correct font weight from lists. DONE.
+* NO PRODUCTS component on products.
+
+## GENERAL CHECK
+
+* Cancellation reason is not writing correctly. DONE.
+* When clicking ORDENAR the total products list gets shorter. DONE.
+
+## NEW PRODUCT STYLING
+
+* Change title. DONE.
+* 
