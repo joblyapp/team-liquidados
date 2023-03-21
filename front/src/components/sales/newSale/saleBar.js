@@ -48,7 +48,7 @@ export default function SaleBar({ col, setCheckedBoxes, oldSales }) {
                     }
                     else {
                         return (
-                            <p key={key}>{item}</p>
+                            <p style={{fontWeight: "bold"}} key={key}>{item}</p>
                         )
                     }
 

@@ -123,7 +123,7 @@ export default function OldSales({ setMode, mode }) {
         */
     }, [calendar, isEditing])
 
-
+   
 
     useEffect(() => {
 
@@ -150,7 +150,7 @@ export default function OldSales({ setMode, mode }) {
                                 autoFocus
                                 placeholder="Por favor indique los motivos de la cancelación"
                                 minLength="20"
-                                onChange={(e) => setSaleCancel(e.target.value)}
+                               
                                 required
 
                             >
@@ -168,8 +168,8 @@ export default function OldSales({ setMode, mode }) {
                                 </button>
                                 <button
                                     onClick={() => {
-
-                                        handleCancelSale(editingId, saleCancel, onClose);
+                                        const description = document.getElementById("cancelDescription").value;
+                                        handleCancelSale(editingId, description, onClose);
 
                                     }}
                                     className={styles.buttonYes}
