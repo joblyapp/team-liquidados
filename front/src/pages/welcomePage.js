@@ -3,6 +3,7 @@ import Welcome from "../components/Welcome/welcome";
 import NavBar from "../components/NavBar/NavBar";
 import { useState } from "react";
 import UserProfileModal from "../components/UserProfileModal/UserProfileModal";
+import { useModal } from "../helpers/modalProvider";
 
 export default function WelcomePage({
   loggedIn,
@@ -11,7 +12,7 @@ export default function WelcomePage({
   handleLogout,
   setLoggedIn,
 }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isModalOpen, setIsModalOpen } = useModal();
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -29,14 +30,13 @@ export default function WelcomePage({
         <>
           {loggedIn && (
             <>
-              {" "}
               <NavBar
                 onProfileClick={openModal}
                 handleLogout={handleLogout}
                 active={active}
                 setActive={setActive}
-              />{" "}
-              <Welcome />{" "}
+              />
+              <Welcome />
               <UserProfileModal
                 isOpen={isModalOpen}
                 onRequestClose={closeModal}

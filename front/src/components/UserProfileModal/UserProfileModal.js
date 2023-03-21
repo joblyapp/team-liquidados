@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import "./UserProfileModal.css";
+import UserIcon from "../../Images/icons/user.svg";
+import EditIcon from "../../Images/icons/editSimple.svg";
 
 function UserProfileModal(props) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState(sessionStorage.getItem("name"));
+  const [email, setEmail] = useState(sessionStorage.getItem("email"));
   const [profilePicture, setProfilePicture] = useState("");
 
   const handleNameChange = (event) => {
@@ -24,9 +26,9 @@ function UserProfileModal(props) {
   const customStyles = {
     content: {
       borderRadius: "10px",
-      width: "40%",
+      width: "30%",
       margin: "auto auto",
-      height: "75vh",
+      height: "70vh",
     },
   };
 
@@ -52,23 +54,60 @@ function UserProfileModal(props) {
       overlayClassName="Overlay"
     >
       <h2>Editar Perfil</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Profile Picture:
-          <input type="file" onChange={handleProfilePictureChange} />
+      <form className="form" onSubmit={handleSubmit}>
+        <label className="profile-picture-container ">
+          <div className="profile-picture">
+            <img className="user-icon" src={UserIcon} alt="User Icon" />
+          </div>
+          <button
+            type="button"
+            className="custom-file-upload"
+            onClick={() => {
+              document.getElementById("file-upload").click();
+            }}
+          >
+            <img
+              style={{ marginRight: "5px" }}
+              src={EditIcon}
+              alt="icono editar"
+            />
+            Editar Foto{" "}
+          </button>
+
+          <input
+            id="file-upload"
+            type="file"
+            onChange={handleProfilePictureChange}
+          />
         </label>
-        <label>
+        <label className="inputs">
           Nombre y apellido:
-          <input type="text" value={name} onChange={handleNameChange} />
+          <input
+            className="input"
+            type="text"
+            value={name}
+            onChange={handleNameChange}
+          />
         </label>
-        <label>
+        <label className="inputs">
           Email:
-          <input type="email" value={email} onChange={handleEmailChange} />
+          <input
+            className="input"
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+          />
         </label>
-        <button type="submit">Guardar</button>
-        <button type="button" onClick={props.onRequestClose}>
-          Cancelar
-        </button>
+        <div className="action-buttons">
+          <button
+            className="cancelar"
+            type="button"
+            onClick={props.onRequestClose}
+          >
+            Cancelar
+          </button>
+          <button type="submit">Guardar</button>
+        </div>
       </form>
     </Modal>
   );
