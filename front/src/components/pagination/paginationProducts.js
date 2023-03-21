@@ -98,7 +98,7 @@ export default function PaginationProducts({
         </div>
       ))}
 
-      {data.length === 0 && <NoProducts />}
+      {data.length === 0 && <NoProducts sectionName="Productos" sectionNew="Nuevo producto" icon="📦" />}
     </div>
   );
 }
