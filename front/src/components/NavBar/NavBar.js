@@ -5,7 +5,7 @@ import "./NavBar.css";
 import Logo from "../../Images/DonVenturaLogoWhite.svg";
 import Avatar from "../../Images/Avatar.png";
 
-const Navbar = ({ handleLogout, active, setActive }) => {
+const Navbar = ({ handleLogout, active, setActive, onProfileClick }) => {
   //state for displayng the avatar drop down menu
   const [showMenu, setShowMenu] = useState(false);
   //state to keep track which link has the active state
@@ -81,7 +81,11 @@ const Navbar = ({ handleLogout, active, setActive }) => {
         </button>
         {showMenu && (
           <div className="navbar-avatar-dropdown" ref={avatarMenuRef}>
-            <Link to="/perfil" className="navbar-avatar-dropdown-link">
+            <Link
+              to="#"
+              onClick={onProfileClick}
+              className="navbar-avatar-dropdown-link"
+            >
               Perfil
             </Link>
             <Link
