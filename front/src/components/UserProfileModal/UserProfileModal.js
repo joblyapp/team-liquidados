@@ -3,24 +3,53 @@ import Modal from "react-modal";
 import "./UserProfileModal.css";
 import UserIcon from "../../Images/icons/user.svg";
 import EditIcon from "../../Images/icons/editSimple.svg";
+import axios from "axios";
 
 function UserProfileModal(props) {
   const [name, setName] = useState(sessionStorage.getItem("name"));
   const [email, setEmail] = useState(sessionStorage.getItem("email"));
-  const [profilePicture, setProfilePicture] = useState("");
 
   const handleNameChange = (event) => {
     setName(event.target.value);
+    console.log(name);
   };
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Code to update user profile goes here
-    props.onRequestClose();
+    const image = document.getElementById("image").files[0];
+    console.log(image);
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("name", name);
+    // formData.append("image", image);
+    if (image) {
+      formData.append("image", image);
+    }
+    try {
+      console.log(formData);
+      const res = await axios.patch(
+        `${process.env.REACT_APP_URL}/admin`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      // handle success response
+      console.log(res.data);
+      sessionStorage.setItem("name", res.data.name);
+      sessionStorage.setItem("email", res.data.email);
+      sessionStorage.setItem("avatar", res.data.image.path);
+      props.onRequestClose();
+    } catch (err) {
+      console.error(err.response.data);
+      // handle error response
+    }
   };
 
   const customStyles = {
@@ -32,19 +61,6 @@ function UserProfileModal(props) {
     },
   };
 
-  function handleProfilePictureChange(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      setProfilePicture(reader.result);
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  }
-
   return (
     <Modal
       isOpen={props.isOpen}
@@ -54,16 +70,30 @@ function UserProfileModal(props) {
       overlayClassName="Overlay"
     >
       <h2>Editar Perfil</h2>
-      <form className="form" onSubmit={handleSubmit}>
+      <form
+        method="post"
+        className="form"
+        encType="multipart/form-data"
+        onSubmit={handleSubmit}
+      >
         <label className="profile-picture-container ">
           <div className="profile-picture">
-            <img className="user-icon" src={UserIcon} alt="User Icon" />
+            {sessionStorage.getItem("avatar") ? (
+              <img
+                className="avatar"
+                src={`http://localhost:8080/${sessionStorage.getItem(
+                  "avatar"
+                )}`}
+              />
+            ) : (
+              <img className="user-icon" src={UserIcon} alt="User Icon" />
+            )}
           </div>
           <button
             type="button"
             className="custom-file-upload"
             onClick={() => {
-              document.getElementById("file-upload").click();
+              document.getElementById("image").click();
             }}
           >
             <img
@@ -74,11 +104,7 @@ function UserProfileModal(props) {
             Editar Foto{" "}
           </button>
 
-          <input
-            id="file-upload"
-            type="file"
-            onChange={handleProfilePictureChange}
-          />
+          <input name="image" id="image" type="file" />
         </label>
         <label className="inputs">
           Nombre y apellido:

@@ -27,11 +27,12 @@ export default function LogIn({ setLoggedIn, setActive }) {
         `${process.env.REACT_APP_URL}/admin/login`,
         { email, password }
       );
-      // console.log(response.data); // handle response
+      console.log(response.data); // handle response
       sessionStorage.setItem("token", response.data.token);
       sessionStorage.setItem("name", response.data.name);
       sessionStorage.setItem("email", email);
       sessionStorage.setItem("password", password);
+      sessionStorage.setItem("avatar", response.data.image);
       setLoggedIn(true);
       setActive("home");
 
@@ -56,7 +57,10 @@ export default function LogIn({ setLoggedIn, setActive }) {
   };
 
   return (
-    <div className={styles.centered} style={{height: "100vh", justifyContent:"center"}}>
+    <div
+      className={styles.centered}
+      style={{ height: "100vh", justifyContent: "center" }}
+    >
       <img style={{ width: 250 }} src={Logo} alt="Logo"></img>
       <div className={`${styles.loginBox}`}>
         <form className={styles.formBox} onSubmit={handleSubmit}>
