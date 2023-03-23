@@ -17,6 +17,8 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
 
     const [productImage, setProductImage] = useState("./notFound.jpg");
 
+    const [selectedCat, setSelectedCat] = useState(categoriasDisponibles[0])
+
 
     useEffect(() => {
 
@@ -41,7 +43,7 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
         formData.append('price', document.getElementById("price").value);
         formData.append('description', "testing");
         formData.append('image', image);
-        formData.append('category', document.getElementById("category").value);
+        formData.append('category', selectedCat);
 
         console.log("Created form Data");
 
@@ -134,17 +136,7 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
                             </div>
                             <div>
                                 Categoría:
-                                <select style={{ height: "4.6vh", width: "100%" }} id="category" defaultValue={category} type="number" required>
-
-                                    {categoriasDisponibles.map((item, key) => {
-
-                                        return (
-                                            <option key={key} value={item._id}>{`${item.number}: ${item.name}`}</option>
-                                        )
-
-                                    })}
-                                    <option value="New">New</option>
-                                </select>
+                                <Categorias categoriasDisponibles={categoriasDisponibles} setCreateCategory={setCreateCategory} setSelectedCat={setSelectedCat} defaultCategory={category}/>
                             </div>
                             <div>
                                 Precio: <input className={styles.inputs} style={{ width: "100%" }} id="price" defaultValue={price} type="number" maxLength="10" required></input>

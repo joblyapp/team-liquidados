@@ -32,7 +32,7 @@ export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCat
                     className={styles.inputsBar}
                 ></input>
             </div>
-            {/*
+
             <select className={styles.inputsBar} id="categoryFilter" defaultValue={"All"} onChange={handleCatChange} type="number" required>
 
                 <option value="All">Todos</option>
@@ -47,9 +47,7 @@ export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCat
 
                     })}
             </select>
-*/}
 
-            <Categorias categoriasDisponibles={categoriasDisponibles} categoriaPorDefecto="All" setCreateCategory={setCreateCategory} setCategoria={setCategoria} />
 
             <button onClick={handleOrder} className={styles.inputsBar}>⬆⬇ Ordenar</button>
         </div>
