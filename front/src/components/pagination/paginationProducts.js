@@ -6,6 +6,7 @@ import deleteButton from "../../Images/icons/delete.svg";
 import activeProduct from "../../Images/icons/activeProduct.svg";
 import hiddenProduct from "../../Images/icons/hiddenProduct.svg";
 
+
 export default function PaginationProducts({
   data,
   handleEdit,
@@ -23,14 +24,20 @@ export default function PaginationProducts({
   return (
     <div className={styles.productsCard}>
       {data.map((item, key) => (
+
         <div key={key} className={styles.listaProductos}>
           <div className="imageAndName">
-            <img
-              className="productImg"
-              src={`http://localhost:8080/${item.image.path}`}
-              alt={`${item.name}`}
-            />
-            <p>{item.name}</p>
+            <div className="conteiner">
+              <img
+                className="productImg"
+                src={`http://localhost:8080/${item.image.path}`}
+                onError={(e) => e.target.src = "notFound.jpg"}
+                alt={`${item.name}`}
+              />
+            </div>
+            <div className="conteiner2">
+              <p>{item.name}</p>
+            </div>
           </div>
 
           <p>
@@ -43,17 +50,20 @@ export default function PaginationProducts({
             }
           </p>
           <p>$ {item.price}</p>
-          <div className="actionButtons">
-            <button>
-              <img src={activeProduct} alt="" />
-            </button>
+
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            {!state &&
+              <button className="actionButtonsButton">
+                <img src={activeProduct} alt="" />
+              </button>}
             {!state && (
-              <button onClick={() => handleAlert(item._id)}>
+              <button className="actionButtonsButton" onClick={() => handleAlert(item._id)}>
                 <img src={deleteButton} alt="delete button" />
               </button>
             )}
             {!state && (
               <button
+                className="actionButtonsButton"
                 onClick={() =>
                   handleEdit(
                     item._id,
@@ -81,13 +91,14 @@ export default function PaginationProducts({
                 }
               >
                 {addedList.includes(item._id) ? <p>-</p> : <p>+</p>}
+
               </button>
             )}
           </div>
         </div>
       ))}
 
-      {data.length === 0 && <NoProducts />}
+      {data.length === 0 && <NoProducts sectionName="Productos" sectionNew="Nuevo producto" icon="📦" />}
     </div>
   );
 }

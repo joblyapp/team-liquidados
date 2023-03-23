@@ -51,9 +51,7 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
         else {
             setEmpty(false);
         }
-        // Just checking
-        console.log(columns)
-
+    
     }, [saleStatus])
 
 
@@ -73,7 +71,7 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
             sum = sum + item.total()
         ))
 
-        setTotalToPay(sum);
+        setTotalToPay(sum.toFixed(2));
     }
 
     // Calculate total every time the Sale Status change
@@ -225,7 +223,7 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
                                 <p>{item.products.name}</p>
                                 <p>{categorias[categorias.findIndex(el => el._id === item.products.category)]?.name}</p>
                                 <p>{item.products.price}</p>
-                                <p>{item.total()}</p>
+                                <p>{ item.total().toFixed(2) }</p>
                                 <SaleQuantity
                                     quantity={item.products.quantity}
                                     name={item.products.name}
@@ -249,11 +247,11 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
                         )}
 
                     </div>
-                    <div className={styles.listaProductos} style={{ borderTop: "1px solid lightGrey" }}>
+                    <div className={styles.listaProductos} style={{ borderTop: "1px solid lightGrey", borderBottomLeftRadius:"8px", borderBottomRightRadius:"8px" }}>
                         <p></p>
                         <p></p>
                         <p></p>
-                        <p style={{ fontWeight: "bold" }}>TOTAL $ {totalToPay}</p>
+                        <h3 style={{ fontWeight: "bold" }}>TOTAL $ {totalToPay}</h3>
                     </div>
 
 

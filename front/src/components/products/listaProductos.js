@@ -10,7 +10,7 @@ import PaginationSelect from "../pagination/paginationSelect";
 
 // A lista productos se le suma otro valor que es "isSelling". Si este valor es TRUE va a cambiar los botones de la derecha
 
-export default function ListaProductos({ setForceRender, forceRender, value, categoryValue, categoriasDisponibles, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, goBack, setShowBars, productsTemp, setProductsTemp }) {
+export default function ListaProductos({ setForceRender, forceRender, value, categoryValue, categoriasDisponibles, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, goBack, setShowBars, productsTemp, setProductsTemp, setReverse, reverse }) {
 
     // Loading wheel
     const [loading, setLoading] = useState();
@@ -25,7 +25,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
     const [addedList, setAddedList] = useState([]);
 
     // Disabled products
-    const [disableList, setDisableList] = useState(saleStatus && saleStatus.map((item)=> item.products._id) || null )
+    const [disableList, setDisableList] = useState(saleStatus && saleStatus.map((item) => item.products._id) || null)
 
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
@@ -40,6 +40,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
         setAddedList(saleStatus && saleStatus.map((item) => item.products._id))
 
         setLoading(true);
+
         axios
             .get(`${process.env.REACT_APP_URL}/products`, {
                 headers: {
@@ -63,15 +64,32 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
     }, [forceRender])
 
-
-
+    // Filter data when changing search or category.
     useEffect(() => {
+
         if (datos) {
             setComplete(filtering(datos));
             setCurrentPage(1);
         }
 
     }, [value, categoryValue, datos])
+
+    // Reverse when clicking on ORDENAR button
+    useEffect(() => {
+
+        if (reverse) {
+            setComplete(complete.reverse())
+            setReverse(false);
+
+            console.log("reversing");
+        }
+        else {
+            console.log("not working")
+        }
+
+    }, [reverse])
+
+
 
     // Filter function
     function filtering(data) {
@@ -174,7 +192,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
         const sale = [...productsTemp];
         console.log(sale)
-        
+
         // create a product
 
         const newProduct = {
@@ -188,7 +206,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
             }
 
             ,
-            total() { return this.products.price * this.products.quantity },
+            total() { return (this.products.price * this.products.quantity) },
 
         }
 
@@ -207,7 +225,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
             const added = [...addedList];
             added.push(id);
             setAddedList(added);
-
+            console.log(sale);
         }
 
         else {

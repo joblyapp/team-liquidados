@@ -456,4 +456,52 @@ CSS
 
 * Categories FILTER working properly. DONE.
 
-* Eliminate the blue background from titles.
+* Eliminate the blue background from titles. DONE.
+
+
+
+## TO THINK ABOUT
+
+* Export products:
+- We don't have checkboxes.
+- We need to reassemble te EXPORT function to do this.
+
+
+## TO DO
+
+* NO PRODUCTS component needs a new icon and format. DONE.
+
+* UPPER BAR need to be changed:
+- Add the ORDENAR button. DONE.
+- Add correspondent classes. DONE.
+
+* Loading wheel up to all components. DONE.
+
+## NICOLE CHANGES
+
+* Replace BACK with X. DONE.
+* "$" symbol to all prices. DONE.
+* Adjust TOTAL size. DONE.
+* Add placeholder to BUSCAR inputs. DONE.
+* Adjust BUSCAR inputs height. DONE.
+* Change loading wheel color. DONE.
+* Change BACK button to VOLVER.
+
+
+## NEW CORRECTIONS
+
+* Add icon to search and move cursor to the right. DONE.
+* Order button not working. DONE.
+* Correct products images height. DONE.
+* Correct font weight from lists. DONE.
+* NO PRODUCTS component on products.
+
+## GENERAL CHECK
+
+* Cancellation reason is not writing correctly. DONE.
+* When clicking ORDENAR the total products list gets shorter. DONE.
+
+## NEW PRODUCT STYLING
+
+* Change title. DONE.
+* 

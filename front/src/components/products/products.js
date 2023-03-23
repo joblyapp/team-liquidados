@@ -31,6 +31,12 @@ export default function Products() {
     // State to force render after deleting, adding or editing an element
     const [forceRender, setForceRender] = useState(false);
 
+    // State for reverse button
+    const [reverse, setReverse] = useState(false);
+
+    // State for loading bar after loading all the products
+    const [showBars, setShowBars] = useState(false);
+
     // Columns for list
 
     const col = [
@@ -55,6 +61,7 @@ export default function Products() {
 
 
     }, [editMode, esNuevo])
+
 
     function getCategories() {
 
@@ -118,18 +125,24 @@ export default function Products() {
 
         <div className={styles.centered}>
 
-            <UpperBar setProductSearch={setEsNuevo} sectionText="Productos" buttonText="Nuevo Producto" />
+            {showBars &&
 
-            <ProductsBar setBusqueda={setBusqueda} categoriasDisponibles={categorias} setCategoria={setCategoria} />
-            <SaleBar col={col} />
-            <ListaProductos setForceRender={setForceRender} forceRender={forceRender} value={busqueda} categoryValue={categoria} categoriasDisponibles={categorias} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} isSelling={false} />
+                <UpperBar setProductSearch={setEsNuevo} sectionText="Productos" buttonText="+ Nuevo Producto" />
+            }
 
-            {/* Not back button right now 
-            <div>
-                <button onClick={() => handleBack("/")}>Volver</button>
+            <div style= {{ backgroundColor: showBars &&  "white" }}  className={styles.showBox}>
+
+                {showBars &&
+                    <>
+                        <ProductsBar setBusqueda={setBusqueda} categoriasDisponibles={categorias} setCategoria={setCategoria} setReverse={setReverse} />
+                        <SaleBar col={col} />
+                    </>
+                }
+
+                <ListaProductos setForceRender={setForceRender} forceRender={forceRender} value={busqueda} categoryValue={categoria} categoriasDisponibles={categorias} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} isSelling={false} setReverse={setReverse} reverse={reverse} setShowBars={setShowBars} />
+
             </div>
 
-            */}
         </div>
 
 

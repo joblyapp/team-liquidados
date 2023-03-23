@@ -21,9 +21,9 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
     useEffect(() => {
 
         if (image) {
-            
+
             setProductImage(`${process.env.REACT_APP_URL}/${image.path}`);
-           
+
         }
 
     }, [productImage])
@@ -33,18 +33,22 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
 
         e.preventDefault();
 
+        const image = document.getElementById("image").files[0];
+        console.log(image);
+
         const formData = new FormData();
         formData.append('name', document.getElementById("name").value);
         formData.append('price', document.getElementById("price").value);
         formData.append('description', "testing");
-        formData.append('image', document.getElementById("image").files[0]);
-        formData.append('category', document.getElementById("category").value)
+        formData.append('image', image);
+        formData.append('category', document.getElementById("category").value);
 
         console.log("Created form Data");
 
         if (esNuevo) {
 
             console.log("Inside If: NEW PRODUCT");
+            console.log(document.getElementById("image").files[0]);
 
             axios
                 .post(`${process.env.REACT_APP_URL}/products`, formData, {
@@ -65,11 +69,11 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
                     console.log("Succedeed")
                 })
         }
-        
+
         else if (!esNuevo) {
 
             console.log("Inside If: EDIT PRODUCT for id: " + id)
-            
+
             axios
                 .patch(`${process.env.REACT_APP_URL}/products/${id}`, formData, {
                     headers: {
@@ -108,45 +112,57 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
 
         !success ?
 
-            <div className={styles.centered}>
+            <div className={`${styles.centered} ${styles.someAlert}`} style={{ justifyContent: "center" }}>
 
-                {esNuevo ? <h2>Crear Producto</h2> : <h2>Editar Producto</h2>}
+
 
                 <div>
 
-                
+                    {esNuevo ? <h2>Agregar Producto</h2> : <h2>Editar Producto</h2>}
 
-                    <form className={styles.boxEmergent} style={{ backgroundColor: "white" }} onSubmit={handleEditSubmit}>
+                    <form id="newProduct" className={styles.boxEmergent} style={{ height: "100%" }} onSubmit={handleEditSubmit} method="post">
 
-                        <div className={styles.boxElement} style={{ justifyContent: "center" }}>
+                        <div className={`${styles.boxElement} ${styles.boxImage}`}>
                             <label className={styles.boxElement} for="image"><img src={productImage}></img></label>
-                            <input id="image" type="file" style={{ display: "none" }} onChange={handleImage}></input>
+                            <input id="image" type="file" name="image" style={{ display: "none" }} onChange={handleImage}></input>
                         </div>
-                        <div className={styles.boxElement}>
-                            Categoría: <select id="category" defaultValue={category} type="number" required>
-
-                                {categoriasDisponibles.map((item, key) => {
-
-                                    return (
-                                        <option key={key} value={item._id}>{`${item.number}: ${item.name}`}</option>
-                                    )
-
-                                })}
-                            </select>
-                            Nombre: <input id="name" defaultValue={name} type="text" maxLength="20" pattern="([^\s][A-z0-9À-ž\s]+)" required></input>
-                            Precio: <input id="price" defaultValue={price} type="number" maxLength="10" required></input>
+                        <div className={`${styles.boxElement} ${styles.boxInputs}`}>
+                            <h2>Datos del producto</h2>
                             <div>
-                                <button onClick={handleCancelar}>Cancelar</button>
-                                <input type="submit" value="Confirmar"></input>
+                                Nombre: <input className={styles.inputs} style={{ width: "100%" }} id="name" defaultValue={name} type="text" maxLength="20" pattern="([^\s][A-z0-9À-ž\s]+)" required></input>
                             </div>
+                            <div>
+                                Categoría:
+                                <div>
+                                    <select style={{ height: "4.6vh", width:"100%" }} id="category" defaultValue={category} type="number" required>
+
+                                        {categoriasDisponibles.map((item, key) => {
+
+                                            return (
+                                                <option key={key} value={item._id}>{`${item.number}: ${item.name}`}</option>
+                                            )
+
+                                        })}
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                Precio: <input className={styles.inputs} style={{ width: "100%" }} id="price" defaultValue={price} type="number" maxLength="10" required></input>
+                            </div>
+
                         </div>
                     </form>
+
+                    <div className={styles.buttonSet}>
+                        <button className={styles.buttonNo} onClick={handleCancelar}>Cancelar</button>
+                        <input className={styles.buttonYes} form="newProduct" type="submit" value="Agregar"></input>
+                    </div>
                 </div>
             </div>
 
             :
 
-            <Success operacion="Edicion de producto" setSuccess={setSuccess} setMode={setProduct} onClose={onClose}/>
+            <Success operacion="Edicion de producto" setSuccess={setSuccess} setMode={setProduct} onClose={onClose} />
 
 
     )

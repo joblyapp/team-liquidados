@@ -7,6 +7,7 @@ import SalesPage from "./pages/salesPage";
 import ChangePass from "./pages/changePass";
 import RecoveryPage from "./pages/RecoveryPage";
 import ChangePassForm from "./components/changePass/changePassForm";
+import { ModalProvider } from "./helpers/modalProvider";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -31,56 +32,58 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={
-            <WelcomePage
-              setLoggedIn={setLoggedIn}
-              setActive={setActive}
-              active={active}
-              loggedIn={loggedIn}
-              handleLogout={handleLogout}
-            />
-          }
-        />
-        <Route
-          exact
-          path="/sales"
-          element={
-            <SalesPage
-              setActive={setActive}
-              active={active}
-              loggedIn={loggedIn}
-              handleLogout={handleLogout}
-            />
-          }
-        />
-        <Route
-          exact
-          path="/products"
-          element={
-            <ProductsPage
-              setActive={setActive}
-              active={active}
-              loggedIn={loggedIn}
-              handleLogout={handleLogout}
-            />
-          }
-        />
-        <Route exact path="/recovery" element={<RecoveryPage />} />
-        <Route
-          exact
-          path="/stats"
-          element={<StatsPage loggedIn={loggedIn} />}
-        />
-        <Route
-          exact
-          path="/reset-password/:recoveryToken"
-          element={<ChangePassForm />}
-        />
-      </Routes>
+      <ModalProvider>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <WelcomePage
+                setLoggedIn={setLoggedIn}
+                setActive={setActive}
+                active={active}
+                loggedIn={loggedIn}
+                handleLogout={handleLogout}
+              />
+            }
+          />
+          <Route
+            exact
+            path="/sales"
+            element={
+              <SalesPage
+                setActive={setActive}
+                active={active}
+                loggedIn={loggedIn}
+                handleLogout={handleLogout}
+              />
+            }
+          />
+          <Route
+            exact
+            path="/products"
+            element={
+              <ProductsPage
+                setActive={setActive}
+                active={active}
+                loggedIn={loggedIn}
+                handleLogout={handleLogout}
+              />
+            }
+          />
+          <Route exact path="/recovery" element={<RecoveryPage />} />
+          <Route
+            exact
+            path="/stats"
+            element={<StatsPage loggedIn={loggedIn} />}
+          />
+          <Route
+            exact
+            path="/reset-password/:recoveryToken"
+            element={<ChangePassForm />}
+          />
+        </Routes>
+      </ModalProvider>
     </BrowserRouter>
   );
 }

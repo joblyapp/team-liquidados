@@ -90,7 +90,7 @@ export default function StatsInputs({ setCalendar, setReverse }) {
 
     return (
 
-        <div className={`${styles.listaProductos} ${styles.gapping} ${styles.whiteIt}`}>
+        <div className={`${styles.listaProductos} ${styles.gapping} ${styles.whiteIt} ${styles.borderTop}`}>
 
             <form className={styles.calendar} onSubmit={handleSubmit}>
                 <input
@@ -116,7 +116,7 @@ export default function StatsInputs({ setCalendar, setReverse }) {
                     style={{maxWidth:"200px"}}>
 
                 </input>
-                <input type="submit" value="Buscar" disabled={!custom}></input>
+                <input type="submit" value="Buscar" disabled={!custom} placeholder="Buscar 🔎"></input>
             </form>
 
 
@@ -131,13 +131,7 @@ export default function StatsInputs({ setCalendar, setReverse }) {
             </div>
 
             <button onClick={handleOrder} className={styles.inputsBar}>⬆⬇ Ordenar</button>
-            <div>
-
-
-
-
-
-            </div>
+         
         </div>
 
     )

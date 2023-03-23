@@ -1,6 +1,7 @@
 import styles from "../styles.module.css";
+import Lupa from "../../Images/icons/Lupa.svg"
 
-export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCategoria }) {
+export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCategoria, setReverse }) {
 
 
 
@@ -10,17 +11,28 @@ export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCat
 
     function handleCatChange(e) {
         setCategoria(e.target.value);
+        
     }
 
+    function handleOrder() {
+        setReverse(true);
+    }
 
 
     return (
 
-        <div className={styles.listaProductos} style={{ paddingLeft: "56px" }}>
+        <div className={`${styles.listaProductos} ${styles.gapping} ${styles.whiteIt} ${styles.borderTop}`} style={{ paddingLeft: "56px", backgroundColor: "white" }}>
 
-            <input onChange={handleInputChange}></input>
+            <div className={styles.inputWithIcon}>
+                <img className={styles.iconInside} src={Lupa}></img>
+                <input
+                    onChange={handleInputChange}
+                    placeholder="Buscar"
+                    className={styles.inputsBar}
+                ></input>
+            </div>
 
-            <select id="categoryFilter" defaultValue={"All"} onChange={handleCatChange} type="number" required>
+            <select className={styles.inputsBar} id="categoryFilter" defaultValue={"All"} onChange={handleCatChange} type="number" required>
 
                 <option value="All">Todos</option>
 
@@ -34,6 +46,8 @@ export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCat
 
                     })}
             </select>
+
+            <button onClick={handleOrder} className={styles.inputsBar}>⬆⬇ Ordenar</button>
         </div>
     )
 }
