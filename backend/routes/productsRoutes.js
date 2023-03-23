@@ -48,6 +48,7 @@ router.get("/:id", async (req, res) => {
 //Creating one
 
 router.post("/", upload.single("image"), async (req, res) => {
+  console.log(req.file);
   const nextSequenceValue = await getNextSequenceValue("products");
   const newProduct = new Product({
     number: nextSequenceValue,

@@ -19,6 +19,10 @@ const AdminSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  image: {
+    path: String, // holds the image path
+    contentType: String, // holds the MIME type of the image
+  },
 });
 
 //method used for the login route

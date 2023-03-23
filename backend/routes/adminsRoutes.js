@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
+const upload = require("../middleware/upload");
 
 const Admin = require("../models/Admin");
 
@@ -27,7 +28,7 @@ router.post("/login", async (req, res) => {
     const token = await admin.login(req.body.password);
     res
       .header("Authorization", `Bearer ${token}`)
-      .send({ name: admin.name, token });
+      .send({ name: admin.name, token, image: admin.image.path });
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -57,6 +58,37 @@ router.post("/reset", async (req, res) => {
   }
 
   return res.json({ message: response.message });
+});
+
+//route use for the edit profile Modal (it does not patch the password)
+router.patch("/", upload.single("image"), async (req, res) => {
+  console.log(req.body);
+  console.log(req.file);
+  try {
+    const email = req.body.email;
+    const name = req.body.name;
+    const admin = await Admin.findOne({ email: email });
+    if (!admin) {
+      return res.status(404).send("Admin user not found.");
+    }
+    if (name) {
+      admin.name = name;
+    }
+    if (email) {
+      admin.email = email;
+    }
+    if (req.file) {
+      // check if an image file was uploaded
+      admin.image = {
+        path: req.file.path,
+        contentType: req.file.mimetype,
+      };
+    }
+    const updatedAdmin = await admin.save();
+    res.json(updatedAdmin);
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
 });
 
 module.exports = router;
