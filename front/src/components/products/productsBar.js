@@ -1,7 +1,8 @@
 import styles from "../styles.module.css";
 import Lupa from "../../Images/icons/Lupa.svg"
+import Categorias from "./categorias";
 
-export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCategoria, setReverse }) {
+export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCategoria, setReverse, setCreateCategory }) {
 
 
 
@@ -11,7 +12,7 @@ export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCat
 
     function handleCatChange(e) {
         setCategoria(e.target.value);
-        
+
     }
 
     function handleOrder() {
@@ -31,7 +32,7 @@ export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCat
                     className={styles.inputsBar}
                 ></input>
             </div>
-
+            {/*
             <select className={styles.inputsBar} id="categoryFilter" defaultValue={"All"} onChange={handleCatChange} type="number" required>
 
                 <option value="All">Todos</option>
@@ -46,6 +47,9 @@ export default function ProductsBar({ setBusqueda, categoriasDisponibles, setCat
 
                     })}
             </select>
+*/}
+
+            <Categorias categoriasDisponibles={categoriasDisponibles} categoriaPorDefecto="All" setCreateCategory={setCreateCategory} setCategoria={setCategoria} />
 
             <button onClick={handleOrder} className={styles.inputsBar}>⬆⬇ Ordenar</button>
         </div>
