@@ -37,6 +37,10 @@ export default function Products() {
     // State for loading bar after loading all the products
     const [showBars, setShowBars] = useState(false);
 
+    // Creating new category inside Modal
+    const [createCategory, setCreateCategory] = useState(false);
+
+
     // Columns for list
 
     const col = [
@@ -52,6 +56,31 @@ export default function Products() {
     useEffect(() => {
         getCategories()
     }, [])
+
+
+    useEffect(() => {
+
+        if (createCategory) {
+
+            axios
+                .post(`${process.env.REACT_APP_URL}/category`, { "name": createCategory }, {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    setCreateCategory(null);
+                    getCategories();
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
+
+    }, [createCategory])
+
 
     useEffect(() => {
         if (editMode || esNuevo) {
@@ -100,11 +129,11 @@ export default function Products() {
 
                     <>
                         {editMode ?
-                            <EditProduct setForceRender={setForceRender} forceRender={forceRender} onClose={onClose} esNuevo={esNuevo} setMode={setEditMode} id={productInfo.id} category={productInfo.category} name={productInfo.name} price={productInfo.price} image={productInfo.image} categoriasDisponibles={categorias} />
+                            <EditProduct setForceRender={setForceRender} forceRender={forceRender} onClose={onClose} esNuevo={esNuevo} setMode={setEditMode} id={productInfo.id} category={productInfo.category} name={productInfo.name} price={productInfo.price} image={productInfo.image} categoriasDisponibles={categorias} setCreateCategory={setCreateCategory} />
                             :
                             esNuevo ?
 
-                                <EditProduct setForceRender={setForceRender} forceRender={forceRender} onClose={onClose} esNuevo={esNuevo} setMode={setEsNuevo} category={"1"} name={""} price={""} image={""} categoriasDisponibles={categorias} />
+                                <EditProduct setForceRender={setForceRender} forceRender={forceRender} onClose={onClose} esNuevo={esNuevo} setMode={setEsNuevo} category={"1"} name={""} price={""} image={""} categoriasDisponibles={categorias} setCreateCategory={setCreateCategory} />
                                 :
                                 onClose()
                         }
@@ -130,11 +159,11 @@ export default function Products() {
                 <UpperBar setProductSearch={setEsNuevo} sectionText="Productos" buttonText="+ Nuevo Producto" />
             }
 
-            <div style= {{ backgroundColor: showBars &&  "white" }}  className={styles.showBox}>
+            <div style={{ backgroundColor: showBars && "white" }} className={styles.showBox}>
 
                 {showBars &&
                     <>
-                        <ProductsBar setBusqueda={setBusqueda} categoriasDisponibles={categorias} setCategoria={setCategoria} setReverse={setReverse} />
+                        <ProductsBar setBusqueda={setBusqueda} categoriasDisponibles={categorias} setCategoria={setCategoria} setReverse={setReverse} setCreateCategory={setCreateCategory} />
                         <SaleBar col={col} />
                     </>
                 }

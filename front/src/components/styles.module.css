@@ -45,6 +45,15 @@ body {
     background-color: var(--back);
 }
 
+/* FUNCTIONALS */
+
+.toGreen:hover {
+    filter: invert(61%) sepia(53%) saturate(449%) hue-rotate(70deg) brightness(98%) contrast(80%);
+}
+
+.toRed:hover {
+    filter: invert(65%) sepia(51%) saturate(5202%) hue-rotate(323deg) brightness(110%) contrast(86%);
+}
 
 .box {
 
@@ -696,7 +705,8 @@ select {
 .buttonSet {
     display: flex;
     justify-content: flex-end;
-    gap: 16px
+    gap: 16px;
+    padding-bottom: 20px;
 }
 
 .buttonSales {
@@ -738,6 +748,18 @@ select {
     padding: 20px;
 
 }
+
+
+.buttonClean {
+    border: none;
+    width: 30px;
+    max-height: 4.6vh;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 10;
+
+}
+
 
 /* LOADING */
 
