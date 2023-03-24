@@ -49,7 +49,10 @@ function UserProfileModal(props) {
       console.log(res.data);
       sessionStorage.setItem("name", res.data.name);
       sessionStorage.setItem("email", res.data.email);
-      sessionStorage.setItem("avatar", res.data.image.path);
+      sessionStorage.setItem(
+        "avatar",
+        `http://localhost:8080/${res.data.image.path}`
+      );
       props.onRequestClose();
     } catch (err) {
       console.error(err.response.data);
@@ -85,10 +88,7 @@ function UserProfileModal(props) {
           <div className="profile-picture">
             {image ? (
               image.includes("localhost:8080") ? (
-                <img
-                  className="avatar"
-                  src={`http://localhost:8080/${image}`}
-                />
+                <img className="avatar" src={image} />
               ) : (
                 <img className="avatar" src={image} />
               )
