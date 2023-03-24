@@ -659,7 +659,7 @@ select {
 
 .buttonNo {
     cursor: pointer;
-  
+
     border: 1px solid var(--blueButton);
     border-radius: 8px;
     background-color: white;
@@ -760,6 +760,20 @@ select {
 
 }
 
+.buttonDelete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4.6vh;
+    width: 10%;
+    opacity: 1;
+}
+
+.buttonDelete:hover {
+    opacity: 0.8;
+    transition: all .5s ease-in-out;
+}
+
 
 /* LOADING */
 
@@ -803,7 +817,7 @@ select {
 .boxEmergent {
 
     height: 50vh;
-   
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -811,7 +825,7 @@ select {
 
     gap: 50px;
 
-    
+
 }
 
 
@@ -819,10 +833,10 @@ select {
 .boxElement {
     height: 50vh;
     width: 50%;
-    
+
     flex-direction: column;
     justify-content: space-around;
-    
+
 }
 
 .boxElement img {
@@ -832,8 +846,8 @@ select {
 
 }
 
-.boxImage{
-    
+.boxImage {
+
     height: 45vh;
     width: 40vw;
     justify-content: center;
