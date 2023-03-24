@@ -32,7 +32,10 @@ export default function LogIn({ setLoggedIn, setActive }) {
       sessionStorage.setItem("name", response.data.name);
       sessionStorage.setItem("email", email);
       sessionStorage.setItem("password", password);
-      sessionStorage.setItem("avatar", response.data.image);
+      sessionStorage.setItem(
+        "avatar",
+        `http://localhost:8080/${response.data.image}`
+      );
       setLoggedIn(true);
       setActive("home");
 
