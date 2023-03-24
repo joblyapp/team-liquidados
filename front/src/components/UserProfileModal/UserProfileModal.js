@@ -8,6 +8,7 @@ import axios from "axios";
 function UserProfileModal(props) {
   const [name, setName] = useState(sessionStorage.getItem("name"));
   const [email, setEmail] = useState(sessionStorage.getItem("email"));
+  const [image, setImage] = useState(sessionStorage.getItem("avatar"));
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -16,6 +17,10 @@ function UserProfileModal(props) {
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
+  };
+  const handleImageChange = (event) => {
+    setImage(URL.createObjectURL(document.getElementById("image").files[0]));
+    console.log(image);
   };
 
   const handleSubmit = async (event) => {
@@ -44,7 +49,10 @@ function UserProfileModal(props) {
       console.log(res.data);
       sessionStorage.setItem("name", res.data.name);
       sessionStorage.setItem("email", res.data.email);
-      sessionStorage.setItem("avatar", res.data.image.path);
+      sessionStorage.setItem(
+        "avatar",
+        `http://localhost:8080/${res.data.image.path}`
+      );
       props.onRequestClose();
     } catch (err) {
       console.error(err.response.data);
@@ -78,13 +86,12 @@ function UserProfileModal(props) {
       >
         <label className="profile-picture-container ">
           <div className="profile-picture">
-            {sessionStorage.getItem("avatar") ? (
-              <img
-                className="avatar"
-                src={`http://localhost:8080/${sessionStorage.getItem(
-                  "avatar"
-                )}`}
-              />
+            {image ? (
+              image.includes("localhost:8080") ? (
+                <img className="avatar" src={image} />
+              ) : (
+                <img className="avatar" src={image} />
+              )
             ) : (
               <img className="user-icon" src={UserIcon} alt="User Icon" />
             )}
@@ -104,7 +111,12 @@ function UserProfileModal(props) {
             Editar Foto{" "}
           </button>
 
-          <input name="image" id="image" type="file" />
+          <input
+            onChange={handleImageChange}
+            name="image"
+            id="image"
+            type="file"
+          />
         </label>
         <label className="inputs">
           Nombre y apellido:

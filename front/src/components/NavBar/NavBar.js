@@ -68,10 +68,7 @@ const Navbar = ({ handleLogout, active, setActive, onProfileClick }) => {
         </Link>
       </div>
       <div className="navbar-avatar">
-        <img
-          src={`http://localhost:8080/${sessionStorage.getItem("avatar")}`}
-          alt="Avatar"
-        />
+        <img src={sessionStorage.getItem("avatar")} alt="Avatar" />
         <div>
           <p>{sessionStorage.getItem("name")}</p>
           <span>Administrador</span>
