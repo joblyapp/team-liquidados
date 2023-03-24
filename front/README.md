@@ -513,6 +513,7 @@ CSS
 ## TO DO
 
 * Create categories component. DONE.
-* Add the delete functionality.
+* Add the delete functionality. DONE.
+* Styling delete button. DONE.
 
 * Enable EXPORT button.

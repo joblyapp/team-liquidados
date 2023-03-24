@@ -5,7 +5,7 @@ import No from "../../Images/icons/no.svg";
 import axios from "axios";
 import DeleteBin from "../../Images/icons/deleteBin.svg"
 
-export default function Categorias({ categoriasDisponibles, setCreateCategory, setSelectedCat, defaultCategory }) {
+export default function Categorias({ categoriasDisponibles, setCreateCategory, setSelectedCat, defaultCategory, setDeleteCategory }) {
 
     // State for changing input
     const [creatingCategory, setCreatingCategory] = useState(false);
@@ -18,6 +18,7 @@ export default function Categorias({ categoriasDisponibles, setCreateCategory, s
         }
         else {
             setSelectedCat(e.target.value);
+            console.log(document.getElementById("categoryId").value);
         }
     }
 
@@ -64,7 +65,30 @@ export default function Categorias({ categoriasDisponibles, setCreateCategory, s
 
 
     function handleDelete(e) {
+
         e.preventDefault();
+        const id = document.getElementById("categoryId").value;
+       
+        setDeleteCategory(id);
+
+        setTimeout(() =>
+        axios
+            .get(`${process.env.REACT_APP_URL}/category`, {
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => {
+                console.log(response.data);
+                setModalCategories(response.data);
+
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
+        , 1000)
 
     }
 
@@ -76,6 +100,7 @@ export default function Categorias({ categoriasDisponibles, setCreateCategory, s
             ?
 
             <div style={{ display: "flex" }}>
+                
                 <input id="newCategory" className={styles.inputs} style={{ width: "80%" }} type="text" placeholder="Crea una nueva categoría"></input>
                 <div style={{ width: "20%", display: "flex", justifyContent: "center", alignItems: "center" }}>
 
@@ -102,8 +127,9 @@ export default function Categorias({ categoriasDisponibles, setCreateCategory, s
 
             :
 
-            <div style={{ display: "flex" }}>
-                <select onChange={(e) => handleCategoryChange(e)} style={{ height: "4.6vh", width: "100%" }} id="categoryFilter" type="number" defaultValue={defaultCategory} required>
+            <div style={{ display: "flex", alignItems: "center", gap:"5px" }}>
+
+                <select onChange={(e) => handleCategoryChange(e)} style={{ height: "4.6vh", width: "90%" }} id="categoryId" type="number" defaultValue={defaultCategory} required>
 
                     {modalCategories.map((item, key) => {
 
@@ -119,7 +145,7 @@ export default function Categorias({ categoriasDisponibles, setCreateCategory, s
 
                 </select>
 
-                <button className={styles.buttonClean} style={{ height: "3.1vh", width: "40px" }}><img onClick={handleDelete} src={DeleteBin}></img></button>
+                <button className={`${styles.buttonClean} ${styles.buttonDelete}`}><img onClick={handleDelete} src={DeleteBin} style={{width:18, height:18}}></img></button>
 
             </div>
 
