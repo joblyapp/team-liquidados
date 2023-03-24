@@ -504,4 +504,15 @@ CSS
 ## NEW PRODUCT STYLING
 
 * Change title. DONE.
-* 
+* Resize image load. DONE.
+* Add pionter to image. DONE.
+* Center the elements inside the Alert. DONE.
+* Style buttons. DONE.
+* Style inputs. DONE.
+
+## TO DO
+
+* Create categories component. DONE.
+* Add the delete functionality.
+
+* Enable EXPORT button.

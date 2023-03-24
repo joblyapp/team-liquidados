@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import styles from "../styles.module.css";
 import axios from "axios";
 import Success from "../success";
+import Categorias from "./categorias";
 
 
 
 
 
-export default function EditProduct({ setForceRender, onClose, esNuevo, setMode, id, category, name, price, image, categoriasDisponibles }) {
+export default function EditProduct({ setForceRender, onClose, esNuevo, setMode, id, category, name, price, image, categoriasDisponibles, setCreateCategory }) {
 
     // Product data State. Only active when submitting form
     const [product, setProduct] = useState(null);
@@ -16,6 +17,7 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
 
     const [productImage, setProductImage] = useState("./notFound.jpg");
 
+    const [selectedCat, setSelectedCat] = useState(categoriasDisponibles[0])
 
 
     useEffect(() => {
@@ -41,7 +43,7 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
         formData.append('price', document.getElementById("price").value);
         formData.append('description', "testing");
         formData.append('image', image);
-        formData.append('category', document.getElementById("category").value);
+        formData.append('category', selectedCat);
 
         console.log("Created form Data");
 
@@ -108,22 +110,23 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
     }
 
 
+
     return (
 
         !success ?
 
-            <div className={`${styles.centered} ${styles.someAlert}`} style={{ justifyContent: "center" }}>
+            <div className={`${styles.centered} ${styles.someAlert}`}>
 
 
 
-                <div>
+                <div style={{ marginTop: "9vh" }}>
 
                     {esNuevo ? <h2>Agregar Producto</h2> : <h2>Editar Producto</h2>}
 
                     <form id="newProduct" className={styles.boxEmergent} style={{ height: "100%" }} onSubmit={handleEditSubmit} method="post">
 
                         <div className={`${styles.boxElement} ${styles.boxImage}`}>
-                            <label className={styles.boxElement} for="image"><img src={productImage}></img></label>
+                            <label className={styles.boxElement} style={{ cursor: "pointer" }} for="image"><img src={productImage}></img></label>
                             <input id="image" type="file" name="image" style={{ display: "none" }} onChange={handleImage}></input>
                         </div>
                         <div className={`${styles.boxElement} ${styles.boxInputs}`}>
@@ -133,18 +136,7 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
                             </div>
                             <div>
                                 Categoría:
-                                <div>
-                                    <select style={{ height: "4.6vh", width:"100%" }} id="category" defaultValue={category} type="number" required>
-
-                                        {categoriasDisponibles.map((item, key) => {
-
-                                            return (
-                                                <option key={key} value={item._id}>{`${item.number}: ${item.name}`}</option>
-                                            )
-
-                                        })}
-                                    </select>
-                                </div>
+                                <Categorias categoriasDisponibles={categoriasDisponibles} setCreateCategory={setCreateCategory} setSelectedCat={setSelectedCat} defaultCategory={category}/>
                             </div>
                             <div>
                                 Precio: <input className={styles.inputs} style={{ width: "100%" }} id="price" defaultValue={price} type="number" maxLength="10" required></input>
