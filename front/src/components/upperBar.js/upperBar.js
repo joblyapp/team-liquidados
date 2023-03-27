@@ -4,7 +4,7 @@ import ExportLogo from "../../Images/icons/upload.svg";
 import { useEffect, useState } from "react";
 import SaleBack from "../sales/saleBack";
 
-export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, checkedBoxes, setProductSearch }) {
+export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, checkedBoxes, setProductSearch, isProducts, categories }) {
 
 
     const [ableToExport, setAbleToExport] = useState(false);
@@ -21,10 +21,12 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
             else {
                 setAbleToExport(false)
             }
-
         }
 
-
+        if (isProducts) {
+            console.log("checking")
+            setAbleToExport(true)
+        }
 
     }, [checkedBoxes])
 
@@ -43,51 +45,89 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
 
     async function handleExport(e) {
 
-        e.preventDefault();
+        if (isProducts) {
+            e.preventDefault();
+            const preparedProducts = data;
+         
+            // Change category ID for category NAME and Format DATE
+            preparedProducts.forEach((e) => {
+                const temp = categories.find(item => item._id === e.category);
+                e.category = temp.name;
 
-        var filteredIds = [];
-        var filteredSales = JSON.parse(JSON.stringify(data));
+                e.DateOfEntry = e.DateOfEntry.substring(0, 10);
+            })
+
+       
+            // Format the categories to a better visual
+            await preparedProducts.forEach(el => {
+                deleteElement("image", el);
+                deleteElement("_id", el);
+                deleteElement("__v", el);
+                changeKeyName("name", "NOMBRE", el);
+                changeKeyName("category", "CATEGORIA", el);
+                deleteElement("description", el);
+                changeKeyName("price", "PRECIO", el);
+                changeKeyName("active", "ACTIVO", el);
+                changeKeyName("number", "CODIGO", el);
+                changeKeyName("DateOfEntry", "FECHA DE INGRESO", el);
+
+            });
 
 
-        filteredSales.map(item => {
-            if (checkedBoxes.includes(item._id)) {
-                filteredIds.push(item._id);
-            }
-            item.date = item.date.substring(0, 10);
+            exportToExcel(preparedProducts, "Lista de Productos");
+        }
 
-            // stringify the product information
-            var temp = [];
+        else {
 
-            item.products.map(product => {
-                temp.push(product.name);
+            e.preventDefault();
+
+            var filteredIds = [];
+            var filteredSales = JSON.parse(JSON.stringify(data));
+
+
+            filteredSales.map(item => {
+                if (checkedBoxes.includes(item._id)) {
+                    filteredIds.push(item._id);
+                }
+                item.date = item.date.substring(0, 10);
+
+                // stringify the product information
+                var temp = [];
+
+                item.products.map(product => {
+                    temp.push(product.name);
+                }
+
+                )
+
+                item.products = temp.join();
+
             }
 
             )
 
-            item.products = temp.join();
+
+            filteredSales = filteredSales.filter(item => filteredIds.includes(item._id));
+
+            // Format the categories to a better visual
+
+            await filteredSales.forEach(el => {
+                deleteElement("_id", el);
+                deleteElement("__v", el);
+                changeKeyName("products", "PRODUCTOS", el);
+                changeKeyName("total", "TOTAL", el);
+                changeKeyName("isCancelled", "CANCELADO?", el);
+                changeKeyName("paymentForm", "PAGO", el);
+                changeKeyName("date", "FECHA", el);
+
+            });
+
+
+            exportToExcel(filteredSales, "Ventas seleccionadas");
+
 
         }
 
-        )
-
-
-        filteredSales = filteredSales.filter(item => filteredIds.includes(item._id));
-
-        // Format the categories to a better visual
-
-        await filteredSales.forEach(el => {
-            deleteElement("_id", el);
-            deleteElement("__v", el);
-            changeKeyName("products", "PRODUCTOS", el);
-            changeKeyName("total", "TOTAL", el);
-            changeKeyName("isCancelled", "CANCELADO?", el);
-            changeKeyName("paymentForm", "PAGO", el);
-            changeKeyName("date", "FECHA", el);
-
-        });
-
-
-        exportToExcel(filteredSales, "Ventas seleccionadas");
 
     }
 
@@ -100,7 +140,7 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
 
                 <h3>{sectionText}</h3>
 
-                {checkedBoxes ?
+                {checkedBoxes || isProducts ?
 
                     <button className={styles.buttonExport} onClick={handleExport} disabled={!ableToExport}>
                         <img

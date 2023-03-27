@@ -2,7 +2,7 @@ import PaginationProducts from "./paginationProducts";
 import PaginationSales from "./paginationSales";
 
 
-export default function PaginationList({ data, state, handleAdd, handleEdit, handleAlert, currentPage, itemsPerPage, goBack, isSale, columns, checkedBoxes, setCheckedBoxes, addedList, disableList, categoriasDisponibles }) {
+export default function PaginationList({ data, state, handleAdd, handleEdit, handleAlert, handleActive, currentPage, itemsPerPage, goBack, isSale, columns, checkedBoxes, setCheckedBoxes, addedList, disableList, categoriasDisponibles }) {
 
 
     const lastPostIndex = currentPage * itemsPerPage;
@@ -24,6 +24,7 @@ export default function PaginationList({ data, state, handleAdd, handleEdit, han
                         handleEdit={handleEdit}
                         handleAlert={handleAlert}
                         handleAdd={handleAdd}
+                        handleActive= {handleActive}
                         state={state}
                         goBack={goBack}
                         addedList= {addedList}

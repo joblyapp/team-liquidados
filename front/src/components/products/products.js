@@ -43,6 +43,8 @@ export default function Products() {
     // Deleting category inside Modal
     const [deleteCategory, setDeleteCategory] = useState(null);
 
+    // Data to Export function
+    const [dataToExport, setDataToExport] = useState();
 
     // Columns for list
 
@@ -184,7 +186,7 @@ return (
 
         {showBars &&
 
-            <UpperBar setProductSearch={setEsNuevo} sectionText="Productos" buttonText="+ Nuevo Producto" />
+            <UpperBar setProductSearch={setEsNuevo} sectionText="Productos" buttonText="+ Nuevo Producto" isProducts={true} data={dataToExport} categories={categorias} />
         }
 
         <div style={{ backgroundColor: showBars && "white" }} className={styles.showBox}>
@@ -196,7 +198,7 @@ return (
                 </>
             }
 
-            <ListaProductos setForceRender={setForceRender} forceRender={forceRender} value={busqueda} categoryValue={categoria} categoriasDisponibles={categorias} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} isSelling={false} setReverse={setReverse} reverse={reverse} setShowBars={setShowBars} />
+            <ListaProductos setForceRender={setForceRender} forceRender={forceRender} value={busqueda} categoryValue={categoria} categoriasDisponibles={categorias} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} isSelling={false} setReverse={setReverse} reverse={reverse} setShowBars={setShowBars} setDataToExport={setDataToExport} />
 
         </div>
 

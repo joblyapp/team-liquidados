@@ -12,20 +12,20 @@ export default function PaginationProducts({
   handleEdit,
   handleAlert,
   handleAdd,
+  handleActive,
   state,
   addedList,
   disableList,
-  categoriasDisponibles,
+  categoriasDisponibles
 }) {
-  console.log(addedList);
-
-  console.log(data);
+ 
 
   return (
     <div className={styles.productsCard}>
+
       {data.map((item, key) => (
 
-        <div key={key} className={styles.listaProductos}>
+        <div key={key} className={styles.listaProductos} >
           <div className="imageAndName">
             <div className="conteiner">
               <img
@@ -52,8 +52,9 @@ export default function PaginationProducts({
           <p>$ {item.price}</p>
 
           <div style={{ display: "flex", justifyContent: "center" }}>
+
             {!state &&
-              <button className="actionButtonsButton">
+              <button className="actionButtonsButton" onClick={() => handleActive(item._id)}>
                 <img src={activeProduct} alt="" />
               </button>}
             {!state && (
