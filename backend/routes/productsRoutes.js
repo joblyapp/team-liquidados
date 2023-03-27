@@ -94,7 +94,7 @@ router.patch("/:id", getProduct, upload.single("image"), async (req, res) => {
 });
 
 //Deactivate a product
-router.patch("deactivate/:id", async (req, res) => {
+router.patch("/deactivate/:id", async (req, res) => {
   try {
     const updatedField = await Product.findByIdAndUpdate(
       req.params.id,
