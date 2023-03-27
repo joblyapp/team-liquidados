@@ -123,19 +123,23 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
         confirmAlert({
             customUI: ({ onClose }) => {
                 return (
-                    <div className={styles.alert}>
-                        <h1>Elminar Producto</h1>
-                        <p>¿Está seguro de que desea eliminar este producto?</p>
-                        <button className={styles.buttonNo} onClick={onClose}>No</button>
-                        <button
-                            onClick={() => {
-                                handleDelete(id);
-                                onClose();
-                            }}
-                            className={styles.buttonYes}
-                        >
-                            Yes
-                        </button>
+                    <div className={styles.alertDescription}>
+                        <div>
+                            <h1>Elminar Producto</h1>
+                            <p>¿Está seguro de que desea eliminar este producto?</p>
+                        </div>
+                        <div className={styles.buttonSet}>
+                            <button className={styles.buttonNo} onClick={onClose}>No</button>
+                            <button
+                                onClick={() => {
+                                    handleDelete(id);
+                                    onClose();
+                                }}
+                                className={styles.buttonYes}
+                            >
+                                Yes
+                            </button>
+                        </div>
                     </div>
                 );
             }

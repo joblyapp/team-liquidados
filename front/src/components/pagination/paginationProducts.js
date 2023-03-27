@@ -4,7 +4,7 @@ import "./paginationProducts.css";
 import editButton from "../../Images/icons/edit.svg";
 import deleteButton from "../../Images/icons/delete.svg";
 import activeProduct from "../../Images/icons/activeProduct.svg";
-import hiddenProduct from "../../Images/icons/hiddenProduct.svg";
+
 
 
 export default function PaginationProducts({

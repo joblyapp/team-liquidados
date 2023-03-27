@@ -96,14 +96,16 @@ router.patch("/:id", getProduct, upload.single("image"), async (req, res) => {
 //Deactivate a product
 router.patch("/deactivate/:id", async (req, res) => {
   try {
-    const updatedField = await Product.findByIdAndUpdate(
-      req.params.id,
-      { $set: { active: req.body.active } },
-      { new: true }
-    );
-    res.json(updatedField);
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    product.active = !product.active;
+    await product.save();
+    res.json(product);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error(err.message);
+    res.status(500).send("Server Error");
   }
 });
 
