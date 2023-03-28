@@ -519,4 +519,10 @@ CSS
 * Enable EXPORT button. DONE.
 
 * Enable Show / not show button.
-- Its involves two thing: First, PATCH the product on backend and then don't show it on the sale's PRODUCT SEARCH.
+- Its involves two thing: 
+- First, PATCH the product on backend. DONE 
+- and then don't show it on the sale's PRODUCT SEARCH. DONE.
+
+## TO DO
+
+* SUCCESS.

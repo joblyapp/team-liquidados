@@ -109,6 +109,6 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
                 <Loading />
             :
 
-            <Success operacion="Venta" setSuccess={setSuccess} setMode={setMode} setIsEditing={setIsEditing} />
+            <Success operacion="La venta fue ingresada correctamente" setSuccess={setSuccess} setMode={setMode} setIsEditing={setIsEditing} />
     )
 }

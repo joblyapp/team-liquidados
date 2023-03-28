@@ -250,9 +250,11 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
     }
 
     function handleActive(id) {
+       
+        
 
        axios
-            .patch(`${process.env.REACT_APP_URL}/products/deactivate/${id}`, {
+            .patch(`${process.env.REACT_APP_URL}/products/deactivate/${id}`, {active: false} ,{
                 headers: {
                     Authorization: `Bearer ${sessionStorage.getItem("token")}`,
                     'Content-Type': 'application/json'
@@ -264,7 +266,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
             .catch((error) => {
                 console.log(error);
             })
-            .finally(() => setForceRender(true))
+            
 
     }
 
