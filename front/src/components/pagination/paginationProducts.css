@@ -42,3 +42,8 @@
     align-items: center;
     justify-content: flex-start;
 }
+
+
+.activeCorrection {
+    max-width: 24px;
+}

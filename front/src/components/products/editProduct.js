@@ -17,7 +17,7 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
 
     const [productImage, setProductImage] = useState("./notFound.jpg");
 
-    const [selectedCat, setSelectedCat] = useState(categoriasDisponibles[0])
+    const [selectedCat, setSelectedCat] = useState(category || categoriasDisponibles[0])
 
 
     useEffect(() => {
@@ -154,7 +154,7 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
 
             :
 
-            <Success operacion="Edicion de producto" setSuccess={setSuccess} setMode={setProduct} onClose={onClose} />
+            <Success operacion="El producto fue ingresado correctamente" setSuccess={setSuccess} setMode={setProduct} onClose={onClose}/>
 
 
     )

@@ -516,4 +516,13 @@ CSS
 * Add the delete functionality. DONE.
 * Styling delete button. DONE.
 
-* Enable EXPORT button.
+* Enable EXPORT button. DONE.
+
+* Enable Show / not show button.
+- Its involves two thing: 
+- First, PATCH the product on backend. DONE 
+- and then don't show it on the sale's PRODUCT SEARCH. DONE.
+
+## TO DO
+
+* SUCCESS.

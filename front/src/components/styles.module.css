@@ -325,9 +325,7 @@ select {
 
 /* Make sure that the list ocuppy some space even if it is empty */
 .productsCard {
-
-
-    height: 56vh;
+    min-height: 50vh;
     box-sizing: border-box;
 }
 

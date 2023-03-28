@@ -10,7 +10,7 @@ import PaginationSelect from "../pagination/paginationSelect";
 
 // A lista productos se le suma otro valor que es "isSelling". Si este valor es TRUE va a cambiar los botones de la derecha
 
-export default function ListaProductos({ setForceRender, forceRender, value, categoryValue, categoriasDisponibles, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, goBack, setShowBars, productsTemp, setProductsTemp, setReverse, reverse }) {
+export default function ListaProductos({ setForceRender, forceRender, value, categoryValue, categoriasDisponibles, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, goBack, setShowBars, productsTemp, setProductsTemp, setReverse, reverse, setDataToExport }) {
 
     // Loading wheel
     const [loading, setLoading] = useState();
@@ -50,6 +50,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
             })
             .then((response) => {
                 setDatos(response.data);
+                setDataToExport(response.data);
                 console.log(response.data)
             })
             .catch((error) => {
@@ -248,6 +249,26 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
     }
 
+    function handleActive(id) {
+       
+        
+
+       axios
+            .patch(`${process.env.REACT_APP_URL}/products/deactivate/${id}`, {active: false} ,{
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => {
+                console.log(response)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+            
+
+    }
 
     return (
 
@@ -262,6 +283,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
                     handleAdd={handleAdd}
                     handleEdit={handleEdit}
                     handleAlert={handleAlert}
+                    handleActive={handleActive}
                     currentPage={currentPage}
                     itemsPerPage={itemsPerPage}
                     goBack={goBack}

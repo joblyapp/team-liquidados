@@ -4,7 +4,8 @@ import "./paginationProducts.css";
 import editButton from "../../Images/icons/edit.svg";
 import deleteButton from "../../Images/icons/delete.svg";
 import activeProduct from "../../Images/icons/activeProduct.svg";
-
+import nonActiveProduct from "../../Images/icons/nonActiveProduct.svg";
+import { useEffect, useState } from "react";
 
 
 export default function PaginationProducts({
@@ -12,20 +13,43 @@ export default function PaginationProducts({
   handleEdit,
   handleAlert,
   handleAdd,
+  handleActive,
   state,
   addedList,
   disableList,
-  categoriasDisponibles,
+  categoriasDisponibles
 }) {
-  console.log(addedList);
 
-  console.log(data);
+ 
+  function handleClick(e, id) {
+    e.preventDefault();
+    handleActive(id);
+
+    const imgName = e.target.src.split("/").pop();
+    const active = activeProduct.split("/").pop();
+    const nonActive = nonActiveProduct.split("/").pop();
+
+    
+
+    if(imgName === active){
+      e.target.src = nonActiveProduct;
+    }
+    else{
+      e.target.src = activeProduct;
+    }
+  }
+
+
 
   return (
+
     <div className={styles.productsCard}>
+
       {data.map((item, key) => (
 
-        <div key={key} className={styles.listaProductos}>
+
+
+        <div key={key} className={styles.listaProductos} style={{ opacity: (state && !item.active) ? "0.5" : "1", pointerEvents: (state && !item.active) ? "none" : "auto" }} >
           <div className="imageAndName">
             <div className="conteiner">
               <img
@@ -52,9 +76,10 @@ export default function PaginationProducts({
           <p>$ {item.price}</p>
 
           <div style={{ display: "flex", justifyContent: "center" }}>
+           
             {!state &&
-              <button className="actionButtonsButton">
-                <img src={activeProduct} alt="" />
+              <button className="actionButtonsButton" onClick={(e) => handleClick(e, item._id)}>
+                <img className="activeCorrection" src={item.active ? activeProduct : nonActiveProduct} alt="" />
               </button>}
             {!state && (
               <button className="actionButtonsButton" onClick={() => handleAlert(item._id)}>
