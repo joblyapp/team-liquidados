@@ -43,6 +43,9 @@ export default function Products() {
     // Deleting category inside Modal
     const [deleteCategory, setDeleteCategory] = useState(null);
 
+    // Managing the delete categories message
+    const [usedCategories, setUsedCategories] = useState([]);
+
     // Data to Export function
     const [dataToExport, setDataToExport] = useState();
 
@@ -64,7 +67,7 @@ export default function Products() {
 
 
     useEffect(() => {
-      
+
         if (deleteCategory) {
 
             axios
@@ -77,10 +80,12 @@ export default function Products() {
                 .then((response) => {
                     console.log(response.data);
                     setDeleteCategory(null);
+
                     getCategories();
                 })
                 .catch((error) => {
-                    console.log(error);
+                    console.log(error.response.data);
+
                 })
 
         }
@@ -88,12 +93,44 @@ export default function Products() {
     }, [deleteCategory])
 
 
-useEffect(() => {
+    useEffect(() => {
 
-    if (createCategory) {
+        if (createCategory) {
+
+            axios
+                .post(`${process.env.REACT_APP_URL}/category`, { "name": createCategory }, {
+                    headers: {
+                        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    setCreateCategory(null);
+                    getCategories();
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
+
+    }, [createCategory])
+
+
+    useEffect(() => {
+        if (editMode || esNuevo) {
+            handleEditProduct(editMode, esNuevo, setEsNuevo, setEditMode);
+        }
+
+
+
+    }, [editMode, esNuevo])
+
+
+    function getCategories() {
 
         axios
-            .post(`${process.env.REACT_APP_URL}/category`, { "name": createCategory }, {
+            .get(`${process.env.REACT_APP_URL}/category`, {
                 headers: {
                     Authorization: `Bearer ${sessionStorage.getItem("token")}`,
                     'Content-Type': 'application/json'
@@ -101,109 +138,77 @@ useEffect(() => {
             })
             .then((response) => {
                 console.log(response.data);
-                setCreateCategory(null);
-                getCategories();
+                setCategorias(response.data)
+
             })
             .catch((error) => {
                 console.log(error);
             })
-    }
 
-}, [createCategory])
-
-
-useEffect(() => {
-    if (editMode || esNuevo) {
-        handleEditProduct(editMode, esNuevo, setEsNuevo, setEditMode);
     }
 
 
-
-}, [editMode, esNuevo])
-
-
-function getCategories() {
-
-    axios
-        .get(`${process.env.REACT_APP_URL}/category`, {
-            headers: {
-                Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((response) => {
-            console.log(response.data);
-            setCategorias(response.data)
-
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-
-}
+    function handleBack(to) {
+        navigate(to);
+    }
 
 
-function handleBack(to) {
-    navigate(to);
-}
+    function handleEditProduct(editMode, esNuevo, setEsNuevo, setEditMode) {
+
+        confirmAlert({
+
+            customUI: ({ onClose }) => {
 
 
-function handleEditProduct(editMode, esNuevo, setEsNuevo, setEditMode) {
+                return (
 
-    confirmAlert({
-
-        customUI: ({ onClose }) => {
-
-
-            return (
-
-                <>
-                    {editMode ?
-                        <EditProduct setForceRender={setForceRender} forceRender={forceRender} onClose={onClose} esNuevo={esNuevo} setMode={setEditMode} id={productInfo.id} category={productInfo.category} name={productInfo.name} price={productInfo.price} image={productInfo.image} categoriasDisponibles={categorias} setCreateCategory={setCreateCategory} setDeleteCategory={setDeleteCategory} />
-                        :
-                        esNuevo ?
-
-                            <EditProduct setForceRender={setForceRender} forceRender={forceRender} onClose={onClose} esNuevo={esNuevo} setMode={setEsNuevo} category={"1"} name={""} price={""} image={""} categoriasDisponibles={categorias} setCreateCategory={setCreateCategory} setDeleteCategory={setDeleteCategory}/>
+                    <>
+                        {editMode ?
+                            <EditProduct setForceRender={setForceRender} forceRender={forceRender} onClose={onClose} esNuevo={esNuevo} setMode={setEditMode} id={productInfo.id} category={productInfo.category} name={productInfo.name} price={productInfo.price} image={productInfo.image} categoriasDisponibles={categorias} setCreateCategory={setCreateCategory} setDeleteCategory={setDeleteCategory} usedCategories={usedCategories}/>
                             :
-                            onClose()
-                    }
+                            esNuevo ?
 
-                </>
-            );
+                                <EditProduct setForceRender={setForceRender} forceRender={forceRender} onClose={onClose} esNuevo={esNuevo} setMode={setEsNuevo} category={"1"} name={""} price={""} image={""} categoriasDisponibles={categorias} setCreateCategory={setCreateCategory} setDeleteCategory={setDeleteCategory} usedCategories={usedCategories}/>
+                                :
+                                onClose()
+                        }
 
-        }
+                    </>
+                );
 
-        ,
-        closeOnClickOutside: false
-    });
+            }
 
-}
+            ,
+            closeOnClickOutside: false
+        });
+
+    }
 
 
-return (
+    return (
 
-    <div className={styles.centered}>
-
-        {showBars &&
-
-            <UpperBar setProductSearch={setEsNuevo} sectionText="Productos" buttonText="+ Nuevo Producto" isProducts={true} data={dataToExport} categories={categorias} />
-        }
-
-        <div style={{ backgroundColor: showBars && "white" }} className={styles.showBox}>
+        <div className={styles.centered}>
 
             {showBars &&
-                <>
-                    <ProductsBar setBusqueda={setBusqueda} categoriasDisponibles={categorias} setCategoria={setCategoria} setReverse={setReverse} setCreateCategory={setCreateCategory} />
-                    <SaleBar col={col} />
-                </>
+
+                <UpperBar setProductSearch={setEsNuevo} sectionText="Productos" buttonText="+ Nuevo Producto" isProducts={true} data={dataToExport} categories={categorias} />
             }
 
-            <ListaProductos setForceRender={setForceRender} forceRender={forceRender} value={busqueda} categoryValue={categoria} categoriasDisponibles={categorias} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} isSelling={false} setReverse={setReverse} reverse={reverse} setShowBars={setShowBars} setDataToExport={setDataToExport} />
+            <div style={{ backgroundColor: showBars && "white" }} className={styles.showBox}>
+
+                {showBars &&
+                    <>
+                        <ProductsBar setBusqueda={setBusqueda} categoriasDisponibles={categorias} setCategoria={setCategoria} setReverse={setReverse} setCreateCategory={setCreateCategory} />
+                        <SaleBar col={col} />
+                    </>
+                }
+
+                <ListaProductos setForceRender={setForceRender} forceRender={forceRender} value={busqueda} categoryValue={categoria} categoriasDisponibles={categorias} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} isSelling={false} setReverse={setReverse} reverse={reverse} setShowBars={setShowBars} setDataToExport={setDataToExport} usedCategories={usedCategories} setUsedCategories={setUsedCategories}/>
+
+            </div>
 
         </div>
 
-    </div>
 
-
-)
+    )
 }

@@ -5,7 +5,6 @@ import editButton from "../../Images/icons/edit.svg";
 import deleteButton from "../../Images/icons/delete.svg";
 import activeProduct from "../../Images/icons/activeProduct.svg";
 import nonActiveProduct from "../../Images/icons/nonActiveProduct.svg";
-import { useEffect, useState } from "react";
 
 
 export default function PaginationProducts({
@@ -17,28 +16,62 @@ export default function PaginationProducts({
   state,
   addedList,
   disableList,
-  categoriasDisponibles
+  categoriasDisponibles,
+  activeProducts,
+  setActiveProducts
 }) {
 
+  /*
+   function handleClick(e, id) {
+     e.preventDefault();
+     handleActive(id);
  
+     const imgName = e.target.src.split("/").pop();
+     const active = activeProduct.split("/").pop();
+     const nonActive = nonActiveProduct.split("/").pop();
+    
+     
+ 
+     if(imgName === active){
+       e.target.src = nonActiveProduct;
+     }
+
+     else if (imgName === nonActive){
+       e.target.src = activeProduct;
+      
+     }
+   }
+ */
+
   function handleClick(e, id) {
-    e.preventDefault();
-    handleActive(id);
+    var temp = [...activeProducts];
 
     const imgName = e.target.src.split("/").pop();
     const active = activeProduct.split("/").pop();
     const nonActive = nonActiveProduct.split("/").pop();
 
-    
-
     if(imgName === active){
-      e.target.src = nonActiveProduct;
-    }
-    else{
-      e.target.src = activeProduct;
-    }
-  }
+       temp = temp.filter(element => element != id);
+     }
+     else{
+      temp.push(id);
+     }
 
+     console.log(temp);
+     setActiveProducts(temp);
+
+
+  }
+  function handleLoad(e, id, active) {
+
+    if (!active) {
+      e.target.style.opacity = "0.5";
+    }
+    if (active) {
+      e.target.style.opacity = "1";
+    }
+
+  }
 
 
   return (
@@ -49,7 +82,8 @@ export default function PaginationProducts({
 
 
 
-        <div key={key} className={styles.listaProductos} style={{ opacity: (state && !item.active) ? "0.5" : "1", pointerEvents: (state && !item.active) ? "none" : "auto" }} >
+        <div id={item._id} key={key} className={styles.listaProductos} style={{ opacity: (!activeProducts.includes(item._id)) ? "0.5" : "1", pointerEvents: (state && !item.active) ? "none" : "auto" }} >
+
           <div className="imageAndName">
             <div className="conteiner">
               <img
@@ -75,11 +109,11 @@ export default function PaginationProducts({
           </p>
           <p>$ {item.price}</p>
 
-          <div style={{ display: "flex", justifyContent: "center" }}>
-           
+          <div style={{ display: "flex", justifyContent: "center", gap: "8px" }}>
+
             {!state &&
               <button className="actionButtonsButton" onClick={(e) => handleClick(e, item._id)}>
-                <img className="activeCorrection" src={item.active ? activeProduct : nonActiveProduct} alt="" />
+                <img className="activeCorrection" src={activeProducts.includes(item._id) ? activeProduct : nonActiveProduct} alt="Active button" />
               </button>}
             {!state && (
               <button className="actionButtonsButton" onClick={() => handleAlert(item._id)}>

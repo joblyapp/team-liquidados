@@ -107,6 +107,13 @@ body {
     gap: 20px;
 }
 
+.errorMessage {
+    width: 30vw;
+    height: 2.5vh;
+    color: red;
+}
+
+
 /* LOGIN */
 
 .loginBox {
@@ -325,7 +332,7 @@ select {
 
 /* Make sure that the list ocuppy some space even if it is empty */
 .productsCard {
-    min-height: 50vh;
+    min-height: 56vh;
     box-sizing: border-box;
 }
 

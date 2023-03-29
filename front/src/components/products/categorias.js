@@ -5,11 +5,21 @@ import No from "../../Images/icons/no.svg";
 import axios from "axios";
 import DeleteBin from "../../Images/icons/deleteBin.svg"
 
-export default function Categorias({ categoriasDisponibles, setCreateCategory, setSelectedCat, defaultCategory, setDeleteCategory }) {
+export default function Categorias({
+    categoriasDisponibles,
+    setCreateCategory,
+    setSelectedCat,
+    defaultCategory,
+    setDeleteCategory,
+    usedCategories
+}) {
 
     // State for changing input
     const [creatingCategory, setCreatingCategory] = useState(false);
     const [modalCategories, setModalCategories] = useState(categoriasDisponibles);
+
+    // Category delete error message
+    const [deleteError, setDeleteError] = useState(false);
 
     function handleCategoryChange(e) {
 
@@ -68,27 +78,42 @@ export default function Categorias({ categoriasDisponibles, setCreateCategory, s
 
         e.preventDefault();
         const id = document.getElementById("categoryId").value;
-       
-        setDeleteCategory(id);
 
-        setTimeout(() =>
-        axios
-            .get(`${process.env.REACT_APP_URL}/category`, {
-                headers: {
-                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then((response) => {
-                console.log(response.data);
-                setModalCategories(response.data);
+        if(usedCategories.includes(id)) {
 
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+            console.log("No se puede borrar")
 
-        , 1000)
+            setDeleteError(true);
+
+            setTimeout(()=>{
+                setDeleteError(false);
+            }, 2000)
+
+        }
+
+        else{
+
+            setDeleteCategory(id);
+
+            setTimeout(() =>
+                axios
+                    .get(`${process.env.REACT_APP_URL}/category`, {
+                        headers: {
+                            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then((response) => {
+                        console.log(response.data);
+                        setModalCategories(response.data);
+    
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+    
+                , 1000)
+        }
 
     }
 
@@ -100,7 +125,7 @@ export default function Categorias({ categoriasDisponibles, setCreateCategory, s
             ?
 
             <div style={{ display: "flex" }}>
-                
+
                 <input id="newCategory" className={styles.inputs} style={{ width: "80%" }} type="text" placeholder="Crea una nueva categoría"></input>
                 <div style={{ width: "20%", display: "flex", justifyContent: "center", alignItems: "center" }}>
 
@@ -127,26 +152,32 @@ export default function Categorias({ categoriasDisponibles, setCreateCategory, s
 
             :
 
-            <div style={{ display: "flex", alignItems: "center", gap:"5px" }}>
+            <div >
 
-                <select onChange={(e) => handleCategoryChange(e)} style={{ height: "4.6vh", width: "90%" }} id="categoryId" type="number" defaultValue={defaultCategory} required>
+                <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
 
-                    {modalCategories.map((item, key) => {
+                    <select onChange={(e) => handleCategoryChange(e)} style={{ height: "4.6vh", width: "90%" }} id="categoryId" type="number" defaultValue={defaultCategory} required>
 
-                        return (
+                        {modalCategories.map((item, key) => {
 
-                            <option key={key} value={item._id}>{`${item.number}: ${item.name}`} </option>
+                            return (
 
-                        )
+                                <option key={key} value={item._id}>{`${item.number}: ${item.name}`} </option>
 
-                    })}
+                            )
 
-                    <option value="New">New</option>
+                        })}
 
-                </select>
+                        <option value="New">New</option>
 
-                <button className={`${styles.buttonClean} ${styles.buttonDelete}`}><img onClick={handleDelete} src={DeleteBin} style={{width:18, height:18}}></img></button>
+                    </select>
 
+                    <button className={`${styles.buttonClean} ${styles.buttonDelete}`}><img onClick={handleDelete} src={DeleteBin} style={{ width: 18, height: 18 }}></img></button>
+
+                </div>
+
+                <p className={styles.errorMessage}>{deleteError ? "No se puede eliminar una categoria ya utilizada" : ""}</p>
+            
             </div>
 
 
