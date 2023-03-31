@@ -10,7 +10,27 @@ import PaginationSelect from "../pagination/paginationSelect";
 
 // A lista productos se le suma otro valor que es "isSelling". Si este valor es TRUE va a cambiar los botones de la derecha
 
-export default function ListaProductos({ setForceRender, forceRender, value, categoryValue, categoriasDisponibles, setProductInfo, setEditMode, isSelling, setSaleStatus, saleStatus, goBack, setShowBars, productsTemp, setProductsTemp, setReverse, reverse, setDataToExport }) {
+export default function ListaProductos({ 
+    setForceRender, 
+    forceRender, 
+    value, 
+    categoryValue, 
+    categoriasDisponibles, 
+    setProductInfo, 
+    setEditMode, 
+    isSelling, 
+    setSaleStatus, 
+    saleStatus, 
+    goBack, 
+    setShowBars, 
+    productsTemp, 
+    setProductsTemp, 
+    setReverse, 
+    reverse, 
+    setDataToExport,
+    usedCategories, 
+    setUsedCategories
+}) {
 
     // Loading wheel
     const [loading, setLoading] = useState();
@@ -26,6 +46,9 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
     // Disabled products
     const [disableList, setDisableList] = useState(saleStatus && saleStatus.map((item) => item.products._id) || null)
+
+    // Active products
+    const [activeProducts, setActiveProducts] = useState([]);
 
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
@@ -90,12 +113,60 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
     }, [reverse])
 
-
+    useEffect(()=> {
+        loadActive(datos);
+        loadUsedCategories(datos);
+    },[datos])
 
     // Filter function
     function filtering(data) {
         const temp = data.filter(product => product.name.toLowerCase().includes(value) && ((product.category === categoryValue || categoryValue === "All")));
         return temp;
+    }
+
+    // Active products load
+    function loadActive(data) {
+
+        if (data) {
+
+            const temp = [...activeProducts]
+
+            data.forEach(item => {
+                    if (item.active) {
+                        temp.push(item._id);
+                    }
+                });
+
+            setActiveProducts(temp);
+        }
+
+        else{
+            console.log("there is no products")
+        }
+
+    }
+
+     // Active products load
+     function loadUsedCategories(data) {
+
+        if (data) {
+
+            const temp = [...usedCategories]
+
+            data.forEach(item => {
+                    if (!temp.includes(item.category)) {
+                        temp.push(item.category);
+                    }
+                });
+
+            setUsedCategories(temp);
+        }
+
+        else{
+            console.log("there is no products")
+        }
+
+
     }
 
     // Delete function
@@ -163,43 +234,11 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
     }
 
     async function handleAdd(name, price, id, cat) {
-        /*
-        console.log(saleStatus);
-        const sale = [...saleStatus];
-        const newProduct = {
-            products:
-            {
-                _id: id,
-                name: name,
-                price: price,
-                quantity: 1,
-            }
-
-            ,
-            total() { return this.products.price * this.products.quantity },
-
-        }
-
-        const elementIndex = sale.indexOf(sale.find(element => element.products._id === id));
-
-        if (elementIndex === -1) {
-            sale.push(newProduct);
-            setSaleStatus(sale);
-            console.log("here");
-            goBack();
-        }
-        else {
-            sale[elementIndex].products.quantity++;
-            setSaleStatus(sale);
-            goBack();
-        }
-*/
 
         const sale = [...productsTemp];
         console.log(sale)
 
         // create a product
-
         const newProduct = {
             products:
             {
@@ -215,10 +254,7 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
         }
 
-
         const elementIndex = sale.indexOf(sale.find(element => element.products._id === id));
-        console.log(elementIndex);
-        console.log(sale)
 
         if (elementIndex === -1) {
 
@@ -245,16 +281,15 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
 
 
         }
-
-
     }
 
-    function handleActive(id) {
-       
-        
 
-       axios
-            .patch(`${process.env.REACT_APP_URL}/products/deactivate/${id}`, {active: false} ,{
+    function handleActive(id) {
+
+
+
+        axios
+            .patch(`${process.env.REACT_APP_URL}/products/deactivate/${id}`, { active: false }, {
                 headers: {
                     Authorization: `Bearer ${sessionStorage.getItem("token")}`,
                     'Content-Type': 'application/json'
@@ -266,8 +301,6 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
             .catch((error) => {
                 console.log(error);
             })
-            
-
     }
 
     return (
@@ -291,6 +324,8 @@ export default function ListaProductos({ setForceRender, forceRender, value, cat
                     addedList={addedList}
                     disableList={disableList}
                     categoriasDisponibles={categoriasDisponibles}
+                    activeProducts={activeProducts}
+                    setActiveProducts={setActiveProducts}
                 />
 
                 <PaginationSelect

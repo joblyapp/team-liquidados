@@ -525,4 +525,14 @@ CSS
 
 ## TO DO
 
-* SUCCESS.
+* SUCCESS. DONE.
+
+## CORRECTIONS
+
+* On products: Action buttons needs GAP. DONE.
+
+* General window change size when there are few products. DONE.
+
+* Show deactivated products with low opacity. DONE. (it seems to work but would be nice if we check it!)
+
+* Delete category error message. DONE.

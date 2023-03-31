@@ -8,7 +8,21 @@ import Categorias from "./categorias";
 
 
 
-export default function EditProduct({ setForceRender, onClose, esNuevo, setMode, id, category, name, price, image, categoriasDisponibles, setCreateCategory, setDeleteCategory }) {
+export default function EditProduct({ 
+    setForceRender, 
+    onClose,
+    esNuevo, 
+    setMode, 
+    id, 
+    category, 
+    name, 
+    price, 
+    image, 
+    categoriasDisponibles, 
+    setCreateCategory, 
+    setDeleteCategory,
+    usedCategories
+}) {
 
     // Product data State. Only active when submitting form
     const [product, setProduct] = useState(null);
@@ -136,7 +150,7 @@ export default function EditProduct({ setForceRender, onClose, esNuevo, setMode,
                             </div>
                             <div>
                                 Categoría:
-                                <Categorias categoriasDisponibles={categoriasDisponibles} setCreateCategory={setCreateCategory} setSelectedCat={setSelectedCat} defaultCategory={category} setDeleteCategory={setDeleteCategory}/>
+                                <Categorias categoriasDisponibles={categoriasDisponibles} setCreateCategory={setCreateCategory} setSelectedCat={setSelectedCat} defaultCategory={category} setDeleteCategory={setDeleteCategory} usedCategories={usedCategories}/>
                             </div>
                             <div>
                                 Precio: <input className={styles.inputs} style={{ width: "100%" }} id="price" defaultValue={price} type="number" maxLength="10" required></input>
