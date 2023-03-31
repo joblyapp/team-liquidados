@@ -79,19 +79,19 @@ export default function Categorias({
         e.preventDefault();
         const id = document.getElementById("categoryId").value;
 
-        if(usedCategories.includes(id)) {
+        if (usedCategories.includes(id)) {
 
             console.log("No se puede borrar")
 
             setDeleteError(true);
 
-            setTimeout(()=>{
+            setTimeout(() => {
                 setDeleteError(false);
             }, 2000)
 
         }
 
-        else{
+        else {
 
             setDeleteCategory(id);
 
@@ -106,12 +106,12 @@ export default function Categorias({
                     .then((response) => {
                         console.log(response.data);
                         setModalCategories(response.data);
-    
+
                     })
                     .catch((error) => {
                         console.log(error);
                     })
-    
+
                 , 1000)
         }
 
@@ -130,9 +130,9 @@ export default function Categorias({
                 <div style={{ width: "20%", display: "flex", justifyContent: "center", alignItems: "center" }}>
 
                     <button
-
                         onClick={(e) => e.preventDefault()}
-                        className={styles.buttonClean}>
+                        className={styles.buttonClean}
+                    >
 
                         <img id="yes" onClick={handleNewCategory} src={Yes} className={styles.toGreen}></img>
 
@@ -158,6 +158,8 @@ export default function Categorias({
 
                     <select onChange={(e) => handleCategoryChange(e)} style={{ height: "4.6vh", width: "90%" }} id="categoryId" type="number" defaultValue={defaultCategory} required>
 
+                        <option value={null} > Seleccione una categoría </option>
+
                         {modalCategories.map((item, key) => {
 
                             return (
@@ -177,7 +179,7 @@ export default function Categorias({
                 </div>
 
                 <p className={styles.errorMessage}>{deleteError ? "No se puede eliminar una categoria ya utilizada" : ""}</p>
-            
+
             </div>
 
 

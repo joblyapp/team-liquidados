@@ -536,3 +536,30 @@ CSS
 * Show deactivated products with low opacity. DONE. (it seems to work but would be nice if we check it!)
 
 * Delete category error message. DONE.
+
+
+## NIKI CHANGES
+
+* Center the eye on LOGIN input.
+
+* Margins align on index.
+
+* Chart Titles. 
+
+* Translate table data.
+
+* Make the images look square. DONE.
+
+* Hover color on NEW PRODUCT and NEW SALE must change to a darker green. DONE.
+
+* Translate EXPORT. DONE.
+
+* Error message on delete category. ALREADY DONE.
+
+
+
+## TO DO
+
+* Category by default.
+
+* Image by default.

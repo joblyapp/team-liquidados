@@ -150,7 +150,7 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
                         <p
                             style={{ textDecoration: "underline" }}
                         >
-                            Export </p>
+                            Exportar </p>
                     </button>
 
                     :
