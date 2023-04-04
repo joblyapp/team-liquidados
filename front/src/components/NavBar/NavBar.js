@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import "./NavBar.css";
 import Logo from "../../Images/DonVenturaLogoWhite.svg";
-// import Avatar from "../../Images/Avatar.png";
 
 const Navbar = ({ handleLogout, active, setActive, onProfileClick }) => {
   //state for displayng the avatar drop down menu
