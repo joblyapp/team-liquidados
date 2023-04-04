@@ -115,7 +115,10 @@ export default function ListaProductos({
 
     useEffect(()=> {
         loadActive(datos);
-        loadUsedCategories(datos);
+        if(usedCategories){
+            loadUsedCategories(datos);
+        }
+       
     },[datos])
 
     // Filter function

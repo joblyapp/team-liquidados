@@ -197,10 +197,12 @@ export default function Products() {
             <div style={{ backgroundColor: showBars && "white" }} className={styles.showBox}>
 
                 {showBars &&
+
                     <>
                         <ProductsBar setBusqueda={setBusqueda} categoriasDisponibles={categorias} setCategoria={setCategoria} setReverse={setReverse} setCreateCategory={setCreateCategory} />
                         <SaleBar col={col} />
                     </>
+                    
                 }
 
                 <ListaProductos setForceRender={setForceRender} forceRender={forceRender} value={busqueda} categoryValue={categoria} categoriasDisponibles={categorias} setProductInfo={setProductInfo} setEditMode={setEditMode} editMode={editMode} isSelling={false} setReverse={setReverse} reverse={reverse} setShowBars={setShowBars} setDataToExport={setDataToExport} usedCategories={usedCategories} setUsedCategories={setUsedCategories}/>
