@@ -21,6 +21,8 @@ export default function Categorias({
     // Category delete error message
     const [deleteError, setDeleteError] = useState(false);
 
+    
+
     function handleCategoryChange(e) {
 
         if (e.target.value === "New") {

@@ -164,11 +164,12 @@ export default function Products() {
 
                     <>
                         {editMode ?
+                        
                             <EditProduct setForceRender={setForceRender} forceRender={forceRender} onClose={onClose} esNuevo={esNuevo} setMode={setEditMode} id={productInfo.id} category={productInfo.category} name={productInfo.name} price={productInfo.price} image={productInfo.image} categoriasDisponibles={categorias} setCreateCategory={setCreateCategory} setDeleteCategory={setDeleteCategory} usedCategories={usedCategories}/>
                             :
                             esNuevo ?
 
-                                <EditProduct setForceRender={setForceRender} forceRender={forceRender} onClose={onClose} esNuevo={esNuevo} setMode={setEsNuevo} category={"1"} name={""} price={""} image={""} categoriasDisponibles={categorias} setCreateCategory={setCreateCategory} setDeleteCategory={setDeleteCategory} usedCategories={usedCategories}/>
+                                <EditProduct setForceRender={setForceRender} forceRender={forceRender} onClose={onClose} esNuevo={esNuevo} setMode={setEsNuevo} category={null} name={""} price={""} image={""} categoriasDisponibles={categorias} setCreateCategory={setCreateCategory} setDeleteCategory={setDeleteCategory} usedCategories={usedCategories}/>
                                 :
                                 onClose()
                         }
