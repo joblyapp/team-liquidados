@@ -66,6 +66,7 @@ function UserProfileModal(props) {
       width: "25%",
       margin: "auto auto",
       height: "65vh",
+      overflow: "hidden",
     },
   };
 

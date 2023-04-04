@@ -266,7 +266,7 @@ body {
 
 .showPass {
     position: absolute;
-    top: -5px;
+    top: -15%;
     right: 5px;
     color: black;
     padding: 15px;
@@ -912,3 +912,13 @@ select {
 .whiteIt {
     background-color: white;
 }
+
+
+@media screen and (max-height: 768px) {
+    /* adjust the position of the icon for smaller screens */
+    .showPass {
+        top: -30%;
+        
+    }
+       
+  }

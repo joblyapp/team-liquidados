@@ -77,14 +77,14 @@ export default function BarChart() {
     labels: sortedMonths,
     datasets: [
       {
-        label: `Sales by month (${thisYear})`,
+        label: `Ventas por mes (${thisYear})`,
         data: salesData,
         backgroundColor: "#36A2EB",
         borderColor: "#36A2EB",
         borderWidth: 1,
       },
       {
-        label: `Cancelled Sales by month (${thisYear})`,
+        label: `Ventas canceladas por mes (${thisYear})`,
         data: cancelledSalesData,
         backgroundColor: "rgba(255, 99, 132)",
         borderColor: "rgba(255, 99, 132, 1)",
@@ -139,8 +139,8 @@ export default function BarChart() {
   return (
     <>
       <div className="charts_title">
-        <h2>Chart ONE</h2>
-        <h2>Chart TWO</h2>
+        <h2>Ventas por mes</h2>
+        <h2>Tipo de pago</h2>
       </div>
       <div className="chart_container">
         <div className="chart bar">

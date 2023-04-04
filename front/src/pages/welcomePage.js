@@ -36,7 +36,7 @@ export default function WelcomePage({
                 active={active}
                 setActive={setActive}
               />
-              <Welcome />
+              <Welcome setActive={setActive} />
               <UserProfileModal
                 isOpen={isModalOpen}
                 onRequestClose={closeModal}
