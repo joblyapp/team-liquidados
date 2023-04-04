@@ -5,7 +5,10 @@ import ChevronRight from "../../Images/icons/ChevronRight.svg";
 import ShoppingCart from "../../Images/icons/ShoppingCart.svg";
 import BarChart from "../BarChart/BarChart";
 
-export default function Welcome() {
+export default function Welcome({ setActive }) {
+  const handleClick = (e, name) => {
+    setActive(name);
+  };
   return (
     <>
       <div className="hero_box">
@@ -15,7 +18,11 @@ export default function Welcome() {
         </div>
 
         <div className="categories_container">
-          <Link to={"/products"} className="categories">
+          <Link
+            to={"/products"}
+            onClick={(e) => handleClick(e, "productos")}
+            className="categories"
+          >
             <div className="categories_left">
               <div className="image_container_left">
                 <img src={ProductsIcon} alt="products icon" />
@@ -27,7 +34,11 @@ export default function Welcome() {
             </div>
           </Link>
 
-          <Link to={"/sales"} className="categories">
+          <Link
+            to={"/sales"}
+            onClick={(e) => handleClick(e, "ventas")}
+            className="categories"
+          >
             <div className="categories_left">
               <div className="image_container_right">
                 <img src={ShoppingCart} alt="products icon" />
