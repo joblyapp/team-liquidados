@@ -10,6 +10,8 @@
     padding-bottom: 0;
     height: 8vh;
     border-bottom: white 1px solid;
+
+   
     
   }
   
@@ -93,6 +95,7 @@
     padding: 8px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
+    z-index: 2;
   }
   
   .navbar-avatar-dropdown-link {

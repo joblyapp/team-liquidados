@@ -8,18 +8,18 @@ import Categorias from "./categorias";
 
 
 
-export default function EditProduct({ 
-    setForceRender, 
+export default function EditProduct({
+    setForceRender,
     onClose,
-    esNuevo, 
-    setMode, 
-    id, 
-    category, 
-    name, 
-    price, 
-    image, 
-    categoriasDisponibles, 
-    setCreateCategory, 
+    esNuevo,
+    setMode,
+    id,
+    category,
+    name,
+    price,
+    image,
+    categoriasDisponibles,
+    setCreateCategory,
     setDeleteCategory,
     usedCategories
 }) {
@@ -31,8 +31,28 @@ export default function EditProduct({
 
     const [productImage, setProductImage] = useState("./notFound.jpg");
 
-    const [selectedCat, setSelectedCat] = useState(category || categoriasDisponibles[0])
+    const [selectedCat, setSelectedCat] = useState(category)
 
+    // State for show category error
+    const [categorySelection, setCategorySelection] = useState(true);
+
+    
+
+    // Image for default image
+    var image;
+
+    useEffect(() => {
+
+        /*defaultImage();*/
+
+ 
+
+    }, [])
+
+    useEffect(() => {
+        setCategorySelection(true);
+
+    }, [selectedCat])
 
     useEffect(() => {
 
@@ -44,15 +64,50 @@ export default function EditProduct({
 
     }, [productImage])
 
+    // Function for loading a default image to the form.
+
+    async function defaultImage() {
+
+        /*
+        await fetch("./notFound.jpg")
+            .then(res => res.blob())
+            .then(blob => {
+                image = new File([blob], 'notFound.jpg', blob)
+                console.log(image);
+            })
+*/
+
+       
+
+
+    }
+
+
     // When submitting form this function sets product state an trigger the useEffect hook
     function handleEditSubmit(e) {
 
         e.preventDefault();
 
-        const image = document.getElementById("image").files[0];
         console.log(image);
 
+        image = document.getElementById("image").files[0];
+
+        /*
+        if (!image) {
+            defaultImage();
+        }
+*/
+
+        if (!selectedCat) {
+            console.log("debe ingresar una categoria");
+            setCategorySelection(false);
+        }
+        else {
+            console.log(selectedCat)
+        }
+
         const formData = new FormData();
+
         formData.append('name', document.getElementById("name").value);
         formData.append('price', document.getElementById("price").value);
         formData.append('description', "testing");
@@ -64,7 +119,7 @@ export default function EditProduct({
         if (esNuevo) {
 
             console.log("Inside If: NEW PRODUCT");
-            console.log(document.getElementById("image").files[0]);
+            console.log(image);
 
             axios
                 .post(`${process.env.REACT_APP_URL}/products`, formData, {
@@ -118,9 +173,8 @@ export default function EditProduct({
 
     function handleImage(e) {
         e.preventDefault();
-        console.log(e.target.files[0]);
         setProductImage(URL.createObjectURL(e.target.files[0]));
-        console.log(productImage);
+        console.log(e.target.files[0]);
     }
 
 
@@ -131,8 +185,6 @@ export default function EditProduct({
 
             <div className={`${styles.centered} ${styles.someAlert}`}>
 
-
-
                 <div style={{ marginTop: "9vh" }}>
 
                     {esNuevo ? <h2>Agregar Producto</h2> : <h2>Editar Producto</h2>}
@@ -141,7 +193,7 @@ export default function EditProduct({
 
                         <div className={`${styles.boxElement} ${styles.boxImage}`}>
                             <label className={styles.boxElement} style={{ cursor: "pointer" }} for="image"><img src={productImage}></img></label>
-                            <input id="image" type="file" name="image" style={{ display: "none" }} onChange={handleImage}></input>
+                            <input onLoad={defaultImage} id="image" type="file" name="image" style={{ display: "none" }} onChange={handleImage}></input>
                         </div>
                         <div className={`${styles.boxElement} ${styles.boxInputs}`}>
                             <h2>Datos del producto</h2>
@@ -150,7 +202,8 @@ export default function EditProduct({
                             </div>
                             <div>
                                 Categoría:
-                                <Categorias categoriasDisponibles={categoriasDisponibles} setCreateCategory={setCreateCategory} setSelectedCat={setSelectedCat} defaultCategory={category} setDeleteCategory={setDeleteCategory} usedCategories={usedCategories}/>
+                                <Categorias categoriasDisponibles={categoriasDisponibles} setCreateCategory={setCreateCategory} setSelectedCat={setSelectedCat} defaultCategory={category} setDeleteCategory={setDeleteCategory} usedCategories={usedCategories} />
+                                <p className={styles.errorMessage} style={{ height: "0" }}>{!categorySelection ? "Debe seleccionar una categoría" : ""}</p>
                             </div>
                             <div>
                                 Precio: <input className={styles.inputs} style={{ width: "100%" }} id="price" defaultValue={price} type="number" maxLength="10" required></input>
@@ -168,7 +221,7 @@ export default function EditProduct({
 
             :
 
-            <Success operacion="El producto fue ingresado correctamente" setSuccess={setSuccess} setMode={setProduct} onClose={onClose}/>
+            <Success operacion="El producto fue ingresado correctamente" setSuccess={setSuccess} setMode={setProduct} onClose={onClose} />
 
 
     )
