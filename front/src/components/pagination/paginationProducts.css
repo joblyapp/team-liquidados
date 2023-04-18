@@ -1,0 +1,51 @@
+.productImg {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    margin-right: 1rem;
+    margin-left: 1rem;
+
+    object-fit: cover;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.imageAndName {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+}
+
+.actionButtons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionButtonsButton {
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.conteiner{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.conteiner2{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+.activeCorrection {
+    max-width: 24px;
+}

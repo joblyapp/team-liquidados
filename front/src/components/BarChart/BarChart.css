@@ -1,0 +1,48 @@
+.chart {
+  width: 50%;
+  height: 90%;
+ 
+}
+
+
+
+.chart_container {
+    display: flex;
+    height: 40vh;
+    width: 80%;
+    padding: 0 4rem;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-evenly;
+    
+    background-color: white;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.chart_container:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+}
+
+.pie {
+  width: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.pie canvas {
+  display: none;
+}
+
+.charts_title {
+  margin:0 auto;
+  margin-top: 8rem;
+  margin-bottom: 1rem;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  
+}

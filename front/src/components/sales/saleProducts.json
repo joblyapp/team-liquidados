@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Peine de Barba",
+        "price": 290,
+        "amount": 2,
+        "total": 580
+    },
+    
+    {
+        "name": "Peine de Bigote",
+        "price": 180,
+        "amount": 1,
+        "total": 180
+    },
+    
+    {
+        "name": "Bigote Falso",
+        "price": 990,
+        "amount": 1,
+        "total": 990
+    }
+]
