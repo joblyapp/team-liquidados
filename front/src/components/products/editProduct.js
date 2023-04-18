@@ -174,6 +174,7 @@ export default function EditProduct({
     function handleImage(e) {
         e.preventDefault();
         setProductImage(URL.createObjectURL(e.target.files[0]));
+        console.log(e.target.files[0]);
     }
 
 
@@ -202,7 +203,7 @@ export default function EditProduct({
                             <div>
                                 Categoría:
                                 <Categorias categoriasDisponibles={categoriasDisponibles} setCreateCategory={setCreateCategory} setSelectedCat={setSelectedCat} defaultCategory={category} setDeleteCategory={setDeleteCategory} usedCategories={usedCategories} />
-                                <p className={styles.errorMessage} style={{ height: "0px" }}>{!categorySelection ? "Debe seleccionar una categoría" : ""}</p>
+                                <p className={styles.errorMessage} style={{ height: "0" }}>{!categorySelection ? "Debe seleccionar una categoría" : ""}</p>
                             </div>
                             <div>
                                 Precio: <input className={styles.inputs} style={{ width: "100%" }} id="price" defaultValue={price} type="number" maxLength="10" required></input>

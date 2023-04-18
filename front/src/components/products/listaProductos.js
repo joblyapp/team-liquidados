@@ -200,7 +200,7 @@ export default function ListaProductos({
                 return (
                     <div className={styles.alertDescription}>
                         <div>
-                            <h1>Elminar Producto</h1>
+                            <h1>Eliminar Producto</h1>
                             <p>¿Está seguro de que desea eliminar este producto?</p>
                         </div>
                         <div className={styles.buttonSet}>
@@ -289,7 +289,22 @@ export default function ListaProductos({
 
     function handleActive(id) {
 
+        axios
+            .patch(`${process.env.REACT_APP_URL}/products/deactivate/${id}`, { active: true }, {
+                headers: {
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((response) => {
+                console.log(response)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
 
+    function handleDeactive(id) {
 
         axios
             .patch(`${process.env.REACT_APP_URL}/products/deactivate/${id}`, { active: false }, {
@@ -320,6 +335,7 @@ export default function ListaProductos({
                     handleEdit={handleEdit}
                     handleAlert={handleAlert}
                     handleActive={handleActive}
+                    handleDeactive={handleDeactive}
                     currentPage={currentPage}
                     itemsPerPage={itemsPerPage}
                     goBack={goBack}
