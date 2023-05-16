@@ -13,6 +13,7 @@ export default function PaginationProducts({
   handleAlert,
   handleAdd,
   handleActive,
+  handleDeactive,
   state,
   addedList,
   disableList,
@@ -52,9 +53,11 @@ export default function PaginationProducts({
 
     if(imgName === active){
        temp = temp.filter(element => element != id);
+       handleDeactive(id);
      }
      else{
       temp.push(id);
+      handleActive(id);
      }
 
      
@@ -88,8 +91,10 @@ export default function PaginationProducts({
             <div className="conteiner">
               <img
                 className="productImg"
+
                 // Correct image src from src={`${process.env.REACT_APP_URL}/${item.image?.path}`} to src= item.image
                 src={item.image}
+
                 onError={(e) => e.target.src = "notFound.jpg"}
                 alt={`${item.name}`}
               />
