@@ -78,13 +78,13 @@ export default function Products() {
                     }
                 })
                 .then((response) => {
-                    console.log(response.data);
+                  
                     setDeleteCategory(null);
 
                     getCategories();
                 })
                 .catch((error) => {
-                    console.log(error.response.data);
+                  
 
                 })
 
@@ -105,7 +105,7 @@ export default function Products() {
                     }
                 })
                 .then((response) => {
-                    console.log(response.data);
+                    
                     setCreateCategory(null);
                     getCategories();
                 })
@@ -137,7 +137,7 @@ export default function Products() {
                 }
             })
             .then((response) => {
-                console.log(response.data);
+                
                 setCategorias(response.data)
 
             })

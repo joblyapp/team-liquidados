@@ -14,7 +14,7 @@ export default function Success({ operacion, setSuccess, setMode, onClose, setIs
             }
 
             setMode("");
-            console.log("im inside time out!");
+       
             onClose();
 
         }, 3000);

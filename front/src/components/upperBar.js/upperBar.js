@@ -24,7 +24,7 @@ export default function UpperBar({ setEsNuevo, sectionText, buttonText, data, ch
         }
 
         if (isProducts) {
-            console.log("checking")
+        
             setAbleToExport(true)
         }
 

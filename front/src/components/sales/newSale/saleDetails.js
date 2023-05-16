@@ -29,7 +29,7 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
                 }
             })
             .then((response) => {
-                console.log(response.data);
+              
                 setCategorias(response.data)
 
             })
@@ -78,7 +78,7 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
     useEffect(() => {
 
         if (saleStatus) {
-            console.log(saleStatus);
+        
             calculateTotal(saleStatus);
         }
 
@@ -97,7 +97,7 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
                 paymentForm: payMethod
             };
 
-            console.log(temporarySales)
+           
 
             axios
                 .patch(`${process.env.REACT_APP_URL}/Sales/${isEditingId}`, temporarySales, {
@@ -107,7 +107,7 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
                     }
                 })
                 .then((response) => {
-                    console.log(response);
+                    
                     setSuccess(true);
                 })
                 .catch((error) => {
@@ -118,15 +118,14 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
                 });
         }
         else {
-            console.log("Payment Form: " + typeof payMethod)
+            
             const temporarySales = {
                 products: saleStatus.map(({ products }) => ({ name: products.name, price: products.price, quantity: products.quantity, category: products.category })),
                 total: totalToPay,
                 paymentForm: payMethod
             };
 
-            console.log(temporarySales)
-
+            
             axios
                 .post(`${process.env.REACT_APP_URL}/Sales/`, temporarySales, {
                     headers: {
@@ -135,7 +134,7 @@ export default function SaleDetails({ setForceRender, forceRender, saleStatus, s
                     }
                 })
                 .then((response) => {
-                    console.log(response);
+                   
                     setSuccess(true);
                 })
                 .catch((error) => {

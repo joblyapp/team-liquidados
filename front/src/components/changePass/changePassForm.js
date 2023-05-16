@@ -14,18 +14,15 @@ export default function ChangePassForm({ recoveryToken, setSuccess, setFail }) {
     const passRepeat = document.getElementById("passRepeat").value;
 
     if (password === passRepeat) {
-      console.log("Se pudo enviar cambio de contraseña (paso 1)");
-      console.log("enviando pass: " + password + " y token: " + resetToken);
+  
       axios
         .post(`${process.env.REACT_APP_URL}/admin/reset`, {
           password,
           resetToken,
         })
         .then((response) => {
-          console.log(response);
-          console.log(
-            "La contraseña nueva ha sido recibida con éxito (paso 2)"
-          );
+        
+
           setSuccess(true);
         })
         .catch((error) => {
@@ -33,7 +30,7 @@ export default function ChangePassForm({ recoveryToken, setSuccess, setFail }) {
           setFail(true);
         });
     } else {
-      console.log("Las contraseñas no coinciden");
+     
     }
   }
 

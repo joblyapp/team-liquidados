@@ -49,17 +49,17 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
                     }
                 })
                 .then((response) => {
-                    console.log(response.data);
+               
                     // sale recieves the products array
                     sale = response.data;
-                    console.log(sale);
+                 
 
                     // Then i map sale and create, for each product, an object with this format: {products: [], total:()}
                     sale.products.map((item) => (
                         item.products = { name: item.name, price: item.price, quantity: item.quantity },
                         item.total = () => { return item.products.price * item.products.quantity }
                     ))
-                    console.log(sale);
+                   
                     setSaleStatus(sale.products);
                 })
                 .catch((error) => {
@@ -67,7 +67,7 @@ export default function Sale({ setMode, isEditing, isEditingId, setIsEditing }) 
                 })
                 .finally(() => {
 
-                    console.log(saleStatus)
+                  
                     setLoad(false)
 
                 });
