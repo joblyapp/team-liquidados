@@ -30,7 +30,7 @@ export default function Categorias({
         }
         else {
             setSelectedCat(e.target.value);
-            console.log(document.getElementById("categoryId").value);
+           
         }
     }
 
@@ -47,7 +47,7 @@ export default function Categorias({
                     }
                 })
                 .then((response) => {
-                    console.log(response.data);
+               
                     setModalCategories(response.data);
 
                 })
@@ -83,7 +83,7 @@ export default function Categorias({
 
         if (usedCategories.includes(id)) {
 
-            console.log("No se puede borrar")
+           
 
             setDeleteError(true);
 
@@ -106,7 +106,7 @@ export default function Categorias({
                         }
                     })
                     .then((response) => {
-                        console.log(response.data);
+                        
                         setModalCategories(response.data);
 
                     })

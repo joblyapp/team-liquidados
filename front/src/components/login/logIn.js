@@ -27,14 +27,14 @@ export default function LogIn({ setLoggedIn, setActive }) {
         `${process.env.REACT_APP_URL}/admin/login`,
         { email, password }
       );
-      console.log(response.data); // handle response
+      
       sessionStorage.setItem("token", response.data.token);
       sessionStorage.setItem("name", response.data.name);
       sessionStorage.setItem("email", email);
       sessionStorage.setItem("password", password);
       sessionStorage.setItem(
         "avatar",
-        `http://localhost:8080/${response.data.image}`
+        `${process.env.REACT_APP_URL}/${response.data.image}`
       );
       setLoggedIn(true);
       setActive("home");
