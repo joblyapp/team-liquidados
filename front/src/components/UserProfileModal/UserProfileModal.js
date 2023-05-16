@@ -51,7 +51,7 @@ function UserProfileModal(props) {
       sessionStorage.setItem("email", res.data.email);
       sessionStorage.setItem(
         "avatar",
-        `http://localhost:8080/${res.data.image.path}`
+        ``${process.env.REACT_APP_URL}/${res.data.image}`
       );
       props.onRequestClose();
     } catch (err) {
@@ -88,7 +88,7 @@ function UserProfileModal(props) {
         <label className="profile-picture-container ">
           <div className="profile-picture">
             {image ? (
-              image.includes("localhost:8080") ? (
+              image.includes(`${process.env.REACT_APP_URL}`) ? (
                 <img className="avatar" src={image} />
               ) : (
                 <img className="avatar" src={image} />
