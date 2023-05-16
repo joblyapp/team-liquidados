@@ -27,7 +27,7 @@ function App() {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("name");
     setLoggedIn(false);
-    window.location.assign("http://localhost:3000/");
+    window.location.assign(`${process.env.REACT_APP_URL}`);
   }
 
   return (
