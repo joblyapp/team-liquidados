@@ -74,7 +74,7 @@ export default function ListaProductos({
             .then((response) => {
                 setDatos(response.data);
                 setDataToExport(response.data);
-                console.log(response.data)
+              
             })
             .catch((error) => {
                 console.log(error);
@@ -105,10 +105,10 @@ export default function ListaProductos({
             setComplete(complete.reverse())
             setReverse(false);
 
-            console.log("reversing");
+            
         }
         else {
-            console.log("not working")
+          
         }
 
     }, [reverse])
@@ -144,7 +144,7 @@ export default function ListaProductos({
         }
 
         else{
-            console.log("there is no products")
+          
         }
 
     }
@@ -166,7 +166,7 @@ export default function ListaProductos({
         }
 
         else{
-            console.log("there is no products")
+          
         }
 
 
@@ -183,7 +183,7 @@ export default function ListaProductos({
                 }
             })
             .then((response) => {
-                console.log(response)
+               
             })
             .catch((error) => {
                 console.log(error);
@@ -224,7 +224,7 @@ export default function ListaProductos({
 
     // Turns on Edit Mode on parent component
     function handleEdit(id, category, name, price, image) {
-        console.log("editing");
+        
         setEditMode(true);
         setProductInfo({
             id: id,
@@ -239,7 +239,8 @@ export default function ListaProductos({
     async function handleAdd(name, price, id, cat) {
 
         const sale = [...productsTemp];
-        console.log(sale)
+        
+        
 
         // create a product
         const newProduct = {
@@ -269,7 +270,7 @@ export default function ListaProductos({
             const added = [...addedList];
             added.push(id);
             setAddedList(added);
-            console.log(sale);
+           
         }
 
         else {
@@ -299,7 +300,7 @@ export default function ListaProductos({
                 }
             })
             .then((response) => {
-                console.log(response)
+              
             })
             .catch((error) => {
                 console.log(error);

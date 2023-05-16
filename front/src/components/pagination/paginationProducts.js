@@ -57,7 +57,7 @@ export default function PaginationProducts({
       temp.push(id);
      }
 
-     console.log(temp);
+     
      setActiveProducts(temp);
 
 
@@ -88,7 +88,8 @@ export default function PaginationProducts({
             <div className="conteiner">
               <img
                 className="productImg"
-                src={`http://localhost:8080/${item.image.path}`}
+                // Correct image src from src={`${process.env.REACT_APP_URL}/${item.image?.path}`} to src= item.image
+                src={item.image}
                 onError={(e) => e.target.src = "notFound.jpg"}
                 alt={`${item.name}`}
               />

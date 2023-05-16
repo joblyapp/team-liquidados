@@ -3,23 +3,24 @@ import styles from "../styles.module.css";
 import axios from "axios";
 import Success from "../success";
 import Categorias from "./categorias";
+import { Storage, StorageSharedKeyCredential } from '@azure/storage-blob';
 
 
 
 
 
-export default function EditProduct({ 
-    setForceRender, 
+export default function EditProduct({
+    setForceRender,
     onClose,
-    esNuevo, 
-    setMode, 
-    id, 
-    category, 
-    name, 
-    price, 
-    image, 
-    categoriasDisponibles, 
-    setCreateCategory, 
+    esNuevo,
+    setMode,
+    id,
+    category,
+    name,
+    price,
+    image,
+    categoriasDisponibles,
+    setCreateCategory,
     setDeleteCategory,
     usedCategories
 }) {
@@ -38,76 +39,93 @@ export default function EditProduct({
 
         if (image) {
 
-            setProductImage(`${process.env.REACT_APP_URL}/${image.path}`);
+            setProductImage(image);
 
         }
 
     }, [productImage])
 
     // When submitting form this function sets product state an trigger the useEffect hook
-    function handleEditSubmit(e) {
+
+    async function handleEditSubmit(e) {
 
         e.preventDefault();
 
-        const image = document.getElementById("image").files[0];
-        console.log(image);
 
-        const formData = new FormData();
-        formData.append('name', document.getElementById("name").value);
-        formData.append('price', document.getElementById("price").value);
-        formData.append('description', "testing");
-        formData.append('image', image);
-        formData.append('category', selectedCat);
+        var imageUrl;
+        // Posting to server
+        const formdataImg = new FormData()
+        formdataImg.append("image", document.getElementById("image").files[0])
 
-        console.log("Created form Data");
+        axios
+            .post("https://api.imgur.com/3/image/", formdataImg, {
+                headers: {
+                    Authorization: "Client-ID 5a8be6a81450005"
+                }
+            })
+            .then((res) => {
 
-        if (esNuevo) {
+              
+                imageUrl = res.data.data.link;
+            })
+            .then((res) => {
+                const formData = new FormData();
+                formData.append('name', document.getElementById("name").value);
+                formData.append('price', document.getElementById("price").value);
+                formData.append('description', "testing");
+                formData.append('image', imageUrl);
+                formData.append('category', selectedCat);
 
-            console.log("Inside If: NEW PRODUCT");
-            console.log(document.getElementById("image").files[0]);
+               
 
-            axios
-                .post(`${process.env.REACT_APP_URL}/products`, formData, {
-                    headers: {
-                        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
-                .then((res) => {
-                    setSuccess(true)
-                    setMode(false);
-                    setForceRender(true);
-                    console.log(res);
+                if (esNuevo) {
 
-                })
-                .catch(error => console.log(error))
-                .finally(() => {
-                    console.log("Succedeed")
-                })
-        }
+                    axios
+                        .post(`${process.env.REACT_APP_URL}/products`, formData, {
+                            headers: {
+                                Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                        .then((res) => {
+                            setSuccess(true)
+                            setMode(false);
+                            setForceRender(true);
+                            
 
-        else if (!esNuevo) {
+                        })
+                        .catch(error => console.log(error))
+                        .finally(() => {
+                          
+                        })
+                }
 
-            console.log("Inside If: EDIT PRODUCT for id: " + id)
+                else if (!esNuevo) {
 
-            axios
-                .patch(`${process.env.REACT_APP_URL}/products/${id}`, formData, {
-                    headers: {
-                        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
-                .then((res) => {
-                    setSuccess(true)
-                    setMode(false);
-                    setForceRender(true);
-                    console.log(res);
-                })
-                .catch(error => console.log(error))
-                .finally(() => {
-                    console.log("Succedeed")
-                })
-        }
+                    axios
+                        .patch(`${process.env.REACT_APP_URL}/products/${id}`, formData, {
+                            headers: {
+                                Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                        .then((res) => {
+                            setSuccess(true)
+                            setMode(false);
+                            setForceRender(true);
+                            
+                        })
+                        .catch(error => console.log(error))
+                        .finally(() => {
+                          
+                        })
+                }
+
+            })
+
+        // Posting to server
+
+
     }
 
     // Cancel function
@@ -116,11 +134,14 @@ export default function EditProduct({
         onClose();
     }
 
+
+
     function handleImage(e) {
+
         e.preventDefault();
-        console.log(e.target.files[0]);
+
         setProductImage(URL.createObjectURL(e.target.files[0]));
-        console.log(productImage);
+        
     }
 
 
@@ -150,7 +171,7 @@ export default function EditProduct({
                             </div>
                             <div>
                                 Categoría:
-                                <Categorias categoriasDisponibles={categoriasDisponibles} setCreateCategory={setCreateCategory} setSelectedCat={setSelectedCat} defaultCategory={category} setDeleteCategory={setDeleteCategory} usedCategories={usedCategories}/>
+                                <Categorias categoriasDisponibles={categoriasDisponibles} setCreateCategory={setCreateCategory} setSelectedCat={setSelectedCat} defaultCategory={category} setDeleteCategory={setDeleteCategory} usedCategories={usedCategories} />
                             </div>
                             <div>
                                 Precio: <input className={styles.inputs} style={{ width: "100%" }} id="price" defaultValue={price} type="number" maxLength="10" required></input>
@@ -168,7 +189,7 @@ export default function EditProduct({
 
             :
 
-            <Success operacion="El producto fue ingresado correctamente" setSuccess={setSuccess} setMode={setProduct} onClose={onClose}/>
+            <Success operacion="El producto fue ingresado correctamente" setSuccess={setSuccess} setMode={setProduct} onClose={onClose} />
 
 
     )
