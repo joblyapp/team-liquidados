@@ -34,7 +34,7 @@ export default function LogIn({ setLoggedIn, setActive }) {
       sessionStorage.setItem("password", password);
       sessionStorage.setItem(
         "avatar",
-        `${process.env.REACT_APP_URL}/${response.data.image}`
+        response.data.image
       );
       setLoggedIn(true);
       setActive("home");

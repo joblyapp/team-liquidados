@@ -24,40 +24,60 @@ function UserProfileModal(props) {
   };
 
   const handleSubmit = async (event) => {
+
     event.preventDefault();
-    const image = document.getElementById("image").files[0];
-    console.log(image);
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("name", name);
-    // formData.append("image", image);
-    if (image) {
-      formData.append("image", image);
-    }
-    try {
-      console.log(formData);
-      const res = await axios.patch(
-        `${process.env.REACT_APP_URL}/admin`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+
+    const formdataUserImg = new FormData()
+    formdataUserImg.append("image", document.getElementById("image").files[0])
+
+    axios
+      .post("https://api.imgur.com/3/image/", formdataUserImg, {
+        headers: {
+          Authorization: "Client-ID 5a8be6a81450005"
         }
-      );
-      // handle success response
-      console.log(res.data);
-      sessionStorage.setItem("name", res.data.name);
-      sessionStorage.setItem("email", res.data.email);
-      sessionStorage.setItem(
-        "avatar",
-        `http://localhost:8080/${res.data.image.path}`
-      );
-      props.onRequestClose();
-    } catch (err) {
-      console.error(err.response.data);
-      // handle error response
-    }
+      })
+      .then((res) => {
+        const imageUrl = res.data.data.link;
+      })
+      .then(() => {
+        const formData = {
+          "email": email,
+          "name": name,
+          "image": imageUrl,
+        }
+
+        try {
+
+          console.log(formData);
+          axios
+            .patch(
+              `${process.env.REACT_APP_URL}/admin`,
+              formData,
+              {
+                headers: {
+                  "Content-Type": 'application/json',
+                },
+              }
+                .then((res) => {
+                  // handle success response
+                  console.log(res.data);
+                  sessionStorage.setItem("name", res.data.name);
+                  sessionStorage.setItem("email", res.data.email);
+                  sessionStorage.setItem(
+                    "avatar",
+                    res.data.image
+                  );
+                  props.onRequestClose();
+                })
+            );
+
+
+        } catch (err) {
+          console.error(err.response.data);
+          // handle error response
+        }
+
+      })
   };
 
   const customStyles = {
