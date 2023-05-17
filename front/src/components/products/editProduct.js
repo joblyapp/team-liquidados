@@ -37,7 +37,7 @@ export default function EditProduct({
     // State for show category error
     const [categorySelection, setCategorySelection] = useState(true);
 
-    
+
 
     // Image for default image
     var image;
@@ -46,7 +46,7 @@ export default function EditProduct({
 
         /*defaultImage();*/
 
- 
+
 
     }, [])
 
@@ -78,7 +78,7 @@ export default function EditProduct({
             })
 */
 
-       
+
 
 
     }
@@ -107,19 +107,19 @@ export default function EditProduct({
             })
             .then((res) => {
 
-              
+
                 imageUrl = res.data.data.link;
             })
             .then((res) => {
-                const formData = new FormData();
-                formData.append('name', document.getElementById("name").value);
-                formData.append('price', document.getElementById("price").value);
-                formData.append('description', "testing");
-                formData.append('image', imageUrl);
-                formData.append('category', selectedCat);
-
-               
-
+                // create JSON
+                const formData = {
+                    "name": document.getElementById("name").value,
+                    'price': document.getElementById("price").value,
+                    'description': "testing",
+                    'image': imageUrl,
+                    'category': selectedCat
+                }
+              
                 if (esNuevo) {
 
                     axios
@@ -133,12 +133,12 @@ export default function EditProduct({
                             setSuccess(true)
                             setMode(false);
                             setForceRender(true);
-                            
+
 
                         })
                         .catch(error => console.log(error))
                         .finally(() => {
-                          
+
                         })
                 }
 
@@ -155,11 +155,11 @@ export default function EditProduct({
                             setSuccess(true)
                             setMode(false);
                             setForceRender(true);
-                            
+
                         })
                         .catch(error => console.log(error))
                         .finally(() => {
-                          
+
                         })
                 }
 
@@ -184,7 +184,7 @@ export default function EditProduct({
 
 
         setProductImage(URL.createObjectURL(e.target.files[0]));
-        
+
 
     }
 
