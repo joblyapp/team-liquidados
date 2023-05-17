@@ -89,11 +89,6 @@ export default function EditProduct({
     async function handleEditSubmit(e) {
 
         e.preventDefault();
-
-
-
-
-
         var imageUrl;
         // Posting to server
         const formdataImg = new FormData()
@@ -120,6 +115,8 @@ export default function EditProduct({
                     'category': selectedCat
                 }
               
+                console.log(formData);
+
                 if (esNuevo) {
 
                     axios
