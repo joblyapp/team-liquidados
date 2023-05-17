@@ -37,7 +37,7 @@ function UserProfileModal(props) {
         }
       })
       .then((res) => {
-        imageUrl = res.data.data.link;
+        const imageUrl = res.data.data.link;
       })
       .then(() => {
         const formData = {
