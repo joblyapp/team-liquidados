@@ -38,13 +38,13 @@ function UserProfileModal(props) {
         }
       })
       .then((res) => {
-        imageUrl = res.data.data.link;
+        imageProfileUrl = res.data.data.link;
       })
       .then(() => {
         const formData = {
           "email": email,
           "name": name,
-          "image": imageUrl,
+          "image":  imageProfileUrl,
         }
 
         try {
