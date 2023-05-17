@@ -38,18 +38,15 @@ function UserProfileModal(props) {
         }
       })
       .then((res) => {
-        imageUrl = res.data.data.link;
-      })
-      .then(() => {
         const formData = {
           "email": email,
           "name": name,
-          "image": imageUrl,
+          "image":  res.data.data.link,
         }
 
-        try {
+       try {
 
-          console.log(formData);
+        console.log(formData);
           axios
             .patch(
               `${process.env.REACT_APP_URL}/admin`,
