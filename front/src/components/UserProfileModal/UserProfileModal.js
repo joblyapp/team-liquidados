@@ -29,6 +29,7 @@ function UserProfileModal(props) {
 
     const formdataUserImg = new FormData()
     formdataUserImg.append("image", document.getElementById("image").files[0])
+    var imageUrl;
 
     axios
       .post("https://api.imgur.com/3/image/", formdataUserImg, {
@@ -37,7 +38,7 @@ function UserProfileModal(props) {
         }
       })
       .then((res) => {
-        const imageUrl = res.data.data.link;
+        imageUrl = res.data.data.link;
       })
       .then(() => {
         const formData = {
