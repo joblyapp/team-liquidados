@@ -122,7 +122,7 @@ function UserProfileModal(props) {
             type="button"
             className="custom-file-upload"
             onClick={() => {
-              document.getElementById("image").click();
+              document.getElementById("imageProfile").click();
             }}
           >
             <img
@@ -135,7 +135,7 @@ function UserProfileModal(props) {
 
           <input
             onChange={handleImageChange}
-            name="image"
+            name="imageProfile"
             id="imageProfile"
             type="file"
           />
