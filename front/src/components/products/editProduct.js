@@ -123,7 +123,7 @@ export default function EditProduct({
                         .post(`${process.env.REACT_APP_URL}/products`, formData, {
                             headers: {
                                 Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                                'Content-Type': 'multipart/form-data'
+                                'Content-Type': 'application/json'
                             }
                         })
                         .then((res) => {
@@ -145,7 +145,7 @@ export default function EditProduct({
                         .patch(`${process.env.REACT_APP_URL}/products/${id}`, formData, {
                             headers: {
                                 Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                                'Content-Type': 'multipart/form-data'
+                                'Content-Type': 'application/json'
                             }
                         })
                         .then((res) => {
