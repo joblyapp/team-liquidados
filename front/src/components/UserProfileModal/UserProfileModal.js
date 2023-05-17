@@ -19,7 +19,7 @@ function UserProfileModal(props) {
     setEmail(event.target.value);
   };
   const handleImageChange = (event) => {
-    setImage(URL.createObjectURL(document.getElementById("image").files[0]));
+    setImage(URL.createObjectURL(document.getElementById("imageProfile").files[0]));
     console.log(image);
   };
 
@@ -28,7 +28,7 @@ function UserProfileModal(props) {
     event.preventDefault();
 
     const formdataUserImg = new FormData()
-    formdataUserImg.append("image", document.getElementById("image").files[0])
+    formdataUserImg.append("image", document.getElementById("imageProfile").files[0])
     var imageUrl;
 
     axios
@@ -136,7 +136,7 @@ function UserProfileModal(props) {
           <input
             onChange={handleImageChange}
             name="image"
-            id="image"
+            id="imageProfile"
             type="file"
           />
         </label>

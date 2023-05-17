@@ -28,8 +28,7 @@ export default function LogIn({ setLoggedIn, setActive }) {
         { email, password }
       );
       
-      console.log(response);
-
+      
       sessionStorage.setItem("token", response.data.token);
       sessionStorage.setItem("name", response.data.name);
       sessionStorage.setItem("email", email);
