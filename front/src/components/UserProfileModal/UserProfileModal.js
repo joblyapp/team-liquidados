@@ -38,49 +38,40 @@ function UserProfileModal(props) {
         }
       })
       .then((res) => {
-        
+
         console.log(res.data)
         const formData = {
           "email": email,
           "name": name,
-          "image":  res.data.data.link,
+          "image": res.data.data.link,
         }
-      
 
-       try {
-        
+
         console.log(formData);
 
-          axios
-            .patch(
-              `${process.env.REACT_APP_URL}/admin`,
-              formData,
-              {
-                headers: {
-                  "Content-Type": 'application/json',
-                },
-              }
-                .then((res) => {
-                  // handle success response
-                  /*
-                  console.log(res.data);
-                  sessionStorage.setItem("name", res.data.name);
-                  sessionStorage.setItem("email", res.data.email);
-                  sessionStorage.setItem(
-                    "avatar",
-                    res.data.image
-                  );
-                  */
-                  props.onRequestClose();
-                })
-            );
-
-
-        } catch (err) {
-          console.error(err.response.data);
-          // handle error response
-        }
-
+        axios
+          .patch(
+            `${process.env.REACT_APP_URL}/admin`,
+            formData,
+            {
+              headers: {
+                "Content-Type": 'application/json',
+              },
+            }
+              .then((res) => {
+                // handle success response
+                /*
+                console.log(res.data);
+                sessionStorage.setItem("name", res.data.name);
+                sessionStorage.setItem("email", res.data.email);
+                sessionStorage.setItem(
+                  "avatar",
+                  res.data.image
+                );
+                */
+                props.onRequestClose();
+              })
+          );
       })
   };
 
