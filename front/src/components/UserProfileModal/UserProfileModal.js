@@ -71,9 +71,9 @@ function UserProfileModal(props) {
             */
             props.onRequestClose();
           })
-        });
+      });
   }
-};
+;
 
 const customStyles = {
   content: {
@@ -166,5 +166,5 @@ return (
   </Modal>
 );
 
-
+}
 export default UserProfileModal;
