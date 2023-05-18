@@ -62,6 +62,7 @@ function UserProfileModal(props) {
               }
                 .then((res) => {
                   // handle success response
+                  /*
                   console.log(res.data);
                   sessionStorage.setItem("name", res.data.name);
                   sessionStorage.setItem("email", res.data.email);
@@ -69,6 +70,7 @@ function UserProfileModal(props) {
                     "avatar",
                     res.data.image
                   );
+                  */
                   props.onRequestClose();
                 })
             );
