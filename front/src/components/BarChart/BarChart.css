@@ -1,10 +1,7 @@
 .chart {
   width: 50%;
   height: 90%;
- 
 }
-
-
 
 .chart_container {
     display: flex;
@@ -14,7 +11,6 @@
     margin: 0 auto;
     align-items: center;
     justify-content: space-evenly;
-    
     background-color: white;
     border-radius: 10px;
     transition: all 0.2s ease-in-out;
@@ -45,4 +41,15 @@
   display: flex;
   justify-content: space-between;
   
+}
+
+@media (max-width: 1367px) {
+  .chart_container {
+    height: 35vh;
+}
+
+.charts_title {
+  margin-top: 7rem;
+}
+
 }
