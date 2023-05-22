@@ -27,7 +27,7 @@ function App() {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("name");
     setLoggedIn(false);
-    window.location.assign(`${process.env.LogOut}`);
+    window.location.assign(`${process.env.LOGOUT}`);
   }
 
   return (
