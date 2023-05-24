@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import ProductsPage from "./pages/productsPage";
 import WelcomePage from "./pages/welcomePage";
 import StatsPage from "./pages/statsPage";
@@ -13,6 +13,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   //state to show for the selected link in navbar
   const [active, setActive] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // check if user is logged in when the component mounts
@@ -28,6 +30,9 @@ function App() {
     sessionStorage.removeItem("name");
     setLoggedIn(false);
     // window.location.assign(`${process.env.LOGOUT}`);
+    // trying the navigate option
+    navigate("/");
+
   }
 
   return (
