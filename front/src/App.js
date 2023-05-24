@@ -15,7 +15,7 @@ function App() {
   const [active, setActive] = useState("");
 
   // add a constant to redirect page after logging out
-  const logoutUrl = process.env.NEXT_PUBLIC_LOGOUT;
+  const logoutUrl = process.env.REACT_APP_LOGOUT;
   console.log(logoutUrl);
  // const navigate = useNavigate();
 
@@ -32,7 +32,8 @@ function App() {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("name");
     setLoggedIn(false);
-    // window.location.assign("https://donventura.vercel.app/");
+
+    window.location.assign(logoutUrl);
  
     // trying the navigate option
     // not workin navigate("/");
