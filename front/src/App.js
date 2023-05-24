@@ -30,6 +30,9 @@ function App() {
     sessionStorage.removeItem("name");
     setLoggedIn(false);
     // window.location.assign(`${process.env.LOGOUT}`);
+    window.location.assign(
+  "https://developer.mozilla.org/en-US/docs/Web/API/Location/reload"
+);
     // trying the navigate option
     // not workin navigate("/");
 
