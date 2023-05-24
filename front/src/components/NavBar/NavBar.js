@@ -90,10 +90,11 @@ const Navbar = ({ handleLogout, active, setActive, onProfileClick }) => {
               Perfil
             </Link>
             <Link
-              onClick={() => {
-                navigate("/");
-                handleLogout();
-              }}
+
+              onClick={async () => {
+                const done = await navigate("/");
+                handleLogout()
+                }}
               className="navbar-avatar-dropdown-link"
             >
               Cerrar sesión
