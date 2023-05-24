@@ -10,7 +10,7 @@ function UserProfileModal(props) {
   const [email, setEmail] = useState(sessionStorage.getItem("email"));
   const [image, setImage] = useState(sessionStorage.getItem("avatar"));
 
-  console.log(window.innerWidth);
+  // console.log(window.innerWidth);
   const handleNameChange = (event) => {
     setName(event.target.value);
     console.log(name);
@@ -43,7 +43,7 @@ function UserProfileModal(props) {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         const formData = {
           email: email,
           name: name,
