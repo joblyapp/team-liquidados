@@ -14,7 +14,7 @@ function App() {
   //state to show for the selected link in navbar
   const [active, setActive] = useState("");
 
-  const navigate = useNavigate();
+ // const navigate = useNavigate();
 
   useEffect(() => {
     // check if user is logged in when the component mounts
