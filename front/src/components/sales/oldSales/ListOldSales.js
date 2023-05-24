@@ -37,7 +37,7 @@ export default function ListOldSales({ oldSales, setIsEditing, setEditingId, col
 
         setEditingId(saleId);
         setIsEditing(true);
-        console.log("Sale ID:" + saleId)
+      
 
     }
 

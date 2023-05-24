@@ -24,7 +24,7 @@ export default function StatsIndex() {
                     }
                   })
                 .then((response) => {
-                    console.log(response)
+                   
                     setOldSales(response.data)
                 })
                 .catch((error) => {

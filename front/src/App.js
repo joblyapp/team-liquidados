@@ -16,7 +16,7 @@ function App() {
 
   // add a constant to redirect page after logging out
   const logoutUrl = process.env.REACT_APP_LOGOUT;
-  console.log(logoutUrl);
+
  // const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,9 +35,6 @@ function App() {
 
     window.location.assign(logoutUrl);
  
-    // trying the navigate option
-    // not workin navigate("/");
-
   }
 
   return (

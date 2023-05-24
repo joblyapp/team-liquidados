@@ -115,7 +115,7 @@ export default function EditProduct({
                     'category': selectedCat
                 }
               
-                console.log(formData);
+             
 
                 if (esNuevo) {
 

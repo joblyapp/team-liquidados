@@ -75,7 +75,7 @@ export default function StatsInputs({ setCalendar, setReverse }) {
         const dateFrom = document.getElementById("dateFrom").value;
         const dateTo = document.getElementById("dateTo").value;
 
-        console.log(dateFrom);
+        
 
         setCalendar({
             "startDate": dateFrom,

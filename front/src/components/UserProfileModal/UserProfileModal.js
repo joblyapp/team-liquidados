@@ -10,10 +10,10 @@ function UserProfileModal(props) {
   const [email, setEmail] = useState(sessionStorage.getItem("email"));
   const [image, setImage] = useState(sessionStorage.getItem("avatar"));
 
-  // console.log(window.innerWidth);
+ 
   const handleNameChange = (event) => {
     setName(event.target.value);
-    console.log(name);
+   
   };
 
   const handleEmailChange = (event) => {
@@ -23,7 +23,7 @@ function UserProfileModal(props) {
     setImage(
       URL.createObjectURL(document.getElementById("imageProfile").files[0])
     );
-    console.log(image);
+    
   };
 
   const handleSubmit = async (event) => {
@@ -43,14 +43,14 @@ function UserProfileModal(props) {
         },
       })
       .then((res) => {
-        // console.log(res.data);
+      
         const formData = {
           email: email,
           name: name,
           image: res.data.data.link,
         };
 
-        console.log(formData);
+        
 
         axios
           .patch(`${process.env.REACT_APP_URL}/admin`, formData, {
@@ -61,7 +61,7 @@ function UserProfileModal(props) {
           .then((res) => {
             // handle success response
 
-            console.log(res.data);
+           
             sessionStorage.setItem("name", res.data.name);
             sessionStorage.setItem("email", res.data.email);
             sessionStorage.setItem("avatar", res.data.image);
