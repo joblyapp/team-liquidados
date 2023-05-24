@@ -15,7 +15,7 @@ function App() {
   const [active, setActive] = useState("");
 
   // add a constant to redirect page after logging out
-  const logoutUrl = process.env.LOGOUT;
+  const logoutUrl = process.env.NEXT_PUBLIC_LOGOUT;
   console.log(logoutUrl);
  // const navigate = useNavigate();
 
