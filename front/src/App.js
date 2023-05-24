@@ -14,6 +14,9 @@ function App() {
   //state to show for the selected link in navbar
   const [active, setActive] = useState("");
 
+  // add a constant to redirect page after logging out
+  const logoutUrl = process.env.LOGOUT;
+  console.log(logoutUrl);
  // const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,10 +32,8 @@ function App() {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("name");
     setLoggedIn(false);
-    // window.location.assign(`${process.env.LOGOUT}`);
-    window.location.assign(
-  "https://developer.mozilla.org/en-US/docs/Web/API/Location/reload"
-);
+    // window.location.assign(logoutUrl);
+ 
     // trying the navigate option
     // not workin navigate("/");
 
