@@ -91,8 +91,8 @@ const Navbar = ({ handleLogout, active, setActive, onProfileClick }) => {
             </Link>
             <Link
               onClick={() => {
-                handleLogout();
                 navigate("/");
+                handleLogout();
               }}
               className="navbar-avatar-dropdown-link"
             >
