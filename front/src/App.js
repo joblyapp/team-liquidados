@@ -31,7 +31,7 @@ function App() {
     setLoggedIn(false);
     // window.location.assign(`${process.env.LOGOUT}`);
     // trying the navigate option
-    navigate("/");
+    // not workin navigate("/");
 
   }
 
