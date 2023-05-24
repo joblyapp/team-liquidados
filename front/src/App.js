@@ -32,7 +32,7 @@ function App() {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("name");
     setLoggedIn(false);
-    // window.location.assign(logoutUrl);
+    // window.location.assign("https://donventura.vercel.app/");
  
     // trying the navigate option
     // not workin navigate("/");
