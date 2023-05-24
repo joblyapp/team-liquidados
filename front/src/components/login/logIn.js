@@ -23,6 +23,7 @@ export default function LogIn({ setLoggedIn, setActive }) {
     e.preventDefault();
 
     try {
+      
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/admin/login`,
         { email, password }

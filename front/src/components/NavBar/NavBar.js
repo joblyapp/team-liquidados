@@ -90,9 +90,10 @@ const Navbar = ({ handleLogout, active, setActive, onProfileClick }) => {
               Perfil
             </Link>
             <Link
-              onClick={() => {
-                handleLogout();
-                navigate("/");
+              onClick={async () => {
+                const done = await navigate("/");
+                handleLogout()
+                
               }}
               className="navbar-avatar-dropdown-link"
             >
