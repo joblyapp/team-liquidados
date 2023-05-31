@@ -73,9 +73,9 @@ function UserProfileModal(props) {
   const customStyles = {
     content: {
       borderRadius: "10px",
-      width: "25%",
+      width: "40%",
       margin: "auto auto",
-      height: "65vh",
+      height: "83vh",
       overflow: "hidden",
     },
   };
