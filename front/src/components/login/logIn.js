@@ -61,6 +61,12 @@ export default function LogIn({ setLoggedIn, setActive }) {
     setRevealPassword(!revealPassword);
   };
 
+  const handleTest = (e) => {
+    e.preventDefault();
+    setEmail("raulventura@donventura.com");
+    setPassword("Raulventura1");
+  }
+
   return (
     <div
       className={styles.centered}
@@ -123,6 +129,12 @@ export default function LogIn({ setLoggedIn, setActive }) {
               type="submit"
               value="Ingresar"
             ></input>
+            <button 
+            className={styles.testButton}
+            onClick= {handleTest} 
+            >
+            
+              Versión de Prueba</button>
           </div>
         </form>
         <Link to={"/recovery"} href="" className={styles.recover}>

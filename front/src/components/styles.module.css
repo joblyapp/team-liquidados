@@ -260,6 +260,25 @@ body {
     border: none;
 }
 
+.testButton {
+    width: 450px;
+    height: 4.6vh;
+    cursor: pointer;
+
+    color: var(--blueButton);
+    background-color: var(white);
+
+    border-radius: 8px;
+    border: none;
+
+    margin-top: 1px;
+}
+
+.testButton:hover {
+    border: .5px var(--blueButton) solid;
+}
+
+
 .passContainer {
     position: relative;
 }
