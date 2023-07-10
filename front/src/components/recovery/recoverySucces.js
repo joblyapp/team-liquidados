@@ -3,7 +3,7 @@ import styles from "../../components/styles.module.css";
 
 export default function RecoverySuccess({ setExito, setRecovery }) {
   useEffect(() => {
-    console.log("im inside recovery succes");
+   
     setTimeout(() => setExito(false), 3000);
     setTimeout(() => setRecovery(false), 3000);
   });

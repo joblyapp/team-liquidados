@@ -21,11 +21,11 @@ export default function ShowSale({ saleId, onClose }) {
 
     function calculateTotal(products) {
         var sum = 0;
-        console.log(products)
+       
         products.map((item) => (
             sum = sum + item.products.price * item.products.quantity
         ))
-        console.log("La suma total es de: " + sum);
+        
         setTotalToPay(sum.toFixed(2));
     }
 
@@ -57,7 +57,7 @@ export default function ShowSale({ saleId, onClose }) {
                     item.products = { name: item.name, price: item.price, quantity: item.quantity },
                     item.total = () => { return item.products.price * item.products.quantity }
                 ))
-                console.log(sale.products)
+                
                 setSaleStatus(sale.products);
             })
             .then(() => {
@@ -69,7 +69,7 @@ export default function ShowSale({ saleId, onClose }) {
                 console.log(error);
             })
             .finally(() => {
-                console.log(saleData)
+               
                 setLoad(false)
 
             });

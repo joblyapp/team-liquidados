@@ -194,3 +194,10 @@
     border-bottom: #fff 4px solid;
   }
   
+
+  @media (max-width: 1367px) {
+    .navbar {
+      height: 9vh;
+    }
+  
+  }

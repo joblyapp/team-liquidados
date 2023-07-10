@@ -23,10 +23,12 @@ export default function LogIn({ setLoggedIn, setActive }) {
     e.preventDefault();
 
     try {
+      
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/admin/login`,
         { email, password }
       );
+      
       
       sessionStorage.setItem("token", response.data.token);
       sessionStorage.setItem("name", response.data.name);
@@ -34,7 +36,7 @@ export default function LogIn({ setLoggedIn, setActive }) {
       sessionStorage.setItem("password", password);
       sessionStorage.setItem(
         "avatar",
-        `${process.env.REACT_APP_URL}/${response.data.image}`
+        response.data.image
       );
       setLoggedIn(true);
       setActive("home");
@@ -58,6 +60,12 @@ export default function LogIn({ setLoggedIn, setActive }) {
   const toggleRevealPassword = () => {
     setRevealPassword(!revealPassword);
   };
+
+  const handleTest = (e) => {
+    e.preventDefault();
+    setEmail("raulventura@donventura.com");
+    setPassword("Raulventura1");
+  }
 
   return (
     <div
@@ -121,6 +129,12 @@ export default function LogIn({ setLoggedIn, setActive }) {
               type="submit"
               value="Ingresar"
             ></input>
+            <button 
+            className={styles.testButton}
+            onClick= {handleTest} 
+            >
+            
+              Versión de Prueba</button>
           </div>
         </form>
         <Link to={"/recovery"} href="" className={styles.recover}>

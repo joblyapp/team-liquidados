@@ -89,11 +89,6 @@ export default function EditProduct({
     async function handleEditSubmit(e) {
 
         e.preventDefault();
-
-
-
-
-
         var imageUrl;
         // Posting to server
         const formdataImg = new FormData()
@@ -120,13 +115,15 @@ export default function EditProduct({
                     'category': selectedCat
                 }
               
+             
+
                 if (esNuevo) {
 
                     axios
                         .post(`${process.env.REACT_APP_URL}/products`, formData, {
                             headers: {
                                 Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                                'Content-Type': 'multipart/form-data'
+                                'Content-Type': 'application/json'
                             }
                         })
                         .then((res) => {
@@ -148,7 +145,7 @@ export default function EditProduct({
                         .patch(`${process.env.REACT_APP_URL}/products/${id}`, formData, {
                             headers: {
                                 Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                                'Content-Type': 'multipart/form-data'
+                                'Content-Type': 'application/json'
                             }
                         })
                         .then((res) => {

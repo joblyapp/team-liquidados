@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import ProductsPage from "./pages/productsPage";
 import WelcomePage from "./pages/welcomePage";
 import StatsPage from "./pages/statsPage";
@@ -14,6 +14,11 @@ function App() {
   //state to show for the selected link in navbar
   const [active, setActive] = useState("");
 
+  // add a constant to redirect page after logging out
+  const logoutUrl = process.env.REACT_APP_LOGOUT;
+
+ // const navigate = useNavigate();
+
   useEffect(() => {
     // check if user is logged in when the component mounts
     const token = sessionStorage.getItem("token");
@@ -27,7 +32,9 @@ function App() {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("name");
     setLoggedIn(false);
-    window.location.assign(`${process.env.REACT_APP_URL}`);
+
+    window.location.assign(logoutUrl);
+ 
   }
 
   return (

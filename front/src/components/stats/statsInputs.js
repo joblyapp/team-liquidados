@@ -11,7 +11,7 @@ export default function StatsInputs({ setCalendar, setReverse }) {
 
 
 
-    const [selected, setSelected] = useState("custom");
+    const [selected, setSelected] = useState("today");
     const [custom, setCustom] = useState(false);
 
     const today = format(new Date(), 'isoDate');
@@ -75,7 +75,7 @@ export default function StatsInputs({ setCalendar, setReverse }) {
         const dateFrom = document.getElementById("dateFrom").value;
         const dateTo = document.getElementById("dateTo").value;
 
-        console.log(dateFrom);
+        
 
         setCalendar({
             "startDate": dateFrom,

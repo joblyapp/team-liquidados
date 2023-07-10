@@ -298,7 +298,7 @@ export default function ListaProductos({
                 }
             })
             .then((response) => {
-                console.log(response)
+          
             })
             .catch((error) => {
                 console.log(error);

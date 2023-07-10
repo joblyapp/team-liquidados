@@ -83,7 +83,7 @@ export default function OldSales({ setMode, mode }) {
                     }
                 })
                 .then((response) => {
-                    console.log(response.data)
+                    
                     setOldSales(response.data)
                 })
 
@@ -192,7 +192,7 @@ export default function OldSales({ setMode, mode }) {
 
     function handleCancelSale(id, description, onClose) {
 
-        console.log(description);
+       
 
         axios
             .patch(`${process.env.REACT_APP_URL}/Sales/cancel/${id}`, { "cancellationReason": description }, {
@@ -206,7 +206,7 @@ export default function OldSales({ setMode, mode }) {
             )
 
             .then((response) => {
-                console.log(response);
+                
                 setIsEditing(false);
                 setEditingId("null");
 

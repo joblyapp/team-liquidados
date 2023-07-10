@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import "./NavBar.css";
 import Logo from "../../Images/DonVenturaLogoWhite.svg";
@@ -10,6 +10,8 @@ const Navbar = ({ handleLogout, active, setActive, onProfileClick }) => {
   //state to keep track which link has the active state
   const avatarMenuRef = useRef(null);
   //used to check if clicked outside avatar dropdown
+
+  const navigate = useNavigate();
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
@@ -88,7 +90,8 @@ const Navbar = ({ handleLogout, active, setActive, onProfileClick }) => {
               Perfil
             </Link>
             <Link
-              onClick={() => handleLogout()}
+
+              onClick={async () => {handleLogout()}}
               className="navbar-avatar-dropdown-link"
             >
               Cerrar sesión

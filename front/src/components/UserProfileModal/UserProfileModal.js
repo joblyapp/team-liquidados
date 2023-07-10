@@ -10,65 +10,81 @@ function UserProfileModal(props) {
   const [email, setEmail] = useState(sessionStorage.getItem("email"));
   const [image, setImage] = useState(sessionStorage.getItem("avatar"));
 
+ 
   const handleNameChange = (event) => {
     setName(event.target.value);
-    console.log(name);
+   
   };
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
   const handleImageChange = (event) => {
-    setImage(URL.createObjectURL(document.getElementById("image").files[0]));
-    console.log(image);
+    setImage(
+      URL.createObjectURL(document.getElementById("imageProfile").files[0])
+    );
+    
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const image = document.getElementById("image").files[0];
-    console.log(image);
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("name", name);
-    // formData.append("image", image);
-    if (image) {
-      formData.append("image", image);
-    }
-    try {
-      console.log(formData);
-      const res = await axios.patch(
-        `${process.env.REACT_APP_URL}/admin`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      // handle success response
-      console.log(res.data);
-      sessionStorage.setItem("name", res.data.name);
-      sessionStorage.setItem("email", res.data.email);
-      sessionStorage.setItem(
-        "avatar",
-        `http://localhost:8080/${res.data.image.path}`
-      );
-      props.onRequestClose();
-    } catch (err) {
-      console.error(err.response.data);
-      // handle error response
-    }
-  };
 
+    const formdataUserImg = new FormData();
+    formdataUserImg.append(
+      "image",
+      document.getElementById("imageProfile").files[0]
+    );
+    var imageUrl;
+
+    axios
+      .post("https://api.imgur.com/3/image/", formdataUserImg, {
+        headers: {
+          Authorization: "Client-ID 5a8be6a81450005",
+        },
+      })
+      .then((res) => {
+      
+        const formData = {
+          email: email,
+          name: name,
+          image: res.data.data.link,
+        };
+
+        
+
+        axios
+          .patch(`${process.env.REACT_APP_URL}/admin`, formData, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((res) => {
+            // handle success response
+
+           
+            sessionStorage.setItem("name", res.data.name);
+            sessionStorage.setItem("email", res.data.email);
+            sessionStorage.setItem("avatar", res.data.image);
+
+            props.onRequestClose();
+          });
+      });
+  };
   const customStyles = {
     content: {
       borderRadius: "10px",
-      width: "25%",
+      width: "40%",
       margin: "auto auto",
-      height: "65vh",
+      height: "83vh",
       overflow: "hidden",
     },
   };
+
+  // Update styles for smaller screens
+  if (window.innerWidth <= 1367) {
+    customStyles.content.width = "30%";
+    customStyles.content.height = "80vh";
+  }
 
   return (
     <Modal
@@ -101,7 +117,7 @@ function UserProfileModal(props) {
             type="button"
             className="custom-file-upload"
             onClick={() => {
-              document.getElementById("image").click();
+              document.getElementById("imageProfile").click();
             }}
           >
             <img
@@ -114,8 +130,8 @@ function UserProfileModal(props) {
 
           <input
             onChange={handleImageChange}
-            name="image"
-            id="image"
+            name="imageProfile"
+            id="imageProfile"
             type="file"
           />
         </label>
@@ -151,5 +167,4 @@ function UserProfileModal(props) {
     </Modal>
   );
 }
-
 export default UserProfileModal;
